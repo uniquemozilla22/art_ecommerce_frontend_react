@@ -1,5 +1,7 @@
 # Art Gallery Website
 
+## Intoduction
+
 <P>
 Art Gallery is a web application that is intended to provide a complete solution keeping inregard to the vendors as well as the customers wanting / visiting the art gallery as their needfor the arts purchase and sell. This platform is created intending the customers to provide analternative yet reliable way to purchase the art and the vendors giving a perfect platform to selltheir art dynamically.
 </p>

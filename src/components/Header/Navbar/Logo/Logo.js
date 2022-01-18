@@ -1,10 +1,15 @@
 import React from "react";
 import classes from "./Logo.module.css";
+import { BarChart } from "@mui/icons-material";
 
-const Logo = ({ image, alt }) => {
+const Logo = (props) => {
   return (
     <div className={classes.logo_container}>
-      <img src={image} alt={alt} />
+      <BarChart
+        className={classes.menuIcon}
+        onClick={(e) => props.toogleCategory()}
+      />
+      <img src={props.image} alt={props.alt} />
     </div>
   );
 };

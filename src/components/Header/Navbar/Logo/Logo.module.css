@@ -1,9 +1,22 @@
 .logo_container {
   min-height: 50px;
+  display: flex;
+  align-items: center;
 }
 
 .logo_container img {
   height: 60px;
   border-radius: 50%;
-  margin: 0 5px;
+  margin: 5px;
+}
+
+.logo_container .menuIcon {
+  transform: rotate(90deg);
+  font-size: 30px;
+}
+
+@media screen and (min-width: 992px) {
+  .logo_container .menuIcon {
+    display: none;
+  }
 }

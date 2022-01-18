@@ -7,6 +7,13 @@
 .category__list {
   padding: 10px;
 }
+.category__list:first-child {
+  padding-left: 0;
+}
+
+.category__list:last-child {
+  padding-right: 0;
+}
 
 .category__list a {
   text-decoration: none;

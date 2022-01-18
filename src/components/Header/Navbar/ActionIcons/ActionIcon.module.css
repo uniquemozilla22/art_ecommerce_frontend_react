@@ -8,6 +8,13 @@
   margin: 0 20px;
 }
 
+.actionIcons .navigation_icons:first-child {
+  margin-left: 0;
+}
+.actionIcons .navigation_icons:last-child {
+  margin-right: 0;
+}
+
 @media screen and (min-width: 992px) {
   .actionIcons .search__bar__icons {
     display: none;

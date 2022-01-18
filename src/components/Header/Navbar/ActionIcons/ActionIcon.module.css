@@ -1,0 +1,15 @@
+.actionIcons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actionIcons .navigation_icons {
+  font-size: 24px;
+  margin: 0 20px;
+}
+
+@media screen and (min-width: 992px) {
+  .actionIcons .search__bar__icons {
+    display: none;
+  }
+}

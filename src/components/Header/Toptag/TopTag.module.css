@@ -1,0 +1,31 @@
+.topTag {
+  background: #eef2ff;
+  height: max-content;
+}
+
+.topTag .topTag__contact {
+  display: flex;
+}
+
+.topTag .topTag__contact p {
+  color: #888686;
+  font-size: 12px;
+  padding: 5px;
+  margin: 0;
+}
+
+.topTag .topTag__social_icons {
+  text-align: right;
+  color: #888686;
+}
+
+.topTag .topTag__social_icons .icon {
+  margin: 5px;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 992px) {
+  .topTag {
+    display: none;
+  }
+}

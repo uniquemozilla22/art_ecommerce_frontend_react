@@ -21,6 +21,17 @@
   font-weight: 500;
 }
 
+.categories__modal__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerTitle {
+  font-weight: 900 !important;
+  font-size: 40px !important;
+  padding: 5vh 0 !important;
+}
+
 @media screen and (max-width: 992px) {
   .categories__container {
     display: none;

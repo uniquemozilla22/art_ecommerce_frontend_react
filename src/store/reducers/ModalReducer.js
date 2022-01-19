@@ -1,9 +1,9 @@
-import { CART, CATEGORY, PROFILE } from "../actions/Types/Types";
+import { CART, CATEGORY, SEARCH } from "../actions/Types/Types";
 
 const initialState = {
   category: false,
   cart: false,
-  profile: false,
+  search: false,
 };
 
 const ModalReducer = (state = initialState, action) => {
@@ -16,7 +16,7 @@ const ModalReducer = (state = initialState, action) => {
     case CATEGORY:
       return { ...state, category: !state.category };
 
-    case PROFILE:
+    case SEARCH:
       return { ...state, category: !state.category };
 
     default:

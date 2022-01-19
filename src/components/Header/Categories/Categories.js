@@ -22,7 +22,7 @@ const Categories = (props) => {
       <div className={classes.categories__container}>
         <div className={"container-fluid " + classes.category__lists}>
           {props.data.map((category) => (
-            <CategoryList {...category} />
+            <CategoryList {...category} key={category.id} />
           ))}
         </div>
       </div>
@@ -35,7 +35,7 @@ const Categories = (props) => {
         <Offcanvas.Body>
           <div className={classes.categories__modal__body}>
             {props.data.map((category) => (
-              <CategoryModalList {...category} />
+              <CategoryModalList {...category} key={category.id} />
             ))}
           </div>
         </Offcanvas.Body>

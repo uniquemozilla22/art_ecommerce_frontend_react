@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductFeild from "../../../../ProductFeild/ProductFeild";
 import removeCartItem from "../../../../store/actions/Cart/RemoveItem";
 import art1 from "./../../../../Assets/art1.jpg";
@@ -7,16 +7,22 @@ import art3 from "./../../../../Assets/art3.jpg";
 import classes from "./CartModalBody.module.css";
 
 const CartModalBody = (props) => {
+  const [data, setData] = useState(props.data);
+
+  useEffect(() => {
+    setData(props.data);
+  }, [props.data]);
+
   return (
     <div className={classes.cart__body__container}>
-      {props.data.map((cartitem) => (
+      {data.map((cartitem) => (
         <ProductFeild
           key={cartitem.id}
           title={cartitem.name}
           price={cartitem.price}
           description={cartitem.description}
           image={cartitem.image}
-          remove={() => props.removeItem(cartitem.id)}
+          remove={() => props.removeItem(cartitem)}
         />
       ))}
 

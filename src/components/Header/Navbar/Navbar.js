@@ -52,6 +52,7 @@ const Navbar = (props) => {
   );
 };
 const mapStateToProps = (state, ownProps) => {
+  console.log(state);
   return { ...state, ...ownProps };
 };
 
@@ -60,7 +61,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     toggleCategories: () => dispatch({ type: "CATEGORY" }),
     toggleCart: () => dispatch({ type: "CART" }),
     toggleSearch: () => dispatch({ type: "SEARCH" }),
-    removeCartItem: (id) => dispatch(removeCartItem({ id })),
+    removeCartItem: (item) => dispatch(removeCartItem({ ...item })),
   };
 };
 

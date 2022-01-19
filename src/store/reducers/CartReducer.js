@@ -35,9 +35,7 @@ const initialState = {
   ],
 };
 const CartReducer = (state = initialState, action) => {
-  const { types, payload } = action;
-
-  switch (types) {
+  switch (action.type) {
     case ADD_CART:
       return state;
 
@@ -45,7 +43,8 @@ const CartReducer = (state = initialState, action) => {
       return state;
 
     case REMOVE_CART: {
-      return 
+      const updatedState = removeCartReducer(state, action.payload);
+      return updatedState;
     }
     case UPDATE_CART:
       return state;

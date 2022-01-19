@@ -8,7 +8,7 @@ import {
 } from "@mui/icons-material";
 import classes from "./ActionIcon.module.css";
 
-const ActionIcons = () => {
+const ActionIcons = (props) => {
   return (
     <div className={classes.actionIcons}>
       <Tooltip title="Search">
@@ -22,7 +22,10 @@ const ActionIcons = () => {
         <HelpOutline className={classes.navigation_icons} />
       </Tooltip>
       <Tooltip title="Cart">
-        <ShoppingCartOutlined className={classes.navigation_icons} />
+        <ShoppingCartOutlined
+          className={classes.navigation_icons}
+          onClick={() => props.toggleCart()}
+        />
       </Tooltip>
       <Tooltip title="Profile">
         <PersonOutlineOutlined className={classes.navigation_icons} />

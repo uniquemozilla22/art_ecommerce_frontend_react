@@ -1,0 +1,21 @@
+.careerrow{
+    background-color: #676FA3;
+    color: #FFF;
+    border-radius: 20px;
+    padding:6px 0px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.careerheader{
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.applynow{
+    background: #FF5959;
+    border-radius: 20px;
+    border:none;
+    color: #FFF;
+    padding:10px 15px;
+    float:right;
+    text-align: right;
+}

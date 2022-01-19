@@ -1,0 +1,21 @@
+.pageHeading{
+    font-family: Poppins;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 60px;
+}
+
+
+
+.accordion-button:not(.collapsed){
+    background-color: transparent !important;
+    box-sizing: none !important;
+    color: #333 !important;
+}
+.accordion-item{
+    border:none !important;
+}
+.accordion-button{
+    padding:6px 0px;
+}

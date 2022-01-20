@@ -1,0 +1,14 @@
+.copyrightBanner {
+  background: #eef2ff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.copyrightBanner p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  justify-self: center;
+}

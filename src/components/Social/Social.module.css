@@ -1,0 +1,11 @@
+.topTag__social_icons {
+  text-align: right;
+  color: #888686;
+  display: flex;
+  justify-content: end;
+}
+
+.topTag__social_icons .icon {
+  margin: 5px;
+  font-size: 16px;
+}

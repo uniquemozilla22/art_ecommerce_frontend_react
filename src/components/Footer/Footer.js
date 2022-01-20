@@ -1,4 +1,5 @@
 import React from "react";
+import CopyrightBanner from "./CopyrightBanner/CopyrightBanner";
 import CustomerSupport from "./CustomerSupport/CustomerSupport";
 import DetailsContainer from "./DetailsContainer/DetailsContainer";
 import classes from "./Footer.module.css";
@@ -11,6 +12,7 @@ const Footer = ({ data }) => {
     <>
       <Main data={data} />
       <Payment />
+      <CopyrightBanner />
     </>
   );
 };

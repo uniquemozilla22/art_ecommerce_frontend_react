@@ -1,0 +1,8 @@
+.aboutSection{ padding: 50px 0px;}
+.aboutHeading{    color: var(--primary-color);    font-weight: 800;    font-size: 35px;    margin-bottom: 0px;}
+.aboutHeading span{    color:#000;}
+.aboutSubHeading{    font-weight: 800;    font-size: 25px;}
+.honorBoxGrid{display: grid; grid-template-columns: 1fr 1fr 1fr;     grid-gap: 100px; padding:50px 0px}
+@media screen and (max-width: 1024px) {  .honorBoxGrid {  grid-gap: 15px; } }
+@media screen and (max-width: 700px) {  .honorBoxGrid { grid-template-columns: 1fr; grid-gap: 15px; } }
+

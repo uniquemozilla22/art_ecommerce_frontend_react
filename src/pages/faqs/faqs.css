@@ -1,0 +1,25 @@
+#faqspage .accordion-button{
+    background-color: #EEF2FF !important;
+  
+}
+#faqspage .accordion-button:not(.collapsed){
+    box-shadow: none;
+}
+.faqFooter{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    color: #A4A4A4;
+    padding: 15px 0px 0px;
+}
+#faqspage .accordion-description{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: #a4a4a4;
+}
+.accordion-item {
+    border: none !important;
+    margin-bottom: 15px;
+}

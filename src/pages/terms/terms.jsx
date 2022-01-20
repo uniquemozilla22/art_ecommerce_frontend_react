@@ -7,8 +7,8 @@ const Privacy = () => {
 
   return (
     <>
-      <div className='termsPage'>
-          <div className="container">
+      <div className={classes.termsPage}>
+          <div className="container-fluid">
             <div className="row ">
                <h3 className="pageHeading">Terms and conditions</h3>
                <p>Welcome to the Art Gallery E-commerce website , read the terms and Conditions before using the website.</p>

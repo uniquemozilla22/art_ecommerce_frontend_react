@@ -1,0 +1,19 @@
+.details__container {
+  display: flex;
+  justify-content: baseline;
+  flex-direction: column;
+}
+
+.details__container .details__content {
+}
+
+.details__container .details__content h2 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.details__container .details__content p {
+  font-weight: 400;
+  margin: 0;
+}

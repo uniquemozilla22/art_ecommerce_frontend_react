@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ProductFeild from "../../../../ProductFeild/ProductFeild";
+import ProductFeild from "../../../ProductFeild/ProductFeild";
 import classes from "./CartModalBody.module.css";
 
 const CartModalBody = (props) => {

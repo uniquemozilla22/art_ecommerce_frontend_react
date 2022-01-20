@@ -1,0 +1,36 @@
+.customer__support {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.customer__support .customer__support__title {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.customer__support .customer__support__subtitle {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.customer__support i {
+  font-size: 50px;
+}
+.customer__support .supportItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.customer__support .supportItem a,
+.customer__support .supportItem p {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #2b2b2b;
+}
+
+.customer__support .supportItem span {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,14 @@
+.headerTitle {
+  font-weight: 900 !important;
+  font-size: 40px !important;
+  padding: 5vh 0 !important;
+}
+
+.offcanvas_Body {
+  margin: 0;
+  padding: 0 !important;
+}
+
+.offcanvas_Body::-webkit-scrollbar {
+  display: none;
+}

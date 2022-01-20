@@ -1,9 +1,10 @@
-import { CART, CATEGORY, SEARCH } from "../actions/Types/Types";
+import { CART, CATEGORY, SEARCH, HELP_CENTER } from "../actions/Types/Types";
 
 const initialState = {
   category: false,
   cart: false,
   search: false,
+  helpCenter: false,
 };
 
 const ModalReducer = (state = initialState, action) => {
@@ -17,7 +18,10 @@ const ModalReducer = (state = initialState, action) => {
       return { ...state, category: !state.category };
 
     case SEARCH:
-      return { ...state, category: !state.category };
+      return { ...state, search: !state.search };
+
+    case HELP_CENTER:
+      return { ...state, helpCenter: !state.helpCenter };
 
     default:
       return state;

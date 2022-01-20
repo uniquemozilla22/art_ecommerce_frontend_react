@@ -16,10 +16,14 @@ const ActionIcons = (props) => {
           className={
             classes.navigation_icons + " " + classes.search__bar__icons
           }
+          onClick={() => props.toggleSearch()}
         />
       </Tooltip>
       <Tooltip title="Help-Centre">
-        <HelpOutline className={classes.navigation_icons} />
+        <HelpOutline
+          className={classes.navigation_icons}
+          onClick={() => props.toggleHelpCenter()}
+        />
       </Tooltip>
       <Tooltip title="Cart">
         <ShoppingCartOutlined

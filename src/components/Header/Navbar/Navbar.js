@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Offcanvas } from "react-bootstrap";
 import { connect } from "react-redux";
 import removeCartItem from "../../../store/actions/Cart/RemoveItem";
-import { REMOVE_CART } from "../../../store/actions/Types/Types";
 import ActionIcons from "./ActionIcons/ActionIcons";
+import CartModal from "./CartModal/CartModal";
 import CartModalBody from "./CartModalBody/CartModalBody";
 import Logo from "./Logo/Logo";
 import classes from "./Navbar.module.css";
 import Search from "./Search/Search";
+import SearchModal from "./SearchModal/SearchModal";
 
 const Navbar = (props) => {
-  const [cartShow, setCartShow] = useState(props.modal.cart);
-
-  const handleCart = () => {
-    setCartShow(false);
-    props.toggleCart();
-  };
-
-  useEffect(() => {
-    setCartShow(props.modal.cart);
-  }, [props.modal.cart]);
-
   return (
     <div className={"container-fluid " + classes.navigation__container}>
       <Logo
@@ -30,24 +19,16 @@ const Navbar = (props) => {
       ></Logo>
       <Search />
       <ActionIcons {...props} />
-      <Offcanvas
-        show={cartShow}
-        onHide={() => handleCart()}
-        placement="end"
-        className={classes.cartModal}
-      >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title className={classes.headerTitle}>
-            Cart.
-          </Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body className={classes.offcanvas_Body}>
-          <CartModalBody
-            data={props.cartContent.cartItems}
-            removeItem={props.removeCartItem}
-          />
-        </Offcanvas.Body>
-      </Offcanvas>
+      <CartModal
+        toggleCart={props.toggleCart}
+        removeCartItem={props.removeCartItem}
+        data={props.cartContent}
+        show={props.modal.cart}
+      />
+      <SearchModal
+        toggleSearch={props.toggleSearch}
+        show={props.modal.search}
+      />
     </div>
   );
 };
@@ -60,6 +41,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     toggleCategories: () => dispatch({ type: "CATEGORY" }),
     toggleCart: () => dispatch({ type: "CART" }),
     toggleSearch: () => dispatch({ type: "SEARCH" }),
+    toggleHelpCenter: () => dispatch({ type: "HELP_CENTER" }),
     removeCartItem: (item) => dispatch(removeCartItem({ id: item.id })),
   };
 };

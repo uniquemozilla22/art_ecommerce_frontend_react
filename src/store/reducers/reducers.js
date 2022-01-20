@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import UserReducer from "./UserReducer";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
+import UserReducer from "./UserReducer";
 import ModalReducer from "./ModalReducer";
 import CartReducer from "./CartReducer";
 

@@ -7,6 +7,7 @@ const Layout = (props) => {
     name: "Art Gallery",
     contactNumber: "+977 9812345123",
     address: "Radhe Radhe, Bhaktapur",
+    email: ["guide@artgallery.com", "support@artgallery.com"],
     logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSsHzWM0xWbFVMrZ95leaNeIIcJ4_XZbIhYg&usqp=CAU",
     categories: [
       {

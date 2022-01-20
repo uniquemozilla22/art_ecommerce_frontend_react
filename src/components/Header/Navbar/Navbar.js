@@ -43,7 +43,7 @@ const Navbar = (props) => {
         </Offcanvas.Header>
         <Offcanvas.Body className={classes.offcanvas_Body}>
           <CartModalBody
-            data={props.cart.cartItems}
+            data={props.cartContent.cartItems}
             removeItem={props.removeCartItem}
           />
         </Offcanvas.Body>
@@ -52,7 +52,6 @@ const Navbar = (props) => {
   );
 };
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
   return { ...state, ...ownProps };
 };
 
@@ -61,7 +60,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     toggleCategories: () => dispatch({ type: "CATEGORY" }),
     toggleCart: () => dispatch({ type: "CART" }),
     toggleSearch: () => dispatch({ type: "SEARCH" }),
-    removeCartItem: (item) => dispatch(removeCartItem({ ...item })),
+    removeCartItem: (item) => dispatch(removeCartItem({ id: item.id })),
   };
 };
 

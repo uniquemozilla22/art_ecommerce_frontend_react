@@ -8,12 +8,13 @@ import CartReducer from "./CartReducer";
 const reducers = combineReducers({
   user: UserReducer,
   modal: ModalReducer,
-  cart: CartReducer,
+  cartContent: CartReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["cartContent"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

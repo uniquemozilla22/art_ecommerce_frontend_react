@@ -1,10 +1,6 @@
-.blogPage{  background: #FFFFFF; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25); border-radius: 20px;}
 .cardBox{ background: #FFFFFF; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25); border-radius: 20px; padding:10px; margin-bottom: 15px !important; }
 .cardBoxList{ background: #FFFFFF; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25); border-radius: 20px; padding:10px; margin:0px !important; margin-bottom: 15px !important; }
-@media screen and (max-width : 600px) {.cardBoxList  .cardHeading{ margin-top:0px }}
 .cardBoxImage{ border-radius: 20px; width: 100%;}
-@media screen and (max-width : 600px) {  .cardBoxImage{ border-radius: 0px; }}
-
 .cardAuthorBox{ color: #A4A4A4; margin-bottom: 10px !important; border-bottom: 1px solid #a4a4a4;}
 .cardDescription{color: #A4A4A4;}
 .cardAuthorListBox{ color: #A4A4A4; margin-left: 0px !important; margin-right: 0px !important; margin-bottom: 10px !important; border-bottom: 1px solid #a4a4a4;}
@@ -12,9 +8,6 @@
 .cardAuthorBox p{margin-bottom: 10px;}
 .cardAuthor{text-align: right;}
 .cardHeading{  font-family: Poppins; font-style: normal; font-weight: bold; font-size: 16px; line-height: 24px; margin-top: 10px;}
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> 8d258611ce9d8ceba6865cc189f1434098645e70

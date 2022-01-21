@@ -6,6 +6,9 @@ import Privacy from "./pages/privacy/privacy";
 import Career from "./pages/career/career";
 import Terms from "./pages/terms/terms";
 import Blog from "./pages/blog/blog";
+import Faqs from "./pages/faqs/faqs";
+import About from "./pages/about/about";
+import BlogDetail from "./pages/blog/blogDetail";
 
 function App() {
   return (
@@ -17,7 +20,9 @@ function App() {
           <Route path="/career" element={<Career />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/blog" element={<Blog />} />
-
+          <Route path="/faqs" element={<Faqs />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
         </Routes>
       </Layout>
     </div>

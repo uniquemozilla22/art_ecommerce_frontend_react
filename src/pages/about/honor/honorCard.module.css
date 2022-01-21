@@ -1,0 +1,6 @@
+
+.honorBox{    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);  border-radius: 20px;  transition: ease-in-out .2s;}
+.honorBox:hover{transform: scale(1.2); transition: ease-in-out .2s;}
+.honorBoxTitle{    font-family: 'Poppins', sans-serif;    font-style: normal;    font-weight: 600;    font-size: 20px;    line-height: 20px; margin-bottom: 5px;}
+.honorBoxContent{    padding: 8px 20px;}
+.honorBoxImg{    border-top-left-radius: 20px;    border-top-right-radius: 20px;    width: 100%;}

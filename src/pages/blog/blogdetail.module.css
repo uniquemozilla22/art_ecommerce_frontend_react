@@ -1,0 +1,5 @@
+.blogImage{margin-top: 20px;}
+.blogDetail{display: grid; grid-template-columns: 170px 170px; color: #a4a4a4; margin-top: 15px;}
+.blogContent{color: #a4a4a4;}
+.moreBlogTitle{margin-top:20px; margin-bottom: 30px;}
+.blogTitle{margin-bottom: 20px; margin-top:10px}

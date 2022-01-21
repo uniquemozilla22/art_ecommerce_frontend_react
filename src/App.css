@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+:root {
+    --primary-color: #FF5959;
+ 
+  }
+
 .pageHeading{
-    font-family: Poppins;
-font-style: normal;
-font-weight: bold;
-font-size: 40px;
-line-height: 60px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 60px;
 }
 
 

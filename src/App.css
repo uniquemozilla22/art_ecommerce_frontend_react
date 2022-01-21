@@ -8,14 +8,17 @@ line-height: 60px;
 
 
 
-.accordion-button:not(.collapsed){
+.filterBar .accordion-button:not(.collapsed){
     background-color: transparent !important;
     box-sizing: none !important;
     color: #333 !important;
 }
-.accordion-item{
+.filterBar .accordion-body{
+    padding:1rem 0rem;
+}
+.filterBar  .accordion-item{
     border:none !important;
 }
-.accordion-button{
+.filterBar  .accordion-button{
     padding:6px 0px;
 }

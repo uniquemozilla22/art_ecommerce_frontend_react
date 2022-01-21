@@ -38,11 +38,11 @@ const Privacy = () => {
 
                 <div className={`row ${classes.cardBoxList}`}>
                   
-                    <div className="col-lg-3 col-sm-4">
+                    <div className="col-lg-3 col-sm-4 col-4">
                         <img src="https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_CrashDummy_image1600w.jpg" className={classes.cardBoxImage}/>
                       
                     </div>
-                    <div className="col-lg-9 col-sm-8">
+                    <div className="col-lg-9 col-sm-8 col-8">
                         <h4 className={classes.cardHeading}>Thieves Steal Gallery Owner’s Multimillion-Dollar NFT Collection: ‘All My Apes Gone’</h4>
                         <div className={`row ${classes.cardAuthorListBox}`}>
                           <div className="col-lg-6 col-sm-6 col-6 p-0">

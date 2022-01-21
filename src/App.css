@@ -11,21 +11,7 @@
     font-weight: bold;
     font-size: 40px;
     line-height: 60px;
+  
 }
 
 
-
-.filterBar .accordion-button:not(.collapsed){
-    background-color: transparent !important;
-    box-sizing: none !important;
-    color: #333 !important;
-}
-.filterBar .accordion-body{
-    padding:1rem 0rem;
-}
-.filterBar  .accordion-item{
-    border:none !important;
-}
-.filterBar  .accordion-button{
-    padding:6px 0px;
-}

@@ -3,23 +3,31 @@
   
 }
 #faqspage .accordion-button:not(.collapsed){
-    box-shadow: none;
+    /* box-shadow: none; */
+    color: #000 !important;
 }
-.faqFooter{
-    display: grid;
-    grid-template-columns: 100px 100px 100px;
-    color: #A4A4A4;
-    padding: 15px 0px 0px;
+.accordion-button:not(.collapsed)::after{
+    background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23212529%27%3e%3cpath fill-rule=%27evenodd%27 d=%27M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z%27/%3e%3c/svg%3e") !important;
 }
+
 #faqspage .accordion-description{
     font-family: Poppins;
     font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 15px;
     line-height: 30px;
     color: #a4a4a4;
 }
 .accordion-item {
     border: none !important;
     margin-bottom: 15px;
+    
 }
+.accordion-button {
+    padding: 0.6rem 1.25rem !important;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.accordion-button, .accordion-header, .accordion-item {border-radius: 10px !important;}

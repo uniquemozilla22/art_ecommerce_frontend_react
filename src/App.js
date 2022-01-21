@@ -8,7 +8,10 @@ import Terms from "./pages/terms/terms";
 import Blog from "./pages/blog/blog";
 import Faqs from "./pages/faqs/faqs";
 import About from "./pages/about/about";
+import Contact from "./pages/contactus/contact";
+
 import BlogDetail from "./pages/blog/blogDetail";
+import Return from "./pages/return/return";
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/return" element={<Return />} />
+
           <Route path="/blog/:id" element={<BlogDetail />} />
         </Routes>
       </Layout>

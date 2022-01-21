@@ -1,3 +1,4 @@
+
 .filterList{
     padding: 0px;
     list-style: none;
@@ -12,6 +13,11 @@
 }
 .filterList span{
     margin-left: 15px;
+}
+
+.filterHeading{
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 
 

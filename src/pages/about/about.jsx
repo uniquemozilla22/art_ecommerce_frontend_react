@@ -1,7 +1,6 @@
 import React , {  useState  }  from 'react';
 import classes from "./about.module.css";
 
-import './about.css';
 import HonorCard from "./honor/honorCard";
 
 

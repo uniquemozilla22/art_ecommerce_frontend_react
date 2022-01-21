@@ -3,19 +3,19 @@ import classes from "./sidebar.module.css";
 import {Link} from "react-router-dom";
 import { Accordion } from "react-bootstrap";
 import FeatherIcon from 'feather-icons-react';
-
+import './sidebar.css';
 const Sidebar = () => {
 
   return (
     <>
     <div className="filterBar">
-
-    <ul className={classes.filterList}>
-        <li><FeatherIcon icon="eye" /> <span>View All</span></li>
-        <li><FeatherIcon icon="list" /> <span>Products</span></li>
-        <li><FeatherIcon icon="users" /> <span>Artist</span></li>
-    </ul>
-    
+        <h3 className={classes.filterHeading}>Filter </h3>
+        <ul className={classes.filterList}>
+            <li><FeatherIcon icon="eye" /> <span>View All</span></li>
+            <li><FeatherIcon icon="list" /> <span>Products</span></li>
+            <li><FeatherIcon icon="users" /> <span>Artist</span></li>
+        </ul>
+        
     
 
     <Accordion defaultActiveKey="0">

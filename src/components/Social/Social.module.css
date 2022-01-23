@@ -2,7 +2,7 @@
   text-align: right;
   color: #888686;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .topTag__social_icons .icon {

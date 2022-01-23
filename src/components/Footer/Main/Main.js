@@ -9,7 +9,7 @@ const Main = ({ data }) => {
       <div className={classes.footer__container}>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-6 d-none d-lg-block">
               <DetailsContainer
                 logo={data.logo}
                 name={data.name}
@@ -17,7 +17,7 @@ const Main = ({ data }) => {
                 address={data.address}
               />
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-6">
               <Links
                 title="Arneli"
                 links={[
@@ -30,7 +30,7 @@ const Main = ({ data }) => {
                 ]}
               ></Links>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-6">
               <Links
                 title="Customer Care"
                 links={[
@@ -42,7 +42,7 @@ const Main = ({ data }) => {
                 ]}
               ></Links>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-6 d-none d-lg-block">
               <CustomerSupport
                 contactNumber={data.contactNumber}
                 emails={data.email}

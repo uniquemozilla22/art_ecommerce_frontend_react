@@ -8,6 +8,7 @@ const Links = ({ title, links }) => {
       <h1 className={classes.link__title}>{title}</h1>
       {links.map((link) => (
         <Link
+          key={link}
           to={`./${link.split(" ").join("").toLowerCase()}`}
           className={classes.footer__link}
         >

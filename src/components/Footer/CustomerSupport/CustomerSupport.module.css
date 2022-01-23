@@ -1,7 +1,8 @@
 .customer__support {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
+  padding: 20px 0;
 }
 .customer__support .customer__support__title {
   font-weight: 700;

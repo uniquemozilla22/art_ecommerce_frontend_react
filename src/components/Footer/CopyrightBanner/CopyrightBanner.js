@@ -1,5 +1,4 @@
 import React from "react";
-import Social from "../../Social/Social";
 import classes from "./CopyrightBanner.module.css";
 
 const CopyrightBanner = () => {

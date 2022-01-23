@@ -5,8 +5,12 @@ import {
   PersonOutlineOutlined,
   ShoppingCartOutlined,
   SearchOutlined,
+  ListAltTwoTone,
+  RemoveRedEyeOutlined,
+  LogoutOutlined,
 } from "@mui/icons-material";
 import classes from "./ActionIcon.module.css";
+import { Dropdown } from "react-bootstrap";
 
 const ActionIcons = (props) => {
   return (
@@ -31,9 +35,32 @@ const ActionIcons = (props) => {
           onClick={() => props.toggleCart()}
         />
       </Tooltip>
-      <Tooltip title="Profile">
-        <PersonOutlineOutlined className={classes.navigation_icons} />
-      </Tooltip>
+
+      <Dropdown>
+        <Dropdown.Toggle
+          id="dropdown-autoclose-true"
+          className={classes.profileButton}
+          variant="none"
+        >
+          <Tooltip title="Profile">
+            <PersonOutlineOutlined className={classes.navigation_icons} />
+          </Tooltip>
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item href="#">
+            <ListAltTwoTone /> Orders
+          </Dropdown.Item>
+          <Dropdown.Item href="#">
+            {" "}
+            <RemoveRedEyeOutlined />
+            View Profile
+          </Dropdown.Item>
+          <Dropdown.Item href="#">
+            <LogoutOutlined /> Logout
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     </div>
   );
 };

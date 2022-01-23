@@ -1,6 +1,7 @@
 .actionIcons {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .actionIcons .navigation_icons {
@@ -19,4 +20,18 @@
   .actionIcons .search__bar__icons {
     display: none;
   }
+}
+
+.actionIcons .profileButton {
+  padding: 0 inherit;
+  background: none;
+  border: none;
+  color: #2b2b2b;
+}
+
+.actionIcons .profileButton:hover,
+.actionIcons .profileButton:focus {
+  border: none;
+  background: none;
+  color: #2b2b2b;
 }

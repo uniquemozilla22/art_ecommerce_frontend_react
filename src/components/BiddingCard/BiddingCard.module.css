@@ -1,0 +1,54 @@
+.bidding__classes {
+  padding: 20px;
+}
+
+.bidding__classes:first-child {
+  padding-left: 0;
+}
+.bidding__classes:last-child {
+  padding-right: 0;
+}
+
+.bidding__classes .bidding__card {
+  border: none;
+  transition: box-shadow 0.5s ease-in;
+  border-radius: 20px;
+}
+
+.bidding__classes .bidding__card:hover {
+  box-shadow: 0 0 10px #2b2b2b25;
+}
+
+.bidding__classes .bidding__image {
+  transform: scale(0.9);
+  border-radius: 20px;
+  height: 250px;
+}
+.bidding__classes .card_body {
+  padding: 0 20px;
+}
+.bidding__classes .Biddingcard__header {
+  display: flex;
+  justify-content: space-between;
+  color: #2b2b2b;
+  font-size: 20px;
+  font-weight: 600;
+}
+.bidding__classes .bidding__card .priceContainer p {
+  font-weight: 600;
+  font-size: 12px;
+}
+.bidding__classes .bidding__card .priceContainer h1 {
+  font-weight: 700;
+  font-size: 12px;
+  color: #ff5959;
+}
+.bidding__classes .card_body .actions__container svg {
+  margin: 0 10px;
+}
+.bidding__classes .card_body .actions__container svg:first-child {
+  margin-left: 0px;
+}
+.bidding__classes .card_body .actions__container svg:last-child {
+  margin-right: 0px;
+}

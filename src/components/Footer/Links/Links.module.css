@@ -7,6 +7,7 @@
 .footer__links {
   display: flex;
   flex-direction: column;
+  padding: 20px 0;
 }
 
 .footer__links .footer__link {

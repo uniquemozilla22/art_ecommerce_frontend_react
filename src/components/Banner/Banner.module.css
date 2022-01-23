@@ -1,0 +1,37 @@
+.banner__section {
+  width: 100%;
+  padding-bottom: 3rem;
+}
+
+.banner__section .banner__content h4 {
+  font-size: 20px;
+  font-weight: 300;
+  color: #676fa3;
+}
+
+.banner__section .banner__content h1 {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.banner__section .banner__content span {
+  color: #ff5959;
+}
+
+.banner__section .banner__content a,
+.banner__section .banner__content i {
+  font-size: 16px;
+  color: #676fa3;
+  text-decoration: none;
+}
+
+.banner__section .banner__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.banner__section .banner__wrapper .image__container {
+  height: 600px;
+  border-radius: 20px;
+}

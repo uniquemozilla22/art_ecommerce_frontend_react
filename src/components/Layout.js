@@ -3,7 +3,7 @@ import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 
 const Layout = (props) => {
-  const [data, setData] = useState({
+  const [data] = useState({
     name: "Art Gallery",
     contactNumber: "+977 9812345123",
     address: "Radhe Radhe, Bhaktapur",

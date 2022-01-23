@@ -1,0 +1,25 @@
+.trendingAuction {
+  margin: 4rem 0;
+}
+
+.trendingAuction .headerTitle {
+  font-size: 30px;
+  font-weight: 900;
+}
+.trendingAuction .title__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trendingAuction .title__container a {
+  color: #2b2b2b;
+  text-decoration: none;
+}
+
+.trendingAuction .headerTitle span {
+  color: #ff5959;
+}
+.trendingAuction .trending__auction__container {
+  display: flex;
+}

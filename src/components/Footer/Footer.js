@@ -1,19 +1,16 @@
 import React from "react";
 import CopyrightBanner from "./CopyrightBanner/CopyrightBanner";
-import CustomerSupport from "./CustomerSupport/CustomerSupport";
-import DetailsContainer from "./DetailsContainer/DetailsContainer";
-import classes from "./Footer.module.css";
-import Links from "./Links/Links";
 import Main from "./Main/Main";
 import Payment from "./Payment/Payment";
+import classes from "./Footer.module.css";
 
 const Footer = ({ data }) => {
   return (
-    <>
+    <div className={classes.footer}>
       <Main data={data} />
       <Payment />
       <CopyrightBanner />
-    </>
+    </div>
   );
 };
 

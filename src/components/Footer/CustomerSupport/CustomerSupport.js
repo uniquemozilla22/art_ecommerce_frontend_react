@@ -1,4 +1,4 @@
-import { Call, LockClock, Mail, Timer } from "@mui/icons-material";
+import { Call, Mail, Timer } from "@mui/icons-material";
 import React from "react";
 import classes from "./CustomerSupport.module.css";
 
@@ -16,7 +16,9 @@ const CustomerSupport = ({ contactNumber, emails }) => {
         <Mail className={classes.icon}></Mail>
         <span>
           {emails.map((email) => (
-            <a href={`mailto:${email}`}>{email}</a>
+            <a key={email} href={`mailto:${email}`}>
+              {email}
+            </a>
           ))}
         </span>
       </div>

@@ -35,10 +35,10 @@ export const BiddingCard = ({ id, name, image, currentPrice, time }) => {
             <Card.Title>{name}</Card.Title>
             <div className={"d-none d-lg-block " + classes.actions__container}>
               <Tooltip title={`View ${name}`}>
-                <RemoveRedEyeOutlined />
+                <RemoveRedEyeOutlined fontSize="small" />
               </Tooltip>
               <Tooltip title={`Add to Wishlist ${name}`}>
-                <FavoriteBorderOutlined />
+                <FavoriteBorderOutlined fontSize="small" />
               </Tooltip>
             </div>
           </div>
@@ -69,13 +69,13 @@ export const ProductCard = ({ id, image, name, price }) => {
             <Card.Title>{name}</Card.Title>
             <div className={"d-none d-lg-block " + classes.actions__container}>
               <Tooltip title={`View ${name}`}>
-                <RemoveRedEyeOutlined />
+                <RemoveRedEyeOutlined fontSize="small" />
               </Tooltip>
               <Tooltip title={`Add to Wishlist ${name}`}>
-                <FavoriteBorderOutlined />
+                <FavoriteBorderOutlined fontSize="small" />
               </Tooltip>
               <Tooltip title={`Add to Cart ${name}`}>
-                <ShoppingCartCheckoutOutlined />
+                <ShoppingCartCheckoutOutlined fontSize="small" />
               </Tooltip>
             </div>
           </div>

@@ -9,7 +9,7 @@ import art2 from "../Assets/art2.jpg";
 import art3 from "../Assets/art3.jpg";
 import FeaturedArtistSection from "../components/FeaturedArtistSection/FeaturedArtistSection";
 const Home = () => {
-  const [trendingAuctions, setTrendingAuctions] = useState([
+  const data = [
     {
       id: 1,
       name: "One",
@@ -29,19 +29,21 @@ const Home = () => {
     {
       id: 3,
       name: "Three",
-      description: "this is the description for Three",
+      description: "this is the description for Two",
       image: art3,
-      price: 2000,
-      time: "Jan 24, 2022 15:37:25",
+      price: 6000,
+      time: "Jan 26, 2022 15:37:25",
     },
     {
       id: 4,
       name: "Four",
-      description: "this is the description for Three",
-      image: art3,
-      price: 2000,
+      description: "this is the description for Two",
+      image: art1,
+      price: 6000,
+      time: "Jan 26, 2022 15:37:25",
     },
-  ]);
+  ];
+  const [trendingAuctions, setTrendingAuctions] = useState(data);
 
   const [featuredArtist, setFeaturedArtist] = useState([
     {
@@ -68,10 +70,7 @@ const Home = () => {
     <>
       <Banner />
       <ProductSection title={"Trending Auction"} products={trendingAuctions} />
-      <ArtistSection
-        artistName={"Picasso Pabblo"}
-        products={trendingAuctions}
-      />
+      <ArtistSection artistName={"Picasso Pablo"} products={trendingAuctions} />
       <FeaturedArtistSection
         title={"Featured Artists"}
         artists={featuredArtist}

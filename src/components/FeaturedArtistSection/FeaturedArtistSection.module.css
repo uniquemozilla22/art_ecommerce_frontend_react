@@ -1,3 +1,7 @@
+.featured__artist__section {
+  margin: 3rem 0;
+}
+
 .featured__artist__section .headerTitle {
   font-size: 30px;
   font-weight: 900;
@@ -6,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 3rem 0;
 }
 
 .featured__artist__section .title__container a {

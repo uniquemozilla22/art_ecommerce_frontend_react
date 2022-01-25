@@ -4,6 +4,14 @@ import { Link } from "react-router-dom";
 import { animated, useSpring } from "react-spring";
 import ReturnItem from "./ReturnItem/ReturnItem";
 const Sidebar = () => {
+  const useAnimationStyle = () => {
+    return useSpring({
+      loop: false,
+      from: { y: 50, opacity: 0 },
+      to: { y: 0, opacity: 1 },
+    });
+  };
+
   return (
     <>
       <div className={classes.return}>
@@ -32,7 +40,10 @@ const Sidebar = () => {
               />
             </div>
             <div className="col-lg-6">
-              <div className={classes.refundBox}>
+              <animated.div
+                className={classes.refundBox}
+                style={useAnimationStyle()}
+              >
                 <p>
                   <b>How to get Refund from a Product?</b>
                 </p>
@@ -73,7 +84,7 @@ const Sidebar = () => {
                     <Link to="./">Contact Lists</Link>
                   </li>
                 </ul>
-              </div>
+              </animated.div>
             </div>
           </div>
         </div>

@@ -9,6 +9,7 @@ import { store, persistor } from "./store/store";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { CircularProgress } from "@mui/material";
+import "animate.css";
 
 ReactDOM.render(
   <React.StrictMode>

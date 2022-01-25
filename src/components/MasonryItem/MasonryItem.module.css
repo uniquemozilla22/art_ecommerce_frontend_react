@@ -7,15 +7,11 @@
 .masonryItem {
   border-radius: 20px;
   width: 100%;
-}
-
-.masonryItem .imageContaiener {
-  z-index: 1002;
+  margin-bottom: 2rem;
 }
 
 .masonryItem .imageContaiener img {
   filter: brightness(50%);
-  z-index: 1002;
 }
 
 .masonryItem:hover {
@@ -28,7 +24,6 @@
   transition: transform 0.2s ease-out;
   border-radius: 20px;
   padding: 20px;
-  z-index: 100;
 }
 
 .masonryItem:hover .content__container {

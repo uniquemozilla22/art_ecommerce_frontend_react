@@ -9,8 +9,18 @@ import {
   RemoveRedEyeOutlined,
   ShoppingCartCheckoutOutlined,
 } from "@mui/icons-material";
+import { animated, useSpring } from "react-spring";
 import { Tooltip } from "@mui/material";
-export const BiddingCard = ({ id, name, image, currentPrice, time }) => {
+export const BiddingCard = ({ id, name, image, currentPrice, time, delay }) => {
+  const useAnimationStyle = (delay) => {
+    return useSpring({
+      loop: false,
+      from: { y: 50, opacity: 0 },
+      to: { y: 0, opacity: 1 },
+      delay: delay * 200,
+    });
+  };
+
   // Get today's date and time
   let now = new Date().getTime();
 
@@ -22,7 +32,10 @@ export const BiddingCard = ({ id, name, image, currentPrice, time }) => {
   let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
   return (
-    <div className={classes.bidding__classes}>
+    <animated.div
+      className={classes.bidding__classes}
+      style={useAnimationStyle(delay)}
+    >
       <Card className={classes.bidding__card}>
         <Card.Img
           variant="bottom"
@@ -50,13 +63,24 @@ export const BiddingCard = ({ id, name, image, currentPrice, time }) => {
           </div>
         </Card.Body>
       </Card>
-    </div>
+    </animated.div>
   );
 };
 
-export const ProductCard = ({ id, image, name, price }) => {
+export const ProductCard = ({ id, image, name, price, delay }) => {
+  const useAnimationStyle = (delay) => {
+    return useSpring({
+      loop: false,
+      from: { y: 50, opacity: 0 },
+      to: { y: 0, opacity: 1 },
+      delay: delay * 200,
+    });
+  };
   return (
-    <div className={classes.bidding__classes}>
+    <animated.div
+      className={classes.bidding__classes}
+      style={useAnimationStyle(delay)}
+    >
       <Card className={classes.bidding__card}>
         <Card.Img
           variant="bottom"
@@ -84,6 +108,6 @@ export const ProductCard = ({ id, image, name, price }) => {
           </div>
         </Card.Body>
       </Card>
-    </div>
+    </animated.div>
   );
 };

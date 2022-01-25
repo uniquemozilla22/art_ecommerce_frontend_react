@@ -1,11 +1,12 @@
 .masonrySection {
-  margin: 3rem 0;
+  margin: 6rem 0;
 }
 
 .masonrySection .section__title {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 2rem 0;
 }
 
 .masonrySection .section__title h1 {

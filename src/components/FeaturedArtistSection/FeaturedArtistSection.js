@@ -9,6 +9,7 @@ import artist3 from "../../Assets/artist3.png";
 const FeaturedArtistSection = (props) => {
   const split = props.title.split(" ");
   const lastTitle = split.pop();
+
   return (
     <div className={classes.featured__artist__section}>
       <div className="container-fluid">
@@ -26,6 +27,7 @@ const FeaturedArtistSection = (props) => {
               image={artist1}
               position="Abstract artist"
               like={99}
+              delay={1}
             />
           </div>
           <div className="col-lg-4 col-xs-12 col-md-6 ">
@@ -34,6 +36,7 @@ const FeaturedArtistSection = (props) => {
               image={artist2}
               position="Free-style artist"
               like={92}
+              delay={2}
             />
           </div>
           <div className="col-lg-4 col-xs-12 col-md-6 ">
@@ -42,6 +45,7 @@ const FeaturedArtistSection = (props) => {
               image={artist3}
               position="Abstract artist"
               like={91}
+              delay={3}
             />
           </div>
         </div>

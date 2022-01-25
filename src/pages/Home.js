@@ -7,6 +7,7 @@ import art2 from "../Assets/art2.jpg";
 import art3 from "../Assets/art3.jpg";
 import FeaturedArtistSection from "../components/FeaturedArtistSection/FeaturedArtistSection";
 import MasonrySection from "../components/MasonrySection/MasonrySection";
+import Fade from "react-reveal/Fade";
 const Home = () => {
   const data = [
     {
@@ -67,14 +68,25 @@ const Home = () => {
 
   return (
     <>
-      <Banner />
+      <Fade>
+        <Banner />
+      </Fade>
       <ProductSection title={"Trending Auction"} products={trendingAuctions} />
-      <ArtistSection artistName={"Picasso Pablo"} products={trendingAuctions} />
-      <FeaturedArtistSection
-        title={"Featured Artists"}
-        artists={featuredArtist}
-      />
-      <MasonrySection title={"Loved Arts"} />
+      <Fade cascade>
+        <ArtistSection
+          artistName={"Picasso Pablo"}
+          products={trendingAuctions}
+        />
+      </Fade>
+      <Fade cascade>
+        <FeaturedArtistSection
+          title={"Featured Artists"}
+          artists={featuredArtist}
+        />
+      </Fade>
+      <Fade cascade>
+        <MasonrySection title={"Loved Arts"} />
+      </Fade>
     </>
   );
 };

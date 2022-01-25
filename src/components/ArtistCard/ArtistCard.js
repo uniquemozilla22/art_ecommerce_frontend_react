@@ -3,11 +3,23 @@ import classes from "./ArtistCard.module.css";
 import { Card } from "react-bootstrap";
 import { FavoriteBorderOutlined } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
+import { animated, useSpring } from "react-spring";
 import { Link } from "react-router-dom";
 
-const ArtistCard = ({ name, image, position, like }) => {
+const ArtistCard = ({ name, image, position, like, delay }) => {
+  const useAnimationStyle = (delay) => {
+    return useSpring({
+      loop: false,
+      from: { y: 50, opacity: 0 },
+      to: { y: 0, opacity: 1 },
+      delay: delay * 200,
+    });
+  };
   return (
-    <div className={classes.artist__card__container}>
+    <animated.div
+      className={classes.artist__card__container}
+      style={useAnimationStyle(delay)}
+    >
       <Card className={classes.bidding__card}>
         <Card.Img
           variant="bottom"
@@ -39,7 +51,7 @@ const ArtistCard = ({ name, image, position, like }) => {
           </div>
         </Card.Body>
       </Card>
-    </div>
+    </animated.div>
   );
 };
 

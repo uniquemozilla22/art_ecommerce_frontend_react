@@ -1,12 +1,25 @@
 import { FavoriteOutlined } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import React from "react";
+import { animated, useSpring } from "react-spring";
 import classes from "./MasonryItem.module.css";
 
-const MasonryItem = ({ image, name, artist, height, like }) => {
+const MasonryItem = ({ image, name, artist, height, like, delay }) => {
+  const useAnimationStyle = (delay) => {
+    return useSpring({
+      loop: { reverse: true },
+      from: { y: 5 },
+      to: { y: 0 },
+      config: { duration: 1000 },
+      delay: delay * 100,
+    });
+  };
   return (
     <div className={classes.container__masontry__item} style={{ height }}>
-      <div className={classes.masonryItem}>
+      <animated.div
+        className={classes.masonryItem}
+        style={useAnimationStyle(delay)}
+      >
         <div className={classes.imageContainer}>
           <img
             src={image}
@@ -27,7 +40,7 @@ const MasonryItem = ({ image, name, artist, height, like }) => {
           </h1>
           <h4>{artist}</h4>
         </div>
-      </div>
+      </animated.div>
     </div>
   );
 };

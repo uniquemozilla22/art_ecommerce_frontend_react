@@ -8,6 +8,7 @@ import art1 from "../Assets/art1.jpg";
 import art2 from "../Assets/art2.jpg";
 import art3 from "../Assets/art3.jpg";
 import FeaturedArtistSection from "../components/FeaturedArtistSection/FeaturedArtistSection";
+import MasonrySection from "../components/MasonrySection/MasonrySection";
 const Home = () => {
   const data = [
     {
@@ -75,6 +76,7 @@ const Home = () => {
         title={"Featured Artists"}
         artists={featuredArtist}
       />
+      <MasonrySection title={"Loved Arts"} />
     </>
   );
 };

@@ -1,0 +1,21 @@
+.filterBar .accordion-button{
+    padding: 10px 0px !important;
+}
+.filterBar .accordion-item{
+    margin-bottom: 0px !important;
+}
+
+.filterBar .accordion-button:not(.collapsed){
+    background-color: transparent !important;
+    box-sizing: none !important;
+    color: #333 !important;
+}
+.filterBar .accordion-body{
+    padding:1rem 0rem;
+}
+.filterBar  .accordion-item{
+    border:none !important;
+}
+.filterBar  .accordion-button{
+    padding:6px 0px;
+}

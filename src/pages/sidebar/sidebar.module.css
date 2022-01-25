@@ -1,0 +1,60 @@
+
+.filterList{
+    padding: 0px;
+    list-style: none;
+}
+.filterList li{
+    color: #a4a4a4;
+    margin-bottom: 10px;
+}
+.filterList li:hover{
+    color: #000;
+    cursor: pointer;
+}
+.filterList span{
+    margin-left: 15px;
+}
+
+.filterHeading{
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+
+
+
+.categoryDropdown a{
+    color: #a4a4a4;
+    text-decoration: none;
+   
+}
+.categoryDropdown a:hover{
+    color: #000;
+}
+.categoryDropdown{
+    list-style:none;
+    padding:0px;
+}
+.categoryDropdown li{
+    margin-bottom: 10px;
+}
+
+
+
+
+
+.tagsList{
+    list-style: none;
+    padding: 0px;
+}
+.tagsList li{
+    display: inline-block;
+    padding: 10px 10px;
+    color: #a4a4a4;
+}
+.tagsList li:hover{
+    background-color: #ededed;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #333;
+}

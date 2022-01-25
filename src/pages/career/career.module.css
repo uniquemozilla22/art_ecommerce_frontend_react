@@ -1,0 +1,26 @@
+.careerPage{padding: 70px 0px;}
+.careerrow{
+    background-color: #676FA3;
+    color: #FFF;
+    border-radius: 20px;
+    padding:6px 0px;
+    align-items: center;
+    margin: 0px !important;
+    margin-bottom: 15px !important;
+    transition: ease-in-out .2s !important;
+}
+.careerrow:hover{transform: scale(1.01); transition: ease-in-out .2s;}
+@media screen and (max-width: 600px) {.careerrow{  font-size: 10px;} .careerheader{  font-size: 10px;}}
+.careerheader{
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.applynow{
+    background: #FF5959;
+    border-radius: 20px;
+    border:none;
+    color: #FFF;
+    padding:10px 15px;
+    float:right;
+    text-align: right;
+}

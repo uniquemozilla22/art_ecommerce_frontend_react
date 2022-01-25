@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Route, Routes } from "react-router";
 import ArtistSection from "../components/AtistSection/ArtistSection";
 import Banner from "../components/Banner/Banner";
-import Layout from "../components/Layout";
 import ProductSection from "../components/TrendingSection/ProductSection";
 import art1 from "../Assets/art1.jpg";
 import art2 from "../Assets/art2.jpg";

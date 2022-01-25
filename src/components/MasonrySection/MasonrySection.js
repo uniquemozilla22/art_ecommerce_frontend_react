@@ -1,11 +1,8 @@
 import { Masonry } from "@mui/lab";
-import { Paper } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import MasonryItem from "../MasonryItem/MasonryItem";
 import classes from "./MasonrySection.module.css";
-import art1 from "../../Assets/art1.jpg";
-import art2 from "../../Assets/art2.jpg";
 import art3 from "../../Assets/art3.jpg";
 
 const MasonrySection = (props) => {

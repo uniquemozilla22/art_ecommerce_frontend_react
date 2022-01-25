@@ -17,8 +17,6 @@
   border-radius: 20px;
 }
 
-.artist__card__container .bidding__card .image__container {
-}
 .artist__card__container .card__header {
   display: flex;
   justify-content: space-between;

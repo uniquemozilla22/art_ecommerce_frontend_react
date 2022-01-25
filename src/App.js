@@ -19,14 +19,14 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/career" element={<Career />} />
-          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacypolicies" element={<Privacy />} />
+          <Route path="/careers" element={<Career />} />
+          <Route path="/termsandconditions" element={<Terms />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/faqs" element={<Faqs />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/aboutus" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/return" element={<Return />} />
+          <Route path="/returnsandrefunds" element={<Return />} />
 
           <Route path="/blog/:id" element={<BlogDetail />} />
         </Routes>

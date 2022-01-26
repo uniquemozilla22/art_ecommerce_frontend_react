@@ -1,0 +1,58 @@
+.product__filter__container .filterList {
+  padding: 0px;
+  list-style: none;
+  margin: 2rem 0;
+}
+.product__filter__container .filterList li {
+  color: #a4a4a4;
+  margin-bottom: 10px;
+  list-style: none;
+}
+.product__filter__container .filterList li:hover {
+  color: #000;
+  cursor: pointer;
+  font-weight: 600;
+}
+.product__filter__container .filterList span {
+  margin-left: 15px;
+}
+.product__filter__container .categoryDropdown a {
+  color: #a4a4a4;
+  text-decoration: none;
+}
+
+.product__filter__container .categoryDropdown,
+.product__filter__container .tagsList {
+  list-style: none;
+  padding: 0;
+}
+
+.product__filter__container .tagsList {
+  display: flex;
+  flex-wrap: wrap;
+}
+.product__filter__container .tagsList li {
+  flex: 33.33%;
+  padding: 10px;
+}
+.product__filter__container .categoryDropdown li {
+  margin-left: 0;
+  padding: 10px 0;
+}
+.product__filter__container .categoryDropdown li:hover a {
+  color: #000;
+  font-weight: 600;
+}
+
+.product__filter__container .filtering__section .accordion__container_header {
+  border-bottom: 1px solid #000;
+  background: #fff;
+}
+
+.product__filter__container
+  .filtering__section
+  .accordion__container_header
+  button {
+  background: #fff;
+  color: #000;
+}

@@ -1,0 +1,41 @@
+.products__grid__container {
+}
+
+.products__grid__container .sort__container .filter__icon {
+  justify-self: start;
+}
+
+.products__grid__container .sorting__place__container .sort__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #a4a4a4;
+  padding: 1rem 0;
+}
+
+.products__grid__container .sorting__place__container .sort__container .sort {
+  display: flex;
+  align-items: center;
+}
+
+.products__grid__container .sorting__place__container .sort__container p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 0;
+}
+
+.products__grid__container .sorting__place__container .sort__selection {
+  height: max-content;
+  width: max-content;
+  background: #e8ebfe;
+  color: #a4a4a4;
+  margin-left: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+.products__grid__container .sorting__place__container .sort__selection option {
+  background: white;
+  color: #2b2b2b;
+}

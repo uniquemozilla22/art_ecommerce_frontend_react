@@ -14,6 +14,7 @@ import BlogDetail from "./pages/blog/blogDetail";
 import Return from "./pages/return/return";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/register";
+import Product from "./pages/product/Product";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/products" element={<Product />} />
           <Route path="/privacypolicies" element={<Privacy />} />
           <Route path="/careers" element={<Career />} />
           <Route path="/termsandconditions" element={<Terms />} />

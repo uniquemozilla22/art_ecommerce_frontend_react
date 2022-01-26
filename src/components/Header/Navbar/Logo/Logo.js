@@ -6,15 +6,17 @@ import { Link } from "react-router-dom";
 
 const Logo = (props) => {
   return (
-    <Link className={classes.logo_container} to="/">
+    <div className={classes.logo_container}>
       <Tooltip title="Categories Menu">
         <BarChart
           className={classes.menuIcon}
           onClick={(e) => props.toogleCategory()}
         />
       </Tooltip>
-      <img src={props.image} alt={props.alt} />
-    </Link>
+      <Link to="/">
+        <img src={props.image} alt={props.alt} />
+      </Link>
+    </div>
   );
 };
 

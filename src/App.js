@@ -27,7 +27,6 @@ function App() {
           <Route path="/aboutus" element={<About />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/returnsandrefunds" element={<Return />} />
-
           <Route path="/blog/:id" element={<BlogDetail />} />
         </Routes>
       </Layout>

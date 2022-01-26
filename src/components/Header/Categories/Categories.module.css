@@ -3,9 +3,11 @@
 }
 .categories__container .category__lists {
   display: flex;
+  align-items: center;
 }
 .category__list {
   padding: 10px;
+  font-size: 12px;
 }
 .category__list:first-child {
   padding-left: 0;

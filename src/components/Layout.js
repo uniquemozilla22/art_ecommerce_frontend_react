@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 
@@ -86,7 +87,12 @@ const Layout = (props) => {
       },
     ],
   });
-  return (
+
+  const location = useLocation();
+
+  return location.pathname === "/login" || location.pathname === "/register" ? (
+    props.children
+  ) : (
     <>
       <Header data={data} />
       {props.children}

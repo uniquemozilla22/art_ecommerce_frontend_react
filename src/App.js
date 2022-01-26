@@ -12,13 +12,15 @@ import Contact from "./pages/contactus/contact";
 
 import BlogDetail from "./pages/blog/blogDetail";
 import Return from "./pages/return/return";
+import Login from "./pages/login/Login";
 
 function App() {
   return (
     <div className="App">
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" exact element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/privacypolicies" element={<Privacy />} />
           <Route path="/careers" element={<Career />} />
           <Route path="/termsandconditions" element={<Terms />} />

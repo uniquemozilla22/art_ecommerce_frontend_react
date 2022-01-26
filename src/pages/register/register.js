@@ -1,11 +1,6 @@
 import React from "react";
 import classes from "./register.module.css";
-import {
-  Facebook,
-  FacebookOutlined,
-  Google,
-  Twitter,
-} from "@mui/icons-material";
+import { FacebookOutlined, Google, Twitter } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const Register = () => {

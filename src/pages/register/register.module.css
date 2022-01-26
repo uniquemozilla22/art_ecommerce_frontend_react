@@ -100,7 +100,7 @@
 }
 .register__container .register__form .register__seperator p {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .register__container .register__form .register__seperator p:before,

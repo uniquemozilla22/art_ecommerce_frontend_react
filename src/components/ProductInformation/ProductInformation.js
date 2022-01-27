@@ -12,7 +12,8 @@ const ProductInformation = (props) => {
       <div className={"col-6 " + classes.image__container}>
         <img src={image} alt={name} />
       </div>
-      <div className={"col-6"}>
+
+      <div className={"col-6 " + classes.content__container}>
         <div className={classes.information__content__container}>
           <div className={classes.supplier__information}>
             <h3 className={classes.supplier_heading}>Artist Information</h3>
@@ -69,16 +70,20 @@ const ProductInformation = (props) => {
             <div className={classes.tags}>
               <h1>Tags</h1>
               <div className={classes.tag__container}>
-                {tags.map((tag) => (
-                  <Link to={`/tag:${tag}`}>{tag}</Link>
+                {tags.map((tag, index) => (
+                  <Link key={index} to={`/tag:${tag}`}>
+                    {tag}
+                  </Link>
                 ))}
               </div>
             </div>
             <div className={classes.categories}>
               <h1>Categories</h1>
               <div className={classes.categories__container}>
-                {categories.map((tag) => (
-                  <Link to={`/tag:${tag}`}>{tag}</Link>
+                {categories.map((tag, index) => (
+                  <Link key={index} to={`/tag:${tag}`}>
+                    {tag}
+                  </Link>
                 ))}
               </div>
               <div className={classes.share}>

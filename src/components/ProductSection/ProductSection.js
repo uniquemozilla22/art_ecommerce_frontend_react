@@ -5,7 +5,7 @@ import Fade from "react-reveal/Fade";
 import { animated, useSpring } from "react-spring";
 import { Link } from "react-router-dom";
 
-const TrendingAution = ({ title, products }) => {
+const ProductSection = ({ title, products }) => {
   const split = title.split(" ");
   const lastName = split.pop();
 
@@ -56,4 +56,4 @@ const TrendingAution = ({ title, products }) => {
   );
 };
 
-export default TrendingAution;
+export default ProductSection;

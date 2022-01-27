@@ -1,0 +1,23 @@
+.description__container {
+  margin: 3rem 0 !important;
+}
+
+.tabContext > div > div {
+  justify-content: center;
+}
+
+.tabContext > div > div > button {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height */
+  text-transform: capitalize;
+
+  color: #000000;
+}
+
+.tabContext > div > span {
+  background-color: black;
+}

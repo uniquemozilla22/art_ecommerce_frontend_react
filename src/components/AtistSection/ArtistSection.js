@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./ArtistSection.module.css";
 import artist from "../../Assets/gal1.png";
-import ProductSection from "../TrendingSection/ProductSection";
+import ProductSection from "../ProductSection/ProductSection";
 import { animated, useSpring } from "react-spring";
 
 const ArtistSection = (props) => {

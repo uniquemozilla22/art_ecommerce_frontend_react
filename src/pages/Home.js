@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ArtistSection from "../components/AtistSection/ArtistSection";
 import Banner from "../components/Banner/Banner";
-import ProductSection from "../components/TrendingSection/ProductSection";
+import ProductSection from "../components/ProductSection/ProductSection";
 import art1 from "../Assets/art1.jpg";
 import art2 from "../Assets/art2.jpg";
 import art3 from "../Assets/art3.jpg";

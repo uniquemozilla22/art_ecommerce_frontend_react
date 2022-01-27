@@ -15,6 +15,7 @@ import Return from "./pages/return/return";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/register";
 import Product from "./pages/product/Product";
+import SingleProduct from "./pages/SingleProduct/SingleProduct";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/contactus" element={<Contact />} />
           <Route path="/returnsandrefunds" element={<Return />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route path="/products/:id" element={<SingleProduct />} />
         </Routes>
       </Layout>
     </div>

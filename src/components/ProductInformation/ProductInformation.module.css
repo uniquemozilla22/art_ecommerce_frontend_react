@@ -1,0 +1,207 @@
+.product__information__container {
+  align-items: center;
+}
+
+.product__information__container .image__container img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.product__information__container .information__content__cotnainer {
+}
+
+.product__information__container .supplier_heading {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+
+  color: #a4a4a4;
+}
+
+.product__information__container .supplierAvatar {
+  display: flex;
+  align-items: center;
+}
+
+.product__information__container .supplierAvatar .supplierAvatar__img {
+  margin: 0 1rem;
+}
+.product__information__container .supplierAvatar .supplierAvatar__img img {
+  height: 80px;
+  border-radius: 50%;
+}
+
+.product__information__container .supplierAvatar .supplierAvatar_content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.product__information__container .supplierAvatar .supplierAvatar_content h1 {
+  font-weight: 600;
+  font-size: 24px;
+  color: #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+
+.product__information__container
+  .supplierAvatar
+  .supplierAvatar_content
+  h1
+  span {
+  font-weight: 500;
+  font-size: 12px;
+
+  color: #000000;
+}
+
+.product__information__container .supplierAvatar .supplierAvatar_content h2 {
+  font-size: 16px;
+  color: #000000;
+}
+.product__information__container .supplierAvatar .supplierAvatar_content p {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 18px;
+
+  color: #a4a4a4;
+}
+
+.product__information__container .product__info h1 {
+  font-weight: 600;
+  font-size: 40px;
+  color: #000000;
+}
+
+.product__information__container .product__info h2 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+}
+
+.product__information__container .product__info p {
+  font-weight: 300;
+  font-size: 16px;
+  color: #000000;
+}
+
+.product__information__container .like__container {
+  display: flex;
+}
+.product__information__container .like__container p {
+  margin-left: 0.5rem;
+}
+
+.product__information__container .buttons__container {
+  display: flex;
+}
+
+.product__information__container .buttons__container .add_to_cart {
+  display: flex;
+  background: #676fa3;
+  border-radius: 20px;
+  padding: 10px 20px;
+  align-items: center;
+  color: #eef2ff;
+  cursor: pointer;
+}
+
+.product__information__container .buttons__container .add_to_cart p {
+  font-weight: 300;
+  font-size: 12px;
+  margin: 0;
+  margin-left: 0.5rem;
+}
+
+.product__information__container .buttons__container .add_to_wishlist {
+  display: flex;
+  border-radius: 20px;
+  padding: 10px 20px;
+  align-items: center;
+  color: #676fa3;
+  cursor: pointer;
+}
+.product__information__container .buttons__container .add_to_wishlist p {
+  margin: 0;
+  margin-left: 0.5rem;
+}
+
+.product__information__container .tags .tag__container {
+  display: flex;
+}
+
+.product__information__container .tags .tag__container a {
+  text-decoration: none;
+  margin: 10px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 18px;
+
+  color: #000000;
+}
+
+.product__information__container .tags .tag__container a:first-child {
+  margin-left: 0;
+}
+
+.product__information__container .tags h1 {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 24px;
+  color: #000000;
+}
+
+.product__information__container .categories .categories__container {
+  display: flex;
+}
+
+.product__information__container .categories .categories__container a {
+  text-decoration: none;
+  margin: 10px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 18px;
+
+  color: #000000;
+}
+
+.product__information__container
+  .categories
+  .categories__container
+  a:first-child {
+  margin-left: 0;
+}
+
+.product__information__container .categories h1 {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 24px;
+  color: #000000;
+}
+
+.product__information__container .share {
+}
+
+.product__information__container .share .icons__container {
+  display: flex;
+}
+
+.product__information__container .share .icons__container .icon {
+  margin: 0 0.5rem;
+  background: #676fa3;
+  color: #fff;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.product__information__container .share .icons__container .icon:first-child {
+  margin-left: 0;
+}

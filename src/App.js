@@ -16,6 +16,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/register";
 import Product from "./pages/product/Product";
 import SingleProduct from "./pages/SingleProduct/SingleProduct";
+import Checkout from "./pages/checkout/Checkout";
 
 function App() {
   return (
@@ -26,16 +27,17 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<Product />} />
+          <Route path="/products/:id" element={<SingleProduct />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/privacypolicies" element={<Privacy />} />
           <Route path="/careers" element={<Career />} />
           <Route path="/termsandconditions" element={<Terms />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/aboutus" element={<About />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/returnsandrefunds" element={<Return />} />
-          <Route path="/blog/:id" element={<BlogDetail />} />
-          <Route path="/products/:id" element={<SingleProduct />} />
         </Routes>
       </Layout>
     </div>

@@ -13,9 +13,11 @@ const ProductFeild = (props) => {
         <h2>NRS.{props.price}</h2>
         <p>{props.description}</p>
       </div>
-      <div className={classes.closeIcon_cart}>
-        <CloseOutlined onClick={(e) => props.remove()} />
-      </div>
+      {props.remove ? (
+        <div className={classes.closeIcon_cart}>
+          <CloseOutlined onClick={(e) => props.remove()} />
+        </div>
+      ) : null}
     </div>
   );
 };

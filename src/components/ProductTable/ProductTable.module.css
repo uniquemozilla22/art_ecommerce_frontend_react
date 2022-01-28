@@ -21,3 +21,29 @@
   width: 100%;
   text-align: end;
 }
+
+.product__table__container .calculations {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.product__table__container .calculations .totals {
+  width: max-content;
+  text-align: start;
+}
+.product__table__container .calculations .totals h4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 300;
+  font-size: 20px;
+  color: #888686;
+}
+
+.product__table__container .calculations .totals h4 span {
+  color: #000000;
+  font-weight: 500;
+  padding: 0 10px;
+}

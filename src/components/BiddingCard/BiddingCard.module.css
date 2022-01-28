@@ -1,3 +1,6 @@
+.modal__container {
+  width: 70vw;
+}
 .bidding__classes {
   padding: 20px;
 }

@@ -3,9 +3,13 @@ import classes from "./SingleProduct.module.css";
 import art1 from "../../Assets/art1.jpg";
 import art2 from "../../Assets/art2.jpg";
 import art3 from "../../Assets/art3.jpg";
-import ProductInformation from "../../components/ProductInformation/ProductInformation";
+import {
+  ProductInformation,
+  BiddingInformation,
+} from "../../components/ProductInformation/ProductInformation";
 import ProductDescription from "../../components/ProductDescription/ProductDescription";
 import ProductSection from "../../components/ProductSection/ProductSection";
+import highestbidder from "../../Assets/artist2.png";
 
 const SingleProduct = () => {
   const data = [
@@ -44,14 +48,17 @@ const SingleProduct = () => {
   return (
     <div className={classes.product__page}>
       <div className="container">
-        <ProductInformation
+        <BiddingInformation
           image={art1}
           name="One"
           price={2000}
           supplier={1}
           like={99}
           tags={["Abstract", "Lovely", "Mystical"]}
-          categories={["Abstract", "Lovely", "Mystical", "natural"]}
+          categories={["Abstract", "Lovely", "Mystical", "Natural"]}
+          time={"Feb 26, 2022 15:37:25"}
+          highestbidder={"Ramesh Yadav"}
+          highestbidderImage={highestbidder}
         />
         <ProductDescription
           description={"This is the description"}

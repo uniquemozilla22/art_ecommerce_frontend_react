@@ -32,10 +32,11 @@
   margin: 0 1rem;
 }
 .product__information__container .supplierAvatar .supplierAvatar__img img {
-  height: 100px;
+  width: 100%;
+  max-height: 100px;
+  max-width: 100px;
   border-radius: 50%;
   border: 2px solid #676fa3;
-  padding: 10px;
 }
 
 .product__information__container .supplierAvatar .supplierAvatar_content {
@@ -48,9 +49,7 @@
   font-weight: 600;
   font-size: 24px;
   color: #000000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: start;
   margin: 0;
 }
 
@@ -61,7 +60,7 @@
   span {
   font-weight: 500;
   font-size: 12px;
-
+  text-align: end;
   color: #000000;
 }
 
@@ -193,9 +192,6 @@
   color: #000000;
 }
 
-.product__information__container .share {
-}
-
 .product__information__container .share .icons__container {
   display: flex;
 }
@@ -210,4 +206,71 @@
 
 .product__information__container .share .icons__container .icon:first-child {
   margin-left: 0;
+}
+
+.product__information__container .bidding__container p {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 12px;
+  color: #888686;
+  margin-bottom: 5px 0;
+}
+
+.product__information__container .bidding__container p span {
+  text-decoration-line: underline;
+  font-style: italic;
+}
+.product__information__container .bidding__container .form__selection {
+  background-color: #676fa3;
+  color: #f8f8f2 !important;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+.product__information__container .bidding__container .form__selection option {
+  padding: 5px 20px;
+  background-color: #f8f8f2;
+  color: black !important;
+}
+
+.product__information__container .product__info .currentHighBidder {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid #ff5959;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.product__information__container .product__info .bidding__information p span {
+  font-weight: 500;
+  text-align: end;
+}
+
+.product__information__container .product__info .bidding__information p {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: 50%;
+  text-align: start;
+  margin: 5px 0;
+}
+
+.product__information__container .product__info .currentHighBidder img {
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+.product__information__container .product__info .currentHighBidder h3 {
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+}
+.buttons__container .like__container p {
+  margin-bottom: 0;
+}
+
+.buttons__container .like__container {
+  padding: 10px 20px;
 }

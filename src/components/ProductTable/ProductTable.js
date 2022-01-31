@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import ProductFeild from "../ProductFeild/ProductFeild";
 import ProductItem from "./ProductItem/ProductItem";
 import classes from "./ProductTable.module.css";
 
 const ProductTable = ({ items, removeFunction }) => {
-  const [coupon, setCoupon] = useState(1400);
+  const [coupon] = useState(1400);
   let total = 0;
   console.log(items);
   return (
     <div className={classes.product__table__container}>
       <div className={classes.table__title}>
         <h4>Product</h4>
-        <h4>By</h4>
+        <h4 className={"d-none d-sm-block"}>By</h4>
         <h4>Price</h4>
         <h4> </h4>
       </div>

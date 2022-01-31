@@ -44,7 +44,7 @@
 .masonryItem .content__container h1 .like__container {
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .masonryItem .content__container h1 .like__container {

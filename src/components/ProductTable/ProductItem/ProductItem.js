@@ -21,9 +21,10 @@ const ProductItem = ({
           <h5>{name}</h5>
           <h6>Edition : {edition}</h6>
           <p>{description}</p>
+          <p className={"d-block d-sm-none "}>{supplierName}</p>
         </div>
       </div>
-      <div className={classes.product__by}>
+      <div className={"d-none d-sm-block " + classes.product__by}>
         <h5>{supplierName}</h5>
       </div>
       <div className={classes.product__Price}>

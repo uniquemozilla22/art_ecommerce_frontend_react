@@ -1,4 +1,3 @@
-import { ClassNames } from "@emotion/react";
 import React, { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
 import ProductFilter from "../../components/ProductFilter/ProductFilter";

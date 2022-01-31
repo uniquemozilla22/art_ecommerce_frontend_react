@@ -63,7 +63,7 @@
 }
 .login__container .login__form .login__seperator p {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .login__container .login__form .login__seperator p:before,

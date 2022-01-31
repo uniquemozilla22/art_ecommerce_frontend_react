@@ -32,7 +32,7 @@ const Home = () => {
     {
       id: 3,
       name: "Three",
-      description: "this is the description for Two",
+      description: "this is the description for Three",
       image: art3,
       price: 6000,
       time: "Jan 26, 2022 15:37:25",
@@ -40,7 +40,7 @@ const Home = () => {
     {
       id: 4,
       name: "Four",
-      description: "this is the description for Two",
+      description: "this is the description for Four",
       image: art1,
       price: 6000,
       time: "Jan 26, 2022 15:37:25",

@@ -21,33 +21,18 @@ const FeaturedArtistSection = (props) => {
           <Link to="./">See More</Link>
         </div>
         <div className="row">
-          <div className=" col-lg-4 col-xs-12 col-md-6 ">
-            <ArtistCard
-              name="Peter Chung"
-              image={artist1}
-              position="Abstract artist"
-              like={99}
-              delay={1}
-            />
-          </div>
-          <div className="col-lg-4 col-xs-12 col-md-6 ">
-            <ArtistCard
-              name="Furba Tamang"
-              image={artist2}
-              position="Free-style artist"
-              like={92}
-              delay={2}
-            />
-          </div>
-          <div className="col-lg-4 col-xs-12 col-md-6 ">
-            <ArtistCard
-              name="Sunima Shrestha"
-              image={artist3}
-              position="Abstract artist"
-              like={91}
-              delay={3}
-            />
-          </div>
+          {props.artists.map((artist, index) => (
+            <div className=" col-lg-4 col-xs-12 col-md-6 ">
+              <ArtistCard
+                id={artist.id}
+                name={artist.name}
+                image={artist.image}
+                position={artist.position}
+                like={artist.likes}
+                delay={index}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

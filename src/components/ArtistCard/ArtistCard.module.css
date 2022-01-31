@@ -1,13 +1,5 @@
 .artist__card__container {
-  margin: 1rem 3rem;
-}
-
-.artist__card__container:first-child {
-  margin-left: 0;
-}
-
-.artist__card__container:last-child {
-  margin-right: 0;
+  margin: 1rem 0;
 }
 
 .artist__card__container .bidding__card {
@@ -24,7 +16,7 @@
 
 .artist__card__container .bidding__card .linkContainer {
   display: flex;
-  justify-content: flex-start;
+  justify-content: start;
   align-items: center;
 }
 .artist__card__container .bidding__card .linkContainer a {

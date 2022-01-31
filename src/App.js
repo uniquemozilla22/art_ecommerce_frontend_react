@@ -17,6 +17,7 @@ import Register from "./pages/register/register";
 import Product from "./pages/product/Product";
 import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import Checkout from "./pages/checkout/Checkout";
+import Artist from "./pages/artist/Artist";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/aboutus" element={<About />} />
+          <Route path="/artist:id" element={<Artist />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/returnsandrefunds" element={<Return />} />
         </Routes>

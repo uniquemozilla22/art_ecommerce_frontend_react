@@ -1,0 +1,52 @@
+.artist__details {
+  margin: 2rem 0;
+}
+
+.artist__details h3 {
+  font-weight: 500;
+  font-size: 30px;
+  color: #000000;
+  margin: 0;
+}
+
+.artist__details .social_links {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.artist__details .link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  text-decoration: none;
+  color: #000;
+}
+
+.artist__details .link p {
+  margin: 0;
+  margin-left: 0.5rem;
+}
+
+.artist__details .action__buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.artist__details .button {
+  display: flex;
+  align-items: center;
+  background: #4267b2;
+  width: fit-content;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+}
+
+.artist__details .button p {
+  margin: 0;
+  margin-left: 0.5rem;
+}

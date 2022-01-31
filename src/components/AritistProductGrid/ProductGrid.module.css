@@ -1,0 +1,4 @@
+.product__grid__container {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -18,6 +18,7 @@ import Product from "./pages/product/Product";
 import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import Checkout from "./pages/checkout/Checkout";
 import Artist from "./pages/artist/Artist";
+import EditProfile from "./pages/EditProfile/EditProfile";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/artist:id" element={<Artist />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/returnsandrefunds" element={<Return />} />
+          <Route path="/editprofile:id" element={<EditProfile />} />
         </Routes>
       </Layout>
     </div>

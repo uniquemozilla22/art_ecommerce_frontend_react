@@ -1,0 +1,32 @@
+.profile__avatar__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.profile__avatar__container img {
+  border-radius: 50%;
+  height: 200px;
+}
+
+.profile__avatar__container .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: auto;
+}
+.profile__avatar__container .content h1 {
+  font-weight: 300;
+  font-size: 24px;
+  color: #000000;
+  text-align: center;
+}
+.profile__avatar__container .content .icon {
+  background: #4267b2;
+  border-radius: 50%;
+  padding: 0.2rem;
+  color: #f8f8f2;
+  margin: 0 1rem;
+}

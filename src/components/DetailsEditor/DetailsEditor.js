@@ -24,7 +24,6 @@ const DetailsEditor = ({ data }) => {
       <div className={classes.detail__modifier}>
         {Object.keys(data).map((key, value) => (
           <>
-            {console.log(value)}
             <div
               className={classes.detail}
               onClick={() => handleModalOpen({ name: key, value: data[key] })}

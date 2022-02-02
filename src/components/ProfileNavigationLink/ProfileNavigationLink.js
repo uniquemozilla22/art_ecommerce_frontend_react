@@ -4,6 +4,7 @@ import DetailsEditor from "../DetailsEditor/DetailsEditor";
 import classes from "./ProfileNavigationLink.module.css";
 import { useSpring, animated } from "react-spring";
 import { Fade } from "react-reveal";
+import OrderList from "../Profileproducts/OrderList";
 
 export const ProfileNavigationLink = ({ title, links }) => {
   return links ? (
@@ -40,6 +41,12 @@ export const ProfileNavigationContent = ({ title, links }) => {
           <animated.div className={classes.tab__container}>
             {link.title === "My Profile" || link.title === "Address" ? (
               <DetailsEditor data={link.data} />
+            ) : null}
+            {link.title === "My Returns" ? (
+              <OrderList datas={link.data} />
+            ) : null}
+            {link.title === "Cancellations" ? (
+              <OrderList datas={link.data} cancelled />
             ) : null}
           </animated.div>
         </Fade>

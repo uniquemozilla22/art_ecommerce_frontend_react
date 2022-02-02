@@ -1,0 +1,37 @@
+.navigation__link {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.navigation__link h3 {
+  margin-top: 1rem;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+}
+
+.navigation__link .navigation__item a {
+  margin: 0;
+  padding: 0.2rem 0;
+  color: #000000;
+  font-weight: normal;
+  font-size: 14px;
+  color: #000000;
+}
+.tab__pane__container {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 20px;
+  min-height: 100%;
+}
+
+.tab__pane__container .tab__container {
+  height: 100%;
+}
+
+.tab__pane__container h3 {
+  font-weight: 700;
+  font-size: 20px;
+  color: #000000;
+}

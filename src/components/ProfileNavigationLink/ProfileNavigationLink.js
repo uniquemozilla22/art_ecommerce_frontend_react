@@ -1,18 +1,56 @@
 import React from "react";
-import { Nav } from "react-bootstrap";
+import { Nav, Tab } from "react-bootstrap";
+import DetailsEditor from "../DetailsEditor/DetailsEditor";
 import classes from "./ProfileNavigationLink.module.css";
-const ProfileNavigationLink = () => {
-  return (
+import { useSpring, animated } from "react-spring";
+import { Fade } from "react-reveal";
+
+export const ProfileNavigationLink = ({ title, links }) => {
+  return links ? (
     <Nav className={"flex-column " + classes.navigation__link}>
-      <h3>Manage Account</h3>
-      <Nav.Item>
-        <Nav.Link eventKey="first">Tab 1</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="second">Tab 2</Nav.Link>
+      <h3>{title}</h3>
+      {links.map((link) => (
+        <Nav.Item className={classes.navigation__item}>
+          <Nav.Link eventKey={link.title.toLowerCase().split(" ").join("")}>
+            {link.title}
+          </Nav.Link>
+        </Nav.Item>
+      ))}
+    </Nav>
+  ) : (
+    <Nav className={"flex-column " + classes.navigation__link}>
+      <Nav.Item className={classes.navigation__item}>
+        <Nav.Link eventKey={title.toLowerCase().split(" ").join("")}>
+          <h3>{title}</h3>
+        </Nav.Link>
       </Nav.Item>
     </Nav>
   );
 };
 
-export default ProfileNavigationLink;
+export const ProfileNavigationContent = ({ title, links }) => {
+  return links ? (
+    links.map((link) => (
+      <Tab.Pane
+        eventKey={link.title.toLowerCase().split(" ").join("")}
+        className={classes.tab__pane__container}
+      >
+        <h3>{link.title}</h3>
+        <Fade cascade>
+          <animated.div className={classes.tab__container}>
+            {link.title === "My Profile" || link.title === "Address" ? (
+              <DetailsEditor data={link.data} />
+            ) : null}
+          </animated.div>
+        </Fade>
+      </Tab.Pane>
+    ))
+  ) : (
+    <Tab.Pane
+      eventKey={title.toLowerCase().split(" ").join("")}
+      className={classes.tab__pane__container}
+    >
+      <h3>{title}</h3>
+    </Tab.Pane>
+  );
+};

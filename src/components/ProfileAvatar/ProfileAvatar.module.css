@@ -15,7 +15,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: auto;
+  margin-top: 1rem;
 }
 .profile__avatar__container .content h1 {
   font-weight: 300;
@@ -29,4 +29,10 @@
   padding: 0.2rem;
   color: #f8f8f2;
   margin: 0 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__avatar__container img {
+    height: 100px;
+  }
 }

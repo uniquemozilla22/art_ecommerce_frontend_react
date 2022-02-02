@@ -2,7 +2,11 @@ import React from "react";
 import { Tab, Nav } from "react-bootstrap";
 import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";
 import userImage from "../../Assets/artist2.png";
-import ProfileNavigationLink from "../../components/ProfileNavigationLink/ProfileNavigationLink";
+import classes from "./EditProfile.module.css";
+import {
+  ProfileNavigationLink,
+  ProfileNavigationContent,
+} from "../../components/ProfileNavigationLink/ProfileNavigationLink";
 
 const EditProfile = () => {
   const user = {
@@ -11,39 +15,112 @@ const EditProfile = () => {
     verified: true,
   };
 
+  const links = [
+    {
+      title: "Manage Account",
+      links: [
+        {
+          title: "My Profile",
+          data: {
+            "Full Name": "Yogesh Bhattarai",
+            "Email Address": "bhattaraiyogesh007@gmail.com",
+            "Mobile Phone": "+977 9846779494",
+            "Date of Birth": "1999 - 06 - 01",
+            Gender: "Male",
+          },
+        },
+        {
+          title: "Address",
+          data: {
+            "Address 1": "Pokhara-17, Birauta",
+            "Address 2": "Kathmandu , Budhhanagar",
+          },
+        },
+        {
+          title: "Payment Information",
+          data: {
+            ese: "Pokhara-17, Birauta",
+            "Address 2": "Kathmandu , Budhhanagar",
+          },
+        },
+      ],
+    },
+    {
+      title: "My Orders",
+      links: [
+        {
+          title: "My Returns",
+          data: {
+            "Full Name": "Yogesh Bhattarai",
+            "Email Address": "bhattaraiyogesh007@gmail.com",
+            "Mobile Phone": "+977 9846779494",
+            "Date of Birth": "1999 - 06 - 01",
+            Gender: "Male",
+          },
+        },
+        {
+          title: "Cancellations",
+          data: {
+            "Address 1": "Pokhara-17, Birauta",
+            "Address 2": "Kathmandu , Budhhanagar",
+          },
+        },
+      ],
+    },
+    {
+      title: "My Likes",
+      links: [
+        {
+          title: "My Arts",
+          data: {
+            "Full Name": "Yogesh Bhattarai",
+            "Email Address": "bhattaraiyogesh007@gmail.com",
+            "Mobile Phone": "+977 9846779494",
+            "Date of Birth": "1999 - 06 - 01",
+            Gender: "Male",
+          },
+        },
+        {
+          title: "My Artists",
+          data: {
+            "Address 1": "Pokhara-17, Birauta",
+            "Address 2": "Kathmandu , Budhhanagar",
+          },
+        },
+      ],
+    },
+  ];
+
   return (
-    <div className="container">
-      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+    <div className={"container " + classes.edit__profile__container}>
+      <Tab.Container
+        id="left-tabs-example"
+        defaultActiveKey={links[0].links[0].title
+          .toLowerCase()
+          .split(" ")
+          .join("")}
+      >
         <div className="row">
-          <div className="col-3">
+          <div className="col-md-3 col-sm-12">
             <ProfileAvatar
               name={user.name}
               image={user.image}
               verified={user.verified}
             />
-
-            <ProfileNavigationLink
-              title="Manage Account"
-              links={["My Profile", "Address", "Payment Information"]}
-            />
-
-            <Nav className="flex-column">
-              <Nav.Item>
-                <Nav.Link eventKey="first">Tab 1</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="second">Tab 2</Nav.Link>
-              </Nav.Item>
-            </Nav>
+            <div className={classes.links__container}>
+              {links.map((link) => (
+                <ProfileNavigationLink title={link.title} links={link.links} />
+              ))}
+            </div>
           </div>
-          <div className="col-9">
+          <div className="col-md-9 col-sm-12">
             <Tab.Content>
-              <Tab.Pane eventKey="first">
-                <p>THis is the first event</p>
-              </Tab.Pane>
-              <Tab.Pane eventKey="second">
-                <p>This is the second Event</p>
-              </Tab.Pane>
+              {links.map((link) => (
+                <ProfileNavigationContent
+                  title={link.title}
+                  links={link.links}
+                />
+              ))}
             </Tab.Content>
           </div>
         </div>

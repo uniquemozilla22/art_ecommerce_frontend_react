@@ -49,7 +49,6 @@ export const BiddingCard = ({ id, name, image, currentPrice, time, delay }) => {
             variant="bottom"
             src={image}
             className={classes.bidding__image}
-            height="300px"
           />
           <Card.Body className={classes.card_body}>
             <div className={classes.Biddingcard__header}>

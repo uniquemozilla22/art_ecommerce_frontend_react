@@ -11,6 +11,7 @@ import {
 } from "@mui/icons-material";
 import classes from "./ActionIcon.module.css";
 import { Dropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const ActionIcons = (props) => {
   return (
@@ -51,10 +52,11 @@ const ActionIcons = (props) => {
           <Dropdown.Item href="#">
             <ListAltTwoTone /> Orders
           </Dropdown.Item>
-          <Dropdown.Item href="#">
-            {" "}
-            <RemoveRedEyeOutlined />
-            View Profile
+          <Dropdown.Item>
+            <Link to="/editprofile:1" className={classes.dropdown__link}>
+              <RemoveRedEyeOutlined />
+              View Profile
+            </Link>
           </Dropdown.Item>
           <Dropdown.Item href="#">
             <LogoutOutlined /> Logout

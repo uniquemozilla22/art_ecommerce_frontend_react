@@ -9,7 +9,7 @@ const ProductGrid = ({ products }) => {
       <div className={classes.product__grid__container}>
         {products.map((product, index) => {
           return product.time ? (
-            <div className="col-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div className="col-lg-4 col-md-6 col-sm-6 col-xs-12">
               <BiddingCard
                 name={product.name}
                 id={product.id}
@@ -20,7 +20,7 @@ const ProductGrid = ({ products }) => {
               />
             </div>
           ) : (
-            <div className="col-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div className="col-lg-4 col-md-6 col-sm-6 col-xs-12">
               <ProductCard
                 name={product.name}
                 id={product.id}

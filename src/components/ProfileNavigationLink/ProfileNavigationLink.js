@@ -5,6 +5,8 @@ import classes from "./ProfileNavigationLink.module.css";
 import { useSpring, animated } from "react-spring";
 import { Fade } from "react-reveal";
 import OrderList from "../Profileproducts/OrderList";
+import ProductGrid from "../AritistProductGrid/ProductGrid";
+import ArtistsGrid from "../ArtistsGrid/ArtistsGrid";
 
 export const ProfileNavigationLink = ({ title, links }) => {
   return links ? (
@@ -47,6 +49,12 @@ export const ProfileNavigationContent = ({ title, links }) => {
             ) : null}
             {link.title === "Cancellations" ? (
               <OrderList datas={link.data} cancelled />
+            ) : null}
+            {link.title === "My Arts" ? (
+              <ProductGrid products={link.data} />
+            ) : null}
+            {link.title === "My Artists" ? (
+              <ArtistsGrid artists={link.data} />
             ) : null}
           </animated.div>
         </Fade>

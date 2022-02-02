@@ -3,6 +3,7 @@
 }
 .bidding__classes {
   padding: 20px;
+  width: 100%;
 }
 
 .bidding__classes:first-child {
@@ -25,7 +26,8 @@
 .bidding__classes .bidding__image {
   transform: scale(0.9);
   border-radius: 20px;
-  height: 250px;
+  height: 300px;
+  width: 100%;
 }
 .bidding__classes .card_body {
   padding: 0 20px;

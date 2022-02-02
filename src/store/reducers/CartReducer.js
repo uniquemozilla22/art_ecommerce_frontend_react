@@ -36,19 +36,19 @@ const initialState = {
 };
 const CartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_CART:
-      return state;
-
-    case REMOVE_ALL_CART:
-      return state;
+    case ADD_CART: {
+      const updatedState = addCartReducer(state, action.payload);
+      return updatedState;
+    }
+    case REMOVE_ALL_CART: {
+      const updatedCart = removeAllCart(state, action.payload);
+      return updatedCart;
+    }
 
     case REMOVE_CART: {
       const updatedState = removeCartReducer(state, action.payload);
       return updatedState;
     }
-    case UPDATE_CART:
-      return state;
-
     default:
       return state;
   }
@@ -59,6 +59,17 @@ const removeCartReducer = (state, payload) => {
     (item) => item.id !== payload.id
   );
   return { ...state, cartItems: filteredItems };
+};
+
+const addCartReducer = (state, payload) => {
+  const addedItems = state.cartItems.add(payload);
+
+  return { ...state, cartItems: addedItems };
+};
+
+const removeAllCart = (state, payload) => {
+  const cart = [];
+  return { ...state, cartItems: cart };
 };
 
 export default CartReducer;

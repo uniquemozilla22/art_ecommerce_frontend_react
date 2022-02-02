@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router";
+import ErrorHandle from "./ErrorHandle/ErrorHandle";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 
@@ -97,6 +98,7 @@ const Layout = (props) => {
       <Header data={data} />
       {props.children}
       <Footer data={data} />
+      <ErrorHandle />
     </>
   );
 };

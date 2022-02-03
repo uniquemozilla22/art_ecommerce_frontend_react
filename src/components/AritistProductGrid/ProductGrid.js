@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./ProductGrid.module.css";
 import { Fade } from "react-reveal";
-import { BiddingCard, ProductCard } from "../BiddingCard/BiddingCard";
+import ProductCard from "../BiddingCard/BiddingCard";
 
 const ProductGrid = ({ products }) => {
   return (
@@ -10,14 +10,14 @@ const ProductGrid = ({ products }) => {
         {products.map((product, index) => {
           return product.time ? (
             <div className="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-              <BiddingCard
+              <ProductCard
                 name={product.name}
                 id={product.id}
                 image={product.image}
-                currentPrice={product.price}
+                price={product.price}
                 time={product.time}
                 delay={index}
-              />
+            />
             </div>
           ) : (
             <div className="col-lg-4 col-md-6 col-sm-6 col-xs-12">

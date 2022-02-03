@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { ProductCard } from "../BiddingCard/BiddingCard";
+import ProductCard from "../BiddingCard/BiddingCard";
 import classes from "./ProductsContainer.module.css";
 import art1 from "../../Assets/art1.jpg";
 import art2 from "../../Assets/art2.jpg";

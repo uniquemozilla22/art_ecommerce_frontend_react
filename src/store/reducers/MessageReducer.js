@@ -1,4 +1,9 @@
-import { ERROR, HIDE_MESSAGE, SUCCESS } from "../actions/Types/Types";
+import {
+  ERROR,
+  HIDE_MESSAGE,
+  SHOW_MESSAGE,
+  SUCCESS,
+} from "../actions/Types/Types";
 
 const initialState = {
   show: true,

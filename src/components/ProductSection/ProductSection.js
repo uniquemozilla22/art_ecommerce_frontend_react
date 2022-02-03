@@ -1,5 +1,5 @@
 import React from "react";
-import { BiddingCard, ProductCard } from "../BiddingCard/BiddingCard";
+import ProductCard from "../BiddingCard/BiddingCard";
 import classes from "./ProductSection.module.css";
 import Fade from "react-reveal/Fade";
 import { animated, useSpring } from "react-spring";
@@ -27,11 +27,11 @@ const ProductSection = ({ title, products }) => {
               {products.map((product, index) => {
                 return product.time ? (
                   <div className="col">
-                    <BiddingCard
+                    <ProductCard
                       name={product.name}
                       id={product.id}
                       image={product.image}
-                      currentPrice={product.price}
+                      price={product.price}
                       time={product.time}
                       delay={index}
                     />

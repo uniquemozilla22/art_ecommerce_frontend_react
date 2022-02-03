@@ -14,7 +14,10 @@ import { Tooltip } from "@mui/material";
 import ProductInformation, {
   BiddingInformation,
 } from "../ProductInformation/ProductInformation";
-export const BiddingCard = ({ id, name, image, currentPrice, time, delay }) => {
+import { connect } from "react-redux";
+import addCartItem from "../../store/actions/Cart/AddItem";
+
+const BiddingCard = ({ id, name, image, price, time, delay }) => {
   const useAnimationStyle = (delay) => {
     return useSpring({
       loop: false,
@@ -68,7 +71,7 @@ export const BiddingCard = ({ id, name, image, currentPrice, time, delay }) => {
               </div>
             </div>
             <div className={classes.priceContainer}>
-              <p>Current Bid: Nrs. {currentPrice}</p>
+              <p>Current Bid: Nrs. {price}</p>
               <h1 className={classes.time_Remaining}>
                 {days + " days " + hours + " hours remaining"}
               </h1>
@@ -90,7 +93,7 @@ export const BiddingCard = ({ id, name, image, currentPrice, time, delay }) => {
           <BiddingInformation
             image={image}
             name={name}
-            price={currentPrice}
+            price={price}
             supplier={1}
             like={99}
             tags={["Abstract", "Lovely", "Mystical"]}
@@ -105,7 +108,7 @@ export const BiddingCard = ({ id, name, image, currentPrice, time, delay }) => {
   );
 };
 
-export const ProductCard = ({ id, image, name, price, delay }) => {
+const ProductCard = ({ id, image, name, price, delay, addToCart }) => {
   const useAnimationStyle = (delay) => {
     return useSpring({
       loop: false,
@@ -147,7 +150,18 @@ export const ProductCard = ({ id, image, name, price, delay }) => {
                   <FavoriteBorderOutlined fontSize="small" />
                 </Tooltip>
                 <Tooltip title={`Add to Cart ${name}`}>
-                  <ShoppingCartCheckoutOutlined fontSize="small" />
+                  <ShoppingCartCheckoutOutlined
+                    fontSize="small"
+                    onClick={(e) =>
+                      addToCart({
+                        id,
+                        name,
+                        description: "Added Description",
+                        price,
+                        image,
+                      })
+                    }
+                  />
                 </Tooltip>
               </div>
             </div>
@@ -182,3 +196,15 @@ export const ProductCard = ({ id, image, name, price, delay }) => {
     </>
   );
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (data) => dispatch(addCartItem(data)),
+  };
+};
+
+const Products = (props) => {
+  return props.time ? <BiddingCard {...props} /> : <ProductCard {...props} />;
+};
+
+export default connect(mapDispatchToProps)(Products);

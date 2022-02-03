@@ -13,3 +13,4 @@ export const WARNING = "WARNING";
 export const ERROR = "ERROR";
 
 export const HIDE_MESSAGE = "HIDE__MESSAGE";
+export const SHOW_MESSAGE = "SHOW__MESSAGE";

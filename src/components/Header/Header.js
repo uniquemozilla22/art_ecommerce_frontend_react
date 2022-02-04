@@ -5,7 +5,7 @@ import Categories from "./Categories/Categories";
 import { connect } from "react-redux";
 import { CATEGORY } from "../../store/actions/Types/Types";
 
-const Header = ({ data }) => {
+const Header = ({ data , logout}) => {
   return (
     <>
       <TopTag contact={data.contactNumber} />

@@ -3,6 +3,7 @@ import {
   HIDE_MESSAGE,
   SHOW_MESSAGE,
   SUCCESS,
+  WARNING,
 } from "../actions/Types/Types";
 
 const initialState = {
@@ -26,6 +27,22 @@ const MessageReducer = (state = initialState, action) => {
       return {
         ...state,
         show: false,
+      };
+    }
+
+    case SUCCESS: {
+      return {
+        ...state,
+        show: true,
+        info: { message: action.payload.message, alert: SUCCESS },
+      };
+    }
+
+    case WARNING: {
+      return {
+        ...state,
+        show: true,
+        info: { message: action.payload.message, alert: WARNING },
       };
     }
 

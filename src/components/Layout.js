@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { HideMessage } from "../store/actions/Message/Message";
 import ErrorHandle from "./ErrorHandle/ErrorHandle";
 import Footer from "./Footer/Footer";
@@ -91,8 +91,19 @@ const Layout = (props) => {
       },
     ],
   });
+  const navigat = useNavigate();
 
+  const [token, setToken] = useState(props.token);
   const location = useLocation();
+
+  useEffect(() => {
+    setToken(props.token);
+    if (location.pathname === "/login" || location.pathname === "/register") {
+      if (props.token) {
+        navigat("/");
+      }
+    }
+  }, [location.pathname, navigat, props.token]);
 
   return location.pathname === "/login" || location.pathname === "/register" ? (
     <>
@@ -110,7 +121,12 @@ const Layout = (props) => {
   );
 };
 const mapStateToProps = (state, ownProps) => {
-  return { ...state.message, loading: { ...state.loader }, ownProps };
+  return {
+    ...state.message,
+    loading: { ...state.loader },
+    token: state.user.token,
+    ownProps,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

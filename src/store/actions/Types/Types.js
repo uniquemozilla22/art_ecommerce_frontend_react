@@ -17,3 +17,7 @@ export const SHOW_MESSAGE = "SHOW__MESSAGE";
 
 export const SHOW_LOADING = "SHOW_LOADING";
 export const HIDE_LOADING = "HIDE_LOADING";
+
+export const USER_REGISTER = "USER_REGISTER";
+export const USER_LOGIN = "USER_LOGIN";
+export const USER_LOGOUT = "USER_LOGOUT";

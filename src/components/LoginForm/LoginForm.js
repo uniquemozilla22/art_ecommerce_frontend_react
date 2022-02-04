@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FacebookOutlined, Google } from "@mui/icons-material";
 import LoginAction from "../../store/actions/Authentication/Login/LoginAction";
 import { connect } from "react-redux";
+import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
 
 const LoginForm = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -14,7 +15,6 @@ const LoginForm = (props) => {
 
   const [view, setView] = useState(false);
 
-  const [spinner, setSpinner] = useState(false);
   const handleEmail = (e) => {
     setData({ ...data, email: e.target.value });
   };
@@ -25,6 +25,7 @@ const LoginForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    props.Loader(true);
     setValidation({
       email: { validated: null, message: "" },
       password: { validated: null, message: "" },
@@ -52,6 +53,8 @@ const LoginForm = (props) => {
                   "Invalid Password format : 8 - 20  characters \n , one uppercase character \n ,  one lowercase character \n & one digit \n  ",
               },
             });
+      props.Loader(false)
+
           }
         } else {
           setValidation({
@@ -59,6 +62,8 @@ const LoginForm = (props) => {
             email: { validated: null, message: "" },
             password: { validated: false, message: "Password Not Found" },
           });
+      props.Loader(false)
+
         }
       } else {
         console.log("true");
@@ -66,12 +71,15 @@ const LoginForm = (props) => {
           ...validation,
           email: { validated: false, message: "Invalid Email Format" },
         });
+      props.Loader(false)
+
       }
     } else {
       setValidation({
         ...validation,
         email: { validated: false, message: "Email Not Found" },
       });
+      props.Loader(false)
     }
   };
 
@@ -139,6 +147,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     Login: (email, password) => dispatch(LoginAction({ email, password })),
+    Loader: (data) =>
+      data ? dispatch(showLoading()) : dispatch(hideLoading()),
   };
 };
 

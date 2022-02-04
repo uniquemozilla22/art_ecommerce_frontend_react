@@ -1,5 +1,10 @@
 import axiosBase from "../../../../axiosBase";
-import { ErrorMessage } from "../../Message/Message";
+import { hideLoading } from "../../Loading/Loading";
+import {
+  ErrorMessage,
+  SuccessMessage,
+  WarningMessage,
+} from "../../Message/Message";
 
 const LoginAction = (payload) => {
   const { email, password } = payload;
@@ -10,7 +15,14 @@ const LoginAction = (payload) => {
         console.log(res);
       })
       .catch((err) => {
-        dispatch(ErrorMessage({ message: err.response.statusText }));
+        console.log({ ...err });
+        if (err.response.status === 400) {
+          dispatch(WarningMessage({ message: err.response.data.message }));
+        } else if (err.response.status === 500) {
+        } else {
+          dispatch(ErrorMessage({ message: err.response.data.message }));
+        }
+        dispatch(hideLoading());
       });
   };
 };

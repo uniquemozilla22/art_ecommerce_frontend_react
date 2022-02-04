@@ -58,7 +58,7 @@ const ActionIcons = (props) => {
               View Profile
             </Link>
           </Dropdown.Item>
-          <Dropdown.Item href="#">
+          <Dropdown.Item onClick={(e) => props.Logout()}>
             <LogoutOutlined /> Logout
           </Dropdown.Item>
         </Dropdown.Menu>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router";
 import removeCartItem from "../../../store/actions/Cart/RemoveItem";
+import { Logout } from "../../../store/actions/User/Logout";
 import ActionIcons from "./ActionIcons/ActionIcons";
 import CartModal from "./CartModal/CartModal";
 import CartModalBody from "./CartModalBody/CartModalBody";
@@ -43,6 +45,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     toggleSearch: () => dispatch({ type: "SEARCH" }),
     toggleHelpCenter: () => dispatch({ type: "HELP_CENTER" }),
     removeCartItem: (item) => dispatch(removeCartItem({ id: item.id })),
+    Logout: () => {
+      dispatch(Logout());
+      useNavigate()("/login");
+    },
   };
 };
 

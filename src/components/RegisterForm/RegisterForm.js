@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./RegisterForm.module.css";
 import { FacebookOutlined, Google, Twitter } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import RegisterAction from "../../store/actions/Authentication/Register/RegisterAction";
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
+import { useNavigate } from "react-router";
 
 const RegisterForm = (props) => {
   const [data, setData] = useState({
@@ -45,11 +46,13 @@ const RegisterForm = (props) => {
     setValidation({ ...validationData });
 
     if (
-      (validationData.email.validated && validationData.password.validated,
-      validationData.username.validated,
-      validationData.mobile_no.validated)
+      validationData.email.validated &&
+      validationData.password.validated &&
+      validationData.username.validated &&
+      validationData.mobile_no.validated
     ) {
       props.Register(data);
+    } else {
       props.Loader(false);
     }
   };
@@ -326,9 +329,6 @@ const RegisterForm = (props) => {
             </div>
             <div className={classes.icons}>
               <Google />
-            </div>
-            <div className={classes.icons}>
-              <Twitter />
             </div>
           </div>
         </div>

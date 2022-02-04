@@ -14,7 +14,7 @@ const SpinnerComp = (props) => {
       <Spinner
         animation="border"
         role="status"
-        variant="info"
+        variant="light"
         className={classes.spinner}
       >
         <span className="visually-hidden">Loading...</span>

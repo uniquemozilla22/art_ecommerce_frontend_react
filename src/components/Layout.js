@@ -103,6 +103,9 @@ const Layout = (props) => {
         navigat("/");
       }
     }
+    if (!props.token) {
+      navigat("/login");
+    }
   }, [location.pathname, navigat, props.token]);
 
   return location.pathname === "/login" || location.pathname === "/register" ? (

@@ -5,6 +5,7 @@ import {
   SuccessMessage,
   WarningMessage,
 } from "../../Message/Message";
+import { RegisterAuthentication } from "../../User/Authenticate";
 
 const LoginAction = (payload) => {
   const { email, password } = payload;
@@ -12,10 +13,21 @@ const LoginAction = (payload) => {
   return (dispatch) => {
     return loginToTheSystem(email, password)
       .then((res) => {
-        console.log(res);
+        dispatch(
+          SuccessMessage({
+            message: res.statusText + "! Login Successfull.",
+          })
+        );
+        dispatch(
+          RegisterAuthentication({
+            username: payload.username,
+            email: payload.email,
+            token: res.data.token,
+          })
+        );
+        dispatch(hideLoading());
       })
       .catch((err) => {
-        console.log({ ...err });
         if (err.response.status === 400) {
           dispatch(WarningMessage({ message: err.response.data.message }));
         } else if (err.response.status === 500) {

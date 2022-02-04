@@ -6,9 +6,9 @@ import {
 } from "../actions/Types/Types";
 
 const initialState = {
-  show: true,
+  show: false,
   info: {
-    message: "This is the Message",
+    message: "",
     alert: SUCCESS,
   },
 };

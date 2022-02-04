@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Snackbar, Alert } from "@mui/material";
-import { connect } from "react-redux";
-import { HideMessage } from "../../store/actions/Message/Message";
+
 
 const MessageHandle = (props) => {
   const [show, setShow] = useState(props.show);
@@ -26,14 +25,6 @@ const MessageHandle = (props) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return { ...state.message, ownProps };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    hideMessage: () => dispatch(HideMessage()),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MessageHandle);
+export default MessageHandle;

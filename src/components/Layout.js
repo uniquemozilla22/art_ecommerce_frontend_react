@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { useLocation } from "react-router";
+import { HideMessage } from "../store/actions/Message/Message";
 import ErrorHandle from "./ErrorHandle/ErrorHandle";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
+import Spinner from "./Spinner/Spinner";
 
 const Layout = (props) => {
   const [data] = useState({
@@ -92,15 +95,27 @@ const Layout = (props) => {
   const location = useLocation();
 
   return location.pathname === "/login" || location.pathname === "/register" ? (
-    props.children
+    <>
+      <Spinner {...props.loading} image={data.logo} />
+      {props.children}
+      <ErrorHandle {...props} />
+    </>
   ) : (
     <>
       <Header data={data} />
       {props.children}
       <Footer data={data} />
-      <ErrorHandle />
+      <ErrorHandle {...props} />
     </>
   );
 };
+const mapStateToProps = (state, ownProps) => {
+  return { ...state.message, loading: { ...state.loader }, ownProps };
+};
 
-export default Layout;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    hideMessage: () => dispatch(HideMessage()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

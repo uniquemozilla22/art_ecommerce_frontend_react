@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LoginForm from "../../components/Login/Login";
+import LoginForm from "../../components/LoginForm/LoginForm";
 import classes from "./Login.module.css";
 
 const Login = (props) => {

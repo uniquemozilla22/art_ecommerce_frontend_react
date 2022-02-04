@@ -1,0 +1,137 @@
+.register__form .register__form__container .group .input:first-child {
+  margin-left: 0rem;
+}
+
+.register__form .register__form__container .group .input:last-child {
+  margin-right: 0rem;
+}
+
+.register__form {
+  background: #e8ebfe60;
+  padding: 2rem 4rem;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title__register {
+  align-self: flex-start;
+}
+.title__register h1 {
+  font-weight: 900;
+  font-size: 30px;
+}
+
+.register__form__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.register__form__container .group .input__container:first-child {
+  margin-left: 0;
+}
+.register__form__container .group {
+  padding: 0;
+  margin: 0;
+}
+
+.register__form__container .group .input__container:last-child {
+  margin-right: 0;
+}
+
+.register__form__container h4 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 30px;
+
+  color: #676fa3;
+}
+
+.register__form__container .input {
+  margin: 5px;
+  padding: 1rem;
+  background: #eef2ff;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.register__form__container .input:focus {
+  outline: none;
+}
+.register__form__container .input::placeholder {
+  color: #00000040;
+  font-weight: 500;
+}
+
+.register__form__container .submit {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  background: #676fa3;
+  color: #fff;
+  width: 50%;
+}
+.register__form .register__seperator p {
+  display: flex;
+  align-items: flex-end;
+}
+
+.register__form .register__seperator p:before,
+.register__form .register__seperator p:after {
+  display: inline-block;
+  align-items: center;
+  content: "";
+  border: 1px solid #888686;
+  width: 12vw;
+  margin: 0 1rem;
+  transform: translateY(-0.7rem);
+}
+.other__methods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #888686;
+}
+.other__methods a {
+  text-decoration: none;
+  color: #888686;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.other__methods a:after {
+  align-items: center;
+  content: "";
+  border: 1px solid #888686;
+  height: 1rem;
+  margin: 0 1rem;
+  width: 1px;
+}
+
+.other__methods .social__alternatives {
+  display: flex;
+  justify-content: center;
+}
+
+.other__methods .social__alternatives .icons {
+  margin: 1rem;
+  background: #676fa3;
+  border-radius: 20px;
+  color: #fff;
+  padding: 0.5rem;
+}
+
+.input__container .error_Message {
+  color: #ff5959;
+  margin: 0;
+  font-size: 12px;
+  align-self: flex-start;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./Login.module.css";
+import classes from "./LoginForm.module.css";
 import { Link } from "react-router-dom";
 import { FacebookOutlined, Google } from "@mui/icons-material";
 import LoginAction from "../../store/actions/Authentication/Login/LoginAction";
@@ -11,6 +11,8 @@ const LoginForm = (props) => {
     email: { validated: null, message: "" },
     password: { validated: null, message: "" },
   });
+
+  const [view, setView] = useState(false);
 
   const [spinner, setSpinner] = useState(false);
   const handleEmail = (e) => {
@@ -93,11 +95,13 @@ const LoginForm = (props) => {
           <p className={classes.errorMessage}>{validation.email.message}</p>
         ) : null}
         <input
-          type="text"
+          type={view ? "text" : "password"}
           placeholder="Password"
           name={"password"}
           className={classes.input}
           onChange={(e) => handlePassword(e)}
+          onClick={(e) => setView(!view)}
+          style={view ? { background: "#ff595920" } : null}
         />
         {validation.password.validated === false ? (
           <p className={classes.errorMessage}>{validation.password.message}</p>
@@ -138,4 +142,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default LoginForm;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

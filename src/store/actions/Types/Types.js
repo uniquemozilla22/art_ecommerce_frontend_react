@@ -14,3 +14,6 @@ export const ERROR = "ERROR";
 
 export const HIDE_MESSAGE = "HIDE__MESSAGE";
 export const SHOW_MESSAGE = "SHOW__MESSAGE";
+
+export const SHOW_LOADING = "SHOW_LOADING";
+export const HIDE_LOADING = "HIDE_LOADING";

@@ -49,6 +49,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(Logout());
       useNavigate()("/login");
     },
+    loginModelToggle: () => dispatch({ type: "LOGIN_MODAL" }),
   };
 };
 

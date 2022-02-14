@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import storage from "redux-persist/lib/storage";
+import storageSession from "redux-persist/lib/storage/session";
 import { persistReducer } from "redux-persist";
 import UserReducer from "./UserReducer";
 import ModalReducer from "./ModalReducer";
@@ -17,8 +17,8 @@ const reducers = combineReducers({
 
 const persistConfig = {
   key: "root",
-  storage,
-  blacklist: ["cartContent", "message", "loader"],
+  storage: storageSession,
+  whitelist: ["user"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

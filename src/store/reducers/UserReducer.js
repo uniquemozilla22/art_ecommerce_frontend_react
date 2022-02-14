@@ -1,4 +1,8 @@
-import { USER_LOGOUT, USER_REGISTER } from "../actions/Types/Types";
+import {
+  LOGIN_MODAL,
+  USER_LOGOUT,
+  USER_REGISTER,
+} from "../actions/Types/Types";
 
 const initialState = {
   email: null,
@@ -26,6 +30,7 @@ const UserReducer = (state = initialState, action) => {
         token: null,
       };
     }
+
     default:
       return state;
   }

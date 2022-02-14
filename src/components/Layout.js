@@ -5,6 +5,7 @@ import { HideMessage } from "../store/actions/Message/Message";
 import ErrorHandle from "./ErrorHandle/ErrorHandle";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
+import LoginModal from "./LoginModal/LoginModal";
 import Spinner from "./Spinner/Spinner";
 
 const Layout = (props) => {
@@ -113,10 +114,11 @@ const Layout = (props) => {
     </>
   ) : (
     <>
-      <Header data={data} />
+      <Header data={data} loggedIn={token} />
       {props.children}
       <Footer data={data} />
       <ErrorHandle {...props} />
+      <LoginModal />
     </>
   );
 };

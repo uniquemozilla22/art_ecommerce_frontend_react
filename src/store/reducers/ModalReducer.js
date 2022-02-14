@@ -1,10 +1,17 @@
-import { CART, CATEGORY, SEARCH, HELP_CENTER } from "../actions/Types/Types";
+import {
+  CART,
+  CATEGORY,
+  SEARCH,
+  HELP_CENTER,
+  LOGIN_MODAL,
+} from "../actions/Types/Types";
 
 const initialState = {
   category: false,
   cart: false,
   search: false,
   helpCenter: false,
+  login: true,
 };
 
 const ModalReducer = (state = initialState, action) => {
@@ -22,6 +29,9 @@ const ModalReducer = (state = initialState, action) => {
 
     case HELP_CENTER:
       return { ...state, helpCenter: !state.helpCenter };
+
+    case LOGIN_MODAL:
+      return { ...state, login: !state.login };
 
     default:
       return state;

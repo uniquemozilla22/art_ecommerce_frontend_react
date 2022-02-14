@@ -43,6 +43,7 @@ const LoginForm = (props) => {
               password: { validated: null, message: "" },
             });
             props.Login(data.email, data.password);
+            if (props.loginModal) props.closeComp();
           } else {
             setValidation({
               ...validation,
@@ -53,8 +54,7 @@ const LoginForm = (props) => {
                   "Invalid Password format : 8 - 20  characters \n , one uppercase character \n ,  one lowercase character \n & one digit \n  ",
               },
             });
-      props.Loader(false)
-
+            props.Loader(false);
           }
         } else {
           setValidation({
@@ -62,8 +62,7 @@ const LoginForm = (props) => {
             email: { validated: null, message: "" },
             password: { validated: false, message: "Password Not Found" },
           });
-      props.Loader(false)
-
+          props.Loader(false);
         }
       } else {
         console.log("true");
@@ -71,22 +70,26 @@ const LoginForm = (props) => {
           ...validation,
           email: { validated: false, message: "Invalid Email Format" },
         });
-      props.Loader(false)
-
+        props.Loader(false);
       }
     } else {
       setValidation({
         ...validation,
         email: { validated: false, message: "Email Not Found" },
       });
-      props.Loader(false)
+      props.Loader(false);
     }
   };
 
+  const classNameContainer = () => {
+    return props.loginModal ? classes.login__modal : classes.login__form;
+  };
+
   return (
-    <div className={classes.login__form}>
+    <div className={classNameContainer()}>
       <div className={classes.title__login}>
         <h1>Login.</h1>
+        {props.closeComponent ? props.closeComponent : null}
       </div>
       <form
         className={classes.login__form__container}

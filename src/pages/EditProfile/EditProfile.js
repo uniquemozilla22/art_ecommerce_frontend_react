@@ -8,12 +8,14 @@ import artist2 from "../../Assets/artist2.png";
 import artist1 from "../../Assets/artist1.png";
 import art3 from "../../Assets/art3.jpg";
 import classes from "./EditProfile.module.css";
+import { useSelector } from "react-redux";
 import {
   ProfileNavigationLink,
   ProfileNavigationContent,
 } from "../../components/ProfileNavigationLink/ProfileNavigationLink";
 
 const EditProfile = () => {
+  const token = useSelector((state) => state.user.token);
   const user = {
     name: "Yogesh Bhattarai",
     image: userImage,
@@ -145,6 +147,8 @@ const EditProfile = () => {
       ],
     },
   ];
+
+  const fetchData = () => {};
 
   return (
     <div className={"container " + classes.edit__profile__container}>

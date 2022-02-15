@@ -32,7 +32,7 @@ export const ProfileNavigationLink = ({ title, links }) => {
   );
 };
 
-export const ProfileNavigationContent = ({ title, links }) => {
+export const ProfileNavigationContent = ({ title, links, updateData }) => {
   return links ? (
     links.map((link) => (
       <Tab.Pane
@@ -43,7 +43,7 @@ export const ProfileNavigationContent = ({ title, links }) => {
         <Fade cascade>
           <animated.div className={classes.tab__container}>
             {link.title === "My Profile" || link.title === "Address" ? (
-              <DetailsEditor data={link.data} />
+              <DetailsEditor data={link.data} updateData={updateData} />
             ) : null}
             {link.title === "Social" ? <SocialEditor data={link.data} /> : null}
             {link.title === "My Returns" ? (

@@ -1,24 +1,53 @@
 import axiosBase from "../../../axiosBase";
 import { store } from "../../store";
-import { SuccessMessage } from "../Message/Message";
+import {
+  SuccessMessage,
+  ErrorMessage,
+  WarningMessage,
+} from "../Message/Message";
 
 const UpdateProfile = (payload) => {
   const state = store.getState();
   return (dispatch) => {
     updateData(state.user.token, payload)
       .then((response) => {
-        console.log(response);
+        dispatch(
+          SuccessMessage({
+            message: response.statusText + "!" + response.data.message,
+          })
+        );
       })
       .catch((error) => {
-        console.log(error);
+        console.log({ ...error });
+        if (error.response === undefined) {
+          dispatch(
+            ErrorMessage({
+              message: "Network Error! Check Your Internet Connection",
+            })
+          );
+        }
+        if (error.response.status === 401) {
+          dispatch(
+            WarningMessage({
+              message: error.response.data.message,
+            })
+          );
+        } else {
+          dispatch(
+            ErrorMessage({
+              message: error.response.data.message,
+            })
+          );
+        }
       });
   };
 };
 
-const updateData = (token) => {
-  return axiosBase.get("/customers/details", {
+const updateData = (token, payload) => {
+  const data = { [payload.name]: payload.value };
+  return axiosBase.put("/customers/update", data, {
     headers: {
-      Authorization: `Bearer ${token} `,
+      Authorization: `Bearer ${token}`,
     },
   });
 };

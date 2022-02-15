@@ -4,7 +4,7 @@ import FeatherIcon from "feather-icons-react";
 import { Modal } from "@mui/material";
 import { connect } from "react-redux";
 
-const DetailsEditor = ({ data }) => {
+const DetailsEditor = ({ data, updateData }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({ name: "", value: "" });
   const [onSubmit, setOnSubmit] = useState(false);
@@ -13,10 +13,6 @@ const DetailsEditor = ({ data }) => {
     setModalData(data);
     setShowModal(true);
     setOnSubmit(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
   };
 
   return (
@@ -48,22 +44,36 @@ const DetailsEditor = ({ data }) => {
             {modalData.name.charAt(0).toUpperCase() +
               modalData.name.slice(1).split("_").join(" ")}
           </h2>
-          <FormCreator name={modalData.name} value={modalData.value} />
+          <FormCreator
+            name={modalData.name}
+            value={modalData.value}
+            updateData={updateData}
+          />
         </div>
       </Modal>
     </>
   );
 };
 
-const FormCreator = ({ name, value }) => {
+const FormCreator = ({ name, value, updateData }) => {
+  const [data, setData] = useState({
+    name,
+    value,
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    updateData(data);
+  };
+
+  const handleInput = (e) => {
+    setData({ ...data, value: e.target.value });
   };
 
   if (name === "gender") {
     return (
       <form className={classes.form__modal} onSubmit={(e) => handleSubmit(e)}>
-        <select name={name} id="cars">
+        <select name={name} id={name} onChange={(e) => handleInput(e)}>
           <option value="Male" disabled>
             Select an Option
           </option>
@@ -84,7 +94,12 @@ const FormCreator = ({ name, value }) => {
   ) {
     return (
       <form className={classes.form__modal} onSubmit={(e) => handleSubmit(e)}>
-        <input type="number" placeholder={value} name={name} />
+        <input
+          type="number"
+          placeholder={value}
+          name={name}
+          onChange={(e) => handleInput(e)}
+        />
         <div className={classes.buttons__container}>
           <input type="submit" value="Submit" />
         </div>
@@ -93,7 +108,12 @@ const FormCreator = ({ name, value }) => {
   } else {
     return (
       <form className={classes.form__modal} onSubmit={(e) => handleSubmit(e)}>
-        <input type="text" placeholder={value} name={name} />
+        <input
+          type="text"
+          placeholder={value}
+          name={name}
+          onChange={(e) => handleInput(e)}
+        />
         <div className={classes.buttons__container}>
           <input type="submit" value="Submit" />
         </div>

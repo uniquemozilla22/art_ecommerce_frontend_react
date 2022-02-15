@@ -15,6 +15,7 @@ import {
 } from "../../components/ProfileNavigationLink/ProfileNavigationLink";
 import FetchEditProfiileData from "../../store/actions/EditProfile/EditProfile.fetch";
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
+import UpdateProfile from "../../store/actions/EditProfile/EditProfile.update";
 
 const EditProfile = (props) => {
   const [data, setData] = useState(props.user);
@@ -31,6 +32,7 @@ const EditProfile = (props) => {
     mobile_no: data.otherData.mobile_no,
     alternative_no: data.otherData.alternative_no,
     telephone_no: data.otherData.telephone_no,
+    gender: data.otherData.gender,
   };
 
   const address = {
@@ -204,6 +206,7 @@ const EditProfile = (props) => {
                 <ProfileNavigationContent
                   title={link.title}
                   links={link.links}
+                  updateData={props.updateData}
                 />
               ))}
             </Tab.Content>
@@ -225,9 +228,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     Loader: (data) =>
       data ? dispatch(showLoading()) : dispatch(hideLoading()),
-    fetchData: () => {
-      dispatch(FetchEditProfiileData());
-    },
+    fetchData: () => dispatch(FetchEditProfiileData()),
+    updateData: (data) => dispatch(UpdateProfile(data)),
   };
 };
 

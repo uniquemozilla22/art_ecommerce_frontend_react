@@ -50,14 +50,21 @@ const DetailsEditor = ({ data }) => {
             className={classes.form__modal}
             onSubmit={(e) => handleSubmit(e)}
           >
-            <input type="text" value={modalData.value} name={modalData.name} />
-            <input type="submit" value="Submit" />
-            <button
-              className={classes.close__button}
-              onClick={() => setShowModal(false)}
-            >
-              Cancel
-            </button>
+            <input
+              type="text"
+              placeholder={modalData.value}
+              onChange={(e) => {}}
+              name={modalData.name}
+            />
+            <div className={classes.buttons__container}>
+              <input type="submit" value="Submit" />
+              <button
+                className={classes.close__button}
+                onClick={() => setShowModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
           </form>
         </div>
       </Modal>

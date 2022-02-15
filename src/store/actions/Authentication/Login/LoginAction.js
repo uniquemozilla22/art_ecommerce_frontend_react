@@ -30,7 +30,6 @@ const LoginAction = (payload) => {
       .catch((err) => {
         if (err.response.status === 400) {
           dispatch(WarningMessage({ message: err.response.data.message }));
-        } else if (err.response.status === 500) {
         } else {
           dispatch(ErrorMessage({ message: err.response.data.message }));
         }

@@ -17,7 +17,6 @@ const LoginModal = (props) => {
     setToken(props.token);
   }, [props.open, props.token]);
 
-  console.log(open);
   return (
     <>
       <Modal show={open} centered backdrop="static" keyboard={false}>
@@ -36,7 +35,6 @@ const LoginModal = (props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
   return {
     open: state.modal.login,
     token: state.user.token,

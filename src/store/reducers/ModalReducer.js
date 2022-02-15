@@ -11,7 +11,7 @@ const initialState = {
   cart: false,
   search: false,
   helpCenter: false,
-  login: true,
+  login: false,
 };
 
 const ModalReducer = (state = initialState, action) => {

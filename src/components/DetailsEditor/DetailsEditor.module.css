@@ -60,6 +60,12 @@
   flex-direction: column;
 }
 
+.modal__body .form__modal .buttons__container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .modal__body .form__modal input {
   padding: 1rem;
   border-radius: 20px;
@@ -94,13 +100,15 @@
   font-weight: bold;
   font-size: 16px;
   color: #ffffff;
+  width: 100%;
 }
 
 .modal__body .form__modal .close__button {
   background: #ffffff;
-  border: 1px solid #ff5959;
+  border: none;
   box-sizing: border-box;
   border-radius: 20px;
   color: #ff5959;
   padding: 0.5rem;
+  width: 100%;
 }

@@ -5,6 +5,7 @@ import { FacebookOutlined, Google } from "@mui/icons-material";
 import LoginAction from "../../store/actions/Authentication/Login/LoginAction";
 import { connect } from "react-redux";
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
+import GoogleAuthAction from "../../store/actions/Authentication/Google/Google.authentication";
 
 const LoginForm = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -133,7 +134,7 @@ const LoginForm = (props) => {
             <FacebookOutlined />
           </div>
           <div className={classes.icons}>
-            <Google />
+            <Google onClick={(e) => props.GoogleLogin()} />
           </div>
         </div>
       </div>
@@ -152,6 +153,8 @@ const mapDispatchToProps = (dispatch) => {
     Login: (email, password) => dispatch(LoginAction({ email, password })),
     Loader: (data) =>
       data ? dispatch(showLoading()) : dispatch(hideLoading()),
+
+    GoogleLogin: () => dispatch(GoogleAuthAction()),
   };
 };
 

@@ -1,4 +1,5 @@
 import {
+  FETCH_EDIT_PROFILE,
   LOGIN_MODAL,
   USER_LOGOUT,
   USER_REGISTER,
@@ -8,6 +9,7 @@ const initialState = {
   email: null,
   username: null,
   token: null,
+  otherData: {},
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -28,6 +30,15 @@ const UserReducer = (state = initialState, action) => {
         email: null,
         username: null,
         token: null,
+      };
+    }
+
+    case FETCH_EDIT_PROFILE: {
+      return {
+        ...state,
+        otherData: payload.otherData,
+        email: payload.email,
+        username: payload.username,
       };
     }
 

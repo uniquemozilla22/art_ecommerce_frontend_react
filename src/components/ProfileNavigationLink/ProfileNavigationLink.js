@@ -7,6 +7,7 @@ import { Fade } from "react-reveal";
 import OrderList from "../Profileproducts/OrderList";
 import ProductGrid from "../AritistProductGrid/ProductGrid";
 import ArtistsGrid from "../ArtistsGrid/ArtistsGrid";
+import SocialEditor from "../SocialEditor/SocialEditor";
 
 export const ProfileNavigationLink = ({ title, links }) => {
   return links ? (
@@ -44,6 +45,7 @@ export const ProfileNavigationContent = ({ title, links }) => {
             {link.title === "My Profile" || link.title === "Address" ? (
               <DetailsEditor data={link.data} />
             ) : null}
+            {link.title === "Social" ? <SocialEditor data={link.data} /> : null}
             {link.title === "My Returns" ? (
               <OrderList datas={link.data} />
             ) : null}

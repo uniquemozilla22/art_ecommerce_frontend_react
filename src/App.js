@@ -41,7 +41,7 @@ function App() {
           <Route path="/artist:id" element={<Artist />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/returnsandrefunds" element={<Return />} />
-          <Route path="/editprofile:id" element={<EditProfile />} />
+          <Route path="/editprofile" element={<EditProfile />} />
         </Routes>
       </Layout>
     </div>

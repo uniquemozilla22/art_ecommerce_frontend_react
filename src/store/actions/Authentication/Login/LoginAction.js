@@ -6,6 +6,7 @@ import {
   WarningMessage,
 } from "../../Message/Message";
 import { RegisterAuthentication } from "../../User/Authenticate";
+import { LOGIN_MODAL } from "../../Types/Types";
 
 const LoginAction = (payload) => {
   const { email, password } = payload;
@@ -26,8 +27,17 @@ const LoginAction = (payload) => {
           })
         );
         dispatch(hideLoading());
+        dispatch({ type: LOGIN_MODAL });
       })
       .catch((err) => {
+        if (err.response === undefined) {
+          dispatch(
+            ErrorMessage({
+              message: "Network Error! Check Your Internet Connection",
+            })
+          );
+        }
+        
         if (err.response.status === 400) {
           dispatch(WarningMessage({ message: err.response.data.message }));
         } else {

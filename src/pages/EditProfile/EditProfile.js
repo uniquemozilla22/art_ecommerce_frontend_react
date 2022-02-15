@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tab, Nav } from "react-bootstrap";
 import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";
 import userImage from "../../Assets/artist2.png";
@@ -8,40 +8,56 @@ import artist2 from "../../Assets/artist2.png";
 import artist1 from "../../Assets/artist1.png";
 import art3 from "../../Assets/art3.jpg";
 import classes from "./EditProfile.module.css";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import {
   ProfileNavigationLink,
   ProfileNavigationContent,
 } from "../../components/ProfileNavigationLink/ProfileNavigationLink";
+import FetchEditProfiileData from "../../store/actions/EditProfile/EditProfile.fetch";
+import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
 
-const EditProfile = () => {
-  const token = useSelector((state) => state.user.token);
+const EditProfile = (props) => {
+  const [data, setData] = useState(props.user);
   const user = {
     name: "Yogesh Bhattarai",
     image: userImage,
     verified: true,
   };
 
+  const profile = {
+    first_name: data.otherData.first_name,
+    last_name: data.otherData.last_name,
+    middle_name: data.otherData.middle_name,
+    mobile_no: data.otherData.mobile_no,
+    alternative_no: data.otherData.alternative_no,
+    telephone_no: data.otherData.telephone_no,
+  };
+
+  const address = {
+    primary_address: data.otherData.primary_address,
+    secondary_address: data.otherData.secondary_address,
+  };
+
+  const social = {
+    facebookId: data.otherData.facebookId,
+    googleId: data.otherData.googleId,
+    twitterId: data.otherData.twitterId,
+  };
   const links = [
     {
       title: "Manage Account",
       links: [
         {
           title: "My Profile",
-          data: {
-            "Full Name": "Yogesh Bhattarai",
-            "Email Address": "bhattaraiyogesh007@gmail.com",
-            "Mobile Phone": "+977 9846779494",
-            "Date of Birth": "1999 - 06 - 01",
-            Gender: "Male",
-          },
+          data: profile,
         },
         {
           title: "Address",
-          data: {
-            "Address 1": "Pokhara-17, Birauta",
-            "Address 2": "Kathmandu , Budhhanagar",
-          },
+          data: address,
+        },
+        {
+          title: "Social",
+          data: social,
         },
       ],
     },
@@ -148,7 +164,17 @@ const EditProfile = () => {
     },
   ];
 
-  const fetchData = () => {};
+  useEffect(() => {
+    fetchUserData();
+    setData(props.user);
+    console.log(data);
+  }, []);
+
+  const fetchUserData = () => {
+    props.Loader(true);
+    props.fetchData();
+    props.Loader(false);
+  };
 
   return (
     <div className={"container " + classes.edit__profile__container}>
@@ -162,7 +188,7 @@ const EditProfile = () => {
         <div className="row">
           <div className="col-md-3 col-sm-12">
             <ProfileAvatar
-              name={user.name}
+              name={"@" + data.username}
               image={user.image}
               verified={user.verified}
             />
@@ -188,4 +214,21 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    ...state,
+    ...ownProps,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    Loader: (data) =>
+      data ? dispatch(showLoading()) : dispatch(hideLoading()),
+    fetchData: () => {
+      dispatch(FetchEditProfiileData());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

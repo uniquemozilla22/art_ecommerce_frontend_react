@@ -28,6 +28,7 @@
   margin: 0;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 
 .detail__modifier .detail h2 {
@@ -66,7 +67,8 @@
   width: 100%;
 }
 
-.modal__body .form__modal input {
+.modal__body .form__modal input,
+.modal__body .form__modal select {
   padding: 1rem;
   border-radius: 20px;
   margin: 1rem 0;

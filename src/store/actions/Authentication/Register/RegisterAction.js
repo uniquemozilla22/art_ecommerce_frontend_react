@@ -27,7 +27,13 @@ const RegisterAction = (payload) => {
         dispatch(hideLoading());
       })
       .catch((err) => {
-        console.log({ ...err });
+        if (err.response === undefined) {
+          dispatch(
+            ErrorMessage({
+              message: "Network Error! Check Your Internet Connection",
+            })
+          );
+        }
         if (err.response.status === 400) {
           dispatch(WarningMessage({ message: err.response.data.message }));
         } else if (err.response.status === 500) {

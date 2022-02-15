@@ -1,0 +1,44 @@
+.detail__modifier {
+  background: #eef2ff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 2rem 0;
+  padding: 2rem;
+  border-radius: 20px;
+  height: 100%;
+}
+
+.detail__modifier .detail {
+  position: relative;
+  width: max-content;
+  flex: 33%;
+  margin: 1rem;
+  margin-right: 1rem;
+}
+
+.detail__modifier .detail .icon {
+  margin: 0 10px;
+}
+
+.detail__modifier .detail p {
+  font-weight: 500;
+  font-size: 16px;
+  color: #a4a4a4;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.detail__modifier .detail button {
+  font-size: 16px;
+  line-height: 24px;
+  color: #f2f2f2;
+  background: #4267b2;
+  width: max-content;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin: 10px 0;
+  border: none;
+}

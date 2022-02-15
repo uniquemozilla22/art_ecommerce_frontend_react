@@ -3,7 +3,6 @@ import React from "react";
 import classes from "./OrderList.module.css";
 
 const OrderList = ({ datas, cancelled }) => {
-  console.log(datas);
   return (
     <div className={classes.order__list__container}>
       <table>

@@ -60,7 +60,7 @@ const ActionIcons = (props) => {
               <ListAltTwoTone /> Orders
             </Dropdown.Item>
             <Dropdown.Item>
-              <Link to="/editprofile:1" className={classes.dropdown__link}>
+              <Link to="/editprofile" className={classes.dropdown__link}>
                 <RemoveRedEyeOutlined />
                 View Profile
               </Link>

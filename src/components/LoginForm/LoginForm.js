@@ -44,7 +44,6 @@ const LoginForm = (props) => {
               password: { validated: null, message: "" },
             });
             props.Login(data.email, data.password);
-            if (props.loginModal) props.closeComp();
           } else {
             setValidation({
               ...validation,

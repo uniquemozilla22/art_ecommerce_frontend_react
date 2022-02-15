@@ -25,3 +25,4 @@ export const LOGIN_MODAL = "LOGIN_MODAL";
 
 export const FETCH_EDIT_PROFILE = "FETCH_EDIT_PROFILE";
 export const UPDATE__PROFILE = "UPDATE_PROFILE";
+export const FORGOT__MODEL = "FORGOT__MODEL";

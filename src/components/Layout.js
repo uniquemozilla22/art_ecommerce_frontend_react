@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { HideMessage } from "../store/actions/Message/Message";
+import { FORGOT__MODEL } from "../store/actions/Types/Types";
 import ErrorHandle from "./ErrorHandle/ErrorHandle";
 import Footer from "./Footer/Footer";
+import ForgotPassword from "./forgotPassword/ForgotPassword";
 import Header from "./Header/Header";
 import LoginModal from "./LoginModal/LoginModal";
 import Spinner from "./Spinner/Spinner";
@@ -111,6 +113,10 @@ const Layout = (props) => {
       <Spinner {...props.loading} image={data.logo} />
       {props.children}
       <ErrorHandle {...props} />
+      <ForgotPassword
+        show={props.forgot}
+        toggleForgetPassword={props.toggleForgetPassword()}
+      />
     </>
   ) : (
     <>
@@ -127,6 +133,7 @@ const mapStateToProps = (state, ownProps) => {
     ...state.message,
     loading: { ...state.loader },
     token: state.user.token,
+    forgot: state.modal.forgot,
     ownProps,
   };
 };
@@ -134,6 +141,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     hideMessage: () => dispatch(HideMessage()),
+    toggleForgetPassword: () => dispatch({ type: FORGOT__MODEL }),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

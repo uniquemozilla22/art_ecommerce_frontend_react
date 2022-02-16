@@ -65,7 +65,6 @@ const LoginForm = (props) => {
           props.Loader(false);
         }
       } else {
-        console.log("true");
         setValidation({
           ...validation,
           email: { validated: false, message: "Invalid Email Format" },
@@ -121,6 +120,9 @@ const LoginForm = (props) => {
         <input type="submit" placeholder="Login" className={classes.submit} />
       </form>
       <div className={classes.login__seperator}>
+        <span onClick={() => props.toggleForgetPassword()}>
+          Forgot Password?
+        </span>
         <p>or</p>
       </div>
       <div className={classes.other__methods}>
@@ -154,6 +156,7 @@ const mapDispatchToProps = (dispatch) => {
       data ? dispatch(showLoading()) : dispatch(hideLoading()),
 
     GoogleLogin: () => dispatch(GoogleAuthAction()),
+    toggleForgetPassword: () => dispatch({ type: "FORGOT__MODEL" }),
   };
 };
 

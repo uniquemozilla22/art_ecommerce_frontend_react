@@ -13,7 +13,7 @@ const initialState = {
   search: false,
   helpCenter: false,
   login: false,
-  forgot: false,
+  forgot: true,
 };
 
 const ModalReducer = (state = initialState, action) => {

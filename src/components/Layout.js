@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
+import ForgotPasswordAction from "../store/actions/Authentication/ForgotPassword/ForgotPassword.action";
 import { HideMessage } from "../store/actions/Message/Message";
 import { FORGOT__MODEL } from "../store/actions/Types/Types";
 import ErrorHandle from "./ErrorHandle/ErrorHandle";
@@ -99,14 +100,17 @@ const Layout = (props) => {
   const [token, setToken] = useState(props.token);
   const location = useLocation();
 
+  const [forgot, setForgot] = useState(props.forgot);
+
   useEffect(() => {
     setToken(props.token);
+    setForgot(props.forgot);
     if (location.pathname === "/login" || location.pathname === "/register") {
       if (props.token) {
         navigat("/");
       }
     }
-  }, [location.pathname, navigat, props.token]);
+  }, [location.pathname, navigat, props.token, props.forgot]);
 
   return location.pathname === "/login" || location.pathname === "/register" ? (
     <>
@@ -114,8 +118,9 @@ const Layout = (props) => {
       {props.children}
       <ErrorHandle {...props} />
       <ForgotPassword
-        show={props.forgot}
-        toggleForgetPassword={props.toggleForgetPassword()}
+        show={forgot}
+        toggleForgetPassword={() => props.toggleForgetPassword()}
+        sendMail={(e) => props.sendMail(e)}
       />
     </>
   ) : (
@@ -142,6 +147,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     hideMessage: () => dispatch(HideMessage()),
     toggleForgetPassword: () => dispatch({ type: FORGOT__MODEL }),
+    sendMail: (email) => dispatch(ForgotPasswordAction(email)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

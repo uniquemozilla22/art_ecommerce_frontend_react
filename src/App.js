@@ -43,7 +43,10 @@ function App() {
           <Route path="/contactus" element={<Contact />} />
           <Route path="/returnsandrefunds" element={<Return />} />
           <Route path="/editprofile" element={<EditProfile />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route
+            path="/forgotpassword/:id/:token"
+            element={<ForgotPassword />}
+          />
         </Routes>
       </Layout>
     </div>

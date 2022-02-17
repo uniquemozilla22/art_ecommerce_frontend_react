@@ -112,7 +112,9 @@ const Layout = (props) => {
     }
   }, [location.pathname, navigat, props.token, props.forgot]);
 
-  return location.pathname === "/login" || location.pathname === "/register" ? (
+  return location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname === "/forgotpassword" ? (
     <>
       <Spinner {...props.loading} image={data.logo} />
       {props.children}
@@ -130,6 +132,11 @@ const Layout = (props) => {
       <Footer data={data} />
       <ErrorHandle {...props} />
       <LoginModal />
+      <ForgotPassword
+        show={forgot}
+        toggleForgetPassword={() => props.toggleForgetPassword()}
+        sendMail={(e) => props.sendMail(e)}
+      />
     </>
   );
 };

@@ -120,9 +120,7 @@ const LoginForm = (props) => {
         <input type="submit" placeholder="Login" className={classes.submit} />
       </form>
       <div className={classes.login__seperator}>
-        <span onClick={() => props.toggleForgetPassword()}>
-          Forgot Password?
-        </span>
+        <div onClick={() => props.toggleForgetPassword()}>Forgot Password?</div>
         <p>or</p>
       </div>
       <div className={classes.other__methods}>

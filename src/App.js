@@ -19,6 +19,7 @@ import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import Checkout from "./pages/checkout/Checkout";
 import Artist from "./pages/artist/Artist";
 import EditProfile from "./pages/EditProfile/EditProfile";
+import ForgotPassword from "./pages/forgetPassword/ForgetPassword";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="/contactus" element={<Contact />} />
           <Route path="/returnsandrefunds" element={<Return />} />
           <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
         </Routes>
       </Layout>
     </div>

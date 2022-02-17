@@ -68,22 +68,23 @@
   width: 50%;
 }
 
-.login__form .login__seperator {
-  text-align: center
-}
-.login__form .login__seperator span {
+.login__form .login__seperator div,
+.login__modal .login__seperator div {
   font-size: 16px;
   color: #2b2b2b60;
   text-align: center;
   width: 100%;
 }
 
-.login__form .login__seperator p {
+.login__form .login__seperator p,
+.login__modal .login__seperator p {
   display: flex;
   align-items: flex-end;
 }
 
 .login__form .login__seperator p:before,
+.login__modal .login__seperator p:before,
+.login__modal .login__seperator p:after,
 .login__form .login__seperator p:after {
   display: inline-block;
   align-items: center;

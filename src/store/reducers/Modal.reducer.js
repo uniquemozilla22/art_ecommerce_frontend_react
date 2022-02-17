@@ -13,7 +13,7 @@ const initialState = {
   search: false,
   helpCenter: false,
   login: false,
-  forgot: true,
+  forgot: false,
 };
 
 const ModalReducer = (state = initialState, action) => {
@@ -35,8 +35,9 @@ const ModalReducer = (state = initialState, action) => {
     case LOGIN_MODAL:
       return { ...state, login: !state.login };
 
-    case FORGOT__MODEL:
+    case FORGOT__MODEL: {
       return { ...state, forgot: !state.forgot };
+    }
 
     default:
       return state;

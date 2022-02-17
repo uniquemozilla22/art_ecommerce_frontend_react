@@ -1,6 +1,6 @@
 import axiosBase from "../../../axiosBase";
 import { store } from "../../store";
-import { ErrorMessage } from "../Message/Message";
+import { ErrorMessage, SuccessMessage } from "../Message/Message";
 
 const ChangePasswordAction = (data) => {
   const state = store.getState();
@@ -8,7 +8,7 @@ const ChangePasswordAction = (data) => {
   return (dispatch) => {
     postRequest(data, state.user.token)
       .then((res) => {
-        console.log(res);
+        dispatch(SuccessMessage({ message: res.data.message }));
       })
       .catch((error) => {
         if (error.response === undefined) {

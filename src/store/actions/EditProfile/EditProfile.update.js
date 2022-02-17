@@ -18,7 +18,6 @@ const UpdateProfile = (payload) => {
         );
       })
       .catch((error) => {
-        console.log({ ...error });
         if (error.response === undefined) {
           dispatch(
             ErrorMessage({

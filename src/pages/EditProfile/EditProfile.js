@@ -16,6 +16,7 @@ import {
 import FetchEditProfiileData from "../../store/actions/EditProfile/EditProfile.fetch";
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
 import UpdateProfile from "../../store/actions/EditProfile/EditProfile.update";
+import ChangePasswordAction from "../../store/actions/ChangePassword/ChangePassword.action";
 
 const EditProfile = (props) => {
   const [data, setData] = useState(props.user);
@@ -169,7 +170,6 @@ const EditProfile = (props) => {
   useEffect(() => {
     fetchUserData();
     setData(props.user);
-    console.log(data);
   }, []);
 
   const fetchUserData = () => {
@@ -207,6 +207,7 @@ const EditProfile = (props) => {
                   title={link.title}
                   links={link.links}
                   updateData={props.updateData}
+                  postPassword={props.postPassword}
                 />
               ))}
             </Tab.Content>
@@ -230,6 +231,7 @@ const mapDispatchToProps = (dispatch) => {
       data ? dispatch(showLoading()) : dispatch(hideLoading()),
     fetchData: () => dispatch(FetchEditProfiileData()),
     updateData: (data) => dispatch(UpdateProfile(data)),
+    postPassword: (data) => dispatch(ChangePasswordAction(data)),
   };
 };
 

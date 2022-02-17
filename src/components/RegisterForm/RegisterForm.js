@@ -206,7 +206,8 @@ const RegisterForm = (props) => {
                 className={classes.input}
                 name={"password"}
                 onChange={(e) => handleInput(e)}
-                onClick={(e) => setView(!view)}
+                onFocusCapture={(e) => setView(true)}
+                onBlur={(e) => setView(false)}
                 style={view ? { background: "#ff595920" } : null}
                 required
               />

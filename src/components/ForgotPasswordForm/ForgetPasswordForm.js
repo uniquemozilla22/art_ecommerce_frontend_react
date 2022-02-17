@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import classes from "./ForgotPasswordForm.module.css";
 
-const ForgetPasswordForm = () => {
+const ForgetPasswordForm = (props) => {
   const [view, setView] = useState(false);
 
   const [data, setData] = useState({
@@ -10,7 +10,7 @@ const ForgetPasswordForm = () => {
     confirm_password: null,
   });
 
-  const [error, setError] = useState();
+  const [error, setError] = useState(false);
 
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -24,8 +24,18 @@ const ForgetPasswordForm = () => {
         setError(valid);
       } else setError(false);
     });
-
-    if (error === false) {
+    if (
+      error === false &&
+      data.confirm_password !== null &&
+      data.new_password !== null
+    ) {
+      props.loader(true);
+      props.postPasswords(
+        props.id,
+        props.token,
+        data.new_password,
+        data.confirm_password
+      );
     }
   };
 
@@ -75,15 +85,4 @@ const ForgetPasswordForm = () => {
   );
 };
 
-const mapDispatchToProps = (disptach) => {
-  return {};
-};
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    ...state,
-    ...ownProps,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ForgetPasswordForm);
+export default ForgetPasswordForm;

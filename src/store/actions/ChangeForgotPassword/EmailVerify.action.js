@@ -20,6 +20,13 @@ const EmailVerify = (payload) => {
         if (err.response.status === 500) {
           dispatch(
             ErrorMessage({
+              message:
+                err.response.data.message + "! Please resend the request",
+            })
+          );
+        } else {
+          dispatch(
+            ErrorMessage({
               message: err.response.data.message,
             })
           );

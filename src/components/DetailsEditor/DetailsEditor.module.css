@@ -20,6 +20,20 @@
 .detail__modifier .detail .icon {
   margin: 0 10px;
 }
+.form__modal .error_message {
+  color: #ff5959;
+  font-size: 16px;
+  width: 100%;
+}
+.change__password {
+  color: #4267b2;
+  background: none;
+  width: max-content;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin: 10px 0;
+  border: none;
+}
 
 .detail__modifier .detail p {
   font-weight: 500;
@@ -71,7 +85,7 @@
 .modal__body .form__modal select {
   padding: 1rem;
   border-radius: 20px;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   border: none;
   background: #eef2ff;
   border: 1px solid #4267b2;

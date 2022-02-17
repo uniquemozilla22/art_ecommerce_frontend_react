@@ -111,6 +111,8 @@ const LoginForm = (props) => {
           className={classes.input}
           onChange={(e) => handlePassword(e)}
           onClick={(e) => setView(!view)}
+          onFocusCapture={(e) => setView(true)}
+          onBlur={(e) => setView(false)}
           style={view ? { background: "#ff595920" } : null}
         />
         {validation.password.validated === false ? (

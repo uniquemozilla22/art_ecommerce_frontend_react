@@ -21,9 +21,8 @@ import ChangePasswordAction from "../../store/actions/ChangePassword/ChangePassw
 const EditProfile = (props) => {
   const [data, setData] = useState(props.user);
   const user = {
-    name: "Yogesh Bhattarai",
     image: userImage,
-    verified: true,
+    verified: data.otherData.active_status,
   };
 
   const profile = {
@@ -168,14 +167,16 @@ const EditProfile = (props) => {
   ];
 
   useEffect(() => {
-    fetchUserData();
     setData(props.user);
+  }, [props.user]);
+
+  useEffect(() => {
+    fetchUserData();
   }, []);
 
   const fetchUserData = () => {
     props.Loader(true);
     props.fetchData();
-    props.Loader(false);
   };
 
   return (
@@ -208,6 +209,7 @@ const EditProfile = (props) => {
                   links={link.links}
                   updateData={props.updateData}
                   postPassword={props.postPassword}
+                  activeStatus={data.otherData.active_status}
                 />
               ))}
             </Tab.Content>

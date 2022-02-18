@@ -127,6 +127,7 @@ const Layout = (props) => {
     </>
   ) : (
     <>
+      <Spinner {...props.loading} image={data.logo} />
       <Header data={data} loggedIn={token} />
       {props.children}
       <Footer data={data} />

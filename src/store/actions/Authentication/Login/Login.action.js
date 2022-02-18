@@ -14,6 +14,8 @@ const LoginAction = (payload) => {
   return (dispatch) => {
     return loginToTheSystem(email, password)
       .then((res) => {
+        dispatch(hideLoading());
+
         dispatch(
           SuccessMessage({
             message: res.statusText + "! Login Successfull.",
@@ -26,10 +28,11 @@ const LoginAction = (payload) => {
             token: res.data.token,
           })
         );
-        dispatch(hideLoading());
         dispatch({ type: LOGIN_MODAL });
       })
       .catch((err) => {
+        dispatch(hideLoading());
+
         if (err.response === undefined) {
           dispatch(
             ErrorMessage({
@@ -37,13 +40,12 @@ const LoginAction = (payload) => {
             })
           );
         }
-        
+
         if (err.response.status === 400) {
           dispatch(WarningMessage({ message: err.response.data.message }));
         } else {
           dispatch(ErrorMessage({ message: err.response.data.message }));
         }
-        dispatch(hideLoading());
       });
   };
 };

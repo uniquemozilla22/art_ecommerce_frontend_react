@@ -1,6 +1,7 @@
 import {
   FETCH_EDIT_PROFILE,
   LOGIN_MODAL,
+  UPDATE__PROFILE,
   USER_LOGOUT,
   USER_REGISTER,
 } from "../actions/Types/Types";
@@ -39,6 +40,17 @@ const UserReducer = (state = initialState, action) => {
         otherData: payload.otherData,
         email: payload.email,
         username: payload.username,
+      };
+    }
+
+    case UPDATE__PROFILE: {
+      console.log(payload);
+      return {
+        ...state,
+        otherData: {
+          ...state.otherData,
+          ...payload,
+        },
       };
     }
 

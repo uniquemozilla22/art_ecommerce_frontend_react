@@ -31,6 +31,13 @@
   margin: 0 1rem;
 }
 
+.profile__avatar__container .icon_not_verfified {
+  border-radius: 50%;
+  color: #4267b2;
+  margin: 0 0.2rem;
+  width: 24px;
+}
+
 @media screen and (max-width: 768px) {
   .profile__avatar__container img {
     height: 100px;

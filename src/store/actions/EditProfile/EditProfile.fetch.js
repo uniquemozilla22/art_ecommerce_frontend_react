@@ -1,5 +1,6 @@
 import axiosBase from "../../../axiosBase";
 import { store } from "../../store";
+import { hideLoading } from "../Loading/Loading";
 import { ErrorMessage, WarningMessage } from "../Message/Message";
 import { FETCH_EDIT_PROFILE } from "../Types/Types";
 
@@ -8,6 +9,8 @@ const FetchEditProfiileData = () => {
     const state = store.getState();
     fetchData(state.user.token)
       .then((res) => {
+        dispatch(hideLoading());
+
         const {
           username,
           twitterId,
@@ -27,6 +30,7 @@ const FetchEditProfiileData = () => {
         } = res.data.customerData;
 
         const { primary_address, secondary_address } = res.data.addressData;
+
         return dispatch({
           type: FETCH_EDIT_PROFILE,
           payload: {
@@ -51,6 +55,7 @@ const FetchEditProfiileData = () => {
         });
       })
       .catch((err) => {
+        dispatch(hideLoading());
         if (err.response === undefined) {
           dispatch(
             ErrorMessage({

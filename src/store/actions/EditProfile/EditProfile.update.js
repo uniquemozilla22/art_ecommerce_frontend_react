@@ -1,23 +1,36 @@
 import axiosBase from "../../../axiosBase";
 import { store } from "../../store";
+import { hideLoading, showLoading } from "../Loading/Loading";
 import {
   SuccessMessage,
   ErrorMessage,
   WarningMessage,
 } from "../Message/Message";
+import { UPDATE__PROFILE } from "../Types/Types";
 
 const UpdateProfile = (payload) => {
   const state = store.getState();
   return (dispatch) => {
+    dispatch(showLoading());
+
     updateData(state.user.token, payload)
       .then((response) => {
+        dispatch(hideLoading());
+
         dispatch(
           SuccessMessage({
             message: response.statusText + "!" + response.data.message,
           })
         );
+        dispatch({
+          type: UPDATE__PROFILE,
+          payload: {
+            [payload.name]: payload.value,
+          },
+        });
       })
       .catch((error) => {
+        dispatch(hideLoading());
         if (error.response === undefined) {
           dispatch(
             ErrorMessage({

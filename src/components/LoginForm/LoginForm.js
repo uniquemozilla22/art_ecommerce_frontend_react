@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classes from "./LoginForm.module.css";
 import { Link } from "react-router-dom";
 import { FacebookOutlined, Google } from "@mui/icons-material";
-import LoginAction from "../../store/actions/Authentication/Login/LoginAction";
+import LoginAction from "../../store/actions/Authentication/Login/Login.action";
 import { connect } from "react-redux";
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
 import GoogleAuthAction from "../../store/actions/Authentication/Google/Google.authentication";

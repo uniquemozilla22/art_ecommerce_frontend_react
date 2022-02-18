@@ -4,11 +4,12 @@ import FeatherIcon from "feather-icons-react";
 import { Modal } from "@mui/material";
 import { connect } from "react-redux";
 
-const DetailsEditor = ({ data, updateData, postPassword }) => {
+const DetailsEditor = ({ data, updateData, postPassword, activeStatus }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({ name: "", value: "" });
   const [onSubmit, setOnSubmit] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [showVerifyEmailModal, setShowVerifyEmailModal] = useState(false);
 
   const handleModalOpen = (data) => {
     setModalData(data);
@@ -40,11 +41,19 @@ const DetailsEditor = ({ data, updateData, postPassword }) => {
         ))}
       </div>
       <button
-        className={classes.change__password}
+        className={classes.extra__button}
         onClick={(e) => setShowPasswordModal(true)}
       >
         Change Password
       </button>
+      {!activeStatus ? (
+        <button
+          className={classes.extra__button}
+          onClick={(e) => setShowVerifyEmailModal(true)}
+        >
+          Verify Email
+        </button>
+      ) : null}
       <Modal
         open={showPasswordModal}
         onClose={() => setShowPasswordModal(false)}
@@ -53,6 +62,18 @@ const DetailsEditor = ({ data, updateData, postPassword }) => {
           <h2>Change Password.</h2>
 
           <PasswordForm postPassword={postPassword} />
+        </div>
+      </Modal>
+      <Modal
+        open={showVerifyEmailModal}
+        onClose={() => setShowVerifyEmailModal(false)}
+      >
+        <div className={classes.modal__body}>
+          <h2>Verify Email</h2>
+          <p>
+            Your Email will receive a OTP. <button>Send OTP</button>
+          </p>
+          <VerifyEmail />
         </div>
       </Modal>
       <Modal open={showModal} onClose={() => setShowModal(false)}>
@@ -228,6 +249,18 @@ const PasswordForm = ({ postPassword }) => {
         </div>
       </form>
     </>
+  );
+};
+
+const VerifyEmail = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+  };
+  return (
+    <form onSubmit={(e) => submitHandler(e)} className={classes.form__modal}>
+      <input type="number" placeholder="OTP"></input>
+      <input type="submit"></input>
+    </form>
   );
 };
 

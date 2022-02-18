@@ -37,6 +37,7 @@ export const ProfileNavigationContent = ({
   links,
   updateData,
   postPassword,
+  activeStatus,
 }) => {
   return links ? (
     links.map((link) => (
@@ -52,6 +53,7 @@ export const ProfileNavigationContent = ({
                 data={link.data}
                 updateData={updateData}
                 postPassword={postPassword}
+                activeStatus={activeStatus}
               />
             ) : null}
             {link.title === "Social" ? <SocialEditor data={link.data} /> : null}

@@ -3,7 +3,7 @@ import { ErrorMessage, SuccessMessage } from "../Message/Message";
 
 const EmailRegister = (payload) => {
   return (dispatch) => {
-    verifyemail(payload)
+    Registeremail(payload)
       .then((res) => {
         dispatch(SuccessMessage({ message: res.data.message }));
       })
@@ -35,7 +35,7 @@ const EmailRegister = (payload) => {
   };
 };
 
-const verifyemail = (payload) => {
+const Registeremail = (payload) => {
   return axiosBase.get(`users/resetPassword/${payload.id}/${payload.token}`);
 };
 

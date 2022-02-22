@@ -28,6 +28,11 @@ const DetailsEditor = ({
     setSendMail(true);
   };
 
+  const handleEmailVerifyModal = () => {
+    setSendMail(false);
+    setShowVerifyEmailModal(false);
+  };
+
   return (
     <>
       <div className={classes.detail__modifier}>
@@ -71,7 +76,7 @@ const DetailsEditor = ({
       </Modal>
       <Modal
         open={showVerifyEmailModal}
-        onClose={() => setShowVerifyEmailModal(false)}
+        onClose={() => handleEmailVerifyModal(false)}
       >
         <div className={classes.modal__body}>
           <h2>Verify Email</h2>

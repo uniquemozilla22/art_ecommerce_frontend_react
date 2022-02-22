@@ -20,6 +20,7 @@ import Checkout from "./pages/checkout/Checkout";
 import Artist from "./pages/artist/Artist";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import ForgotPassword from "./pages/forgetPassword/ForgetPassword";
+import ConfirmEmail from "./pages/Confirm_email/Confirm_email";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
             path="/forgotpassword/:id/:token"
             element={<ForgotPassword />}
           />
+          <Route path="/auth/confirm/:token" element={<ConfirmEmail />} />
         </Routes>
       </Layout>
     </div>

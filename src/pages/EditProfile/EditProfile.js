@@ -17,6 +17,7 @@ import FetchEditProfiileData from "../../store/actions/EditProfile/EditProfile.f
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
 import UpdateProfile from "../../store/actions/EditProfile/EditProfile.update";
 import ChangePasswordAction from "../../store/actions/ChangePassword/ChangePassword.action";
+import SendOTPtoEmail from "../../store/actions/Authentication/VerifyEmail/SendOTP.action";
 
 const EditProfile = (props) => {
   const [data, setData] = useState(props.user);
@@ -216,6 +217,7 @@ const EditProfile = (props) => {
                   postPassword={props.postPassword}
                   activeStatus={data.otherData.active_status}
                   email={data.email}
+                  sendOTP={props.sendOTP}
                 />
               ))}
             </Tab.Content>
@@ -240,6 +242,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchData: () => dispatch(FetchEditProfiileData()),
     updateData: (data) => dispatch(UpdateProfile(data)),
     postPassword: (data) => dispatch(ChangePasswordAction(data)),
+    sendOTP: (data) => dispatch(SendOTPtoEmail(data)),
   };
 };
 

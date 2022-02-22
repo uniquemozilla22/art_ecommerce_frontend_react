@@ -27,6 +27,7 @@
     "react-spring": "^9.4.2",
     "redux": "^4.1.2",
     "redux-persist": "^6.0.0",
+    "redux-persist-cookie-storage": "^1.0.0",
     "redux-thunk": "^2.4.1",
     "web-vitals": "^2.1.3"
   },

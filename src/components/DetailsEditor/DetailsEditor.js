@@ -10,6 +10,7 @@ const DetailsEditor = ({
   postPassword,
   activeStatus,
   email,
+  sendOTP,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({ name: "", value: "" });
@@ -26,6 +27,7 @@ const DetailsEditor = ({
 
   const handleSendMail = () => {
     setSendMail(true);
+    sendOTP({ email });
   };
 
   const handleEmailVerifyModal = () => {
@@ -86,7 +88,6 @@ const DetailsEditor = ({
               {sendMail ? "Didn't Receive ? Send Mail Again" : "Send Mail"}
             </button>
           </p>
-          {sendMail ? <VerifyEmail /> : null}
         </div>
       </Modal>
       <Modal open={showModal} onClose={() => setShowModal(false)}>
@@ -262,18 +263,6 @@ const PasswordForm = ({ postPassword }) => {
         </div>
       </form>
     </>
-  );
-};
-
-const VerifyEmail = () => {
-  const submitHandler = (e) => {
-    e.preventDefault();
-  };
-  return (
-    <form onSubmit={(e) => submitHandler(e)} className={classes.form__modal}>
-      <input type="number" placeholder="OTP"></input>
-      <input type="submit"></input>
-    </form>
   );
 };
 

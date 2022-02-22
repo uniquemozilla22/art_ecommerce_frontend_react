@@ -1,0 +1,38 @@
+.confirmation__page {
+  margin: 5rem 0;
+}
+
+.confirmation__page .title__container {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.confirmation__page .title__container h1 {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.confirmation__page .title__container .icon {
+  background: #7c8ae6;
+  color: white;
+  border-radius: 20px;
+  margin: 0 20px;
+}
+
+.confirmation__page a {
+  text-decoration: none;
+  background: #eef2ff;
+  padding: 1rem;
+  margin: 1rem;
+  color: #7c8ae6;
+  border-radius: 20px;
+}
+
+.confirmation__page a:first-child {
+  margin-left: 0;
+}
+
+.confirmation__page a:last-child {
+  margin-right: 0;
+}

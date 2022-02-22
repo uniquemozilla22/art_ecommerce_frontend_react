@@ -18,7 +18,7 @@ const reducers = combineReducers({
 
 const persistConfig = {
   key: "root",
-  storage: storageSession,
+  storage: new CookieStorage(Cookies),
   whitelist: ["user"],
 };
 

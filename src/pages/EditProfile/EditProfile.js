@@ -196,20 +196,26 @@ const EditProfile = (props) => {
               verified={user.verified}
             />
             <div className={classes.links__container}>
-              {links.map((link) => (
-                <ProfileNavigationLink title={link.title} links={link.links} />
+              {links.map((link, index) => (
+                <ProfileNavigationLink
+                  key={index}
+                  title={link.title}
+                  links={link.links}
+                />
               ))}
             </div>
           </div>
           <div className="col-md-9 col-sm-12">
             <Tab.Content>
-              {links.map((link) => (
+              {links.map((link, index) => (
                 <ProfileNavigationContent
+                  key={index}
                   title={link.title}
                   links={link.links}
                   updateData={props.updateData}
                   postPassword={props.postPassword}
                   activeStatus={data.otherData.active_status}
+                  email={data.email}
                 />
               ))}
             </Tab.Content>

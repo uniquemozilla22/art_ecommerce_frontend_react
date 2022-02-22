@@ -63,7 +63,9 @@
   width: 50vw;
   border-radius: 20px;
 }
-
+.modal__body p span {
+  text-decoration: underline;
+}
 .modal__body p button {
   background-color: transparent;
   color: #4267b2;

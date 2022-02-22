@@ -1,7 +1,7 @@
 import axiosBase from "../../../axiosBase";
 import { ErrorMessage, SuccessMessage } from "../Message/Message";
 
-const EmailVerify = (payload) => {
+const EmailRegister = (payload) => {
   return (dispatch) => {
     verifyemail(payload)
       .then((res) => {
@@ -39,4 +39,4 @@ const verifyemail = (payload) => {
   return axiosBase.get(`users/resetPassword/${payload.id}/${payload.token}`);
 };
 
-export default EmailVerify;
+export default EmailRegister;

@@ -4,12 +4,19 @@ import FeatherIcon from "feather-icons-react";
 import { Modal } from "@mui/material";
 import { connect } from "react-redux";
 
-const DetailsEditor = ({ data, updateData, postPassword, activeStatus }) => {
+const DetailsEditor = ({
+  data,
+  updateData,
+  postPassword,
+  activeStatus,
+  email,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({ name: "", value: "" });
   const [onSubmit, setOnSubmit] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showVerifyEmailModal, setShowVerifyEmailModal] = useState(false);
+  const [sendMail, setSendMail] = useState(false);
 
   const handleModalOpen = (data) => {
     setModalData(data);
@@ -17,27 +24,25 @@ const DetailsEditor = ({ data, updateData, postPassword, activeStatus }) => {
     setOnSubmit(false);
   };
 
+  const handleSendMail = () => {
+    setSendMail(true);
+  };
+
   return (
     <>
       <div className={classes.detail__modifier}>
         {Object.keys(data).map((key, value) => (
-          <>
-            <div
-              className={classes.detail}
-              onClick={() => handleModalOpen({ name: key, value: data[key] })}
-            >
-              <p>
-                {key.charAt(0).toUpperCase() +
-                  key.slice(1).split("_").join(" ")}
-                <FeatherIcon
-                  icon="edit-2"
-                  size={"15"}
-                  className={classes.icon}
-                />
-              </p>
-              <h2>{data[key]}</h2>
-            </div>
-          </>
+          <div
+            key={value}
+            className={classes.detail}
+            onClick={() => handleModalOpen({ name: key, value: data[key] })}
+          >
+            <p>
+              {key.charAt(0).toUpperCase() + key.slice(1).split("_").join(" ")}
+              <FeatherIcon icon="edit-2" size={"15"} className={classes.icon} />
+            </p>
+            <h2>{data[key]}</h2>
+          </div>
         ))}
       </div>
       <button
@@ -71,9 +76,12 @@ const DetailsEditor = ({ data, updateData, postPassword, activeStatus }) => {
         <div className={classes.modal__body}>
           <h2>Verify Email</h2>
           <p>
-            Your Email will receive a OTP. <button>Send OTP</button>
+            Your Email <span>{email}</span> will receive a OTP.{" "}
+            <button onClick={(e) => handleSendMail()}>
+              {sendMail ? "Didn't Receive ? Send Mail Again" : "Send Mail"}
+            </button>
           </p>
-          <VerifyEmail />
+          {sendMail ? <VerifyEmail /> : null}
         </div>
       </Modal>
       <Modal open={showModal} onClose={() => setShowModal(false)}>

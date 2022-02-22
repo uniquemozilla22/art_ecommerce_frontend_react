@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ForgetPasswordForm from "../../components/ForgotPasswordForm/ForgetPasswordForm";
 import classes from "./ForgetPassword.module.css";
 import { useParams } from "react-router";
-import EmailVerify from "../../store/actions/ChangeForgotPassword/EmailVerify.action";
+import EmailVerify from "../../store/actions/ChangeForgotPassword/EmailRegister.action";
 import { connect } from "react-redux";
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
 import ChangeForgotPassword from "../../store/actions/ChangeForgotPassword/ChangeForgetPassword.action";

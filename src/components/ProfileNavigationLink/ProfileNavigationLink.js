@@ -13,8 +13,8 @@ export const ProfileNavigationLink = ({ title, links }) => {
   return links ? (
     <Nav className={"flex-column " + classes.navigation__link}>
       <h3>{title}</h3>
-      {links.map((link) => (
-        <Nav.Item className={classes.navigation__item}>
+      {links.map((link, index) => (
+        <Nav.Item key={index} className={classes.navigation__item}>
           <Nav.Link eventKey={link.title.toLowerCase().split(" ").join("")}>
             {link.title}
           </Nav.Link>
@@ -38,10 +38,12 @@ export const ProfileNavigationContent = ({
   updateData,
   postPassword,
   activeStatus,
+  email,
 }) => {
   return links ? (
-    links.map((link) => (
+    links.map((link, index) => (
       <Tab.Pane
+        key={index}
         eventKey={link.title.toLowerCase().split(" ").join("")}
         className={classes.tab__pane__container}
       >
@@ -54,6 +56,7 @@ export const ProfileNavigationContent = ({
                 updateData={updateData}
                 postPassword={postPassword}
                 activeStatus={activeStatus}
+                email={email}
               />
             ) : null}
             {link.title === "Social" ? <SocialEditor data={link.data} /> : null}

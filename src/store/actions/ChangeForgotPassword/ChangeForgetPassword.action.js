@@ -1,4 +1,5 @@
 import axiosBase from "../../../axiosBase";
+import { hideLoading, showLoading } from "../Loading/Loading";
 import {
   ErrorMessage,
   SuccessMessage,
@@ -7,15 +8,19 @@ import {
 
 const ChangeForgotPassword = (payload) => {
   return (dispatch) => {
+    dispatch(showLoading());
     postPassword(payload)
-      .then((res) =>
+      .then((res) => {
+        dispatch(hideLoading());
         dispatch(
           SuccessMessage({
             message: "Password Changed ! Login with new password",
           })
-        )
-      )
+        );
+      })
       .catch((err) => {
+        dispatch(hideLoading());
+
         if (err.response === undefined) {
           dispatch(
             ErrorMessage({

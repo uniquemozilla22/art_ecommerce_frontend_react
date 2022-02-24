@@ -1,10 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import classes from "./Confirm_email.module.css";
 import FeatherIcon from "feather-icons-react";
 import { Tooltip } from "@mui/material";
 
-const Confirm_email = () => {
+const Confirm_email = (props) => {
+  const params = useParams();
+  useEffect(() => {
+    check_token();
+  }, []);
+  const check_token = () => {
+    console.log(params);
+  };
   return (
     <div className={classes.confirmation__page}>
       <div className={"container"}>

@@ -1,0 +1,3 @@
+const FetchAllProducts = () => {};
+
+const fetch = () => {};

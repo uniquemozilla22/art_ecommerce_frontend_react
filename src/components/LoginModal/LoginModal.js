@@ -23,9 +23,7 @@ const LoginModal = (props) => {
         <LoginForm
           loginModal
           closeComponent={
-            <Tooltip title="Login">
-              <FeatherIcon icon="x" onClick={() => props.handleLoginClose()} />
-            </Tooltip>
+            <FeatherIcon icon="x" onClick={() => props.handleLoginClose()} />
           }
           closeComp={() => props.handleLoginClose()}
         />

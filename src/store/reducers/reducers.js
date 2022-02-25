@@ -7,6 +7,7 @@ import MessageReducer from "./Message.reducer";
 import LoaderReducer from "./Loading.reducer";
 import { CookieStorage } from "redux-persist-cookie-storage";
 import Cookies from "cookies-js";
+import ProductReducer from "./Product.reducer";
 
 const reducers = combineReducers({
   user: UserReducer,
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   cartContent: CartReducer,
   message: MessageReducer,
   loader: LoaderReducer,
+  products: ProductReducer,
 });
 
 const persistConfig = {

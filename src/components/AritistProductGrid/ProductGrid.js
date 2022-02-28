@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./ProductGrid.module.css";
 import { Fade } from "react-reveal";
-import ProductCard from "../BiddingCard/BiddingCard";
+import ProductCard from "../ProductCard/ProductCard";
 
 const ProductGrid = ({ products }) => {
   return (
@@ -17,7 +17,7 @@ const ProductGrid = ({ products }) => {
                 price={product.price}
                 time={product.time}
                 delay={index}
-            />
+              />
             </div>
           ) : (
             <div className="col-lg-4 col-md-6 col-sm-6 col-xs-12">

@@ -4,7 +4,7 @@ import art3 from "../../Assets/art3.jpg";
 import { ALL_PRODUCTS } from "../actions/Types/Types";
 
 let initialState = {
-  ALL_PRODUCTS: null,
+  all: null,
 };
 
 let ProductReducer = (state = initialState, action) => {
@@ -12,7 +12,7 @@ let ProductReducer = (state = initialState, action) => {
     case ALL_PRODUCTS:
       return {
         ...state,
-        ALL_PRODUCTS: action.payload,
+        all: action.payload,
       };
     default:
       return state;

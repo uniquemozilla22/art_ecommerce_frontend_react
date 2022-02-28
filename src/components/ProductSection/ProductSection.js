@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "../BiddingCard/BiddingCard";
+import ProductCard from "../ProductCard/ProductCard";
 import classes from "./ProductSection.module.css";
 import Fade from "react-reveal/Fade";
 import { animated, useSpring } from "react-spring";

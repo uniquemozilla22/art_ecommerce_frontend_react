@@ -5,17 +5,24 @@ import ProductFilter from "../../components/ProductFilter/ProductFilter";
 import ProductsContainer from "../../components/ProductsContainer/ProductsContainer";
 import FetchAllProducts from "../../store/actions/products/allproducts.fetch";
 import classes from "./Product.module.css";
+import { connect } from "react-redux";
 
-const Product = () => {
+const Product = (props) => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const handleFilter = () => setIsFilterActive(!isFilterActive);
+  const [products, setProducts] = useState(props.products.all);
 
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.ALL_PRODUCTS);
 
   useEffect(() => {
-    dispatch(FetchAllProducts());
+    setProducts(props.products.all);
+  }, [props.products]);
+
+  useEffect(() => {
+    fetchAllProducts();
   }, []);
+
+  const fetchAllProducts = () => dispatch(FetchAllProducts());
 
   return (
     <>
@@ -26,10 +33,14 @@ const Product = () => {
           </div>
           <div className="row">
             <div className="col-2 d-none d-md-block">
-              <ProductFilter />
+              <ProductFilter fetchAllProducts={fetchAllProducts} />
             </div>
             <div className="col-12 col-md-10">
-              <ProductsContainer filterHandler={handleFilter} data={products} />
+              <ProductsContainer
+                filterHandler={handleFilter}
+                data={products}
+                fetchAllProducts={fetchAllProducts}
+              />
             </div>
           </div>
         </div>
@@ -46,4 +57,11 @@ const Product = () => {
   );
 };
 
-export default Product;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    products: state.products,
+    ownProps,
+  };
+};
+
+export default connect(mapStateToProps)(Product);

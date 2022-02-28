@@ -8,7 +8,7 @@ import { Accordion } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Slider } from "@mui/material";
 
-const ProductFilter = () => {
+const ProductFilter = ({ fetchAllProducts }) => {
   const [value, setValue] = useState([2000, 3000]);
 
   const useAnimationStyle = (delay) => {
@@ -23,10 +23,10 @@ const ProductFilter = () => {
     <div className={classes.product__filter__container}>
       <div className={classes.filtering__section}>
         <ul className={classes.filterList}>
-          <animated.li style={useAnimationStyle(1)}>
-            <FeatherIcon icon="eye" /> <span>View All</span>
-          </animated.li>
-          <animated.li style={useAnimationStyle(2)}>
+          <animated.li
+            style={useAnimationStyle(2)}
+            onClick={(e) => fetchAllProducts()}
+          >
             <FeatherIcon icon="list" /> <span>Products</span>
           </animated.li>
           <animated.li style={useAnimationStyle(3)}>

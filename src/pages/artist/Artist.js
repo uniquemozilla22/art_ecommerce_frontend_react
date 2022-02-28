@@ -12,7 +12,7 @@ import { Fade } from "react-reveal";
 import {
   BiddingCard,
   ProductCard,
-} from "../../components/BiddingCard/BiddingCard";
+} from "../../components/ProductCard/ProductCard";
 import { ClassNames } from "@emotion/react";
 import ProductGrid from "../../components/AritistProductGrid/ProductGrid";
 import ArtistCard from "../../components/ArtistCard/ArtistCard";

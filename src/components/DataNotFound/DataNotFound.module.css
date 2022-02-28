@@ -1,0 +1,29 @@
+.not_found__container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.not_found__container img {
+  height: 20vw;
+}
+
+.not_found__container h2 {
+  font-size: 20px;
+  font-weight: 900;
+  color: rgb(103, 111, 163);
+}
+
+.not_found__container button {
+  border: 1px solid rgb(103, 111, 163);
+  background-color: transparent;
+  color: rgb(103, 111, 163);
+  padding: 1rem;
+  border-radius: 20px;
+}
+
+.not_found__container button svg {
+  margin-right: 1rem;
+}

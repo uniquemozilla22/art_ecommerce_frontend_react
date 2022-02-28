@@ -11,11 +11,12 @@ const FetchAllProducts = () => {
         dispatch(hideLoading());
         return dispatch({
           type: ALL_PRODUCTS,
-          payload: res.data.data,
+          payload: res.data.products,
         });
       })
       .catch((err) => {
         dispatch(hideLoading());
+        console.log({ ...err });
 
         if (err.response === undefined) {
           dispatch(

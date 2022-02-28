@@ -29,6 +29,30 @@
   height: 300px;
   width: 100%;
 }
+.button__container {
+  display: flex;
+  width: 100%;
+  justify-content: "center";
+  flex-direction: column;
+}
+
+.button__container .button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border-radius: 20px;
+  border: 1px solid rgb(103, 111, 163);
+  color: rgb(103, 111, 163);
+  margin: 5px;
+  transition: all ease-in 0.5s;
+}
+.button__container .button svg {
+  margin-right: 5px;
+}
+
+.button__container .button:hover {
+  background-color: rgb(103, 111, 163);
+  color: #fff;
+}
 .bidding__classes .card_body {
   padding: 0 20px;
 }

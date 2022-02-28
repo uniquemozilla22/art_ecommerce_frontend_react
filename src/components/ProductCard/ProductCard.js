@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./BiddingCard.module.css";
+import classes from "./ProductCard.module.css";
 import { Card, ListGroup, ListGroupItem, Modal } from "react-bootstrap";
 import {
   FavoriteBorderOutlined,
@@ -16,8 +16,9 @@ import ProductInformation, {
 } from "../ProductInformation/ProductInformation";
 import { connect } from "react-redux";
 import addCartItem from "../../store/actions/Cart/AddItem";
+import { useNavigate } from "react-router";
 
-const BiddingCard = ({ id, name, image, price, time, delay }) => {
+const BiddingCard = (props) => {
   const useAnimationStyle = (delay) => {
     return useSpring({
       loop: false,
@@ -26,6 +27,7 @@ const BiddingCard = ({ id, name, image, price, time, delay }) => {
       delay: delay * 200,
     });
   };
+  const { id, productData, supplier, time, auction, category, delay } = props;
 
   const [showModal, setShowModal] = useState(false);
 
@@ -38,9 +40,21 @@ const BiddingCard = ({ id, name, image, price, time, delay }) => {
   let distance = new Date(time).getTime() - now;
 
   // Time calculations for days, hours, minutes and seconds
-  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  // Time calculations for days, hours, minutes and seconds
+  let days =
+    Math.floor(distance / (1000 * 60 * 60 * 24)) > 0
+      ? Math.floor(distance / (1000 * 60 * 60 * 24)) + " days"
+      : 0;
+  let hours =
+    Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) > 0
+      ? Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) +
+        " hours"
+      : 0;
+  const navigate = useNavigate();
 
+  const goToProduct = (id) => {
+    navigate(`/products/${id}`);
+  };
   return (
     <>
       <animated.div
@@ -50,31 +64,47 @@ const BiddingCard = ({ id, name, image, price, time, delay }) => {
         <Card className={classes.bidding__card}>
           <Card.Img
             variant="bottom"
-            src={image}
+            src={productData.image_url}
             className={classes.bidding__image}
           />
           <Card.Body className={classes.card_body}>
             <div className={classes.Biddingcard__header}>
-              <Card.Title>{name}</Card.Title>
+              <Card.Title>{productData.name}</Card.Title>
               <div
                 className={"d-none d-lg-block " + classes.actions__container}
               >
-                <Tooltip title={`View ${name}`}>
+                <Tooltip title={`View ${productData.name}`}>
                   <RemoveRedEyeOutlined
                     fontSize="small"
                     onClick={() => handleShowModal()}
                   />
                 </Tooltip>
-                <Tooltip title={`Add to Wishlist ${name}`}>
+                <Tooltip title={`Add to Wishlist ${productData.name}`}>
                   <FavoriteBorderOutlined fontSize="small" />
                 </Tooltip>
               </div>
             </div>
             <div className={classes.priceContainer}>
-              <p>Current Bid: Nrs. {price}</p>
+              <p>Current Bid: Nrs. {productData.unit_price}</p>
               <h1 className={classes.time_Remaining}>
-                {days + " days " + hours + " hours remaining"}
+                {days + hours === 0 ? "Ended" : days + hours}
               </h1>
+            </div>
+            <div className={"d-flex d-lg-none " + classes.button__container}>
+              <button className={classes.button}>
+                <RemoveRedEyeOutlined
+                  fontSize="small"
+                  onClick={(e) => goToProduct(id)}
+                />
+                Visit {productData.name}
+              </button>
+              <button className={classes.button}>
+                <FavoriteBorderOutlined
+                  fontSize="small"
+                  onClick={(e) => props.addToCart("data")}
+                />
+                Add to cart
+              </button>
             </div>
           </Card.Body>
         </Card>
@@ -90,25 +120,14 @@ const BiddingCard = ({ id, name, image, price, time, delay }) => {
           <Modal.Title id="contained-modal-title-vcenter"> </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <BiddingInformation
-            image={image}
-            name={name}
-            price={price}
-            supplier={1}
-            like={99}
-            tags={["Abstract", "Lovely", "Mystical"]}
-            categories={["Abstract", "Lovely", "Mystical", "Natural"]}
-            time={time}
-            highestbidder={"Ramesh Yadav"}
-            highestbidderImage={image}
-          />
+          <BiddingInformation {...props} />
         </Modal.Body>
       </Modal>
     </>
   );
 };
 
-const ProductCard = ({ id, image, name, price, delay, addToCart }) => {
+const ProductCard = (props) => {
   const useAnimationStyle = (delay) => {
     return useSpring({
       loop: false,
@@ -117,6 +136,12 @@ const ProductCard = ({ id, image, name, price, delay, addToCart }) => {
       delay: delay * 200,
     });
   };
+  const navigate = useNavigate();
+
+  const goToProduct = (id) => {
+    navigate(`/products/${id}`);
+  };
+  const { id, productData, supplier, time, auction, category, delay } = props;
 
   const [showModal, setShowModal] = useState(false);
 
@@ -130,43 +155,51 @@ const ProductCard = ({ id, image, name, price, delay, addToCart }) => {
         <Card className={classes.bidding__card}>
           <Card.Img
             variant="bottom"
-            src={image}
+            src={productData.image_url}
             className={classes.bidding__image}
             height="400px"
           />
           <Card.Body className={classes.card_body}>
             <div className={classes.Biddingcard__header}>
-              <Card.Title>{name}</Card.Title>
+              <Card.Title>{productData.name}</Card.Title>
               <div
                 className={"d-none d-lg-block " + classes.actions__container}
               >
-                <Tooltip title={`View ${name}`}>
+                <Tooltip title={`View ${productData.name}`}>
                   <RemoveRedEyeOutlined
                     fontSize="small"
                     onClick={() => handleShowModal()}
                   />
                 </Tooltip>
-                <Tooltip title={`Add to Wishlist ${name}`}>
+                <Tooltip title={`Add to Wishlist ${productData.name}`}>
                   <FavoriteBorderOutlined fontSize="small" />
                 </Tooltip>
-                <Tooltip title={`Add to Cart ${name}`}>
+                <Tooltip title={`Add to Cart ${productData.name}`}>
                   <ShoppingCartCheckoutOutlined
                     fontSize="small"
-                    onClick={(e) =>
-                      addToCart({
-                        id,
-                        name,
-                        description: "Added Description",
-                        price,
-                        image,
-                      })
-                    }
+                    onClick={(e) => props.addToCart("data")}
                   />
                 </Tooltip>
               </div>
             </div>
             <div className={classes.priceContainer}>
-              <p> Nrs. {price}</p>
+              <p> Nrs. {productData.unit_price}</p>
+            </div>
+            <div className={"d-flex d-lg-none " + classes.button__container}>
+              <button
+                className={classes.button}
+                onClick={(e) => goToProduct(id)}
+              >
+                <RemoveRedEyeOutlined />
+                Visit {productData.name}
+              </button>
+              <button
+                className={classes.button}
+                onClick={(e) => props.addToCart("data")}
+              >
+                <ShoppingCartCheckoutOutlined fontSize="small" />
+                Add to cart
+              </button>
             </div>
           </Card.Body>
         </Card>
@@ -182,15 +215,7 @@ const ProductCard = ({ id, image, name, price, delay, addToCart }) => {
           <Modal.Title id="contained-modal-title-vcenter"> </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ProductInformation
-            image={image}
-            name={name}
-            price={price}
-            supplier={1}
-            like={99}
-            tags={["Abstract", "Lovely", "Mystical"]}
-            categories={["Abstract", "Lovely", "Mystical", "Natural"]}
-          />
+          <ProductInformation {...props} />
         </Modal.Body>
       </Modal>
     </>

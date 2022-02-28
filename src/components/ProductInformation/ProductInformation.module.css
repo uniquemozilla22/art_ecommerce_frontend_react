@@ -191,12 +191,10 @@
   font-size: 24px;
   color: #000000;
 }
-
-.product__information__container .share .icons__container {
+.share .icons__container {
   display: flex;
 }
-
-.product__information__container .share .icons__container .icon {
+.share .icons__container .icon {
   margin: 0 0.5rem;
   background: #676fa3;
   color: #fff;
@@ -204,7 +202,13 @@
   border-radius: 20px;
 }
 
-.product__information__container .share .icons__container .icon:first-child {
+.share h1 {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 24px;
+  color: #000000;
+}
+.share .icons__container .icon:first-child {
   margin-left: 0;
 }
 

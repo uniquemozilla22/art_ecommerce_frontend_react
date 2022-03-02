@@ -306,4 +306,12 @@ export const BiddingInformation = (props) => {
   );
 };
 
-export default ProductInformation;
+const ProductInfo = (props) => {
+  return props.auction?.expiration_date ? (
+    <BiddingInformation {...props} />
+  ) : (
+    <ProductInformation {...props} />
+  );
+};
+
+export default ProductInfo;

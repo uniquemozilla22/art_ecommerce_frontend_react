@@ -30,6 +30,7 @@ const BiddingCard = (props) => {
   const { id, productData, supplier, time, auction, category, delay } = props;
 
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleShowModal = () => setShowModal(!showModal);
 
@@ -50,9 +51,9 @@ const BiddingCard = (props) => {
       ? Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) +
         " hours"
       : 0;
-  const navigate = useNavigate();
 
   const goToProduct = (id) => {
+    console.log(id);
     navigate(`/products/${id}`);
   };
   return (
@@ -91,18 +92,18 @@ const BiddingCard = (props) => {
               </h1>
             </div>
             <div className={"d-flex d-lg-none " + classes.button__container}>
-              <button className={classes.button}>
-                <RemoveRedEyeOutlined
-                  fontSize="small"
-                  onClick={(e) => goToProduct(id)}
-                />
+              <button
+                className={classes.button}
+                onClick={(e) => goToProduct(id)}
+              >
+                <RemoveRedEyeOutlined fontSize="small" />
                 Visit {productData.name}
               </button>
-              <button className={classes.button}>
-                <FavoriteBorderOutlined
-                  fontSize="small"
-                  onClick={(e) => props.addToCart("data")}
-                />
+              <button
+                className={classes.button}
+                onClick={(e) => props.addToCart("data")}
+              >
+                <FavoriteBorderOutlined fontSize="small" />
                 Add to cart
               </button>
             </div>

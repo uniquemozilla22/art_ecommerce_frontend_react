@@ -10,7 +10,6 @@ import DataNotFound from "../DataNotFound/DataNotFound";
 
 const ProductsContainer = ({ filterHandler, data, fetchAllProducts }) => {
   const dataConversion = (d) => {
-    console.log(d);
     if (!d) {
       return <DataNotFound action={fetchAllProducts} />;
     } else {

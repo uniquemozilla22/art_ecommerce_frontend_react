@@ -29,3 +29,4 @@ export const FORGOT__MODEL = "FORGOT__MODEL";
 export const SEND_FORGOT_EMAIL = "SEND_FORGOT_EMAIL";
 
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
+export const SINGLE_PRODUCT = "SINGLE_PRODUCT";

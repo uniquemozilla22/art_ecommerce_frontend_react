@@ -1,17 +1,17 @@
 import axiosBase from "../../../axiosBase";
 import { hideLoading, showLoading } from "../Loading/Loading";
 import { ErrorMessage, WarningMessage } from "../Message/Message";
-import { ALL_PRODUCTS } from "../Types/Types";
+import { SINGLE_PRODUCT } from "../Types/Types";
 
-const FetchAllProducts = () => {
+const SingleProductFetchData = (id) => {
   return (dispatch) => {
     dispatch(showLoading());
-    fetch()
+    FetchSingleProduct(id)
       .then((res) => {
         dispatch(hideLoading());
         return dispatch({
-          type: ALL_PRODUCTS,
-          payload: res.data.products,
+          type: SINGLE_PRODUCT,
+          payload: res.data.data,
         });
       })
       .catch((err) => {
@@ -24,7 +24,6 @@ const FetchAllProducts = () => {
             })
           );
         }
-
         if (err.response.status === 400) {
           dispatch(WarningMessage({ message: err.response.data.message }));
         } else {
@@ -34,8 +33,8 @@ const FetchAllProducts = () => {
   };
 };
 
-const fetch = () => {
-  return axiosBase.get("/products");
+const FetchSingleProduct = (id) => {
+  return axiosBase.get("/products/" + id);
 };
 
-export default FetchAllProducts;
+export default SingleProductFetchData;

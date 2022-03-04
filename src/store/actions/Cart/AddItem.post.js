@@ -14,8 +14,7 @@ const AddCartItem = (payload) => {
     postCartitem(payload, token)
       .then((res) => {
         dispatch(hideLoading());
-
-        dispatch(SuccessMessage({ message: "Item added to cart" }));
+        dispatch(SuccessMessage({ message: res.data.message }));
         dispatch({
           type: ADD_CART,
           payload,

@@ -19,7 +19,7 @@ const CartModalBody = (props) => {
   };
   return (
     <div className={classes.cart__body__container}>
-      {data ? (
+      {data === [] || data === null || data === undefined ? (
         data.map((cartitem) => {
           return (
             <ProductFeild

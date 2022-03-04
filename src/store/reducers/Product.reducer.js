@@ -1,12 +1,14 @@
-import { SignalWifiStatusbarNullRounded } from "@mui/icons-material";
-import art1 from "../../Assets/art1.jpg";
-import art2 from "../../Assets/art2.jpg";
-import art3 from "../../Assets/art3.jpg";
-import { ALL_PRODUCTS, SINGLE_PRODUCT } from "../actions/Types/Types";
+import {
+  ALL_PRODUCTS,
+  SINGLE_PRODUCT,
+  PRODUCT_BY_CATEGORIES,
+  FILTER_DATA_PRICE,
+} from "../actions/Types/Types";
 
 let initialState = {
   all: null,
   single: null,
+  category: null,
 };
 
 let ProductReducer = (state = initialState, action) => {
@@ -21,6 +23,18 @@ let ProductReducer = (state = initialState, action) => {
         ...state,
         single: action.payload,
       };
+    case PRODUCT_BY_CATEGORIES: {
+      return {
+        ...state,
+        category: action.payload,
+      };
+    }
+    case FILTER_DATA_PRICE: {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    }
     default:
       return state;
   }

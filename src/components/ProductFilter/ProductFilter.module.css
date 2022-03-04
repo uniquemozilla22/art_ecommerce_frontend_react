@@ -2,13 +2,18 @@
   padding: 0px;
   list-style: none;
   margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
 }
-.product__filter__container .filterList li {
+.product__filter__container .filterList li,
+.product__filter__container .filterList a {
   color: #a4a4a4;
   margin-bottom: 10px;
   list-style: none;
+  text-decoration: none;
 }
-.product__filter__container .filterList li:hover {
+.product__filter__container .filterList li:hover,
+.product__filter__container .filterList a:hover {
   color: #000;
   cursor: pointer;
   font-weight: 600;

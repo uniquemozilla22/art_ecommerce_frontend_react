@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
-import removeCartItem from "../../../store/actions/Cart/RemoveItem";
+import removeCartItem from "../../../store/actions/Cart/RemoveItem.post";
 import { Logout } from "../../../store/actions/User/Logout";
 import ActionIcons from "./ActionIcons/ActionIcons";
 import CartModal from "./CartModal/CartModal";

@@ -38,8 +38,16 @@ const SingleProduct = (props) => {
               tags={product.tags}
             />
             <ProductDescription
-              description={"This is the description"}
-              additionalInformation={"additional Information"}
+              description={
+                product.data.description
+                  ? product.data.description
+                  : "No description"
+              }
+              additionalInformation={
+                product.data.additional_information
+                  ? product.data.additional_information
+                  : "No Additional Information"
+              }
             />
           </>
         ) : (

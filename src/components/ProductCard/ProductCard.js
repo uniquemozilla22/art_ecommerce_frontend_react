@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import classes from "./ProductCard.module.css";
-import { Card, ListGroup, ListGroupItem, Modal } from "react-bootstrap";
+import { Card, Modal } from "react-bootstrap";
 import {
   FavoriteBorderOutlined,
-  FavoriteOutlined,
-  HeartBrokenOutlined,
   MonitorHeartOutlined,
   RemoveRedEyeOutlined,
   ShoppingCartCheckoutOutlined,
@@ -15,7 +13,7 @@ import ProductInformation, {
   BiddingInformation,
 } from "../ProductInformation/ProductInformation";
 import { connect } from "react-redux";
-import addCartItem from "../../store/actions/Cart/AddItem";
+import addCartItem from "../../store/actions/Cart/AddItem.post.js";
 import { useNavigate } from "react-router";
 
 const BiddingCard = (props) => {
@@ -80,9 +78,11 @@ const BiddingCard = (props) => {
                     onClick={() => handleShowModal()}
                   />
                 </Tooltip>
-                <Tooltip title={`Add to Wishlist ${productData.name}`}>
-                  <FavoriteBorderOutlined fontSize="small" />
-                </Tooltip>
+                {props.token ? (
+                  <Tooltip title={`Add to Wishlist ${productData.name}`}>
+                    <FavoriteBorderOutlined fontSize="small" />
+                  </Tooltip>
+                ) : null}
               </div>
             </div>
             <div className={classes.priceContainer}>
@@ -99,13 +99,15 @@ const BiddingCard = (props) => {
                 <RemoveRedEyeOutlined fontSize="small" />
                 Visit {productData.name}
               </button>
-              <button
-                className={classes.button}
-                onClick={(e) => props.addToCart("data")}
-              >
-                <FavoriteBorderOutlined fontSize="small" />
-                Add to cart
-              </button>
+              {props.token ? (
+                <button
+                  className={classes.button}
+                  onClick={(e) => console.log("wishlist")}
+                >
+                  <FavoriteBorderOutlined fontSize="small" />
+                  Add to Wishlist
+                </button>
+              ) : null}
             </div>
           </Card.Body>
         </Card>
@@ -172,15 +174,19 @@ const ProductCard = (props) => {
                     onClick={() => handleShowModal()}
                   />
                 </Tooltip>
-                <Tooltip title={`Add to Wishlist ${productData.name}`}>
-                  <FavoriteBorderOutlined fontSize="small" />
-                </Tooltip>
-                <Tooltip title={`Add to Cart ${productData.name}`}>
-                  <ShoppingCartCheckoutOutlined
-                    fontSize="small"
-                    onClick={(e) => props.addToCart("data")}
-                  />
-                </Tooltip>
+                {props.token ? (
+                  <>
+                    <Tooltip title={`Add to Wishlist ${productData.name}`}>
+                      <FavoriteBorderOutlined fontSize="small" />
+                    </Tooltip>
+                    <Tooltip title={`Add to Cart ${productData.name}`}>
+                      <ShoppingCartCheckoutOutlined
+                        fontSize="small"
+                        onClick={(e) => props.addToCart(id)}
+                      />
+                    </Tooltip>
+                  </>
+                ) : null}
               </div>
             </div>
             <div className={classes.priceContainer}>
@@ -194,13 +200,15 @@ const ProductCard = (props) => {
                 <RemoveRedEyeOutlined />
                 Visit {productData.name}
               </button>
-              <button
-                className={classes.button}
-                onClick={(e) => props.addToCart("data")}
-              >
-                <ShoppingCartCheckoutOutlined fontSize="small" />
-                Add to cart
-              </button>
+              {props.token ? (
+                <button
+                  className={classes.button}
+                  onClick={(e) => props.addToCart(id)}
+                >
+                  <ShoppingCartCheckoutOutlined fontSize="small" />
+                  Add to cart
+                </button>
+              ) : null}
             </div>
           </Card.Body>
         </Card>
@@ -223,6 +231,10 @@ const ProductCard = (props) => {
   );
 };
 
+const mapStateToProps = (state, ownProps) => {
+  return { ...state.user, ...ownProps };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (data) => dispatch(addCartItem(data)),
@@ -233,4 +245,4 @@ const Products = (props) => {
   return props.time ? <BiddingCard {...props} /> : <ProductCard {...props} />;
 };
 
-export default connect(mapDispatchToProps)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

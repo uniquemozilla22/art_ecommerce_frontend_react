@@ -4,73 +4,81 @@ import { useLocation } from "react-router";
 import { animated, useSpring } from "react-spring";
 import classes from "./ProductFilter.module.css";
 import FeatherIcon from "feather-icons-react";
-import { Accordion } from "react-bootstrap";
+import { Accordion, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Slider } from "@mui/material";
+import { useDispatch } from "react-redux";
+import FilterByPrice from "../../store/actions/products/filterbyprice.update";
+import { CATEGORY } from "../../store/actions/Types/Types";
 
-const ProductFilter = ({ fetchAllProducts }) => {
-  const [value, setValue] = useState([2000, 3000]);
-
-  const useAnimationStyle = (delay) => {
-    return useSpring({
-      loop: false,
-      from: { x: 50, opacity: 0 },
-      to: { x: 0, opacity: 1 },
-      delay: delay * 100,
-    });
+const ProductFilter = ({ data }) => {
+  const dispatch = useDispatch();
+  const categoryData = (datas) => {
+    return datas
+      ?.map((product) => product.category)
+      .reduce((acc, current) => {
+        const x = acc.find((item) => item.id === current.id);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
   };
+
+  const getPriceRange = () => {
+    let price_range = data?.map((product) => product.data.unit_price).sort();
+
+    return [price_range[0], price_range[price_range.length - 1]];
+  };
+
+  const [category, setCategory] = useState(categoryData(data));
+  const [highAndLow, sethighAndLow] = useState(getPriceRange());
+  const [value, setValue] = useState(highAndLow);
+
+  const handleChangeSlider = (value) => {
+    // dispatch(FilterByPrice({ range: value, type: CATEGORY }));
+    setValue(value);
+  };
+
   return (
     <div className={classes.product__filter__container}>
       <div className={classes.filtering__section}>
         <ul className={classes.filterList}>
-          <animated.li
-            style={useAnimationStyle(2)}
-            onClick={(e) => fetchAllProducts()}
-          >
+          <Link to={"/products"}>
             <FeatherIcon icon="list" /> <span>Products</span>
-          </animated.li>
-          <animated.li style={useAnimationStyle(3)}>
-            <FeatherIcon icon="users" /> <span>Artist</span>
-          </animated.li>
+          </Link>
+          <Link to={"/artists"}>
+            <FeatherIcon icon="users" /> <span>Auctions</span>
+          </Link>
         </ul>
         <Accordion
           defaultActiveKey="0"
           className={classes.accordion__container}
         >
-          <Accordion.Item eventKey="0">
-            <Accordion.Header className={classes.accordion__container_header}>
-              Category
-            </Accordion.Header>
-            <Accordion.Body className={classes.accordion__body}>
-              <ul className={classes.categoryDropdown}>
-                <animated.li style={useAnimationStyle(1)}>
-                  <Link to="/dashboard" className="w-100">
-                    Category 1
-                  </Link>
-                </animated.li>
-                <animated.li style={useAnimationStyle(2)}>
-                  <Link to="/dashboard" className="w-100">
-                    Category 2
-                  </Link>
-                </animated.li>
-                <animated.li style={useAnimationStyle(3)}>
-                  <Link to="/dashboard" className="w-100">
-                    Category 3
-                  </Link>
-                </animated.li>
-                <animated.li style={useAnimationStyle(4)}>
-                  <Link to="/dashboard" className="w-100">
-                    Category 4
-                  </Link>
-                </animated.li>
-                <animated.li style={useAnimationStyle(5)}>
-                  <Link to="/dashboard" className="w-100">
-                    Category 5
-                  </Link>
-                </animated.li>
-              </ul>
-            </Accordion.Body>
-          </Accordion.Item>
+          {category ? (
+            <Accordion.Item eventKey="0">
+              <Accordion.Header className={classes.accordion__container_header}>
+                Category
+              </Accordion.Header>
+              <Accordion.Body className={classes.accordion__body}>
+                <ul className={classes.categoryDropdown}>
+                  {Object.keys(category).map((keys, value) => {
+                    return (
+                      <animated.li key={value}>
+                        <Link
+                          to={`/category/${category[value].id}`}
+                          className="w-100"
+                        >
+                          {category[value].name}
+                        </Link>
+                      </animated.li>
+                    );
+                  })}
+                </ul>
+              </Accordion.Body>
+            </Accordion.Item>
+          ) : null}
         </Accordion>
         <Accordion
           defaultActiveKey="0"
@@ -84,11 +92,13 @@ const ProductFilter = ({ fetchAllProducts }) => {
               <Slider
                 getAriaLabel={() => "Temperature range"}
                 value={value}
-                min={1000}
-                max={5000}
-                onChange={(e, value) => setValue(value)}
+                min={0}
+                max={highAndLow[1]}
+                onChange={(e, value) => handleChangeSlider(value)}
                 valueLabelDisplay="auto"
-                getAriaValueText={(value) => `NRS. ${value}`}
+                getAriaValueText={(value) => {
+                  return `NRS. ${value}`;
+                }}
                 className={classes.product__slider}
                 style={slider__style}
               />

@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "cart_id": 1,
+        "product_id": 12,
+        "quantity": 9,
+        "cart_product": {
+            "id": 12,
+            "name": "Product 4",
+            "description": "this is the updated product 4 ",
+            "unit_price": 20,
+            "image_url": "https://www.artmajeur.com/medias/standard/c/l/claireved-1/artwork/12821123_pop-art-dali.jpg"
+        }
+    },
+    {
+        "id": 3,
+        "cart_id": 1,
+        "product_id": 13,
+        "quantity": 2,
+        "cart_product": {
+            "id": 13,
+            "name": "Product 4",
+            "description": "this is the updated product 4 ",
+            "unit_price": 20,
+            "image_url": "https://www.artmajeur.com/medias/standard/c/l/claireved-1/artwork/12821123_pop-art-dali.jpg"
+        }
+    },
+    {
+        "id": 2,
+        "cart_id": 1,
+        "product_id": 14,
+        "quantity": 20,
+        "cart_product": {
+            "id": 14,
+            "name": "Product 4",
+            "description": "this is the updated product 4 ",
+            "unit_price": 20,
+            "image_url": "https://www.artmajeur.com/medias/standard/c/l/claireved-1/artwork/12821123_pop-art-dali.jpg"
+        }
+    }
+]
+}

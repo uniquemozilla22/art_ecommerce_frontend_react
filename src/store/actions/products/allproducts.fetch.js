@@ -11,12 +11,11 @@ const FetchAllProducts = () => {
         dispatch(hideLoading());
         return dispatch({
           type: ALL_PRODUCTS,
-          payload: res.data.products,
+          payload: res.data,
         });
       })
       .catch((err) => {
         dispatch(hideLoading());
-
         if (err.response === undefined) {
           dispatch(
             ErrorMessage({
@@ -24,7 +23,6 @@ const FetchAllProducts = () => {
             })
           );
         }
-
         if (err.response.status === 400) {
           dispatch(WarningMessage({ message: err.response.data.message }));
         } else {

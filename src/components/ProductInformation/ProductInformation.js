@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./ProductInformation.module.css";
-import supplierImage from "../../Assets/artist1.png";
 import FeatherIcon from "feather-icons-react";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import { Avatar, AvatarGroup } from "@mui/material";
+import { Avatar } from "@mui/material";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export const ProductInformation = (props) => {
   const {
@@ -19,6 +20,8 @@ export const ProductInformation = (props) => {
     likes,
     tags,
   } = props;
+
+  const token = useSelector((state) => state.user.token);
   return (
     <div className={"row " + classes.product__information__container}>
       <div
@@ -63,28 +66,28 @@ export const ProductInformation = (props) => {
               <h2>NPR. {productData.unit_price}</h2>
               {productData.description ? productData.description : null}
             </div>
-
             <div className={classes.like__container}>
               <FeatherIcon icon="heart" />
               <p>{likes}</p>
             </div>
-
-            <div className={classes.buttons__container}>
-              <div
-                className={classes.add_to_cart}
-                onClick={(e) => console.log("Added to Cart")}
-              >
-                <FeatherIcon icon="shopping-cart" />
-                <p>Add to cart</p>
+            {token ? (
+              <div className={classes.buttons__container}>
+                <div
+                  className={classes.add_to_cart}
+                  onClick={(e) => console.log("Added to Cart")}
+                >
+                  <FeatherIcon icon="shopping-cart" />
+                  <p>Add to cart</p>
+                </div>
+                <div
+                  className={classes.add_to_wishlist}
+                  onClick={(e) => console.log("Added to Cart")}
+                >
+                  <FeatherIcon icon="heart" />
+                  <p>Wishlist</p>
+                </div>
               </div>
-              <div
-                className={classes.add_to_wishlist}
-                onClick={(e) => console.log("Added to Cart")}
-              >
-                <FeatherIcon icon="heart" />
-                <p>Wishlist</p>
-              </div>
-            </div>
+            ) : null}
 
             <hr />
 
@@ -137,6 +140,12 @@ export const BiddingInformation = (props) => {
     likes,
     tags,
   } = props;
+  const tokens = useSelector((state) => state.user.token);
+  const [token, setToken] = useState(tokens);
+
+  useEffect(() => {
+    setToken(tokens);
+  }, [tokens]);
 
   // Get today's date and time
   let now = new Date().getTime();
@@ -285,7 +294,7 @@ export const BiddingInformation = (props) => {
             <div className={classes.categories}>
               <h1>Categories</h1>
               <div className={classes.categories__container}>
-                <Link to={`/category/:${category.id}`}>{category.name}</Link>
+                <Link to={`/category/${category.id}`}>{category.name}</Link>
               </div>
             </div>
             <div className={classes.share}>

@@ -1,22 +1,21 @@
 import axiosBase from "../../../axiosBase";
 import { hideLoading, showLoading } from "../Loading/Loading";
 import { ErrorMessage, WarningMessage } from "../Message/Message";
-import { SINGLE_PRODUCT } from "../Types/Types";
+import { PRODUCT_BY_CATEGORIES } from "../Types/Types";
 
-const SingleProductFetchData = (id) => {
+const ProductsByCategories = ({ id }) => {
   return (dispatch) => {
     dispatch(showLoading());
-    FetchSingleProduct(id)
+    fetchProductByCategories(id)
       .then((res) => {
         dispatch(hideLoading());
         return dispatch({
-          type: SINGLE_PRODUCT,
-          payload: res.data,
+          type: PRODUCT_BY_CATEGORIES,
+          payload: res.data.products,
         });
       })
       .catch((err) => {
         dispatch(hideLoading());
-
         if (err.response === undefined) {
           dispatch(
             ErrorMessage({
@@ -33,8 +32,8 @@ const SingleProductFetchData = (id) => {
   };
 };
 
-const FetchSingleProduct = (id) => {
-  return axiosBase.get("/products/" + id);
+const fetchProductByCategories = (id) => {
+  return axiosBase.get("/categories/" + id);
 };
 
-export default SingleProductFetchData;
+export default ProductsByCategories;

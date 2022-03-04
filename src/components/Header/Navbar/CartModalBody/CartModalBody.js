@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import DataNotFound from "../../../DataNotFound/DataNotFound";
 import ProductFeild from "../../../ProductFeild/ProductFeild";
 import classes from "./CartModalBody.module.css";
 
@@ -13,23 +14,30 @@ const CartModalBody = (props) => {
 
   const totalPriceHandler = (data) => {
     let totalItemPrice = 0;
-    data.forEach((item) => (totalItemPrice = totalItemPrice + +item.price));
+    data?.forEach((item) => (totalItemPrice = totalItemPrice + +item.price));
     return totalItemPrice;
   };
   return (
     <div className={classes.cart__body__container}>
-      {data.map((cartitem) => {
-        return (
-          <ProductFeild
-            key={cartitem.id}
-            title={cartitem.name}
-            price={cartitem.price}
-            description={cartitem.description}
-            image={cartitem.image}
-            remove={() => props.removeItem(cartitem)}
-          />
-        );
-      })}
+      {data ? (
+        data.map((cartitem) => {
+          return (
+            <ProductFeild
+              key={cartitem.id}
+              title={cartitem.name}
+              price={cartitem.price}
+              description={cartitem.description}
+              image={cartitem.image}
+              remove={() => props.removeItem(cartitem)}
+            />
+          );
+        })
+      ) : (
+        <DataNotFound
+          action={() => console.log("refresh")}
+          content="Try adding some items"
+        />
+      )}
 
       <div className={classes.cart__footer}>
         <div className={classes.cart__totalContent}>

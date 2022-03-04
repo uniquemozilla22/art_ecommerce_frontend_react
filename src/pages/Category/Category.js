@@ -9,29 +9,32 @@ import { connect } from "react-redux";
 import { useLocation, useParams } from "react-router";
 import ProductsByCategories from "../../store/actions/products/byCategories.fetch";
 
-const Product = (props) => {
+const Category = (props) => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const handleFilter = () => setIsFilterActive(!isFilterActive);
-  const [products, setProducts] = useState(props.products.all);
+  const [products, setProducts] = useState(props.products.category);
   const params = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setProducts(props.products.all);
-  }, [props.products.all]);
+    setProducts(props.products.category);
+  }, [props.products.category]);
 
   useEffect(() => {
-    fetchAllProducts();
+    const { id } = params;
+    fetchProductsByCategories({ id });
   }, []);
 
-  const fetchAllProducts = () => dispatch(FetchAllProducts());
+  const fetchProductsByCategories = (data) => {
+    dispatch(ProductsByCategories(data));
+  };
 
   return (
     <>
       <div className={classes.product__container}>
         <div className={"container-fluid"}>
           <div className={classes.product__title}>
-            <h1>Product</h1>
+            <h1>Category.</h1>
           </div>
           <div className="row">
             <div className="col-2 d-none d-md-block">
@@ -41,7 +44,7 @@ const Product = (props) => {
               <ProductsContainer
                 filterHandler={handleFilter}
                 data={products}
-                fetchAllProducts={fetchAllProducts}
+                fetchAllProducts={fetchProductsByCategories}
               />
             </div>
           </div>
@@ -66,4 +69,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(Product);
+export default connect(mapStateToProps)(Category);

@@ -36,40 +36,42 @@ const ActionIcons = (props) => {
           onClick={() => props.toggleHelpCenter()}
         />
       </Tooltip>
-      <Tooltip title="Cart">
-        <ShoppingCartOutlined
-          className={classes.navigation_icons}
-          onClick={() => props.toggleCart()}
-        />
-      </Tooltip>
 
       {token ? (
-        <Dropdown>
-          <Dropdown.Toggle
-            id="dropdown-autoclose-true"
-            className={classes.profileButton}
-            variant="none"
-          >
-            <Tooltip title="Profile">
-              <PersonOutlineOutlined className={classes.navigation_icons} />
-            </Tooltip>
-          </Dropdown.Toggle>
+        <>
+          <Tooltip title="Cart">
+            <ShoppingCartOutlined
+              className={classes.navigation_icons}
+              onClick={() => props.toggleCart()}
+            />
+          </Tooltip>
+          <Dropdown>
+            <Dropdown.Toggle
+              id="dropdown-autoclose-true"
+              className={classes.profileButton}
+              variant="none"
+            >
+              <Tooltip title="Profile">
+                <PersonOutlineOutlined className={classes.navigation_icons} />
+              </Tooltip>
+            </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            <Dropdown.Item href="#">
-              <ListAltTwoTone /> Orders
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <Link to="/editprofile" className={classes.dropdown__link}>
-                <RemoveRedEyeOutlined />
-                View Profile
-              </Link>
-            </Dropdown.Item>
-            <Dropdown.Item onClick={(e) => props.Logout()}>
-              <LogoutOutlined /> Logout
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+            <Dropdown.Menu>
+              <Dropdown.Item href="#">
+                <ListAltTwoTone /> Orders
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to="/editprofile" className={classes.dropdown__link}>
+                  <RemoveRedEyeOutlined />
+                  View Profile
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item onClick={(e) => props.Logout()}>
+                <LogoutOutlined /> Logout
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </>
       ) : (
         <Tooltip title="Login">
           <PersonOutlineOutlined

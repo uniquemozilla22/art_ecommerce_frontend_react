@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import ProductTable from "../../components/ProductTable/ProductTable";
 import classes from "./Checkout.module.css";
-import removeCartItem from "../../store/actions/Cart/RemoveItem";
+import removeCartItem from "../../store/actions/Cart/RemoveItem.post";
 import CheckoutInformation from "../../components/CheckoutInformation/CheckoutInformation";
 
 const Checkout = (props) => {

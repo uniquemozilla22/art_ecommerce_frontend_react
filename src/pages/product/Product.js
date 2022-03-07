@@ -8,6 +8,7 @@ import classes from "./Product.module.css";
 import { connect } from "react-redux";
 import { useLocation, useParams } from "react-router";
 import ProductsByCategories from "../../store/actions/products/byCategories.fetch";
+import { WarningMessage } from "../../store/actions/Message/Message";
 
 const Product = (props) => {
   const [isFilterActive, setIsFilterActive] = useState(false);
@@ -15,6 +16,7 @@ const Product = (props) => {
   const [products, setProducts] = useState(props.products.all);
   const params = useParams();
   const dispatch = useDispatch();
+  const [filteredProducts, setFilteredProducts] = useState(null);
 
   useEffect(() => {
     setProducts(props.products.all);
@@ -26,6 +28,24 @@ const Product = (props) => {
 
   const fetchAllProducts = () => dispatch(FetchAllProducts());
 
+  const filterProductbyPrice = (range) => {
+    setFilteredProducts(
+      products.filter(
+        (product) =>
+          product.data.unit_price >= range[0] &&
+          product.data.unit_price <= range[1]
+      )
+    );
+
+    if (filteredProducts && filteredProducts.length == 0) {
+      dispatch(
+        WarningMessage({
+          message: "No Products are available of that price range.",
+        })
+      );
+    }
+  };
+
   return (
     <>
       <div className={classes.product__container}>
@@ -35,12 +55,19 @@ const Product = (props) => {
           </div>
           <div className="row">
             <div className="col-2 d-none d-md-block">
-              {products ? <ProductFilter data={products} /> : <Spinner />}
+              {products ? (
+                <ProductFilter
+                  data={filteredProducts || products}
+                  filterProductbyPrice={(range) => filterProductbyPrice(range)}
+                />
+              ) : (
+                <Spinner />
+              )}
             </div>
             <div className="col-12 col-md-10">
               <ProductsContainer
                 filterHandler={handleFilter}
-                data={products}
+                data={filteredProducts || products}
                 fetchAllProducts={fetchAllProducts}
               />
             </div>
@@ -52,7 +79,10 @@ const Product = (props) => {
           <Offcanvas.Title>Filter.</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <ProductFilter data={products} />
+          <ProductFilter
+            data={filteredProducts || products}
+            filterProductbyPrice={(range) => filterProductbyPrice(range)}
+          />
         </Offcanvas.Body>
       </Offcanvas>
     </>

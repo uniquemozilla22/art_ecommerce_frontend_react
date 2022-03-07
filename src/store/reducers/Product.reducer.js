@@ -123,6 +123,7 @@ let ProductReducer = (state = initialState, action) => {
         ),
       };
     }
+    
     default:
       return state;
   }

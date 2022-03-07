@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import ProductCard from "../ProductCard/ProductCard";
 import classes from "./ProductsContainer.module.css";
@@ -22,39 +22,68 @@ const ProductsContainer = ({
   fetchAllProducts,
   category,
 }) => {
-  console.log(category);
-  const dispatch = useDispatch();
+  const [sortingType, setSortingType] = useState(null);
   const sorting = [
     {
       name: "Sort By Name ( Ascending )",
-      value: category
-        ? SORT_CATEGORY_BY_NAME_ASCENDING
-        : SORT_BY_NAME_ASCENDING,
+      value: SORT_BY_NAME_ASCENDING,
     },
     {
       name: "Sort By Name ( Descending )",
-      value: category
-        ? SORT_CATEGORY_BY_NAME_DESCENDING
-        : SORT_BY_NAME_DESCENDING,
+      value: SORT_BY_NAME_DESCENDING,
     },
     {
       name: "Sort By Price (Low to High)",
-      value: category
-        ? SORT_CATEGORY_BY_PRICE_ASCENDING
-        : SORT_BY_PRICE_ASCENDING,
+      value: SORT_BY_PRICE_ASCENDING,
     },
     {
       name: "Sort By Price (High to Low)",
-      value: category
-        ? SORT_CATEGORY_BY_PRICE_DESCENDING
-        : SORT_BY_PRICE_DESCENDING,
+      value: SORT_BY_PRICE_DESCENDING,
     },
   ];
-  const dataConversion = (d) => {
+
+  const sortingData = (type, data) => {
+    switch (type) {
+      case SORT_BY_NAME_ASCENDING: {
+        return data.sort((a, b) =>
+          a.data.name > b.data.name ? 1 : b.data.name > a.data.name ? -1 : 0
+        );
+      }
+      case SORT_BY_NAME_DESCENDING: {
+        return data.sort((a, b) =>
+          a.data.name < b.data.name ? 1 : b.data.name < a.data.name ? -1 : 0
+        );
+      }
+      case SORT_BY_PRICE_ASCENDING: {
+        return data.sort((a, b) =>
+          a.data.unit_price > b.data.unit_price
+            ? 1
+            : b.data.unit_price > a.data.unit_price
+            ? -1
+            : 0
+        );
+      }
+      case SORT_BY_PRICE_DESCENDING: {
+        return data.sort((a, b) =>
+          a.data.unit_price < b.data.unit_price
+            ? 1
+            : b.data.unit_price < a.data.unit_price
+            ? -1
+            : 0
+        );
+      }
+      case null: {
+        return data;
+      }
+      default:
+        return data;
+    }
+  };
+  const dataConversion = (d, type) => {
     if (!d) {
       return <DataNotFound action={fetchAllProducts} />;
     } else {
-      return d.map((product, index) => {
+      return sortingData(type, data).map((product, index) => {
         return (
           <div className={"col-lg-3 col-md-4 col-xs-12 col-6"}>
             {
@@ -80,8 +109,7 @@ const ProductsContainer = ({
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
-    dispatch({ type: e.target.value });
+    setSortingType(e.target.value);
   };
   return (
     <div className={classes.products__grid__container}>
@@ -114,7 +142,7 @@ const ProductsContainer = ({
       </div>
 
       <div className={classes.resulting__products__container}>
-        <div className="row">{dataConversion(data)}</div>
+        <div className="row">{dataConversion(data, sortingType)}</div>
       </div>
     </div>
   );

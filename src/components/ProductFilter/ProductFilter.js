@@ -8,10 +8,12 @@ import { Accordion, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Slider } from "@mui/material";
 import { useDispatch } from "react-redux";
-import FilterByPrice from "../../store/actions/products/filterbyprice.update";
-import { CATEGORY } from "../../store/actions/Types/Types";
+import {
+  CATEGORY,
+  FILTER_PRODUCTS_BY_PRICE,
+} from "../../store/actions/Types/Types";
 
-const ProductFilter = ({ data }) => {
+const ProductFilter = ({ data, filterProductbyPrice }) => {
   const dispatch = useDispatch();
   const categoryData = (datas) => {
     return datas
@@ -37,7 +39,7 @@ const ProductFilter = ({ data }) => {
   const [value, setValue] = useState(highAndLow);
 
   const handleChangeSlider = (value) => {
-    // dispatch(FilterByPrice({ range: value, type: CATEGORY }));
+    filterProductbyPrice(value);
     setValue(value);
   };
 

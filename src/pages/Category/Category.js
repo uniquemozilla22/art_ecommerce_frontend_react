@@ -45,6 +45,7 @@ const Category = (props) => {
                 filterHandler={handleFilter}
                 data={products}
                 fetchAllProducts={fetchProductsByCategories}
+                category
               />
             </div>
           </div>

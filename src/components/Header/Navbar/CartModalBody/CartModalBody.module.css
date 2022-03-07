@@ -40,3 +40,16 @@
   font-size: 16px;
   border-radius: 20px;
 }
+
+.cart__body__container .clear__button {
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+}
+
+.cart__body__container .clear__button button {
+  color: #676fa3;
+  border: none;
+  background-color: none;
+  padding: 1rem;
+}

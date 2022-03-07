@@ -55,7 +55,6 @@ const ActionIcons = (props) => {
                 <PersonOutlineOutlined className={classes.navigation_icons} />
               </Tooltip>
             </Dropdown.Toggle>
-
             <Dropdown.Menu>
               <Dropdown.Item href="#">
                 <ListAltTwoTone /> Orders

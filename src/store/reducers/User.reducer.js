@@ -44,7 +44,6 @@ const UserReducer = (state = initialState, action) => {
     }
 
     case UPDATE__PROFILE: {
-      console.log(payload);
       return {
         ...state,
         otherData: {

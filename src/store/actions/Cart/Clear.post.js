@@ -5,19 +5,17 @@ import {
   SuccessMessage,
   WarningMessage,
 } from "../Message/Message";
-import { ADD_CART } from "../Types/Types";
+import { REMOVE_ALL_CART } from "../Types/Types";
 
-const AddCartItem = (payload) => {
+const ClearCartGlobally = () => {
   return (dispatch, getState) => {
-    const token = getState().user.token;
     dispatch(showLoading());
-    postCartitem(payload.id, token)
+    ClearCartGloballyRequest(getState().user.token)
       .then((res) => {
         dispatch(hideLoading());
         dispatch(SuccessMessage({ message: res.data.message }));
         dispatch({
-          type: ADD_CART,
-          payload,
+          type: REMOVE_ALL_CART,
         });
       })
       .catch((error) => {
@@ -48,13 +46,12 @@ const AddCartItem = (payload) => {
   };
 };
 
-const postCartitem = (id, token) => {
-  const data = { product_id: id };
-  return axiosBase.post("carts/add", data, {
+const ClearCartGloballyRequest = (token) => {
+  return axiosBase.delete("carts/clear", {
     headers: {
       Authorization: "Bearer " + token,
     },
   });
 };
 
-export default AddCartItem;
+export default ClearCartGlobally;

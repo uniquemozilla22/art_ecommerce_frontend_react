@@ -105,26 +105,6 @@ const ProductFilter = ({ data }) => {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-        <Accordion
-          defaultActiveKey="0"
-          className={classes.accordion__container}
-        >
-          <Accordion.Item eventKey="0">
-            <Accordion.Header className={classes.accordion__container_header}>
-              Tags
-            </Accordion.Header>
-            <Accordion.Body className={classes.accordion__body}>
-              <ul className={classes.tagsList}>
-                <li>Tag 1</li>
-                <li>Tag 2</li>
-                <li>Tag 3</li>
-                <li>Tag 4</li>
-                <li>Tag 5</li>
-                <li>Tag 6</li>
-              </ul>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
       </div>
     </div>
   );

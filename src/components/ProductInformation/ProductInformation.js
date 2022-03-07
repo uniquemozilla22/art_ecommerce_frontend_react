@@ -4,10 +4,12 @@ import FeatherIcon from "feather-icons-react";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { Avatar } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import AddCartItem from "../../store/actions/Cart/AddItem.post";
 
 export const ProductInformation = (props) => {
+  const dispatch = useDispatch();
   const {
     id,
     productData,
@@ -74,7 +76,7 @@ export const ProductInformation = (props) => {
               <div className={classes.buttons__container}>
                 <div
                   className={classes.add_to_cart}
-                  onClick={(e) => console.log("Added to Cart")}
+                  onClick={(e) => dispatch(AddCartItem())}
                 >
                   <FeatherIcon icon="shopping-cart" />
                   <p>Add to cart</p>

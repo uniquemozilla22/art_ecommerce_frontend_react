@@ -182,7 +182,15 @@ const ProductCard = (props) => {
                     <Tooltip title={`Add to Cart ${productData.name}`}>
                       <ShoppingCartCheckoutOutlined
                         fontSize="small"
-                        onClick={(e) => props.addToCart(id)}
+                        onClick={(e) =>
+                          props.addToCart({
+                            id,
+                            image_url: productData.image_url,
+                            name: productData.name,
+                            unit_price: productData.unit_price,
+                            description: productData.description,
+                          })
+                        }
                       />
                     </Tooltip>
                   </>
@@ -195,7 +203,15 @@ const ProductCard = (props) => {
             <div className={"d-flex d-lg-none " + classes.button__container}>
               <button
                 className={classes.button}
-                onClick={(e) => goToProduct(id)}
+                onClick={(e) =>
+                  goToProduct({
+                    id,
+                    name: productData.name,
+                    image_url: productData.image_url,
+                    unit_price: productData.unit_price,
+                    description: productData.description,
+                  })
+                }
               >
                 <RemoveRedEyeOutlined />
                 Visit {productData.name}
@@ -203,7 +219,15 @@ const ProductCard = (props) => {
               {props.token ? (
                 <button
                   className={classes.button}
-                  onClick={(e) => props.addToCart(id)}
+                  onClick={(e) =>
+                    props.addToCart({
+                      id,
+                      name: productData.name,
+                      image_url: productData.image_url,
+                      unit_price: productData.unit_price,
+                      description: productData.description,
+                    })
+                  }
                 >
                   <ShoppingCartCheckoutOutlined fontSize="small" />
                   Add to cart

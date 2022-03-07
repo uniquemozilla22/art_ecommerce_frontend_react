@@ -115,7 +115,7 @@ const Layout = (props) => {
   return location.pathname === "/login" ||
     location.pathname === "/register" ||
     location.pathname === "/forgotpassword" ? (
-    <>  
+    <>
       <Spinner {...props.loading} image={data.logo} />
       {props.children}
       <ErrorHandle {...props} />
@@ -147,7 +147,7 @@ const mapStateToProps = (state, ownProps) => {
     loading: { ...state.loader },
     token: state.user.token,
     forgot: state.modal.forgot,
-    ownProps,
+    ...ownProps,
   };
 };
 

@@ -6,12 +6,12 @@ import {
   WarningMessage,
 } from "../../Message/Message";
 import { RegisterAuthentication } from "../../User/Authenticate";
-import { LOGIN_MODAL } from "../../Types/Types";
+import { GET_CART, LOGIN_MODAL } from "../../Types/Types";
 
 const LoginAction = (payload) => {
   const { email, password } = payload;
 
-  return (dispatch) => {
+  return (dispatch, getState) => {
     return loginToTheSystem(email, password)
       .then((res) => {
         dispatch(hideLoading());
@@ -28,7 +28,16 @@ const LoginAction = (payload) => {
             token: res.data.token,
           })
         );
-        dispatch({ type: LOGIN_MODAL });
+        dispatch(
+          RegisterAuthentication({
+            username: payload.username,
+            email: payload.email,
+            token: res.data.token,
+          })
+        );
+        console.log(res.data);
+        dispatch({ type: GET_CART, payload: res.data.cartItems });
+        if (getState().modal.login) dispatch({ type: LOGIN_MODAL });
       })
       .catch((err) => {
         dispatch(hideLoading());

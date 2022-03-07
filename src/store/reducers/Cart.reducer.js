@@ -3,17 +3,21 @@ import {
   REMOVE_ALL_CART,
   REMOVE_CART,
   UPDATE_CART,
+  GET_CART,
 } from "../actions/Types/Types";
 
 const initialState = {
-  cartID: null,
   cartItems: [],
 };
 
 const CartReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_CART: {
+      return { ...state, cartItems: action.payload };
+    }
     case ADD_CART: {
-      return { ...state, cartItems: [...state.cartItems, action.payload] };
+      const UpdatedCartItems = addToCart(state.cartItems, action.payload);
+      return { ...state, cartItems: UpdatedCartItems };
     }
     case REMOVE_ALL_CART: {
       const updatedCart = removeAllCart(state, action.payload);
@@ -36,10 +40,10 @@ const removeCartReducer = (state, payload) => {
   return { ...state, cartItems: filteredItems };
 };
 
-const addCartReducer = (state, payload) => {
-  const addedItems = state.cartItems.add(payload);
+const addToCart = (cartItems, payload) => {
+  cartItems.push({ ...payload });
 
-  return { ...state, cartItems: addedItems };
+  return cartItems;
 };
 
 const removeAllCart = (state, payload) => {

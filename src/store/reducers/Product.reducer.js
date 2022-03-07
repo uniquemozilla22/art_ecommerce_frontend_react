@@ -11,6 +11,7 @@ import {
   SORT_CATEGORY_BY_NAME_DESCENDING,
   SORT_CATEGORY_BY_NAME_ASCENDING,
   SORT_CATEGORY_BY_PRICE_DESCENDING,
+  FETCH_WISHLIST,
 } from "../actions/Types/Types";
 
 let initialState = {
@@ -43,87 +44,12 @@ let ProductReducer = (state = initialState, action) => {
         ...action.payload,
       };
     }
-    case SORT_BY_NAME_ASCENDING: {
+    case FETCH_WISHLIST: {
       return {
         ...state,
-        all: state.all.sort((a, b) =>
-          a.data.name > b.data.name ? 1 : b.data.name > a.data.name ? -1 : 0
-        ),
+        ...action.payload,
       };
     }
-    case SORT_BY_NAME_DESCENDING: {
-      return {
-        ...state,
-        all: state.all.sort((a, b) =>
-          a.data.name < b.data.name ? 1 : b.data.name < a.data.name ? -1 : 0
-        ),
-      };
-    }
-    case SORT_BY_PRICE_ASCENDING: {
-      return {
-        ...state,
-        all: state.all.sort((a, b) =>
-          a.data.unit_price > b.data.unit_price
-            ? 1
-            : b.data.unit_price > a.data.unit_price
-            ? -1
-            : 0
-        ),
-      };
-    }
-    case SORT_BY_PRICE_DESCENDING: {
-      return {
-        ...state,
-        all: state.all.sort((a, b) =>
-          a.data.unit_price < b.data.unit_price
-            ? 1
-            : b.data.unit_price < a.data.unit_price
-            ? -1
-            : 0
-        ),
-      };
-    }
-    case SORT_CATEGORY_BY_NAME_ASCENDING: {
-      return {
-        ...state,
-        category: state.category.sort((a, b) =>
-          a.data.name > b.data.name ? 1 : b.data.name > a.data.name ? -1 : 0
-        ),
-      };
-    }
-    case SORT_CATEGORY_BY_NAME_DESCENDING: {
-      return {
-        ...state,
-        category: state.category.sort((a, b) =>
-          a.data.name < b.data.name ? 1 : b.data.name < a.data.name ? -1 : 0
-        ),
-      };
-    }
-    case SORT_CATEGORY_BY_PRICE_ASCENDING: {
-      return {
-        ...state,
-        category: state.category.sort((a, b) =>
-          a.data.unit_price > b.data.unit_price
-            ? 1
-            : b.data.unit_price > a.data.unit_price
-            ? -1
-            : 0
-        ),
-      };
-    }
-    case SORT_CATEGORY_BY_PRICE_DESCENDING: {
-      return {
-        ...state,
-        category: state.category.sort((a, b) =>
-          a.data.unit_price < b.data.unit_price
-            ? 1
-            : b.data.unit_price < a.data.unit_price
-            ? -1
-            : 0
-        ),
-      };
-    }
-    
     default:
       return state;
   }

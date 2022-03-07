@@ -1,23 +1,18 @@
 import axiosBase from "../../../axiosBase";
 import { hideLoading, showLoading } from "../Loading/Loading";
-import {
-  ErrorMessage,
-  SuccessMessage,
-  WarningMessage,
-} from "../Message/Message";
-import { ADD_CART } from "../Types/Types";
+import { ErrorMessage, WarningMessage } from "../Message/Message";
+import { FETCH_WISHLIST } from "../Types/Types";
 
-const AddCartItem = (payload) => {
+const WishlistData = () => {
   return (dispatch, getState) => {
     const token = getState().user.token;
     dispatch(showLoading());
-    postCartitem(payload.id, token)
+    fetchWishlistData(token)
       .then((res) => {
         dispatch(hideLoading());
-        dispatch(SuccessMessage({ message: res.data.message }));
         dispatch({
-          type: ADD_CART,
-          payload,
+          type: FETCH_WISHLIST,
+          payload: res.data,
         });
       })
       .catch((error) => {
@@ -47,13 +42,12 @@ const AddCartItem = (payload) => {
   };
 };
 
-const postCartitem = (id, token) => {
-  const data = { product_id: id };
-  return axiosBase.post("carts/add", data, {
+const fetchWishlistData = (token) => {
+  return axiosBase.get("wishList/items", {
     headers: {
       Authorization: "Bearer " + token,
     },
   });
 };
 
-export default AddCartItem;
+export default WishlistData;

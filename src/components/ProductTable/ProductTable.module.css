@@ -47,3 +47,8 @@
   font-weight: 500;
   padding: 0 10px;
 }
+
+.product__table__container .pagetitle {
+  font-weight: 800;
+  font-size: 34px;
+}

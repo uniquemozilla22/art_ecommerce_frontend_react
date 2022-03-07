@@ -22,6 +22,7 @@ import EditProfile from "./pages/EditProfile/EditProfile";
 import ForgotPassword from "./pages/forgetPassword/ForgetPassword";
 import ConfirmEmail from "./pages/Confirm_email/Confirm_email";
 import Category from "./pages/Category/Category";
+import Wishlist from "./pages/wishlist/Wishlist.page";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<Product />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/category/:id" element={<Category />} />
           <Route path="/products/:id" element={<SingleProduct />} />
           <Route path="/checkout" element={<Checkout />} />

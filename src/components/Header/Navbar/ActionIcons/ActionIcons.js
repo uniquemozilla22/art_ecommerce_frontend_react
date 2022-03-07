@@ -9,6 +9,8 @@ import {
   RemoveRedEyeOutlined,
   LogoutOutlined,
   SettingsVoice,
+  FavoriteOutlined,
+  FavoriteBorderOutlined,
 } from "@mui/icons-material";
 import classes from "./ActionIcon.module.css";
 import { Dropdown } from "react-bootstrap";
@@ -36,7 +38,13 @@ const ActionIcons = (props) => {
           onClick={() => props.toggleHelpCenter()}
         />
       </Tooltip>
-
+      {token ? (
+        <Tooltip title="Wishlist">
+          <Link to="/wishlist">
+            <FavoriteBorderOutlined className={classes.navigation_icons} />
+          </Link>
+        </Tooltip>
+      ) : null}
       {token ? (
         <>
           <Tooltip title="Cart">

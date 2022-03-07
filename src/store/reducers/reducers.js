@@ -8,6 +8,7 @@ import LoaderReducer from "./Loading.reducer";
 import { CookieStorage } from "redux-persist-cookie-storage";
 import Cookies from "cookies-js";
 import ProductReducer from "./Product.reducer";
+import WishListReducer from "./Wishlist.reducer";
 
 const reducers = combineReducers({
   user: UserReducer,
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   message: MessageReducer,
   loader: LoaderReducer,
   products: ProductReducer,
+  wishlist: WishListReducer,
 });
 
 const persistConfig = {

@@ -1,6 +1,9 @@
 import React from "react";
 import classes from "./ProductItem.module.css";
 import FeatherIcon from "feather-icons-react";
+import { Tooltip } from "@mui/material";
+import { ShoppingCartOutlined } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
 
 const ProductItem = ({
   image,
@@ -8,9 +11,11 @@ const ProductItem = ({
   price,
   supplierName,
   description,
-  edition,
   removeItem,
+  wishlist,
+  id,
 }) => {
+  const dispatch = useDispatch();
   return (
     <div className={classes.product__item__container}>
       <div className={classes.product__info}>
@@ -19,7 +24,6 @@ const ProductItem = ({
         </div>
         <div className={classes.product__content}>
           <h5>{name}</h5>
-          <h6>Edition : {edition}</h6>
           <p>{description}</p>
           <p className={"d-block d-sm-none "}>{supplierName}</p>
         </div>
@@ -31,7 +35,14 @@ const ProductItem = ({
         <h5>{price}</h5>
       </div>
       <div className={classes.delete__item}>
-        <FeatherIcon icon={"x"} onClick={() => removeItem()} />
+        {wishlist ? (
+          <Tooltip title={"Add " + name + " to cart"}>
+            <ShoppingCartOutlined icon={"x"} onClick={(e) => removeItem(id)} />
+          </Tooltip>
+        ) : null}
+        <Tooltip title={"Remove " + name}>
+          <FeatherIcon icon={"x"} onClick={(e) => removeItem(id)} />
+        </Tooltip>
       </div>
     </div>
   );

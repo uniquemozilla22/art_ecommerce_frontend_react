@@ -6,7 +6,6 @@ import classes from "./ProductTable.module.css";
 const ProductTable = ({ items, removeFunction, wishlist, refresh }) => {
   const [coupon] = useState(1400);
   let total = 0;
-  console.log(items);
   return (
     <div className={"container " + classes.product__table__container}>
       <h1 className={classes.pagetitle}>{wishlist ? "Wishlist" : "Cart"}.</h1>
@@ -21,18 +20,23 @@ const ProductTable = ({ items, removeFunction, wishlist, refresh }) => {
           <div className={classes.product__listing__container}>
             <div className={classes.product__list}>
               {items.map((item) => {
-                total = total + item.price;
+                total = total + item.data.unit_price;
                 return (
                   <ProductItem
-                    id={item.id}
-                    image={item.image}
-                    name={item.name}
-                    price={item.price}
-                    supplierName={"Phurba Tamang"}
-                    description={item.description}
-                    edition={"18/20"}
+                    key={item.data.id}
+                    id={item.data.id}
+                    image={item.data.image_url}
+                    name={item.data.name}
+                    price={item.data.unit_price}
+                    supplierName={
+                      item.supplierInfo.first_name +
+                      " " +
+                      item.supplierInfo.last_name
+                    }
+                    description={item.data.description}
                     removeItem={removeFunction}
                     wishlist={wishlist}
+                    time={item?.auction?.expiration_date || null}
                   />
                 );
               })}

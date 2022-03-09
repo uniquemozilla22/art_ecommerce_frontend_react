@@ -1,7 +1,7 @@
 .product__item__container {
   display: flex;
   justify-content: space-between;
-  margin: 5px 0;
+  margin: 1rem 0;
 }
 
 .product__item__container .delete__item {
@@ -25,6 +25,13 @@
 }
 .product__item__container .product__info .image__container {
   width: 150px;
+}
+
+.product__item__container .product__by,
+.product__item__container .product__Price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .product__item__container .product__info .image__container img {

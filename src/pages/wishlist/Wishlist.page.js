@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
+import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ProductTable from "../../components/ProductTable/ProductTable";
-import WishlistData from "../../store/actions/products/wishlist.fetch";
+import WishlistData from "../../store/actions/Wishlist/wishlist.fetch";
+
+const ProductTable = lazy(() =>
+  import("../../components/ProductTable/ProductTable")
+);
 
 const Wishlist = () => {
   const wishlist = useSelector((state) => state.wishlist.wishlistItems);
@@ -20,12 +24,14 @@ const Wishlist = () => {
 
   return (
     <>
-      <ProductTable
-        removeFunction={(id) => console.log(id)}
-        items={data}
-        wishlist
-        refresh={getWishList}
-      />
+      <Suspense fallback={<Spinner />}>
+        <ProductTable
+          removeFunction={(id) => console.log(id)}
+          items={data}
+          wishlist
+          refresh={getWishList}
+        />
+      </Suspense>
     </>
   );
 };

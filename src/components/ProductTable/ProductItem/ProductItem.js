@@ -14,8 +14,27 @@ const ProductItem = ({
   removeItem,
   wishlist,
   id,
+  time,
 }) => {
   const dispatch = useDispatch();
+
+  // Get today's date and time
+  let now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  let distance = new Date(time).getTime() - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  // Time calculations for days, hours, minutes and seconds
+  let days =
+    Math.floor(distance / (1000 * 60 * 60 * 24)) > 0
+      ? Math.floor(distance / (1000 * 60 * 60 * 24)) + " days"
+      : 0;
+  let hours =
+    Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) > 0
+      ? Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) +
+        " hours"
+      : 0;
   return (
     <div className={classes.product__item__container}>
       <div className={classes.product__info}>
@@ -25,17 +44,18 @@ const ProductItem = ({
         <div className={classes.product__content}>
           <h5>{name}</h5>
           <p>{description}</p>
-          <p className={"d-block d-sm-none "}>{supplierName}</p>
+          {days + hours === 0 ? "Ended" : days + hours}
+          <p className={"d-flex d-sm-none "}>{supplierName}</p>
         </div>
       </div>
-      <div className={"d-none d-sm-block " + classes.product__by}>
+      <div className={"d-none d-sm-flex " + classes.product__by}>
         <h5>{supplierName}</h5>
       </div>
       <div className={classes.product__Price}>
-        <h5>{price}</h5>
+        <h5>NRS. {price}</h5>
       </div>
       <div className={classes.delete__item}>
-        {wishlist ? (
+        {wishlist && time === null ? (
           <Tooltip title={"Add " + name + " to cart"}>
             <ShoppingCartOutlined icon={"x"} onClick={(e) => removeItem(id)} />
           </Tooltip>

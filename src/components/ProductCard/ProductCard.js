@@ -15,6 +15,8 @@ import ProductInformation, {
 import { connect } from "react-redux";
 import addCartItem from "../../store/actions/Cart/AddItem.post.js";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import AddWishlistItem from "./../../store/actions/Wishlist/wishlistItem.post";
 
 const BiddingCard = (props) => {
   const useAnimationStyle = (delay) => {
@@ -25,6 +27,8 @@ const BiddingCard = (props) => {
       delay: delay * 200,
     });
   };
+
+  const dispatch = useDispatch();
   const { id, productData, supplier, time, auction, category, delay } = props;
 
   const [showModal, setShowModal] = useState(false);
@@ -54,6 +58,9 @@ const BiddingCard = (props) => {
     console.log(id);
     navigate(`/products/${id}`);
   };
+
+  const AddToWishList = (id) => dispatch(AddWishlistItem(id));
+
   return (
     <>
       <animated.div
@@ -80,7 +87,10 @@ const BiddingCard = (props) => {
                 </Tooltip>
                 {props.token ? (
                   <Tooltip title={`Add to Wishlist ${productData.name}`}>
-                    <FavoriteBorderOutlined fontSize="small" />
+                    <FavoriteBorderOutlined
+                      fontSize="small"
+                      onClick={(e) => AddToWishList(id)}
+                    />
                   </Tooltip>
                 ) : null}
               </div>
@@ -104,7 +114,10 @@ const BiddingCard = (props) => {
                   className={classes.button}
                   onClick={(e) => console.log("wishlist")}
                 >
-                  <FavoriteBorderOutlined fontSize="small" />
+                  <FavoriteBorderOutlined
+                    fontSize="small"
+                    onClick={(e) => AddToWishList(id)}
+                  />
                   Add to Wishlist
                 </button>
               ) : null}

@@ -2,9 +2,11 @@ import axiosBase from "../../../axiosBase";
 import { hideLoading, showLoading } from "../Loading/Loading";
 import { ErrorMessage, WarningMessage } from "../Message/Message";
 import { ALL_PRODUCTS } from "../Types/Types";
+import WishlistData from "./../Wishlist/wishlist.fetch";
 
 const FetchAllProducts = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    dispatch(WishlistData());
     dispatch(showLoading());
     fetch()
       .then((res) => {

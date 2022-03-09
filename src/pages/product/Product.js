@@ -14,7 +14,6 @@ const Product = (props) => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const handleFilter = () => setIsFilterActive(!isFilterActive);
   const [products, setProducts] = useState(props.products.all);
-  const params = useParams();
   const dispatch = useDispatch();
   const [filteredProducts, setFilteredProducts] = useState(null);
 

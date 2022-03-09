@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import classes from "./ProductCard.module.css";
 import { Card, Modal } from "react-bootstrap";
 import {
+  Favorite,
+  FavoriteBorder,
   FavoriteBorderOutlined,
   MonitorHeartOutlined,
   RemoveRedEyeOutlined,
@@ -17,6 +19,7 @@ import addCartItem from "../../store/actions/Cart/AddItem.post.js";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import AddWishlistItem from "./../../store/actions/Wishlist/wishlistItem.post";
+import isWishlist from "../../store/actions/Wishlist/isWishlist.check";
 
 const BiddingCard = (props) => {
   const useAnimationStyle = (delay) => {
@@ -27,9 +30,22 @@ const BiddingCard = (props) => {
       delay: delay * 200,
     });
   };
-
   const dispatch = useDispatch();
   const { id, productData, supplier, time, auction, category, delay } = props;
+
+  const isOnWishlist = () => dispatch(isWishlist(id));
+
+  const [isOnWishList, setIsOnWishList] = useState(isOnWishlist());
+
+  const removeFromWishList = () => {
+    AddToWishList(id);
+    setIsOnWishList(false);
+  };
+
+  const AddToWishList = (id) => {
+    dispatch(AddWishlistItem(id));
+    setIsOnWishList(true);
+  };
 
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
@@ -38,7 +54,6 @@ const BiddingCard = (props) => {
 
   // Get today's date and time
   let now = new Date().getTime();
-
   // Find the distance between now and the count down date
   let distance = new Date(time).getTime() - now;
 
@@ -54,12 +69,7 @@ const BiddingCard = (props) => {
         " hours"
       : 0;
 
-  const goToProduct = (id) => {
-    console.log(id);
-    navigate(`/products/${id}`);
-  };
-
-  const AddToWishList = (id) => dispatch(AddWishlistItem(id));
+  const goToProduct = (id) => navigate(`/products/${id}`);
 
   return (
     <>
@@ -86,12 +96,21 @@ const BiddingCard = (props) => {
                   />
                 </Tooltip>
                 {props.token ? (
-                  <Tooltip title={`Add to Wishlist ${productData.name}`}>
-                    <FavoriteBorderOutlined
-                      fontSize="small"
-                      onClick={(e) => AddToWishList(id)}
-                    />
-                  </Tooltip>
+                  isOnWishList ? (
+                    <Tooltip title={`Remove from Wishlist ${productData.name}`}>
+                      <Favorite
+                        fontSize="small"
+                        onClick={(e) => removeFromWishList()}
+                      />
+                    </Tooltip>
+                  ) : (
+                    <Tooltip title={`Add to Wishlist ${productData.name}`}>
+                      <FavoriteBorderOutlined
+                        fontSize="small"
+                        onClick={(e) => AddToWishList(id)}
+                      />
+                    </Tooltip>
+                  )
                 ) : null}
               </div>
             </div>

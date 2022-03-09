@@ -1,4 +1,4 @@
-import { FETCH_WISHLIST } from "../actions/Types/Types";
+import { DELETE_WISHLIST_ITEM, FETCH_WISHLIST } from "../actions/Types/Types";
 import { ADD_WISHLIST_ITEM } from "./../actions/Types/Types";
 
 const initialState = {
@@ -19,10 +19,24 @@ const WishListReducer = (state = initialState, action) => {
         wishlistItems: state.wishlistItems.push(action.payload),
       };
     }
-
+    case DELETE_WISHLIST_ITEM: {
+      return {
+        ...state,
+        wishlistItems: removeList(state.wishlistItems, action.payload.id),
+      };
+    }
     default:
       return state;
   }
+};
+
+const removeList = (wishlistItems, id) => {
+  let index = wishlistItems.findIndex((item) => {
+    return item.data.id === id;
+  });
+  if (index !== -1) wishlistItems.splice(index, 1);
+
+  return wishlistItems;
 };
 
 export default WishListReducer;

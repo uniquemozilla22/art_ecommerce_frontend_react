@@ -44,7 +44,7 @@ const ProductItem = ({
         <div className={classes.product__content}>
           <h5>{name}</h5>
           <p>{description}</p>
-          {days + hours === 0 ? "Ended" : days + hours}
+          {time ? <p>{days + hours === 0 ? "Ended" : days + hours}</p> : null}
           <p className={"d-flex d-sm-none "}>{supplierName}</p>
         </div>
       </div>

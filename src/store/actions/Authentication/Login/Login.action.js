@@ -15,7 +15,7 @@ const LoginAction = (payload) => {
     return loginToTheSystem(email, password)
       .then((res) => {
         dispatch(hideLoading());
-
+        console.log(res.data);
         dispatch(
           SuccessMessage({
             message: res.statusText + "! Login Successfull.",
@@ -23,19 +23,11 @@ const LoginAction = (payload) => {
         );
         dispatch(
           RegisterAuthentication({
-            username: payload.username,
             email: payload.email,
             token: res.data.token,
+            likes: res.data.likedProducts,
           })
         );
-        dispatch(
-          RegisterAuthentication({
-            username: payload.username,
-            email: payload.email,
-            token: res.data.token,
-          })
-        );
-        console.log(res.data);
         dispatch({ type: GET_CART, payload: res.data.cartItems });
         if (getState().modal.login) dispatch({ type: LOGIN_MODAL });
       })
@@ -48,12 +40,12 @@ const LoginAction = (payload) => {
               message: "Network Error! Check Your Internet Connection",
             })
           );
-        }
-
-        if (err.response.status === 400) {
-          dispatch(WarningMessage({ message: err.response.data.message }));
         } else {
-          dispatch(ErrorMessage({ message: err.response.data.message }));
+          if (err.response.status === 400) {
+            dispatch(WarningMessage({ message: err.response.data.message }));
+          } else {
+            dispatch(ErrorMessage({ message: err.response.data.message }));
+          }
         }
       });
   };

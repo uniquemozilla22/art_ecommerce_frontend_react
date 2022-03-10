@@ -1,5 +1,5 @@
 import { hideLoading } from "../Loading/Loading";
-import { ErrorMessage } from "../Message/Message";
+import { ErrorMessage, SuccessMessage } from "../Message/Message";
 import { DELETE_WISHLIST_ITEM } from "../Types/Types";
 import axiosBase from "./../../../axiosBase";
 import { showLoading } from "./../Loading/Loading";
@@ -13,10 +13,12 @@ const DeleteWishlist = (id) => {
         dispatch(hideLoading());
         dispatch({
           type: DELETE_WISHLIST_ITEM,
-          payload: { id },
+          payload: id,
         });
+        dispatch(SuccessMessage({ message: res.data.message }));
       })
       .catch((error) => {
+        console.log(error);
         dispatch(hideLoading());
         if (error.response === undefined) {
           dispatch(

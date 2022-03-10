@@ -129,16 +129,26 @@ const BiddingCard = (props) => {
                 Visit {productData.name}
               </button>
               {props.token ? (
-                <button
-                  className={classes.button}
-                  onClick={(e) => console.log("wishlist")}
-                >
-                  <FavoriteBorderOutlined
-                    fontSize="small"
+                isOnWishList ? (
+                  <button
+                    className={classes.button}
+                    onClick={(e) => removeFromWishList(id)}
+                  >
+                    <FavoriteBorderOutlined fontSize="small" />
+                    Remove from Wishlist
+                  </button>
+                ) : (
+                  <button
+                    className={classes.button}
                     onClick={(e) => AddToWishList(id)}
-                  />
-                  Add to Wishlist
-                </button>
+
+                  >
+                    <FavoriteBorderOutlined
+                      fontSize="small"
+                    />
+                    Add to Wishlist
+                  </button>
+                )
               ) : null}
             </div>
           </Card.Body>
@@ -173,10 +183,26 @@ const ProductCard = (props) => {
   };
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const goToProduct = (id) => {
     navigate(`/products/${id}`);
   };
   const { id, productData, supplier, time, auction, category, delay } = props;
+
+  const isOnWishlist = () => dispatch(isWishlist(id));
+
+  const [isOnWishList, setIsOnWishList] = useState(isOnWishlist());
+
+  const removeFromWishList = () => {
+    dispatch(AddWishlistItem(id));
+    setIsOnWishList(false);
+  };
+
+  const AddToWishList = (id) => {
+    dispatch(AddWishlistItem(id));
+    setIsOnWishList(true);
+  };
 
   const [showModal, setShowModal] = useState(false);
 
@@ -208,9 +234,23 @@ const ProductCard = (props) => {
                 </Tooltip>
                 {props.token ? (
                   <>
-                    <Tooltip title={`Add to Wishlist ${productData.name}`}>
-                      <FavoriteBorderOutlined fontSize="small" />
-                    </Tooltip>
+                    {isOnWishList ? (
+                      <Tooltip
+                        title={`Remove from Wishlist ${productData.name}`}
+                      >
+                        <Favorite
+                          fontSize="small"
+                          onClick={(e) => removeFromWishList()}
+                        />
+                      </Tooltip>
+                    ) : (
+                      <Tooltip title={`Add to Wishlist ${productData.name}`}>
+                        <FavoriteBorderOutlined
+                          fontSize="small"
+                          onClick={(e) => AddToWishList(id)}
+                        />
+                      </Tooltip>
+                    )}
                     <Tooltip title={`Add to Cart ${productData.name}`}>
                       <ShoppingCartCheckoutOutlined
                         fontSize="small"
@@ -249,21 +289,40 @@ const ProductCard = (props) => {
                 Visit {productData.name}
               </button>
               {props.token ? (
-                <button
-                  className={classes.button}
-                  onClick={(e) =>
-                    props.addToCart({
-                      id,
-                      name: productData.name,
-                      image_url: productData.image_url,
-                      unit_price: productData.unit_price,
-                      description: productData.description,
-                    })
-                  }
-                >
-                  <ShoppingCartCheckoutOutlined fontSize="small" />
-                  Add to cart
-                </button>
+                <>
+                  {isOnWishList ? (
+                    <button
+                      className={classes.button}
+                      onClick={(e) => removeFromWishList(id)}
+                    >
+                      <FavoriteBorderOutlined fontSize="small" />
+                      Remove from Wishlist
+                    </button>
+                  ) : (
+                    <button
+                      className={classes.button}
+                      onClick={(e) => AddToWishList(id)}
+                    >
+                      <FavoriteBorderOutlined fontSize="small" />
+                      Add to Wishlist
+                    </button>
+                  )}
+                  <button
+                    className={classes.button}
+                    onClick={(e) =>
+                      props.addToCart({
+                        id,
+                        name: productData.name,
+                        image_url: productData.image_url,
+                        unit_price: productData.unit_price,
+                        description: productData.description,
+                      })
+                    }
+                  >
+                    <ShoppingCartCheckoutOutlined fontSize="small" />
+                    Add to cart
+                  </button>
+                </>
               ) : null}
             </div>
           </Card.Body>

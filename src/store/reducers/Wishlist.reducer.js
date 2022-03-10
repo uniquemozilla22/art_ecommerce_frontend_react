@@ -20,10 +20,8 @@ const WishListReducer = (state = initialState, action) => {
       };
     }
     case DELETE_WISHLIST_ITEM: {
-      return {
-        ...state,
-        wishlistItems: removeList(state.wishlistItems, action.payload.id),
-      };
+      let wishlistItems = removeList(state.wishlistItems, action.payload);
+      return { ...state, wishlistItems };
     }
     default:
       return state;
@@ -31,12 +29,9 @@ const WishListReducer = (state = initialState, action) => {
 };
 
 const removeList = (wishlistItems, id) => {
-  let index = wishlistItems.findIndex((item) => {
-    return item.data.id === id;
-  });
-  if (index !== -1) wishlistItems.splice(index, 1);
-
-  return wishlistItems;
+  const filteredItems = wishlistItems.filter((item) => item.data.id !== id);
+  console.log(filteredItems);
+  return filteredItems;
 };
 
 export default WishListReducer;

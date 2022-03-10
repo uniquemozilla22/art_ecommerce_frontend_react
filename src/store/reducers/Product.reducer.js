@@ -36,12 +36,7 @@ let ProductReducer = (state = initialState, action) => {
         ...action.payload,
       };
     }
-    case FETCH_WISHLIST: {
-      return {
-        ...state,
-        ...action.payload,
-      };
-    }
+
     default:
       return state;
   }

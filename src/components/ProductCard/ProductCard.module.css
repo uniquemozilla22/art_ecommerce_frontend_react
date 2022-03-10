@@ -3,7 +3,8 @@
 }
 .bidding__classes {
   padding: 20px;
-  width: 100%;
+  max-width: 400px;
+  min-width: 300px;
 }
 
 .bidding__classes:first-child {

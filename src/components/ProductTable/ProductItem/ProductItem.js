@@ -2,8 +2,9 @@ import React from "react";
 import classes from "./ProductItem.module.css";
 import FeatherIcon from "feather-icons-react";
 import { Tooltip } from "@mui/material";
-import { ShoppingCartOutlined } from "@mui/icons-material";
+import { Delete, ShoppingCartOutlined } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
+import AddCartItem from "../../../store/actions/Cart/AddItem.post";
 
 const ProductItem = ({
   image,
@@ -35,6 +36,9 @@ const ProductItem = ({
       ? Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) +
         " hours"
       : 0;
+
+  let addToCart = (data) => dispatch(AddCartItem(data));
+
   return (
     <div className={classes.product__item__container}>
       <div className={classes.product__info}>
@@ -57,11 +61,21 @@ const ProductItem = ({
       <div className={classes.delete__item}>
         {wishlist && time === null ? (
           <Tooltip title={"Add " + name + " to cart"}>
-            <ShoppingCartOutlined icon={"x"} onClick={(e) => removeItem(id)} />
+            <ShoppingCartOutlined
+              onClick={(e) =>
+                addToCart({
+                  id,
+                  image_url: image,
+                  name: name,
+                  unit_price: price,
+                  description: description,
+                })
+              }
+            />
           </Tooltip>
         ) : null}
         <Tooltip title={"Remove " + name}>
-          <FeatherIcon icon={"x"} onClick={(e) => removeItem(id)} />
+          <Delete onClick={(e) => removeItem(id)} />
         </Tooltip>
       </div>
     </div>

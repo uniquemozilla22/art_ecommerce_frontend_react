@@ -1,6 +1,6 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Spinner } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import WishlistData from "../../store/actions/Wishlist/wishlist.fetch";
 import DeleteWishlist from "./../../store/actions/Wishlist/wishlist.delete";
 
@@ -8,33 +8,37 @@ const ProductTable = lazy(() =>
   import("../../components/ProductTable/ProductTable")
 );
 
-const Wishlist = () => {
-  const wishlist = useSelector((state) => state.wishlist.wishlistItems);
-  const dispatch = useDispatch();
-  const [data, setData] = useState(wishlist);
-
+const Wishlist = (props) => {
   useEffect(() => {
-    setData(wishlist);
-  }, [wishlist]);
-
-  useEffect(() => {
-    getWishList();
+    props.getWishList();
   }, []);
-
-  const getWishList = () => dispatch(WishlistData());
 
   return (
     <>
       <Suspense fallback={<Spinner />}>
         <ProductTable
-          removeFunction={(id) => dispatch(DeleteWishlist(id))}
-          items={data}
+          removeFunction={(id) => props.deleteWishList(id)}
+          items={props.wishlistItems}
           wishlist
-          refresh={getWishList}
+          refresh={props.getWishList}
         />
       </Suspense>
     </>
   );
 };
 
-export default Wishlist;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    ...state.wishlist,
+    ...ownProps,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getWishList: () => dispatch(WishlistData()),
+    deleteWishList: (id) => dispatch(DeleteWishlist(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wishlist);

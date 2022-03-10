@@ -81,7 +81,7 @@ const ProductsContainer = ({
     } else {
       return sortingData(type, data).map((product, index) => {
         return (
-          <div className={"col-lg-3 col-md-4 col-xs-12 col-6"}>
+          <div className={"col"}>
             {
               <ProductCard
                 key={index}

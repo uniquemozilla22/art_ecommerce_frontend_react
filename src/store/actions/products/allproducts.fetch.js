@@ -6,7 +6,6 @@ import WishlistData from "./../Wishlist/wishlist.fetch";
 
 const FetchAllProducts = () => {
   return (dispatch, getState) => {
-    dispatch(WishlistData());
     dispatch(showLoading());
     fetch()
       .then((res) => {

@@ -4,12 +4,14 @@ import {
   PRODUCT_BY_CATEGORIES,
   FILTER_DATA_PRICE,
   FETCH_WISHLIST,
+  TRENDING_AUCTION_FETCH,
 } from "../actions/Types/Types";
 
 let initialState = {
   all: null,
   single: null,
   category: null,
+  trendingAuctions: null,
 };
 
 let ProductReducer = (state = initialState, action) => {
@@ -34,6 +36,13 @@ let ProductReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.payload,
+      };
+    }
+
+    case TRENDING_AUCTION_FETCH: {
+      return {
+        ...state,
+        trendingAuctions: action.payload,
       };
     }
 

@@ -1,6 +1,7 @@
 import {
   FETCH_EDIT_PROFILE,
   LOGIN_MODAL,
+  TOOGLE_LIKE_ON_PRODUCT,
   UPDATE__PROFILE,
   USER_LOGOUT,
   USER_REGISTER,
@@ -10,6 +11,7 @@ const initialState = {
   email: null,
   username: null,
   token: null,
+  likes: [],
   otherData: {},
 };
 
@@ -23,6 +25,7 @@ const UserReducer = (state = initialState, action) => {
         email: payload.email,
         username: payload.username,
         token: payload.token,
+        likes: payload.likes,
       };
     }
     case USER_LOGOUT: {
@@ -31,6 +34,8 @@ const UserReducer = (state = initialState, action) => {
         email: null,
         username: null,
         token: null,
+        likes: [],
+        otherData: {},
       };
     }
 
@@ -53,9 +58,29 @@ const UserReducer = (state = initialState, action) => {
       };
     }
 
+    case TOOGLE_LIKE_ON_PRODUCT: {
+      if (state.likes.includes(payload)) {
+        let updatedLike = removeLike(state.likes, payload);
+        return { ...state, likes: updatedLike };
+      } else {
+        let updatedLike = addLike(state.likes, payload);
+        return { ...state, likes: updatedLike };
+      }
+    }
+
     default:
       return state;
   }
+};
+
+const removeLike = (likes, id) => {
+  const filteredItems = likes.filter((item) => item !== id);
+  return filteredItems;
+};
+
+const addLike = (likes, id) => {
+  likes.push(id);
+  return likes;
 };
 
 export default UserReducer;

@@ -7,6 +7,9 @@ import { Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import AddCartItem from "../../store/actions/Cart/AddItem.post";
+import { Favorite } from "@mui/icons-material";
+import toggleLikeOnProduct from "../../store/actions/Likes/likesOnPorducts";
+import isLikedByUser from "../../store/actions/Likes/isLiked.check";
 
 export const ProductInformation = (props) => {
   const dispatch = useDispatch();
@@ -14,16 +17,27 @@ export const ProductInformation = (props) => {
     id,
     productData,
     supplier,
-    time,
-    auction,
     category,
-    delay,
-    currentBid,
     likes,
     tags,
+    removeFromWishList,
+    AddToWishList,
+    isOnWishList,
   } = props;
 
   const token = useSelector((state) => state.user.token);
+
+  const [likeCount, setLikeCount] = useState(likes);
+
+  const isLikedAction = () => dispatch(isLikedByUser(id));
+
+  const [isLiked, setIsLiked] = useState(isLikedAction);
+
+  const toggleLike = (id) => {
+    dispatch(toggleLikeOnProduct(id));
+    setIsLiked(!isLiked);
+    isLiked ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
+  };
   return (
     <div className={"row " + classes.product__information__container}>
       <div
@@ -68,9 +82,10 @@ export const ProductInformation = (props) => {
               <h2>NPR. {productData.unit_price}</h2>
               {productData.description ? productData.description : null}
             </div>
-            <div className={classes.like__container}>
-              <FeatherIcon icon="heart" />
-              <p>{likes}</p>
+            <div className={classes.like__container} 
+                onClick={token ? (e) => toggleLike(id) : null}>
+              {isLiked ? <Favorite /> : <FeatherIcon icon="heart" />}
+              <p>{likeCount}</p>
             </div>
             {token ? (
               <div className={classes.buttons__container}>
@@ -81,13 +96,24 @@ export const ProductInformation = (props) => {
                   <FeatherIcon icon="shopping-cart" />
                   <p>Add to cart</p>
                 </div>
-                <div
-                  className={classes.add_to_wishlist}
-                  onClick={(e) => console.log("Added to Cart")}
-                >
-                  <FeatherIcon icon="heart" />
-                  <p>Wishlist</p>
-                </div>
+
+                {isOnWishList ? (
+                  <div
+                    className={classes.add_to_wishlist}
+                    onClick={(e) => removeFromWishList()}
+                  >
+                    <Favorite />
+                    <p>Remove from Wishlist</p>
+                  </div>
+                ) : (
+                  <div
+                    className={classes.add_to_wishlist}
+                    onClick={(e) => AddToWishList(id)}
+                  >
+                    <FeatherIcon icon="heart" />
+                    <p>Wishlist</p>
+                  </div>
+                )}
               </div>
             ) : null}
 
@@ -130,7 +156,9 @@ export const ProductInformation = (props) => {
 };
 
 export const BiddingInformation = (props) => {
-  const {
+  const dispatch = useDispatch();
+
+  let {
     id,
     productData,
     supplier,
@@ -141,9 +169,24 @@ export const BiddingInformation = (props) => {
     currentBid,
     likes,
     tags,
+    removeFromWishList,
+    AddToWishList,
+    isOnWishList,
   } = props;
   const tokens = useSelector((state) => state.user.token);
   const [token, setToken] = useState(tokens);
+
+  const [likeCount, setLikeCount] = useState(likes);
+
+  const isLikedAction = () => dispatch(isLikedByUser(id));
+
+  const [isLiked, setIsLiked] = useState(isLikedAction);
+
+  const toggleLike = (id) => {
+    dispatch(toggleLikeOnProduct(id));
+    setIsLiked(!isLiked);
+    isLiked ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
+  };
 
   useEffect(() => {
     setToken(tokens);
@@ -268,17 +311,32 @@ export const BiddingInformation = (props) => {
               </p>
             </div>
             <div className={classes.buttons__container}>
-              <div className={classes.like__container}>
-                <FeatherIcon icon="heart" />
-                <p>{likes}</p>
-              </div>
               <div
-                className={classes.add_to_wishlist}
-                onClick={(e) => console.log("Added to Cart")}
+                className={classes.like__container}
+                onClick={token ? (e) => toggleLike(id) : null}
               >
-                <FeatherIcon icon="heart" />
-                <p>Wishlist</p>
+                {isLiked ? <Favorite /> : <FeatherIcon icon="heart" />}
+                <p>{likeCount}</p>
               </div>
+              {token ? (
+                isOnWishList ? (
+                  <div
+                    className={classes.add_to_wishlist}
+                    onClick={(e) => removeFromWishList()}
+                  >
+                    <Favorite />
+                    <p>Remove from Wishlist</p>
+                  </div>
+                ) : (
+                  <div
+                    className={classes.add_to_wishlist}
+                    onClick={(e) => AddToWishList(id)}
+                  >
+                    <FeatherIcon icon="heart" />
+                    <p>Wishlist</p>
+                  </div>
+                )
+              ) : null}
             </div>
 
             <hr />

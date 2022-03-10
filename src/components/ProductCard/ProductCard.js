@@ -31,7 +31,7 @@ const BiddingCard = (props) => {
     });
   };
   const dispatch = useDispatch();
-  const { id, productData, supplier, time, auction, category, delay } = props;
+  const { id, productData, time, delay } = props;
 
   const isOnWishlist = () => dispatch(isWishlist(id));
 
@@ -141,11 +141,8 @@ const BiddingCard = (props) => {
                   <button
                     className={classes.button}
                     onClick={(e) => AddToWishList(id)}
-
                   >
-                    <FavoriteBorderOutlined
-                      fontSize="small"
-                    />
+                    <FavoriteBorderOutlined fontSize="small" />
                     Add to Wishlist
                   </button>
                 )
@@ -165,7 +162,12 @@ const BiddingCard = (props) => {
           <Modal.Title id="contained-modal-title-vcenter"> </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <BiddingInformation {...props} />
+          <BiddingInformation
+            {...props}
+            removeFromWishList={removeFromWishList}
+            AddToWishList={AddToWishList}
+            isOnWishList={isOnWishList}
+          />
         </Modal.Body>
       </Modal>
     </>
@@ -188,7 +190,7 @@ const ProductCard = (props) => {
   const goToProduct = (id) => {
     navigate(`/products/${id}`);
   };
-  const { id, productData, supplier, time, auction, category, delay } = props;
+  const { id, productData, delay } = props;
 
   const isOnWishlist = () => dispatch(isWishlist(id));
 
@@ -339,7 +341,12 @@ const ProductCard = (props) => {
           <Modal.Title id="contained-modal-title-vcenter"> </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ProductInformation {...props} />
+          <ProductInformation
+            {...props}
+            removeFromWishList={removeFromWishList}
+            AddToWishList={AddToWishList}
+            isOnWishList={isOnWishList}
+          />
         </Modal.Body>
       </Modal>
     </>

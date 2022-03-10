@@ -11,42 +11,9 @@ import artist3 from "../Assets/artist3.png";
 import FeaturedArtistSection from "../components/FeaturedArtistSection/FeaturedArtistSection";
 import MasonrySection from "../components/MasonrySection/MasonrySection";
 import Fade from "react-reveal/Fade";
+import TrendingAuction from "../components/TrendingAuction/TrendingAuction";
 const Home = () => {
-  const data = [
-    {
-      id: 1,
-      name: "One",
-      description: "this is the description for One",
-      image: art1,
-      price: 3000,
-      time: "Jan 27, 2022 15:37:25",
-    },
-    {
-      id: 2,
-      name: "Two",
-      description: "this is the description for Two",
-      image: art2,
-      price: 6000,
-      time: "Jan 26, 2022 15:37:25",
-    },
-    {
-      id: 3,
-      name: "Three",
-      description: "this is the description for Three",
-      image: art3,
-      price: 6000,
-      time: "Jan 26, 2022 15:37:25",
-    },
-    {
-      id: 4,
-      name: "Four",
-      description: "this is the description for Four",
-      image: art1,
-      price: 6000,
-      time: "Jan 26, 2022 15:37:25",
-    },
-  ];
-  const [trendingAuctions, setTrendingAuctions] = useState(data);
+  const [trendingAuctions, setTrendingAuctions] = useState([]);
 
   const [featuredArtist, setFeaturedArtist] = useState([
     {
@@ -77,7 +44,7 @@ const Home = () => {
       <Fade>
         <Banner />
       </Fade>
-      <ProductSection title={"Trending Auction"} products={trendingAuctions} />
+      {/* <TrendingAuction /> */}
       <Fade cascade>
         <ArtistSection
           artistName={"Picasso Pablo"}

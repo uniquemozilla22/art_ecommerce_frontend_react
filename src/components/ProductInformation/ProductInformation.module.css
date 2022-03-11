@@ -2,6 +2,24 @@
   align-items: center;
 }
 
+.product__information__container .bid__form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product__information__container .bid__form input {
+  transition: width 0.5s ease-in;
+}
+
+.product__information__container .bid__form input[type="submit"] {
+  margin-left: 1rem;
+  color: #eef2ff;
+  background: #676fa3;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+}
+
 .product__information__container .image__container img {
   width: 100%;
   border-radius: 20px;
@@ -77,20 +95,24 @@
   color: #a4a4a4;
 }
 
-.product__information__container .product__info h1 {
+.product__info {
+  margin: 1rem 0;
+}
+
+.product__info h1 {
   font-weight: 600;
   font-size: 40px;
   color: #000000;
 }
 
-.product__information__container .product__info h2 {
+.product__info h2 {
   font-weight: 500;
   font-size: 20px;
   line-height: 30px;
   color: #000000;
 }
 
-.product__information__container .product__info p {
+.product__info p {
   font-weight: 300;
   font-size: 16px;
   color: #000000;
@@ -226,10 +248,17 @@
   font-style: italic;
 }
 .product__information__container .bidding__container .form__selection {
-  background-color: #676fa3;
-  color: #f8f8f2 !important;
+  border-color: #676fa3;
+  color: #676fa3 !important;
   border-radius: 20px;
   padding: 10px 20px;
+}
+
+.product__information__container
+  .bidding__container
+  .form__selection::placeholder {
+  color: #676fa3;
+  font-size: 12px;
 }
 .product__information__container .bidding__container .form__selection option {
   padding: 5px 20px;

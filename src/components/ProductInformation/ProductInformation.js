@@ -7,9 +7,10 @@ import { Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import AddCartItem from "../../store/actions/Cart/AddItem.post";
-import { Favorite } from "@mui/icons-material";
+import { Favorite, ThumbUp, ThumbUpAltOutlined } from "@mui/icons-material";
 import toggleLikeOnProduct from "../../store/actions/Likes/likesOnPorducts";
 import isLikedByUser from "../../store/actions/Likes/isLiked.check";
+import { WarningMessage } from "../../store/actions/Message/Message";
 
 export const ProductInformation = (props) => {
   const dispatch = useDispatch();
@@ -80,18 +81,31 @@ export const ProductInformation = (props) => {
             <div className={classes.product__info}>
               <h1>{productData.name}</h1>
               <h2>NPR. {productData.unit_price}</h2>
-              {productData.description ? productData.description : null}
+              <p>{productData.description ? productData.description : null}</p>
             </div>
-            <div className={classes.like__container} 
-                onClick={token ? (e) => toggleLike(id) : null}>
-              {isLiked ? <Favorite /> : <FeatherIcon icon="heart" />}
+            <div
+              className={classes.like__container}
+              onClick={token ? (e) => toggleLike(id) : null}
+            >
+              {isLiked ? <ThumbUp /> : <ThumbUpAltOutlined />}
+
               <p>{likeCount}</p>
             </div>
             {token ? (
               <div className={classes.buttons__container}>
                 <div
                   className={classes.add_to_cart}
-                  onClick={(e) => dispatch(AddCartItem())}
+                  onClick={(e) =>
+                    dispatch(
+                      AddCartItem({
+                        id,
+                        image_url: productData.image_url,
+                        name: productData.name,
+                        unit_price: productData.unit_price,
+                        description: productData.description,
+                      })
+                    )
+                  }
                 >
                   <FeatherIcon icon="shopping-cart" />
                   <p>Add to cart</p>
@@ -188,6 +202,25 @@ export const BiddingInformation = (props) => {
     isLiked ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
   };
 
+  const [bidAmount, setBidAmount] = useState(0);
+  const [showSubmit, setShowSubmit] = useState(0);
+
+  const handleChange = (e) => {
+    setBidAmount(e.target.value);
+  };
+
+  const onSubmitBidAmount = (e) => {
+    e.preventDefault();
+    if (bidAmount <= productData.unit_price) {
+      dispatch(
+        WarningMessage({
+          message: "Bid cannot be less than or equal to the current price.",
+        })
+      );
+    } else {
+    }
+  };
+
   useEffect(() => {
     setToken(tokens);
   }, [tokens]);
@@ -269,7 +302,7 @@ export const BiddingInformation = (props) => {
                   <p>
                     Current Bid:
                     <span>
-                      NPR. 14000
+                      {productData.unit_price}
                       <div className={classes.currentHighBidder}>
                         {currentBid?.image ? (
                           <img
@@ -295,15 +328,20 @@ export const BiddingInformation = (props) => {
               <p>
                 Choose your Maximum Bid* <span>How Bidding Works ?</span>
               </p>
-              <Form.Select size="md" className={classes.form__selection}>
-                <option>14000</option>
-                <option>15000</option>
-                <option>16000</option>
-                <option>17000</option>
-                <option>18000</option>
-                <option>19000</option>
-                <option>20000</option>
-              </Form.Select>
+              <form onSubmit={onSubmitBidAmount} className={classes.bid__form}>
+                <Form.Control
+                  size="md"
+                  type="number"
+                  min={productData.unit_price}
+                  className={classes.form__selection}
+                  placeholder={"Enter amount to bid"}
+                  onChange={(e) => handleChange(e)}
+                  onBlur={(e) => setShowSubmit(false)}
+                  onFocusCapture={(e) => setShowSubmit(true)}
+                />
+                <input type="submit" className={showSubmit ? null : "d-none"} />
+              </form>
+
               <p>
                 This amount excludes shipping fees, applicable taxes, and will
                 have a Buyer's Premium based on the hammer price of the lot:
@@ -315,7 +353,7 @@ export const BiddingInformation = (props) => {
                 className={classes.like__container}
                 onClick={token ? (e) => toggleLike(id) : null}
               >
-                {isLiked ? <Favorite /> : <FeatherIcon icon="heart" />}
+                {isLiked ? <ThumbUp /> : <ThumbUpAltOutlined />}
                 <p>{likeCount}</p>
               </div>
               {token ? (

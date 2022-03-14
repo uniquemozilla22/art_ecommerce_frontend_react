@@ -13,6 +13,7 @@ const initialState = {
   token: null,
   likes: [],
   otherData: {},
+  balance: 999999,
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -38,7 +39,6 @@ const UserReducer = (state = initialState, action) => {
         otherData: {},
       };
     }
-
     case FETCH_EDIT_PROFILE: {
       return {
         ...state,
@@ -47,7 +47,6 @@ const UserReducer = (state = initialState, action) => {
         username: payload.username,
       };
     }
-
     case UPDATE__PROFILE: {
       return {
         ...state,
@@ -57,7 +56,6 @@ const UserReducer = (state = initialState, action) => {
         },
       };
     }
-
     case TOOGLE_LIKE_ON_PRODUCT: {
       if (state.likes.includes(payload)) {
         let updatedLike = removeLike(state.likes, payload);

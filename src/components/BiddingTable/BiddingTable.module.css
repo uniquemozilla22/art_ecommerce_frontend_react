@@ -1,0 +1,9 @@
+.bids__container {
+  margin: 5rem 0;
+}
+
+.bids__container .title {
+  font-weight: 800;
+  font-size: 34px;
+}
+

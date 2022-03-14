@@ -11,13 +11,18 @@ import {
   SettingsVoice,
   FavoriteOutlined,
   FavoriteBorderOutlined,
+  VerifiedUserOutlined,
+  AccountCircleOutlined,
 } from "@mui/icons-material";
 import classes from "./ActionIcon.module.css";
 import { Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import CardBalance from "./Card/Card";
 
 const ActionIcons = (props) => {
   const [token, setToken] = useState(props.loggedIn);
+
+  console.log(props);
 
   useEffect(() => {
     setToken(props.loggedIn);
@@ -53,7 +58,7 @@ const ActionIcons = (props) => {
               onClick={() => props.toggleCart()}
             />
           </Tooltip>
-          <Dropdown>
+          <Dropdown className={classes.dropdown___link}>
             <Dropdown.Toggle
               id="dropdown-autoclose-true"
               className={classes.profileButton}
@@ -64,15 +69,29 @@ const ActionIcons = (props) => {
               </Tooltip>
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="#">
+              <Dropdown.Item disabled>
+                <CardBalance
+                  balance={props.user.balance}
+                  email={props.user.email}
+                />
+              </Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item>
                 <ListAltTwoTone /> Orders
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link to="/editprofile" className={classes.dropdown__link}>
+                <Link to="/mybids" className={classes.dropdown__link}>
                   <RemoveRedEyeOutlined />
-                  View Profile
+                  My Bids
                 </Link>
               </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to="/editprofile" className={classes.dropdown__link}>
+                  <AccountCircleOutlined />
+                  Profile
+                </Link>
+              </Dropdown.Item>
+
               <Dropdown.Item onClick={(e) => props.Logout()}>
                 <LogoutOutlined /> Logout
               </Dropdown.Item>

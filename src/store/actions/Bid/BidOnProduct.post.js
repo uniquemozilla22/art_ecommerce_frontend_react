@@ -1,14 +1,34 @@
 import axiosBase from "../../../axiosBase";
 import { hideLoading, showLoading } from "../Loading/Loading";
-import { SuccessMessage } from "../Message/Message";
+import {
+  ErrorMessage,
+  SuccessMessage,
+  WarningMessage,
+} from "../Message/Message";
 
 const BidOnProduct = (auction_id, price) => {
   return (dispatch, getState) => {
     dispatch(showLoading);
-    postAmount(auction_id, price, getState().user.token).then((res) => {
-      dispatch(hideLoading());
-      dispatch(SuccessMessage({ message: res.data.message }));
-    });
+    postAmount(auction_id, price, getState().user.token)
+      .then((res) => {
+        dispatch(hideLoading());
+        dispatch(SuccessMessage({ message: res.data.message }));
+      })
+      .catch((err) => {
+        dispatch(hideLoading());
+        if (err.response === undefined) {
+          dispatch(
+            ErrorMessage({
+              message: "Network Error! Check Your Internet Connection",
+            })
+          );
+        }
+        if (err.response.status === 400) {
+          dispatch(WarningMessage({ message: err.response.data.message }));
+        } else {
+          dispatch(ErrorMessage({ message: err.response.data.message }));
+        }
+      });
   };
 };
 

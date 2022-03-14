@@ -275,6 +275,10 @@
   padding: 5px 10px;
 }
 
+.product__information__container .product__info .currentHighBidder p {
+  margin: 0;
+}
+
 .product__information__container .product__info .bidding__information p span {
   font-weight: 500;
   text-align: end;

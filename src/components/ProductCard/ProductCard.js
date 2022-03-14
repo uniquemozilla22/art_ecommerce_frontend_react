@@ -3,9 +3,7 @@ import classes from "./ProductCard.module.css";
 import { Card, Modal } from "react-bootstrap";
 import {
   Favorite,
-  FavoriteBorder,
   FavoriteBorderOutlined,
-  MonitorHeartOutlined,
   RemoveRedEyeOutlined,
   ShoppingCartCheckoutOutlined,
 } from "@mui/icons-material";
@@ -162,12 +160,7 @@ const BiddingCard = (props) => {
           <Modal.Title id="contained-modal-title-vcenter"> </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <BiddingInformation
-            {...props}
-            removeFromWishList={removeFromWishList}
-            AddToWishList={AddToWishList}
-            isOnWishList={isOnWishList}
-          />
+          <BiddingInformation {...props} />
         </Modal.Body>
       </Modal>
     </>
@@ -343,9 +336,6 @@ const ProductCard = (props) => {
         <Modal.Body>
           <ProductInformation
             {...props}
-            removeFromWishList={removeFromWishList}
-            AddToWishList={AddToWishList}
-            isOnWishList={isOnWishList}
           />
         </Modal.Body>
       </Modal>

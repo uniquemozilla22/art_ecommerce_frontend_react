@@ -23,6 +23,7 @@ import ForgotPassword from "./pages/forgetPassword/ForgetPassword";
 import ConfirmEmail from "./pages/Confirm_email/Confirm_email";
 import Category from "./pages/Category/Category";
 import Wishlist from "./pages/wishlist/Wishlist.page";
+import MyBids from "./pages/mybids/MyBids.page";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
             element={<ForgotPassword />}
           />
           <Route path="/auth/confirm/:token" element={<ConfirmEmail />} />
+          <Route path="/mybids" element={<MyBids />} />
         </Routes>
       </Layout>
     </div>

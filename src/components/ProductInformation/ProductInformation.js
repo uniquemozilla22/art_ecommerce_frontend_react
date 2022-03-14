@@ -11,20 +11,13 @@ import { Favorite, ThumbUp, ThumbUpAltOutlined } from "@mui/icons-material";
 import toggleLikeOnProduct from "../../store/actions/Likes/likesOnPorducts";
 import isLikedByUser from "../../store/actions/Likes/isLiked.check";
 import { WarningMessage } from "../../store/actions/Message/Message";
+import AddWishlistItem from "./../../store/actions/Wishlist/wishlistItem.post";
+import isWishlist from "../../store/actions/Wishlist/isWishlist.check";
+import BidOnProduct from "../../store/actions/Bid/BidOnProduct.post";
 
 export const ProductInformation = (props) => {
   const dispatch = useDispatch();
-  const {
-    id,
-    productData,
-    supplier,
-    category,
-    likes,
-    tags,
-    removeFromWishList,
-    AddToWishList,
-    isOnWishList,
-  } = props;
+  const { id, productData, supplier, category, likes, tags } = props;
 
   const token = useSelector((state) => state.user.token);
 
@@ -38,6 +31,20 @@ export const ProductInformation = (props) => {
     dispatch(toggleLikeOnProduct(id));
     setIsLiked(!isLiked);
     isLiked ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
+  };
+
+  const isOnWishlist = () => dispatch(isWishlist(id));
+
+  const [isOnWishList, setIsOnWishList] = useState(isOnWishlist());
+
+  const removeFromWishList = () => {
+    dispatch(AddWishlistItem(id));
+    setIsOnWishList(false);
+  };
+
+  const AddToWishList = (id) => {
+    dispatch(AddWishlistItem(id));
+    setIsOnWishList(true);
   };
   return (
     <div className={"row " + classes.product__information__container}>
@@ -183,9 +190,6 @@ export const BiddingInformation = (props) => {
     currentBid,
     likes,
     tags,
-    removeFromWishList,
-    AddToWishList,
-    isOnWishList,
   } = props;
   const tokens = useSelector((state) => state.user.token);
   const [token, setToken] = useState(tokens);
@@ -203,7 +207,7 @@ export const BiddingInformation = (props) => {
   };
 
   const [bidAmount, setBidAmount] = useState(0);
-  const [showSubmit, setShowSubmit] = useState(0);
+  const [showSubmit, setShowSubmit] = useState(false);
 
   const handleChange = (e) => {
     setBidAmount(e.target.value);
@@ -218,9 +222,22 @@ export const BiddingInformation = (props) => {
         })
       );
     } else {
+      dispatch(BidOnProduct(auction.id, bidAmount));
     }
   };
+  const isOnWishlist = () => dispatch(isWishlist(id));
 
+  const [isOnWishList, setIsOnWishList] = useState(isOnWishlist());
+
+  const removeFromWishList = () => {
+    dispatch(AddWishlistItem(id));
+    setIsOnWishList(false);
+  };
+
+  const AddToWishList = (id) => {
+    dispatch(AddWishlistItem(id));
+    setIsOnWishList(true);
+  };
   useEffect(() => {
     setToken(tokens);
   }, [tokens]);
@@ -296,13 +313,13 @@ export const BiddingInformation = (props) => {
                   </span>
                 </p>
                 <p>
-                  Started At:<span> NPR.{auction.start_price}</span>
+                  Started At:<span> NRS .{auction.start_price}</span>
                 </p>
                 {currentBid ? (
                   <p>
                     Current Bid:
                     <span>
-                      {productData.unit_price}
+                      NRS .{currentBid.price}
                       <div className={classes.currentHighBidder}>
                         {currentBid?.image ? (
                           <img
@@ -324,30 +341,37 @@ export const BiddingInformation = (props) => {
                 <p>{productData.description}</p>
               ) : null}
             </div>
-            <div className={classes.bidding__container}>
-              <p>
-                Choose your Maximum Bid* <span>How Bidding Works ?</span>
-              </p>
-              <form onSubmit={onSubmitBidAmount} className={classes.bid__form}>
-                <Form.Control
-                  size="md"
-                  type="number"
-                  min={productData.unit_price}
-                  className={classes.form__selection}
-                  placeholder={"Enter amount to bid"}
-                  onChange={(e) => handleChange(e)}
-                  onBlur={(e) => setShowSubmit(false)}
+            {token ? (
+              <div className={classes.bidding__container}>
+                <p>
+                  Choose your Maximum Bid* <span>How Bidding Works ?</span>
+                </p>
+                <form
+                  onSubmit={onSubmitBidAmount}
+                  className={classes.bid__form}
                   onFocusCapture={(e) => setShowSubmit(true)}
-                />
-                <input type="submit" className={showSubmit ? null : "d-none"} />
-              </form>
+                >
+                  <Form.Control
+                    size="md"
+                    type="number"
+                    min={productData.unit_price}
+                    className={classes.form__selection}
+                    placeholder={"Enter amount to bid"}
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <input
+                    type="submit"
+                    className={showSubmit ? null : "d-none"}
+                  />
+                </form>
 
-              <p>
-                This amount excludes shipping fees, applicable taxes, and will
-                have a Buyer's Premium based on the hammer price of the lot:
-                Buyer's Premium.
-              </p>
-            </div>
+                <p>
+                  This amount excludes shipping fees, applicable taxes, and will
+                  have a Buyer's Premium based on the hammer price of the lot:
+                  Buyer's Premium.
+                </p>
+              </div>
+            ) : null}
             <div className={classes.buttons__container}>
               <div
                 className={classes.like__container}

@@ -6,14 +6,13 @@ const CardBalance = ({ balance, email }) => {
   return (
     <>
       <div className={classes.balance__container}>
-        <p>Your Balance</p>
         <div className={classes.avatar}>
-          <Avatar>{email.charAt(0).toUpperCase()}</Avatar>
-          <div>
-            <p>{email.split("@")[0]}</p>
+          <Avatar>{email?.charAt(0).toUpperCase()}</Avatar>
+          <div className={classes.content__container}>
             <p>
               <span>{balance.toLocaleString("hi-IN")}</span>
             </p>
+            <p>{email?.split("@")[0]}</p>
           </div>
         </div>
       </div>

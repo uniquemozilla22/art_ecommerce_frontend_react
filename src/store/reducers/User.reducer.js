@@ -37,6 +37,7 @@ const UserReducer = (state = initialState, action) => {
         token: null,
         likes: [],
         otherData: {},
+        balance: 0,
       };
     }
     case FETCH_EDIT_PROFILE: {

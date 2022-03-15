@@ -15,34 +15,64 @@ const BiddingItem = ({
   price,
   currentBid,
 }) => {
-  const [times, setTimes] = useState("0");
+  const [days, setDays] = useState(null);
+  const [hours, setHours] = useState(null);
+  const [mins, setMins] = useState(null);
+  const [sec, setSec] = useState(null);
+
   const time = setInterval(() => {
     // Get today's date and time
     let now = new Date().getTime();
     // Find the distance between now and the count down date
     let distance = new Date(auction?.expiration_date).getTime() - now;
-
     // Time calculations for days, hours, minutes and seconds
     // Time calculations for days, hours, minutes and seconds
-    let days =
-      (Math.floor(distance / (1000 * 60 * 60 * 24)) > 0
+    setDays(
+      Math.floor(distance / (1000 * 60 * 60 * 24)) > 0
         ? Math.floor(distance / (1000 * 60 * 60 * 24))
-        : 0) + " days ";
-    let hours =
-      (Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) > 0
-        ? Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-        : 0) + " hours ";
-    let minutes =
-      (Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) > 0
-        ? Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-        : 0) + " min ";
-    let seconds =
-      (Math.floor((distance % (1000 * 60)) / 1000) > 0
-        ? Math.floor((distance % (1000 * 60)) / 1000)
-        : 0) + " sec ";
+        : null
+    );
 
-    setTimes(days + hours + minutes + seconds);
+    setHours(
+      Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) > 0
+        ? Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        : null
+    );
+    setMins(
+      Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) > 0
+        ? Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+        : null
+    );
+    setSec(
+      Math.floor((distance % (1000 * 60)) / 1000) > 0
+        ? Math.floor((distance % (1000 * 60)) / 1000)
+        : null
+    );
   }, 1000);
+
+  const timed = (days, mins, hour, sec) => {
+    if (days) {
+      days = days + " d ";
+    } else {
+      days = "";
+    }
+    if (mins) {
+      mins = mins + " m ";
+    } else {
+      mins = "";
+    }
+    if (hour) {
+      hour = hour + " h ";
+    } else {
+      hour = "";
+    }
+    if (sec) {
+      sec = sec + " s ";
+    } else {
+      sec = 0;
+    }
+    return days + hour + mins + sec;
+  };
 
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -83,24 +113,33 @@ const BiddingItem = ({
             <Link to={`/category/${category.id}`}>{category.name}</Link>
           </div>
         </div>
+        <div className={classes.highest__avatar}>
+          <p className={classes.title}>Highest</p>
+          <Avatar style={{ height: "30px", width: "30px" }}>
+            {currentBid.first_name.charAt(0)}
+          </Avatar>
+          <p>{currentBid.first_name + " " + currentBid.last_name.charAt(0)}.</p>
+        </div>
         <div className={classes.status__container}>
-          <div className={classes.highest__avatar}>
-            <Avatar>{currentBid.first_name.charAt(0)}</Avatar>
-            <p>
-              {currentBid.first_name + " " + currentBid.last_name.charAt(0)}.
-            </p>
-          </div>
-          <p>{times}</p>
+          <p>
+            Current
+            <span> {currentBid.price.toLocaleString("en-IN")}</span>
+          </p>
+
+          <p className={classes.time}>{timed(days, mins, hours, sec)}</p>
         </div>
         <div className={classes.actions__container}>
           <p>
-            <span>Your Bid :</span> NRS.{price}
+            Your Bid<span> {price.toLocaleString("en-IN")}</span>
           </p>
           <div className={classes.icons__container + " d-none d-lg-flex"}>
             <Tooltip title={"See " + data.name}>
               <RemoveRedEyeSharp size="sm" onClick={(e) => gotoNavigation()} />
             </Tooltip>
-            <Tooltip title={"See " + data.name} onClick={(e) => showModel()}>
+            <Tooltip
+              title={"Add Bid Amount to " + data.name}
+              onClick={(e) => showModel()}
+            >
               <Add size="sm" />
             </Tooltip>
           </div>
@@ -124,8 +163,10 @@ const BiddingItem = ({
         className={classes.model}
       >
         <div className={classes.bidding__container}>
+          <h5>Add Amount</h5>
           <p>
-            Choose your Maximum Bid* <span>How Bidding Works ?</span>
+            Add the amount to your previous bid *
+            <span>How Bidding Works ?</span>
           </p>
           <form onSubmit={onSubmitBidAmount} className={classes.bid__form}>
             <Form.Control
@@ -133,7 +174,7 @@ const BiddingItem = ({
               type="number"
               min={currentBid.price}
               className={classes.form__selection}
-              placeholder={"Enter amount to bid"}
+              placeholder={"Add amount to increase Bid"}
               onChange={(e) => handleChange(e)}
             />
             <input type="submit" />

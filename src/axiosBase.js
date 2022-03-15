@@ -1,5 +1,4 @@
 import axios from "axios";
-import store from "./store/store";
 
 const base = "http://localhost:4000/";
 

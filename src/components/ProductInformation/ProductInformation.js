@@ -242,26 +242,65 @@ export const BiddingInformation = (props) => {
     setToken(tokens);
   }, [tokens]);
 
-  // Get today's date and time
-  let now = new Date().getTime();
+  const [days, setDays] = useState(null);
+  const [hours, setHours] = useState(null);
+  const [mins, setMins] = useState(null);
+  const [sec, setSec] = useState(null);
 
-  // Find the distance between now and the count down date
-  let distance = new Date(time).getTime() - now;
+  const timedInteval = setInterval(() => {
+    // Get today's date and time
+    let now = new Date().getTime();
+    // Find the distance between now and the count down date
+    let distance = new Date(auction?.expiration_date).getTime() - now;
+    // Time calculations for days, hours, minutes and seconds
+    // Time calculations for days, hours, minutes and seconds
+    setDays(
+      Math.floor(distance / (1000 * 60 * 60 * 24)) > 0
+        ? Math.floor(distance / (1000 * 60 * 60 * 24))
+        : null
+    );
 
-  // Time calculations for days, hours, minutes and seconds
-  let days =
-    Math.floor(distance / (1000 * 60 * 60 * 24)) > 0
-      ? Math.floor(distance / (1000 * 60 * 60 * 24)) + " days"
-      : 0;
-  let hours =
-    Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) > 0
-      ? Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) +
-        " hours"
-      : 0;
-  let minutes =
-    Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) > 0
-      ? Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) + " minutes"
-      : 0;
+    setHours(
+      Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) > 0
+        ? Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        : null
+    );
+    setMins(
+      Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) > 0
+        ? Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+        : null
+    );
+    setSec(
+      Math.floor((distance % (1000 * 60)) / 1000) > 0
+        ? Math.floor((distance % (1000 * 60)) / 1000)
+        : null
+    );
+  }, 1000);
+
+  const timed = (days, mins, hour, sec) => {
+    if (days) {
+      days = days + " d ";
+    } else {
+      days = "";
+    }
+    if (mins) {
+      mins = mins + " m ";
+    } else {
+      mins = "";
+    }
+    if (hour) {
+      hour = hour + " h ";
+    } else {
+      hour = "";
+    }
+    if (sec) {
+      sec = sec + " s ";
+    } else {
+      sec = 0;
+    }
+    return days + hour + mins + sec;
+  };
+
   return (
     <div className={"row " + classes.product__information__container}>
       <div
@@ -305,12 +344,7 @@ export const BiddingInformation = (props) => {
               <h1>{productData.name}</h1>
               <div className={classes.bidding__information}>
                 <p>
-                  Ending :
-                  <span>
-                    {days + hours + minutes === 0
-                      ? "Ended"
-                      : days + hours + minutes}
-                  </span>
+                  Ending :<span>{timed(days, mins, hours, sec)}</span>
                 </p>
                 <p>
                   Started At:<span> NRS .{auction.start_price}</span>

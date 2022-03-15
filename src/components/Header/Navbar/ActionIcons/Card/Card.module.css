@@ -13,6 +13,12 @@
   align-items: center;
 }
 
+.balance__container .content__container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
 .balance__container p {
   display: flex;
   flex-direction: column;

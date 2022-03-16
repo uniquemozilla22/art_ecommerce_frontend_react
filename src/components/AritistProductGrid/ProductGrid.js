@@ -5,20 +5,26 @@ import ProductCard from "../ProductCard/ProductCard";
 import { useDispatch } from "react-redux";
 import fetchLikedProducts from "../../store/actions/Authentication/LikedProducts/likedProducts.fetch";
 import DataNotFound from "../DataNotFound/DataNotFound";
-const ProductGrid = ({ arts }) => {
+import FetchAllBids from "../../store/actions/Bid/bid.fetch";
+const ProductGrid = ({ arts, bids }) => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   myLikedProducts();
-  // }, []);
+  useEffect(() => {
+    myLikedProducts();
+  }, []);
 
   const myLikedProducts = async () => {
     if (arts) {
       let likedproducts = await dispatch(await fetchLikedProducts());
       setData(likedproducts);
     }
+    if (bids) {
+      const fetch = await dispatch(FetchAllBids());
+      setData(fetch);
+    }
   };
+
   return (
     <Fade cascade>
       <div className={classes.product__grid__container}>
@@ -44,11 +50,17 @@ const ProductGrid = ({ arts }) => {
             ) : (
               <div className="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 <ProductCard
-                  name={product.name}
-                  id={product.id}
-                  image={product.image}
-                  price={product.price}
+                  key={index}
+                  id={product.data.id}
+                  productData={product.data}
+                  supplier={product.supplierInfo}
+                  time={product.auction?.expiration_date}
+                  auction={product.auction ? product.auction : null}
+                  category={product.category}
                   delay={index}
+                  currentBid={product.currentBid}
+                  likes={product.likesCount}
+                  tags={product.tags}
                 />
               </div>
             );

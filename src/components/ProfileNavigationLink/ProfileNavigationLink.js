@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import DetailsEditor from "../DetailsEditor/DetailsEditor";
 import classes from "./ProfileNavigationLink.module.css";
-import { useSpring, animated } from "react-spring";
 import { Fade } from "react-reveal";
 import OrderList from "../Profileproducts/OrderList";
 import ProductGrid from "../AritistProductGrid/ProductGrid";
 import ArtistsGrid from "../ArtistsGrid/ArtistsGrid";
 import SocialEditor from "../SocialEditor/SocialEditor";
+import DataNotFound from "../DataNotFound/DataNotFound";
+import { useLocation } from "react-router";
+import BiddingTable from "../BiddingTable/BiddingTable";
+import { useDispatch } from "react-redux";
+import FetchAllBids from "../../store/actions/Bid/bid.fetch";
 
 export const ProfileNavigationLink = ({ title, links }) => {
   return links ? (
@@ -41,6 +45,42 @@ export const ProfileNavigationContent = ({
   email,
   sendOTP,
 }) => {
+  const functionCreator = (link) => {
+    switch (link.title) {
+      case "My Profile" || "Address": {
+        return (
+          <DetailsEditor
+            data={link.data}
+            updateData={updateData}
+            postPassword={postPassword}
+            activeStatus={activeStatus}
+            email={email}
+            sendOTP={sendOTP}
+          />
+        );
+      }
+      case "Social":
+        return <SocialEditor data={link.data} />;
+      case "My Returns":
+        return <OrderList datas={link.data} />;
+      case "Cancellations":
+        return <OrderList datas={link.data} cancelled />;
+      case "My Arts":
+        return <ProductGrid arts />;
+      case "My Bids": {
+        return <ProductGrid bids />;
+      }
+      case "My Artists":
+        return <ArtistsGrid artists={link.data} />;
+      default:
+        return (
+          <DataNotFound
+            content="No Data Found"
+            action={() => useLocation.reload()}
+          />
+        );
+    }
+  };
 
   return links ? (
     links.map((link, index) => (
@@ -51,29 +91,7 @@ export const ProfileNavigationContent = ({
       >
         <h3>{link.title}</h3>
         <Fade cascade>
-          <animated.div className={classes.tab__container}>
-            {link.title === "My Profile" || link.title === "Address" ? (
-              <DetailsEditor
-                data={link.data}
-                updateData={updateData}
-                postPassword={postPassword}
-                activeStatus={activeStatus}
-                email={email}
-                sendOTP={sendOTP}
-              />
-            ) : null}
-            {link.title === "Social" ? <SocialEditor data={link.data} /> : null}
-            {link.title === "My Returns" ? (
-              <OrderList datas={link.data} />
-            ) : null}
-            {link.title === "Cancellations" ? (
-              <OrderList datas={link.data} cancelled />
-            ) : null}
-            {link.title === "My Arts" ? <ProductGrid arts /> : null}
-            {link.title === "My Artists" ? (
-              <ArtistsGrid artists={link.data} />
-            ) : null}
-          </animated.div>
+          <div className={classes.tab__container}>{functionCreator(link)}</div>
         </Fade>
       </Tab.Pane>
     ))

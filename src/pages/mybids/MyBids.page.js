@@ -6,7 +6,6 @@ import FetchAllBids from "../../store/actions/Bid/bid.fetch";
 
 const MyBids = () => {
   const [data, setData] = useState(null);
- 
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,11 +17,9 @@ const MyBids = () => {
     setData(fetch);
   };
 
-
   return (
     <div className="container">
       <BiddingTable data={data} />
-      
     </div>
   );
 };

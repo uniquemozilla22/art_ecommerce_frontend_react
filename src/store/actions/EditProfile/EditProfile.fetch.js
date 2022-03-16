@@ -1,13 +1,13 @@
 import axiosBase from "../../../axiosBase";
 import { store } from "../../store";
-import { hideLoading } from "../Loading/Loading";
+import { hideLoading, showLoading } from "../Loading/Loading";
 import { ErrorMessage, WarningMessage } from "../Message/Message";
 import { FETCH_EDIT_PROFILE } from "../Types/Types";
 
 const FetchEditProfiileData = () => {
-  return (dispatch) => {
-    const state = store.getState();
-    fetchData(state.user.token)
+  return (dispatch, getState) => {
+    dispatch(showLoading());
+    fetchData(getState().user.token)
       .then((res) => {
         dispatch(hideLoading());
 

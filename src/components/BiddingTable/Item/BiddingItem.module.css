@@ -8,6 +8,10 @@
   flex-wrap: wrap;
 }
 
+.bidding__component svg:hover {
+  color: #676fa3;
+}
+
 .highest__user {
   border: 2px solid lightgreen;
 }
@@ -83,6 +87,10 @@
 .actions__container p span {
   font-weight: 700;
   font-size: 1rem;
+}
+
+.actions__container svg {
+  cursor: pointer;
 }
 
 .status__container {

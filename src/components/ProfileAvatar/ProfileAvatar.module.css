@@ -37,7 +37,21 @@
   margin: 0 0.2rem;
   width: 24px;
 }
+.profile__avatar__container .credit__container {
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+}
 
+.profile__avatar__container .credit__container span {
+  display: flex;
+  margin-left: 1rem;
+}
+
+.profile__avatar__container .credit__container span:before {
+  content: " Nrs.";
+}
 @media screen and (max-width: 768px) {
   .profile__avatar__container img {
     height: 100px;

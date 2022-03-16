@@ -31,6 +31,65 @@ const BiddingCard = (props) => {
   const dispatch = useDispatch();
   const { id, productData, time, delay } = props;
 
+  const [days, setDays] = useState(null);
+  const [hours, setHours] = useState(null);
+  const [mins, setMins] = useState(null);
+  const [sec, setSec] = useState(null);
+
+  const timedInterval = setInterval(() => {
+    // Get today's date and time
+    let now = new Date().getTime();
+    // Find the distance between now and the count down date
+    let distance = new Date(time).getTime() - now;
+    // Time calculations for days, hours, minutes and seconds
+    // Time calculations for days, hours, minutes and seconds
+    setDays(
+      Math.floor(distance / (1000 * 60 * 60 * 24)) > 0
+        ? Math.floor(distance / (1000 * 60 * 60 * 24))
+        : null
+    );
+
+    setHours(
+      Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) > 0
+        ? Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        : null
+    );
+    setMins(
+      Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) > 0
+        ? Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+        : null
+    );
+    setSec(
+      Math.floor((distance % (1000 * 60)) / 1000) > 0
+        ? Math.floor((distance % (1000 * 60)) / 1000)
+        : null
+    );
+  }, 1000);
+
+  const timed = (days, mins, hour, sec) => {
+    if (days) {
+      days = days + " d ";
+    } else {
+      days = "";
+    }
+    if (mins) {
+      mins = mins + " m ";
+    } else {
+      mins = "";
+    }
+    if (hour) {
+      hour = hour + " h ";
+    } else {
+      hour = "";
+    }
+    if (sec) {
+      sec = sec + " s ";
+    } else {
+      sec = 0;
+    }
+    return days + hour + mins + sec;
+  };
+
   const isOnWishlist = () => dispatch(isWishlist(id));
 
   const [isOnWishList, setIsOnWishList] = useState(isOnWishlist());
@@ -50,23 +109,6 @@ const BiddingCard = (props) => {
 
   const handleShowModal = () => setShowModal(!showModal);
 
-  // Get today's date and time
-  let now = new Date().getTime();
-  // Find the distance between now and the count down date
-  let distance = new Date(time).getTime() - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  // Time calculations for days, hours, minutes and seconds
-  let days =
-    Math.floor(distance / (1000 * 60 * 60 * 24)) > 0
-      ? Math.floor(distance / (1000 * 60 * 60 * 24)) + " days"
-      : 0;
-  let hours =
-    Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) > 0
-      ? Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) +
-        " hours"
-      : 0;
-
   const goToProduct = (id) => navigate(`/products/${id}`);
 
   return (
@@ -80,6 +122,8 @@ const BiddingCard = (props) => {
             variant="bottom"
             src={productData.image_url}
             className={classes.bidding__image}
+            onClick={(e) => goToProduct(id)}
+            alt={productData.name}
           />
           <Card.Body className={classes.card_body}>
             <div className={classes.Biddingcard__header}>
@@ -115,7 +159,7 @@ const BiddingCard = (props) => {
             <div className={classes.priceContainer}>
               <p>Current Bid: Nrs. {productData.unit_price}</p>
               <h1 className={classes.time_Remaining}>
-                {days + hours === 0 ? "Ended" : days + hours}
+                {timed(days, mins, hours, sec)}
               </h1>
             </div>
             <div className={"d-flex d-lg-none " + classes.button__container}>
@@ -202,6 +246,7 @@ const ProductCard = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => setShowModal(!showModal);
+
   return (
     <>
       <animated.div
@@ -214,6 +259,8 @@ const ProductCard = (props) => {
             src={productData.image_url}
             className={classes.bidding__image}
             height="400px"
+            onClick={(e) => goToProduct(id)}
+            alt={productData.name}
           />
           <Card.Body className={classes.card_body}>
             <div className={classes.Biddingcard__header}>
@@ -334,9 +381,7 @@ const ProductCard = (props) => {
           <Modal.Title id="contained-modal-title-vcenter"> </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ProductInformation
-            {...props}
-          />
+          <ProductInformation {...props} />
         </Modal.Body>
       </Modal>
     </>

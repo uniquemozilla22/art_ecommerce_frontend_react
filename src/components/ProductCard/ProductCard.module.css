@@ -82,3 +82,13 @@
 .bidding__classes .card_body .actions__container svg:last-child {
   margin-right: 0px;
 }
+.bidding__card svg {
+  cursor: pointer;
+}
+
+.bidding__card svg:hover {
+  color: rgb(103, 111, 163);
+}
+.modal__container svg:hover {
+  color: rgb(103, 111, 163);
+}

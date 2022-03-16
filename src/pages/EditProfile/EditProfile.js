@@ -106,43 +106,19 @@ const EditProfile = (props) => {
       ],
     },
     {
+      title: "Bids",
+      links: [
+        {
+          title: "My Bids",
+        },
+      ],
+    },
+    {
       title: "My Likes",
       links: [
         {
           title: "My Arts",
-          data: [
-            {
-              id: 1,
-              name: "One",
-              description: "this is the description for One",
-              image: art1,
-              price: 3000,
-              time: "Jan 27, 2022 15:37:25",
-            },
-            {
-              id: 2,
-              name: "Two",
-              description: "this is the description for Two",
-              image: art2,
-              price: 6000,
-              time: "Jan 26, 2022 15:37:25",
-            },
-            {
-              id: 3,
-              name: "Three",
-              description: "this is the description for Two",
-              image: art3,
-              price: 6000,
-              time: "Jan 26, 2022 15:37:25",
-            },
-            {
-              id: 4,
-              name: "Four",
-              description: "this is the description for Two",
-              image: art1,
-              price: 6000,
-            },
-          ],
+          data: [],
         },
         {
           title: "My Artists",
@@ -176,7 +152,6 @@ const EditProfile = (props) => {
   }, []);
 
   const fetchUserData = () => {
-    props.Loader(true);
     props.fetchData();
   };
 
@@ -195,6 +170,7 @@ const EditProfile = (props) => {
               name={"@" + data.username}
               image={user.image}
               verified={user.verified}
+              balance={user.balance}
             />
             <div className={classes.links__container}>
               {links.map((link, index) => (

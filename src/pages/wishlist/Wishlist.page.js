@@ -16,7 +16,7 @@ const Wishlist = (props) => {
   return (
     <>
       <Suspense fallback={<Spinner />}>
-        <ProductTable
+        <ProductTable 
           removeFunction={(id) => props.deleteWishList(id)}
           items={props.wishlistItems}
           wishlist

@@ -222,6 +222,15 @@
   color: #fff;
   padding: 10px;
   border-radius: 20px;
+  cursor: pointer
+}
+
+.share .icons__container .icon:hover svg {
+  color: #2b2b2b;
+}
+
+.product__information__container svg:hover {
+  color: #676fa3;
 }
 
 .share h1 {
@@ -310,4 +319,5 @@
 
 .buttons__container .like__container {
   padding: 10px 20px;
+  cursor: pointer;
 }

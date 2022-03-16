@@ -4,10 +4,14 @@
   align-items: center;
 }
 
-.actionIcons .navigation_icons {
+.navigation_icons {
   font-size: 24px;
   margin: 0 20px;
   color: #2b2b2b;
+}
+
+.actionIcons svg:hover {
+  color: rgb(103, 111, 163);
 }
 
 .actionIcons .navigation_icons:first-child {

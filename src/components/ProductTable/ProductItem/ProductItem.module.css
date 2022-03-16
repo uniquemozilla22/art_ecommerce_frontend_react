@@ -13,6 +13,10 @@
 .product__item__container .delete__item svg {
   margin: 0 1rem;
 }
+
+.product__item__container .delete__item svg:hover {
+  color: rgb(103, 111, 163);
+}
 .product__item__container div {
   width: 100%;
   text-align: end;

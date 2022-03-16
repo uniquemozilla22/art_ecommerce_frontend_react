@@ -95,7 +95,6 @@ const ProductsContainer = ({
                 currentBid={product.currentBid}
                 likes={product.likesCount}
                 tags={product.tags}
-                addToCart={(data) => console.log(data)}
               />
             }
           </div>

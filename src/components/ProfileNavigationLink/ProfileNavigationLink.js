@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import DetailsEditor from "../DetailsEditor/DetailsEditor";
 import classes from "./ProfileNavigationLink.module.css";
@@ -41,6 +41,7 @@ export const ProfileNavigationContent = ({
   email,
   sendOTP,
 }) => {
+
   return links ? (
     links.map((link, index) => (
       <Tab.Pane
@@ -68,9 +69,7 @@ export const ProfileNavigationContent = ({
             {link.title === "Cancellations" ? (
               <OrderList datas={link.data} cancelled />
             ) : null}
-            {link.title === "My Arts" ? (
-              <ProductGrid products={link.data} />
-            ) : null}
+            {link.title === "My Arts" ? <ProductGrid arts /> : null}
             {link.title === "My Artists" ? (
               <ArtistsGrid artists={link.data} />
             ) : null}

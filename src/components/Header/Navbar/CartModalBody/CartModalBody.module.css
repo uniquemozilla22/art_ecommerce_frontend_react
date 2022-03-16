@@ -31,14 +31,20 @@
   color: #f8f8f2;
 }
 
+.cart__body__container .cart__footer .checkoutButton:hover button {
+  background: #f8f8f2;
+  color: #ff5959;
+  box-shadow: 0 0 20px #2b2b2b;
+}
+
 .cart__body__container .cart__footer .checkoutButton button {
   background: #ff5959;
   color: #f8f8f2;
   padding: 10px;
   border: none;
-  box-shadow: 00 10px #2b2b2b25;
   font-size: 16px;
   border-radius: 20px;
+  transition: all 0.2s ease-in;
 }
 
 .cart__body__container .clear__button {
@@ -52,4 +58,9 @@
   border: none;
   background-color: none;
   padding: 1rem;
+}
+
+.cart__body__container .clear__button:hover button {
+  background-color: #676fa3;
+  color: #f8f8f8;
 }

@@ -8,10 +8,7 @@ import {
   ListAltTwoTone,
   RemoveRedEyeOutlined,
   LogoutOutlined,
-  SettingsVoice,
-  FavoriteOutlined,
   FavoriteBorderOutlined,
-  VerifiedUserOutlined,
   AccountCircleOutlined,
 } from "@mui/icons-material";
 import classes from "./ActionIcon.module.css";

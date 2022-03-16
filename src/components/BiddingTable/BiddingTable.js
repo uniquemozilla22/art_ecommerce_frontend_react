@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import BiddingItem from "./Item/BiddingItem.comp";
 import classes from "./BiddingTable.module.css";
 import DataNotFound from "../DataNotFound/DataNotFound";
-import { Modal } from "bootstrap";
-import { Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { WarningMessage } from "../../store/actions/Message/Message";
-import BidOnProduct from "../../store/actions/Bid/BidOnProduct.post";
 
-const BiddingTable = ({ data }) => {
- 
+const BiddingTable = ({ data, fetchdata }) => {
   return data ? (
     <>
       <div className={classes.bids__container}>
@@ -55,10 +49,9 @@ const BiddingTable = ({ data }) => {
           </>
         ) : null}
       </div>
-      
     </>
   ) : (
-    <DataNotFound content={"Try Bidding on some products"} />
+    <DataNotFound content={"Try Bidding on some products"} action={fetchdata} />
   );
 };
 

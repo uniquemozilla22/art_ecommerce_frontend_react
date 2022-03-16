@@ -12,6 +12,8 @@ const FetchAllBids = () => {
       return res.data;
     } catch (error) {
       console.log({ ...error });
+      dispatch(hideLoading());
+
       if (error.response === undefined) {
         dispatch(
           ErrorMessage({

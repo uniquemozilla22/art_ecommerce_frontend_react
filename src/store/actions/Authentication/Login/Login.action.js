@@ -26,6 +26,7 @@ const LoginAction = (payload) => {
             email: payload.email,
             token: res.data.token,
             likes: res.data.likedProducts,
+            balance: res.data.userBalance || 0,
           })
         );
         dispatch({ type: GET_CART, payload: res.data.cartItems });

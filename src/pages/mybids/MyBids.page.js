@@ -19,7 +19,7 @@ const MyBids = () => {
 
   return (
     <div className="container">
-      <BiddingTable data={data} />
+      <BiddingTable data={data} fetchdata={fetchdata} />
     </div>
   );
 };

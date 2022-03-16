@@ -27,6 +27,7 @@ const UserReducer = (state = initialState, action) => {
         username: payload.username,
         token: payload.token,
         likes: payload.likes,
+        balance: payload.balance,
       };
     }
     case USER_LOGOUT: {

@@ -50,7 +50,7 @@ function App() {
           <Route path="/returnsandrefunds" element={<Return />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route
-            path="/forgotpassword/:id/:token"
+            path="/users/resetPassword/:id/:token"
             element={<ForgotPassword />}
           />
           <Route path="/auth/confirm/:token" element={<ConfirmEmail />} />

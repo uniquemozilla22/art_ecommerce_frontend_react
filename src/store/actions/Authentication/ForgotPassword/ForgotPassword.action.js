@@ -1,4 +1,5 @@
 import axiosBase from "../../../../axiosBase";
+import { hideLoading, showLoading } from "../../Loading/Loading";
 import {
   ErrorMessage,
   SuccessMessage,
@@ -7,11 +8,14 @@ import {
 
 const ForgotPasswordAction = (email) => {
   return (dispatch) => {
+    dispatch(showLoading());
     sendMail(email)
-      .then((response) =>
-        dispatch(SuccessMessage({ message: response.data.message }))
-      )
+      .then((response) => {
+        dispatch(hideLoading());
+        dispatch(SuccessMessage({ message: response.data.message }));
+      })
       .catch((error) => {
+        dispatch(hideLoading());
         if (error.response === undefined) {
           dispatch(ErrorMessage({ message: "Check Your Internet Connection" }));
         }

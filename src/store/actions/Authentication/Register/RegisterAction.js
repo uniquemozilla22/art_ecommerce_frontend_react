@@ -22,6 +22,8 @@ const RegisterAction = (payload) => {
             username: payload.username,
             email: payload.email,
             token: res.data.token,
+            balance: res.data.userBalance || 0,
+            likes: res.data.likes || [],
           })
         );
         dispatch(hideLoading());

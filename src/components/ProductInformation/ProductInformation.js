@@ -398,7 +398,6 @@ export const BiddingInformation = (props) => {
                     className={showSubmit ? null : "d-none"}
                   />
                 </form>
-
                 <p>
                   This amount excludes shipping fees, applicable taxes, and will
                   have a Buyer's Premium based on the hammer price of the lot:

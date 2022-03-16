@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import classes from "./SingleProduct.module.css";
-import art1 from "../../Assets/art1.jpg";
-import art2 from "../../Assets/art2.jpg";
-import art3 from "../../Assets/art3.jpg";
 import ProductInformation from "../../components/ProductInformation/ProductInformation";
 import ProductDescription from "../../components/ProductDescription/ProductDescription";
-import ProductSection from "../../components/ProductSection/ProductSection";
-import highestbidder from "../../Assets/artist2.png";
 import { useLocation, useParams } from "react-router";
 import SingleProductFetchData from "../../store/actions/products/singleProduct.fetch";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
+import DataNotFound from "../../components/DataNotFound/DataNotFound";
 
 const SingleProduct = (props) => {
   const { id } = useParams();
@@ -56,7 +52,10 @@ const SingleProduct = (props) => {
             />
           </>
         ) : (
-          <Spinner />
+          <DataNotFound
+            action={() => fetchData(id)}
+            content={"There is no Data . Try Again"}
+          />
         )}
         {/* <ProductSection title={"Trending Products"} products={data} /> */}
       </div>

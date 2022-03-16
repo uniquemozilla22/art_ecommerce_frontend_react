@@ -1,4 +1,5 @@
 import {
+  DEDUCT_BALANCE,
   FETCH_EDIT_PROFILE,
   LOGIN_MODAL,
   TOOGLE_LIKE_ON_PRODUCT,
@@ -57,6 +58,11 @@ const UserReducer = (state = initialState, action) => {
           ...payload,
         },
       };
+    }
+
+    case DEDUCT_BALANCE: {
+      const deductedPrice = state.balance - payload;
+      return { ...state, balance: deductedPrice };
     }
     case TOOGLE_LIKE_ON_PRODUCT: {
       if (state.likes.includes(payload)) {

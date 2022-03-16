@@ -1,4 +1,5 @@
 import axiosBase from "../../../axiosBase";
+import deductBalance from "../Balance/Balance.action";
 import { hideLoading, showLoading } from "../Loading/Loading";
 import {
   ErrorMessage,
@@ -11,6 +12,7 @@ const BidOnProduct = (auction_id, price) => {
     dispatch(showLoading);
     postAmount(auction_id, price, getState().user.token)
       .then((res) => {
+        dispatch(deductBalance(price));
         dispatch(hideLoading());
         dispatch(SuccessMessage({ message: res.data.message }));
       })

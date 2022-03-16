@@ -21,11 +21,6 @@ let ProductReducer = (state = initialState, action) => {
         ...state,
         all: action.payload,
       };
-    case SINGLE_PRODUCT:
-      return {
-        ...state,
-        single: action.payload,
-      };
     case PRODUCT_BY_CATEGORIES: {
       return {
         ...state,

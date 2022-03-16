@@ -4,32 +4,38 @@ import { ErrorMessage, WarningMessage } from "../Message/Message";
 import { SINGLE_PRODUCT } from "../Types/Types";
 
 const SingleProductFetchData = (id) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(showLoading());
-    FetchSingleProduct(id)
-      .then((res) => {
-        dispatch(hideLoading());
-        return dispatch({
-          type: SINGLE_PRODUCT,
-          payload: res.data,
-        });
-      })
-      .catch((err) => {
-        dispatch(hideLoading());
-
-        if (err.response === undefined) {
+    try {
+      const res = await new Promise((resolve) =>
+        resolve(FetchSingleProduct(id))
+      );
+      dispatch(hideLoading());
+      return res.data;
+    } catch (error) {
+      dispatch(hideLoading());
+      if (error.response === undefined) {
+        dispatch(
+          ErrorMessage({
+            message: "Network Error! Check Your Internet Connection",
+          })
+        );
+      } else {
+        if (error.response?.status === 401) {
+          dispatch(
+            WarningMessage({
+              message: error.response.data.message,
+            })
+          );
+        } else {
           dispatch(
             ErrorMessage({
-              message: "Network Error! Check Your Internet Connection",
+              message: error.response.data.message,
             })
           );
         }
-        if (err.response.status === 400) {
-          dispatch(WarningMessage({ message: err.response.data.message }));
-        } else {
-          dispatch(ErrorMessage({ message: err.response.data.message }));
-        }
-      });
+      }
+    }
   };
 };
 

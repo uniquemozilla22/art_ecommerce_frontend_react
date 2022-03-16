@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./SingleProduct.module.css";
 import art1 from "../../Assets/art1.jpg";
 import art2 from "../../Assets/art2.jpg";
@@ -15,11 +15,16 @@ import { Spinner } from "react-bootstrap";
 const SingleProduct = (props) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.products.single);
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    dispatch(SingleProductFetchData(id));
+    fetchData(id);
   }, [id]);
+
+  const fetchData = async (id) => {
+    const data = await dispatch(SingleProductFetchData(id));
+    setProduct(data);
+  };
 
   return (
     <div className={classes.product__page}>

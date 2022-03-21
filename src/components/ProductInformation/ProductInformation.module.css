@@ -69,6 +69,9 @@
   color: #000000;
   text-align: start;
   margin: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .product__information__container
@@ -222,7 +225,7 @@
   color: #fff;
   padding: 10px;
   border-radius: 20px;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .share .icons__container .icon:hover svg {
@@ -279,9 +282,16 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: 2px solid #ff5959;
   border-radius: 20px;
   padding: 5px 10px;
+}
+
+.product__information__container .product__info .currentHighBidder.winning {
+  border: 2px solid rgb(44, 179, 44);
+}
+
+.product__information__container .product__info .currentHighBidder.losing {
+  border: 2px solid #ff5959;
 }
 
 .product__information__container .product__info .currentHighBidder p {
@@ -289,8 +299,23 @@
 }
 
 .product__information__container .product__info .bidding__information p span {
-  font-weight: 500;
+  font-weight: 600;
   text-align: end;
+}
+
+.product__information__container .product__info .bidding__information .losing {
+  color: #ff5959;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.product__information__container .product__info .currentBid__container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.product__information__container .product__info .currentBid__container svg {
+  margin-left: 0.5rem;
 }
 
 .product__information__container .product__info .bidding__information p {

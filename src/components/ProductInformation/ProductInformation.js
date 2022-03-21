@@ -3,17 +3,23 @@ import classes from "./ProductInformation.module.css";
 import FeatherIcon from "feather-icons-react";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import { Avatar } from "@mui/material";
+import { Avatar, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import AddCartItem from "../../store/actions/Cart/AddItem.post";
-import { Favorite, ThumbUp, ThumbUpAltOutlined } from "@mui/icons-material";
+import {
+  AccessTimeFilledOutlined,
+  Favorite,
+  ThumbUp,
+  ThumbUpAltOutlined,
+} from "@mui/icons-material";
 import toggleLikeOnProduct from "../../store/actions/Likes/likesOnPorducts";
 import isLikedByUser from "../../store/actions/Likes/isLiked.check";
 import { WarningMessage } from "../../store/actions/Message/Message";
 import AddWishlistItem from "./../../store/actions/Wishlist/wishlistItem.post";
 import isWishlist from "../../store/actions/Wishlist/isWishlist.check";
 import BidOnProduct from "../../store/actions/Bid/BidOnProduct.post";
+import IsBiddingUser from "../../store/actions/Bid/isBiddingUser.check";
 
 export const ProductInformation = (props) => {
   const dispatch = useDispatch();
@@ -194,6 +200,21 @@ export const BiddingInformation = (props) => {
   const tokens = useSelector((state) => state.user.token);
   const [token, setToken] = useState(tokens);
 
+  useEffect(() => {
+    setToken(tokens);
+    if (tokens) {
+      checkBiddingUser();
+    }
+  }, [tokens]);
+
+  const [isBidder, setIsBidder] = useState({
+    bid_status: false,
+  });
+
+  const checkBiddingUser = async () => {
+    const isBidderCheck = await dispatch(IsBiddingUser(id));
+    setIsBidder(isBidderCheck);
+  };
   const [likeCount, setLikeCount] = useState(likes);
 
   const isLikedAction = () => dispatch(isLikedByUser(id));
@@ -215,6 +236,30 @@ export const BiddingInformation = (props) => {
 
   const onSubmitBidAmount = (e) => {
     e.preventDefault();
+    if (isBidder.bid_status === true) {
+      handleBiddingSubmit();
+    } else {
+      handleNewBid();
+    }
+  };
+
+  const handleBiddingSubmit = () => {
+    if (
+      parseInt(isBidder.recentBid) + parseInt(bidAmount) <=
+      parseInt(currentBid.price)
+    ) {
+      console.log(parseInt(currentBid.price) + parseInt(bidAmount));
+      dispatch(
+        WarningMessage({
+          message: "You should add a winning amount.",
+        })
+      );
+    } else {
+      dispatch(BidOnProduct(auction.id, bidAmount));
+    }
+  };
+
+  const handleNewBid = () => {
     if (bidAmount <= productData.unit_price) {
       dispatch(
         WarningMessage({
@@ -225,6 +270,7 @@ export const BiddingInformation = (props) => {
       dispatch(BidOnProduct(auction.id, bidAmount));
     }
   };
+
   const isOnWishlist = () => dispatch(isWishlist(id));
 
   const [isOnWishList, setIsOnWishList] = useState(isOnWishlist());
@@ -238,9 +284,6 @@ export const BiddingInformation = (props) => {
     dispatch(AddWishlistItem(id));
     setIsOnWishList(true);
   };
-  useEffect(() => {
-    setToken(tokens);
-  }, [tokens]);
 
   const [days, setDays] = useState(null);
   const [hours, setHours] = useState(null);
@@ -310,7 +353,6 @@ export const BiddingInformation = (props) => {
       >
         <img src={productData.image_url} alt={productData.name} />
       </div>
-
       <div
         className={
           "col-12 col-sm-12 col-md-12 col-lg-6 " + classes.content__container
@@ -341,7 +383,14 @@ export const BiddingInformation = (props) => {
             </div>
             <hr />
             <div className={classes.product__info}>
-              <h1>{productData.name}</h1>
+              <h1>
+                {productData.name}
+                {isBidder.bid_status === true ? (
+                  <Tooltip title={"You have bid on this product"}>
+                    <AccessTimeFilledOutlined />
+                  </Tooltip>
+                ) : null}
+              </h1>
               <div className={classes.bidding__information}>
                 <p>
                   Ending :<span>{timed(days, mins, hours, sec)}</span>
@@ -353,8 +402,27 @@ export const BiddingInformation = (props) => {
                   <p>
                     Current Bid:
                     <span>
-                      NRS .{currentBid.price}
-                      <div className={classes.currentHighBidder}>
+                      <div className={classes.currentBid__container}>
+                        NRS .{currentBid.price}
+                        {token && isBidder.bid_status ? (
+                          isBidder.winStatus === false ? (
+                            <div className={classes.losing}>
+                              <FeatherIcon icon="chevron-down" />
+                              {parseInt(currentBid.price) -
+                                parseInt(isBidder.recentBid)}
+                            </div>
+                          ) : null
+                        ) : null}
+                      </div>
+                      <div
+                        className={
+                          classes.currentHighBidder +
+                          " " +
+                          (isBidder?.winStatus === true
+                            ? classes.winning
+                            : classes.losing)
+                        }
+                      >
                         {currentBid?.image ? (
                           <img
                             src={currentBid.image}
@@ -363,9 +431,9 @@ export const BiddingInformation = (props) => {
                         ) : (
                           <Avatar>{currentBid?.first_name?.charAt(0)}</Avatar>
                         )}
-                        <h3>
+                        <p>
                           {currentBid?.first_name + " " + currentBid?.last_name}
-                        </h3>
+                        </p>
                       </div>
                     </span>
                   </p>
@@ -376,34 +444,64 @@ export const BiddingInformation = (props) => {
               ) : null}
             </div>
             {token ? (
-              <div className={classes.bidding__container}>
-                <p>
-                  Choose your Maximum Bid* <span>How Bidding Works ?</span>
-                </p>
-                <form
-                  onSubmit={onSubmitBidAmount}
-                  className={classes.bid__form}
-                  onFocusCapture={(e) => setShowSubmit(true)}
-                >
-                  <Form.Control
-                    size="md"
-                    type="number"
-                    min={productData.unit_price}
-                    className={classes.form__selection}
-                    placeholder={"Enter amount to bid"}
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <input
-                    type="submit"
-                    className={showSubmit ? null : "d-none"}
-                  />
-                </form>
-                <p>
-                  This amount excludes shipping fees, applicable taxes, and will
-                  have a Buyer's Premium based on the hammer price of the lot:
-                  Buyer's Premium.
-                </p>
-              </div>
+              isBidder.bid_status ? (
+                <div className={classes.bidding__container}>
+                  <h5>Add Amount</h5>
+                  <p>
+                    Add the amount to your previous bid *
+                    <span>How Bidding Works ?</span>
+                  </p>
+                  <form
+                    onSubmit={onSubmitBidAmount}
+                    className={classes.bid__form}
+                  >
+                    <Form.Control
+                      size="md"
+                      type="number"
+                      min={0}
+                      className={classes.form__selection}
+                      placeholder={"Add amount to increase Bid"}
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <input type="submit" />
+                  </form>
+
+                  <p>
+                    This amount excludes shipping fees, applicable taxes, and
+                    will have a Buyer's Premium based on the hammer price of the
+                    lot: Buyer's Premium.
+                  </p>
+                </div>
+              ) : (
+                <div className={classes.bidding__container}>
+                  <p>
+                    Choose your Maximum Bid* <span>How Bidding Works ?</span>
+                  </p>
+                  <form
+                    onSubmit={onSubmitBidAmount}
+                    className={classes.bid__form}
+                    onFocusCapture={(e) => setShowSubmit(true)}
+                  >
+                    <Form.Control
+                      size="md"
+                      type="number"
+                      min={productData.unit_price}
+                      className={classes.form__selection}
+                      placeholder={"Enter amount to bid"}
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <input
+                      type="submit"
+                      className={showSubmit ? null : "d-none"}
+                    />
+                  </form>
+                  <p>
+                    This amount excludes shipping fees, applicable taxes, and
+                    will have a Buyer's Premium based on the hammer price of the
+                    lot: Buyer's Premium.
+                  </p>
+                </div>
+              )
             ) : null}
             <div className={classes.buttons__container}>
               <div

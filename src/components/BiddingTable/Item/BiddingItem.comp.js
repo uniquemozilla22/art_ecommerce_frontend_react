@@ -89,10 +89,11 @@ const BiddingItem = ({
 
   const onSubmitBidAmount = (e) => {
     e.preventDefault();
-    if (bidAmount <= currentBid.price) {
+    if (parseInt(price) + parseInt(bidAmount) <= parseInt(currentBid.price)) {
+      console.log(parseInt(price) + parseInt(bidAmount));
       dispatch(
         WarningMessage({
-          message: "Bid cannot be less than or equal to the current price.",
+          message: "You should add a winning amount.",
         })
       );
     } else {

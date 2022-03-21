@@ -2,8 +2,11 @@ import React from "react";
 import BiddingItem from "./Item/BiddingItem.comp";
 import classes from "./BiddingTable.module.css";
 import DataNotFound from "../DataNotFound/DataNotFound";
+import { Refresh } from "@mui/icons-material";
+import { Tooltip } from "@mui/material";
 
 const BiddingTable = ({ data, fetchdata }) => {
+  console.log(data);
   return data ? (
     <>
       <div className={classes.bids__container}>
@@ -14,7 +17,12 @@ const BiddingTable = ({ data, fetchdata }) => {
             0
         ).length > 0 ? (
           <>
-            <h1 className={classes.title}>Current Bids</h1>
+            <div className={classes.title__container}>
+              <h1 className={classes.title}>Current Bids</h1>
+              <Tooltip title="Refresh List">
+                <Refresh onClick={(e) => fetchdata()} />
+              </Tooltip>
+            </div>
             {data
               ?.filter(
                 (items) =>

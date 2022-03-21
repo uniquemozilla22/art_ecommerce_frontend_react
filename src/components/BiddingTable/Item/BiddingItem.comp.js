@@ -14,6 +14,7 @@ const BiddingItem = ({
   category,
   price,
   currentBid,
+  winStatus,
 }) => {
   const [days, setDays] = useState(null);
   const [hours, setHours] = useState(null);
@@ -104,7 +105,13 @@ const BiddingItem = ({
 
   return (
     <>
-      <div className={classes.bidding__component + " " + classes.highest__user}>
+      <div
+        className={
+          classes.bidding__component +
+          " " +
+          (winStatus ? classes.highest__user : classes.losing_user)
+        }
+      >
         <div className={classes.product__container}>
           <img src={data.image_url} alt={data.name} />
           <div className={classes.contentContainer}>
@@ -144,11 +151,11 @@ const BiddingItem = ({
             </Tooltip>
           </div>
           <div className={classes.button__container + " d-flex d-lg-none"}>
-            <button>
-              <RemoveRedEyeSharp size="sm" onClick={(e) => gotoNavigation()} />
+            <button onClick={(e) => gotoNavigation()}>
+              <RemoveRedEyeSharp size="sm" />
               See Product
             </button>
-            <button>
+            <button onClick={(e) => showModel()}>
               <Add size="sm" />
               Add Amount
             </button>
@@ -172,7 +179,7 @@ const BiddingItem = ({
             <Form.Control
               size="md"
               type="number"
-              min={currentBid.price}
+              min={0}
               className={classes.form__selection}
               placeholder={"Add amount to increase Bid"}
               onChange={(e) => handleChange(e)}

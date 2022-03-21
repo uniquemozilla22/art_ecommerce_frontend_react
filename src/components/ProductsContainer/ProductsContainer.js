@@ -80,7 +80,6 @@ const ProductsContainer = ({
       return <DataNotFound action={fetchAllProducts} />;
     } else {
       return sortingData(type, data).map((product, index) => {
-        console.log(product);
         return (
           <div className={"col"}>
             {

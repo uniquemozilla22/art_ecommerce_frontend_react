@@ -2,7 +2,6 @@ import React from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import classes from "./ProductSection.module.css";
 import Fade from "react-reveal/Fade";
-import { animated, useSpring } from "react-spring";
 import { Link } from "react-router-dom";
 
 const ProductSection = ({ title, products }) => {
@@ -25,25 +24,21 @@ const ProductSection = ({ title, products }) => {
           <div className="row">
             <Fade cascade>
               {products.map((product, index) => {
-                return product.time ? (
-                  <div className="col">
+                console.log(product);
+                return (
+                  <div className="col" key={index}>
                     <ProductCard
-                      name={product.name}
-                      id={product.id}
-                      image={product.image}
-                      price={product.price}
-                      time={product.time}
+                      key={index}
+                      id={product.data.id}
+                      productData={product.data}
+                      supplier={product.supplierInfo}
+                      time={product.auction?.expiration_date}
+                      auction={product.auction ? product.auction : null}
+                      category={product.category}
                       delay={index}
-                    />
-                  </div>
-                ) : (
-                  <div className="col">
-                    <ProductCard
-                      name={product.name}
-                      id={product.id}
-                      image={product.image}
-                      price={product.price}
-                      delay={index}
+                      currentBid={product.currentBid}
+                      likes={product.likesCount}
+                      tags={product.tags}
                     />
                   </div>
                 );

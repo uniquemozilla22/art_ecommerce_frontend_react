@@ -6,8 +6,6 @@ import ProductsContainer from "../../components/ProductsContainer/ProductsContai
 import FetchAllProducts from "../../store/actions/products/allproducts.fetch";
 import classes from "./Product.module.css";
 import { connect } from "react-redux";
-import { useLocation, useParams } from "react-router";
-import ProductsByCategories from "../../store/actions/products/byCategories.fetch";
 import { WarningMessage } from "../../store/actions/Message/Message";
 
 const Product = (props) => {

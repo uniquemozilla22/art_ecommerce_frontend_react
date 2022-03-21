@@ -38,7 +38,7 @@ const Banner = () => {
                 <br /> the better it <span>gets.</span>
               </animated.h1>
               <animated.div style={useAppearAnimation(800)}>
-                <Link to="./" className={classes.link}>
+                <Link to="/blog" className={classes.link}>
                   Learn More <DoubleArrowTwoTone />
                 </Link>
               </animated.div>

@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import fetchTrendingAuctions from "../../store/actions/products/trending.fetch";
+import DataNotFound from "../DataNotFound/DataNotFound";
 import ProductSection from "../ProductSection/ProductSection";
 
 const TrendingAuction = () => {
-  const trendingAuctions = useSelector(
-    (state) => state.product.trendingAuctions
-  );
-  const [data, setData] = useState(trendingAuctions);
+  const dispatch = useDispatch();
+  const [data, setData] = useState(null);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchTrendingAuction();
+  }, []);
 
-  return (
+  const fetchTrendingAuction = async () => {
+    const fetchData = await dispatch(fetchTrendingAuctions());
+    setData(fetchData);
+  };
+
+  return data ? (
     <>
-      <ProductSection title="Trending Auctions" />
+      <ProductSection title="Trending Products" products={data} />
     </>
+  ) : (
+    <DataNotFound
+      action={fetchTrendingAuction}
+      content={"Trending Auctions not found"}
+    />
   );
 };
 

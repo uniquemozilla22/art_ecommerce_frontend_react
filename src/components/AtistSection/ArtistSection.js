@@ -10,7 +10,7 @@ const ArtistSection = (props) => {
       loop: false,
       from: { width: "0%", opacity: 0 },
       to: { width: "100%", opacity: 1 },
-      delay,
+      delay: delay * 100,
     });
   };
   return (
@@ -20,7 +20,7 @@ const ArtistSection = (props) => {
           <div className={"col-4  d-none d-md-block"}>
             <animated.div
               className={classes.artist__image__container}
-              style={useSlideWidth(0)}
+              style={useSlideWidth(1)}
             >
               <img src={artist} alt={"Artist"} />
               <div className={classes.artist__quote}>
@@ -30,10 +30,10 @@ const ArtistSection = (props) => {
             </animated.div>
           </div>
           <div className="col-12  col-xs-12  col-sm-12 col-md-8">
-            <ProductSection
+            {/* <ProductSection
               title={props.artistName.split(" ")[1] + "'s Arts"}
               products={props.products}
-            />
+            /> */}
           </div>
         </div>
       </div>

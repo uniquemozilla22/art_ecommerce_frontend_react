@@ -44,7 +44,9 @@ const Home = () => {
       <Fade>
         <Banner />
       </Fade>
-      {/* <TrendingAuction /> */}
+      <Fade>
+        <TrendingAuction />
+      </Fade>
       <Fade cascade>
         <ArtistSection
           artistName={"Picasso Pablo"}

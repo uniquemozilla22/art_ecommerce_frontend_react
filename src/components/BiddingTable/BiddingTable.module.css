@@ -7,3 +7,7 @@
   font-size: 34px;
 }
 
+.bids__container .title__container {
+  display: flex;
+  justify-content: space-between;
+}

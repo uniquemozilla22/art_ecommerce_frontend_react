@@ -6,9 +6,7 @@ import classes from "./ProductTable.module.css";
 const ProductTable = (props) => {
   const [coupon] = useState(1400);
   let total = 0;
-
   const [data, setData] = useState(props.items);
-
   useEffect(() => {
     setData(props.items);
   }, [props.items]);
@@ -36,7 +34,7 @@ const ProductTable = (props) => {
   return (
     <div className={"container " + classes.product__table__container}>
       <h1 className={classes.pagetitle}>
-        {props.wishlist ? "Wishlist" : "Cart"}.
+        {props.wishlist ? "Wishlist" : "Cart Items"}.
       </h1>
       {data.length !== 0 ? (
         <>

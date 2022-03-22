@@ -19,16 +19,18 @@ const Checkout = (props) => {
         </div>
         <div className="row">
           <div className={"col-lg-8 col-md-8 col-sm-12 col-xs-12"}>
-            {data.length !== 0 ? (
-              <ProductTable
-                items={data}
-                removeFunction={props.removeCartItem}
-              />
-            ) : (
-              <DataNotFound
-                content={"No Cart Item Found! Try adding some items to cart"}
-              />
-            )}
+            {data ? (
+              data.length !== 0 ? (
+                <ProductTable
+                  items={data}
+                  removeFunction={props.removeCartItem}
+                />
+              ) : (
+                <DataNotFound
+                  content={"No Cart Item Found! Try adding some items to cart"}
+                />
+              )
+            ) : null}
           </div>
           <div className={"col-lg-4 col-md-4 col-sm-12 col-xs-12"}>
             <CheckoutInformation />

@@ -8,9 +8,10 @@ const CartItems = () => {
     dispatch(showLoading());
     try {
       const res = await new Promise((resolve) =>
-        fetchCartItems(getState().user.token)
+        resolve(fetchCartItems(getState().user.token))
       );
       dispatch({ type: GET_CART, payload: res.data.cartItems });
+      dispatch(hideLoading());
     } catch (error) {
       console.log({ ...error });
       dispatch(hideLoading());
@@ -40,7 +41,11 @@ const CartItems = () => {
 };
 
 const fetchCartItems = async (token) => {
-  return await axiosBase.get("/carts/items");
+  return await axiosBase.get("/carts/items", {
+    header: {
+      Authorization: "Bearer " + token,
+    },
+  });
 };
 
 export default CartItems;

@@ -9,6 +9,7 @@ import { REMOVE_CART } from "../Types/Types";
 
 const removeCartItem = (payload) => {
   return (dispatch, getState) => {
+    console.log(payload);
     dispatch(showLoading());
     console.log(getState().user.token);
     removeAction(payload.id, getState().user.token)

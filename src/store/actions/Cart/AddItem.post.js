@@ -11,7 +11,7 @@ const AddCartItem = (payload) => {
   return (dispatch, getState) => {
     const token = getState().user.token;
     dispatch(showLoading());
-    postCartitem(payload.id, token)
+    postCartitem(payload.data.id, token)
       .then((res) => {
         dispatch(hideLoading());
         dispatch(SuccessMessage({ message: res.data.message }));

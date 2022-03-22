@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     toggleCart: () => dispatch({ type: "CART" }),
     toggleSearch: () => dispatch({ type: "SEARCH" }),
     toggleHelpCenter: () => dispatch({ type: "HELP_CENTER" }),
-    removeCartItem: (item) => dispatch(removeCartItem({ id: item.id })),
+    removeCartItem: (id) => dispatch(removeCartItem(id)),
     Logout: () => {
       dispatch(Logout());
       useNavigate()("/login");

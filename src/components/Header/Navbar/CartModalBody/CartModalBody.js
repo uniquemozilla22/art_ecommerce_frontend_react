@@ -39,7 +39,7 @@ const CartModalBody = (props) => {
               price={cartitem.data.unit_price}
               description={cartitem.data.description}
               image={cartitem.data.image_url}
-              remove={() => props.removeItem(cartitem)}
+              remove={() => props.removeItem({ id: cartitem.data.id })}
             />
           ))}
         </>

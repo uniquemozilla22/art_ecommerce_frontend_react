@@ -16,6 +16,11 @@ const ProductItem = ({
   wishlist,
   id,
   time,
+  productData,
+  supplierInfo,
+  tags,
+  likesCount,
+  category,
 }) => {
   const dispatch = useDispatch();
 
@@ -105,11 +110,11 @@ const ProductItem = ({
             <ShoppingCartOutlined
               onClick={(e) =>
                 addToCart({
-                  id,
-                  image_url: image,
-                  name: name,
-                  unit_price: price,
-                  description: description,
+                  data: productData,
+                  supplierInfo,
+                  tags,
+                  likesCount,
+                  category,
                 })
               }
             />

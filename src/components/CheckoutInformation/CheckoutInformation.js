@@ -13,13 +13,25 @@ const CheckoutInformation = () => {
         <h2>Payment Method</h2>
         <Form className={classes.checkbox__container}>
           <Form.Check
-            label={<img src={esewa} alt="Khalti" />}
+            label={<img src={esewa} alt="Esewa" />}
+            name="payment"
+            type={"radio"}
+            className={classes.checkbox}
+          />
+
+          <Form.Check
+            label={<img src={khalti} alt="Khalti" />}
             name="payment"
             type={"radio"}
             className={classes.checkbox}
           />
           <Form.Check
-            label={<img src={khalti} alt="Khalti" />}
+            label={
+              <div className={classes.label__COD}>
+                <FeatherIcon icon="dollar-sign" />
+                Use Balance
+              </div>
+            }
             name="payment"
             type={"radio"}
             className={classes.checkbox}

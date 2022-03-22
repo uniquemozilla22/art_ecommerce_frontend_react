@@ -34,8 +34,9 @@ const CartReducer = (state = initialState, action) => {
 };
 
 const removeCartReducer = (state, payload) => {
+  console.log(payload.id, "remove cart");
   const filteredItems = state.cartItems.filter(
-    (item) => item.id !== payload.id
+    (item) => item.data.id !== payload.id
   );
   return { ...state, cartItems: filteredItems };
 };

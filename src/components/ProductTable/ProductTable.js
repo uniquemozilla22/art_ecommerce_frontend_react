@@ -4,15 +4,18 @@ import ProductItem from "./ProductItem/ProductItem";
 import classes from "./ProductTable.module.css";
 
 const ProductTable = (props) => {
-  const [coupon] = useState(1400);
+  const [coupon] = useState(0);
+
   let total = 0;
   const [data, setData] = useState(props.items);
+
   useEffect(() => {
     setData(props.items);
   }, [props.items]);
 
   const dataPrinting = (data) => {
     return data?.map((item, index) => {
+      total = total + item.data.unit_price;
       return (
         <ProductItem
           key={index}
@@ -23,9 +26,14 @@ const ProductTable = (props) => {
           supplierName={
             item.supplierInfo.first_name + " " + item.supplierInfo.last_name
           }
+          supplierInfo={item.supplierInfo}
+          productData={item.data}
+          tags={item.tags}
+          category={item.category}
           description={item.data.description}
           removeItem={props.removeFunction}
           wishlist={props.wishlist}
+          likesCount={item.likesCount}
           time={item?.auction?.expiration_date || null}
         />
       );
@@ -34,7 +42,7 @@ const ProductTable = (props) => {
   return (
     <div className={"container " + classes.product__table__container}>
       <h1 className={classes.pagetitle}>
-        {props.wishlist ? "Wishlist" : "Cart Items"}.
+        {props.wishlist ? "Wishlist" : "Cart"}.
       </h1>
       {data.length !== 0 ? (
         <>
@@ -53,14 +61,36 @@ const ProductTable = (props) => {
             <div className={classes.calculations}>
               <div className={classes.totals}>
                 <h4>
-                  Sub Total<span> {total}</span>{" "}
+                  Sub Total
+                  <span>
+                    {" "}
+                    {parseInt(total).toLocaleString("en-IN", {
+                      maximumFractionDigits: 2,
+                      style: "currency",
+                      currency: "NRS",
+                    })}
+                  </span>{" "}
                 </h4>
                 <h4>
-                  Coupon <span>{coupon} </span>
+                  Coupon{" "}
+                  <span>
+                    {parseInt(coupon).toLocaleString("en-IN", {
+                      maximumFractionDigits: 2,
+                      style: "currency",
+                      currency: "NRS",
+                    })}{" "}
+                  </span>
                 </h4>
                 <hr />
                 <h4>
-                  Grand Total <span>{total - coupon}</span>
+                  Grand Total{" "}
+                  <span>
+                    {parseInt(total - coupon).toLocaleString("en-IN", {
+                      maximumFractionDigits: 2,
+                      style: "currency",
+                      currency: "NRS",
+                    })}
+                  </span>
                 </h4>
               </div>
             </div>

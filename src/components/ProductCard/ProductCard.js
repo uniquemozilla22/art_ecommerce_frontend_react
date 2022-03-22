@@ -234,7 +234,7 @@ const ProductCard = (props) => {
   const goToProduct = (id) => {
     navigate(`/products/${id}`);
   };
-  const { id, productData, delay } = props;
+  const { id, productData, delay, supplier, tags, likes, category } = props;
 
   const isOnWishlist = () => dispatch(isWishlist(id));
 
@@ -253,6 +253,7 @@ const ProductCard = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => setShowModal(!showModal);
+  console.log(props);
 
   return (
     <>
@@ -305,11 +306,11 @@ const ProductCard = (props) => {
                         fontSize="small"
                         onClick={(e) =>
                           props.addToCart({
-                            id,
-                            image_url: productData.image_url,
-                            name: productData.name,
-                            unit_price: productData.unit_price,
-                            description: productData.description,
+                            data: productData,
+                            supplierInfo: supplier,
+                            tags,
+                            likesCount: likes,
+                            category,
                           })
                         }
                       />
@@ -366,11 +367,11 @@ const ProductCard = (props) => {
                     className={classes.button}
                     onClick={(e) =>
                       props.addToCart({
-                        id,
-                        name: productData.name,
-                        image_url: productData.image_url,
-                        unit_price: productData.unit_price,
-                        description: productData.description,
+                        data: productData,
+                        supplierInfo: supplier,
+                        tags,
+                        likesCount: likes,
+                        category,
                       })
                     }
                   >

@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import ProductTable from "../../components/ProductTable/ProductTable";
 import classes from "./Checkout.module.css";
 import removeCartItem from "../../store/actions/Cart/RemoveItem.post";
 import CheckoutInformation from "../../components/CheckoutInformation/CheckoutInformation";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
+import CartItems from "../../store/actions/Cart/CartItems.fetch";
 
 const Checkout = (props) => {
-  const [data, setData] = useState(props.cartItems);
+  const cartItems = useSelector((state) => state.cartContent.cartItems);
+  const [data, setData] = useState(cartItems);
+
   useEffect(() => {
-    setData(props.cartItems);
-  }, [props.cartItems]);
+    setData(cartItems);
+  }, [cartItems]);
+
+  console.log(props.cartItems);
+
   return (
     <div className={classes.checkout__page}>
       <div className="container-fluid">
@@ -28,6 +34,7 @@ const Checkout = (props) => {
               ) : (
                 <DataNotFound
                   content={"No Cart Item Found! Try adding some items to cart"}
+                  action={props.handleFetchCart}
                 />
               )
             ) : null}
@@ -48,6 +55,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     removeCartItem: (id) => dispatch(removeCartItem({ id })),
+    handleFetchCart: () => dispatch(CartItems()),
   };
 };
 

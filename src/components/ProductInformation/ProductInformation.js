@@ -111,11 +111,11 @@ export const ProductInformation = (props) => {
                   onClick={(e) =>
                     dispatch(
                       AddCartItem({
-                        id,
-                        image_url: productData.image_url,
-                        name: productData.name,
-                        unit_price: productData.unit_price,
-                        description: productData.description,
+                        data: productData,
+                        supplierInfo: supplier,
+                        tags,
+                        likesCount: likes,
+                        category,
                       })
                     )
                   }
@@ -419,13 +419,15 @@ export const BiddingInformation = (props) => {
                           isBidder.winStatus === false ? (
                             <div className={classes.losing}>
                               <FeatherIcon icon="chevron-down" />
-                              
-                                {(parseInt(currentBid.price) -
-                                  parseInt(isBidder.recentBid)).toLocaleString("en-IN", {
-                                  maximumFractionDigits: 2,
-                                  style: "currency",
-                                  currency: "NRS",
-                                })}
+
+                              {(
+                                parseInt(currentBid.price) -
+                                parseInt(isBidder.recentBid)
+                              ).toLocaleString("en-IN", {
+                                maximumFractionDigits: 2,
+                                style: "currency",
+                                currency: "NRS",
+                              })}
                             </div>
                           ) : null
                         ) : null}

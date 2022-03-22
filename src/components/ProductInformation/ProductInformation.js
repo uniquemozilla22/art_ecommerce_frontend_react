@@ -248,7 +248,6 @@ export const BiddingInformation = (props) => {
       parseInt(isBidder.recentBid) + parseInt(bidAmount) <=
       parseInt(currentBid.price)
     ) {
-      console.log(parseInt(currentBid.price) + parseInt(bidAmount));
       dispatch(
         WarningMessage({
           message: "You should add a winning amount.",
@@ -396,20 +395,37 @@ export const BiddingInformation = (props) => {
                   Ending :<span>{timed(days, mins, hours, sec)}</span>
                 </p>
                 <p>
-                  Started At:<span> NRS .{auction.start_price}</span>
+                  Started At:
+                  <span>
+                    {" "}
+                    {parseInt(auction.start_price).toLocaleString("en-IN", {
+                      maximumFractionDigits: 2,
+                      style: "currency",
+                      currency: "NRS",
+                    })}
+                  </span>
                 </p>
                 {currentBid ? (
                   <p>
                     Current Bid:
                     <span>
                       <div className={classes.currentBid__container}>
-                        NRS .{currentBid.price}
+                        {parseInt(currentBid.price).toLocaleString("en-IN", {
+                          maximumFractionDigits: 2,
+                          style: "currency",
+                          currency: "NRS",
+                        })}
                         {token && isBidder.bid_status ? (
                           isBidder.winStatus === false ? (
                             <div className={classes.losing}>
                               <FeatherIcon icon="chevron-down" />
-                              {parseInt(currentBid.price) -
-                                parseInt(isBidder.recentBid)}
+                              
+                                {(parseInt(currentBid.price) -
+                                  parseInt(isBidder.recentBid)).toLocaleString("en-IN", {
+                                  maximumFractionDigits: 2,
+                                  style: "currency",
+                                  currency: "NRS",
+                                })}
                             </div>
                           ) : null
                         ) : null}

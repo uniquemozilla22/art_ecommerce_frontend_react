@@ -4,6 +4,7 @@ import ClearCartGlobally from "../../../../store/actions/Cart/Clear.post";
 import DataNotFound from "../../../DataNotFound/DataNotFound";
 import ProductFeild from "../../../ProductFeild/ProductFeild";
 import classes from "./CartModalBody.module.css";
+import { Link } from "react-router-dom";
 
 const CartModalBody = (props) => {
   const [data, setData] = useState(props.data);
@@ -62,7 +63,7 @@ const CartModalBody = (props) => {
             <h2>NPR.{total} /-</h2>
           </div>
           <div className={classes.checkoutButton}>
-            <button>Checkout</button>
+            <Link to={"/checkout"}>Checkout</Link>
           </div>
         </div>
       ) : null}

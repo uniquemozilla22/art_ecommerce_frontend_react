@@ -10,7 +10,13 @@ const CardBalance = ({ balance, email }) => {
           <Avatar>{email?.charAt(0).toUpperCase()}</Avatar>
           <div className={classes.content__container}>
             <p>
-              <span>{balance.toLocaleString("hi-IN")}</span>
+              <span>
+                {parseInt(balance).toLocaleString("en-IN", {
+                  maximumFractionDigits: 2,
+                  style: "currency",
+                  currency: "NRS",
+                })}
+              </span>
             </p>
             <p>{email?.split("@")[0]}</p>
           </div>

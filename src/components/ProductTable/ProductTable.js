@@ -11,7 +11,6 @@ const ProductTable = (props) => {
 
   useEffect(() => {
     setData(props.items);
-    console.log(props.items);
   }, [props.items]);
 
   const dataPrinting = (data) => {

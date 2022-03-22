@@ -42,7 +42,6 @@ const removeCartReducer = (state, payload) => {
 
 const addToCart = (cartItems, payload) => {
   cartItems.push({ ...payload });
-
   return cartItems;
 };
 

@@ -6,6 +6,8 @@ import removeCartItem from "../../store/actions/Cart/RemoveItem.post";
 import CheckoutInformation from "../../components/CheckoutInformation/CheckoutInformation";
 
 const Checkout = (props) => {
+
+  
   return (
     <div className={classes.checkout__page}>
       <div className="container-fluid">

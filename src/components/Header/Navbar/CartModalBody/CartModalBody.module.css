@@ -31,13 +31,13 @@
   color: #f8f8f2;
 }
 
-.cart__body__container .cart__footer .checkoutButton:hover button {
+.cart__body__container .cart__footer .checkoutButton:hover a {
   background: #f8f8f2;
   color: #ff5959;
   box-shadow: 0 0 20px #2b2b2b;
 }
 
-.cart__body__container .cart__footer .checkoutButton button {
+.cart__body__container .cart__footer .checkoutButton a {
   background: #ff5959;
   color: #f8f8f2;
   padding: 10px;
@@ -45,6 +45,7 @@
   font-size: 16px;
   border-radius: 20px;
   transition: all 0.2s ease-in;
+  text-decoration: none;
 }
 
 .cart__body__container .clear__button {

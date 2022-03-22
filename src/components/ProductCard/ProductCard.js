@@ -157,7 +157,14 @@ const BiddingCard = (props) => {
               </div>
             </div>
             <div className={classes.priceContainer}>
-              <p>Current Bid: Nrs. {productData.unit_price}</p>
+              <p>
+                Current Bid:{" "}
+                {parseInt(productData.unit_price).toLocaleString("en-IN", {
+                  maximumFractionDigits: 2,
+                  style: "currency",
+                  currency: "NRS",
+                })}
+              </p>
               <h1 className={classes.time_Remaining}>
                 {timed(days, mins, hours, sec)}
               </h1>
@@ -312,7 +319,13 @@ const ProductCard = (props) => {
               </div>
             </div>
             <div className={classes.priceContainer}>
-              <p> Nrs. {productData.unit_price}</p>
+              <p>
+                {parseInt(productData.unit_price).toLocaleString("en-IN", {
+                  maximumFractionDigits: 2,
+                  style: "currency",
+                  currency: "NRS",
+                })}
+              </p>
             </div>
             <div className={"d-flex d-lg-none " + classes.button__container}>
               <button

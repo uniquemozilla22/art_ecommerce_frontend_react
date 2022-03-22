@@ -15,7 +15,6 @@ const LoginAction = (payload) => {
     return loginToTheSystem(email, password)
       .then((res) => {
         dispatch(hideLoading());
-        console.log(res.data);
         dispatch(
           SuccessMessage({
             message: res.statusText + "! Login Successfull.",

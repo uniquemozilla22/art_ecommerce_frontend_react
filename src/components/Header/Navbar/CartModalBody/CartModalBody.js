@@ -18,7 +18,7 @@ const CartModalBody = (props) => {
   const totalPriceHandler = (data) => {
     let totalItemPrice = 0;
     data?.forEach(
-      (item) => (totalItemPrice = totalItemPrice + +item.unit_price)
+      (item) => (totalItemPrice = totalItemPrice + +item.data.unit_price)
     );
     return totalItemPrice;
   };
@@ -34,11 +34,11 @@ const CartModalBody = (props) => {
           </div>
           {data?.map((cartitem) => (
             <ProductFeild
-              key={cartitem.id}
-              title={cartitem.name}
-              price={cartitem.unit_price}
-              description={cartitem.description}
-              image={cartitem.image_url}
+              key={cartitem.data.id}
+              title={cartitem.data.name}
+              price={cartitem.data.unit_price}
+              description={cartitem.data.description}
+              image={cartitem.data.image_url}
               remove={() => props.removeItem(cartitem)}
             />
           ))}

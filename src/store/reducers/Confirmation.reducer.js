@@ -1,7 +1,7 @@
 import { HIDE_CONFIRMATION, SHOW_CONFIRMATION } from "../actions/Types/Types";
 
 const initialState = {
-  show: true,
+  show: false,
   title: null,
   onAccept: null,
 };

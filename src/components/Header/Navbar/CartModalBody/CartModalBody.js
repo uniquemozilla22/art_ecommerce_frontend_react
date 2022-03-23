@@ -6,6 +6,7 @@ import ProductFeild from "../../../ProductFeild/ProductFeild";
 import classes from "./CartModalBody.module.css";
 import { Link } from "react-router-dom";
 import { showConfirmation } from "../../../../store/actions/Confirmation/Confirmation.action";
+import CreateOrder from "../../../../store/actions/Order/Order.post";
 
 const CartModalBody = (props) => {
   const [data, setData] = useState(props.data);
@@ -55,7 +56,7 @@ const CartModalBody = (props) => {
     }
   };
 
-  const onAccept = () => console.log("hello");
+  const onAccept = () => dispatch(CreateOrder());
 
   const checkoutButton = () => {
     dispatch(

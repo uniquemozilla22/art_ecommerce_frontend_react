@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import classes from "./DetailsEditor.module.css";
 import FeatherIcon from "feather-icons-react";
 import { Modal } from "@mui/material";
-import { connect } from "react-redux";
 
 const DetailsEditor = ({
   data,

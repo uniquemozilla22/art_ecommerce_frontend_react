@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router";
 import ForgotPasswordAction from "../store/actions/Authentication/ForgotPassword/ForgotPassword.action";
 import { HideMessage } from "../store/actions/Message/Message";
 import { FORGOT__MODEL } from "../store/actions/Types/Types";
+import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
 import ErrorHandle from "./ErrorHandle/ErrorHandle";
 import Footer from "./Footer/Footer";
 import ForgotPassword from "./forgotPassword/ForgotPassword";
@@ -138,6 +139,7 @@ const Layout = (props) => {
         toggleForgetPassword={() => props.toggleForgetPassword()}
         sendMail={(e) => props.sendMail(e)}
       />
+      <ConfirmationModal />
     </>
   );
 };

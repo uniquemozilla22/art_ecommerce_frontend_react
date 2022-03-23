@@ -5,6 +5,7 @@ import DataNotFound from "../../../DataNotFound/DataNotFound";
 import ProductFeild from "../../../ProductFeild/ProductFeild";
 import classes from "./CartModalBody.module.css";
 import { Link } from "react-router-dom";
+import { showConfirmation } from "../../../../store/actions/Confirmation/Confirmation.action";
 
 const CartModalBody = (props) => {
   const [data, setData] = useState(props.data);
@@ -53,6 +54,20 @@ const CartModalBody = (props) => {
       );
     }
   };
+
+  const onAccept = () => console.log("hello");
+
+  const checkoutButton = () => {
+    dispatch(
+      showConfirmation(
+        <p>
+          Your cart items will be moved to order and your cart will be cleared.
+        </p>,
+        onAccept
+      )
+    );
+  };
+
   return (
     <div className={classes.cart__body__container}>
       {printData(props.data)}
@@ -63,7 +78,7 @@ const CartModalBody = (props) => {
             <h2>NPR.{total} /-</h2>
           </div>
           <div className={classes.checkoutButton}>
-            <Link to={"/checkout"}>Checkout</Link>
+            <button onClick={(e) => checkoutButton()}>Checkout</button>
           </div>
         </div>
       ) : null}

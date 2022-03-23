@@ -13,6 +13,7 @@ const CreateOrder = () => {
       .then((res) => {
         dispatch(hideLoading());
         dispatch(SuccessMessage({ message: res.data.message }));
+        console.log(res);
       })
       .catch((error) => {
         dispatch(hideLoading());
@@ -42,11 +43,15 @@ const CreateOrder = () => {
 };
 
 const createOrder = (token) => {
-  return axiosBase.post("orders/create", {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
+  return axiosBase.post(
+    "orders/create",
+    {},
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
 };
 
 export default CreateOrder;

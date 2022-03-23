@@ -61,9 +61,7 @@ const CartModalBody = (props) => {
   const checkoutButton = () => {
     dispatch(
       showConfirmation(
-        <p>
-          Your cart items will be moved to order and your cart will be cleared.
-        </p>,
+        "Your cart items will be moved to order and your cart will be cleared.",
         onAccept
       )
     );

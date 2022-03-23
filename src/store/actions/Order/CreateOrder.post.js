@@ -5,6 +5,7 @@ import {
   SuccessMessage,
   WarningMessage,
 } from "../Message/Message";
+import { REMOVE_ALL_CART } from "../Types/Types";
 
 const CreateOrder = () => {
   return (dispatch, getState) => {
@@ -13,7 +14,9 @@ const CreateOrder = () => {
       .then((res) => {
         dispatch(hideLoading());
         dispatch(SuccessMessage({ message: res.data.message }));
-        console.log(res);
+        dispatch({
+          type: REMOVE_ALL_CART,
+        });
       })
       .catch((error) => {
         dispatch(hideLoading());

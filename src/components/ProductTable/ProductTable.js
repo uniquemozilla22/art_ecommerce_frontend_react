@@ -42,7 +42,8 @@ const ProductTable = (props) => {
   return (
     <div className={"container " + classes.product__table__container}>
       <h1 className={classes.pagetitle}>
-        {props.wishlist ? "Wishlist" : "Cart"}.
+        {props.wishlist ? "Wishlist." : null}
+        {props.order ? "#" + props.order : null}
       </h1>
       {data.length !== 0 ? (
         <>

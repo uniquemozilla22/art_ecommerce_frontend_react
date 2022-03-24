@@ -6,7 +6,10 @@ const GetOrderList = () => {
   return async (dispatch, getState) => {
     dispatch(showLoading());
     try {
-      const res = fetchOrderData(getState().user.token);
+      const res = await new Promise((resolve) =>
+        resolve(fetchOrderData(getState().user.token))
+      );
+      console.log(res);
       dispatch(hideLoading());
       return res.data;
     } catch (error) {
@@ -37,12 +40,12 @@ const GetOrderList = () => {
   };
 };
 
-const fetchOrderData = async (token) => [
-  axiosBase.get("", {
+const fetchOrderData = async (token) => {
+  return await axiosBase.get("orders/user", {
     headers: {
       Authorization: "Bearer " + token,
     },
-  }),
-];
+  });
+};
 
 export default GetOrderList;

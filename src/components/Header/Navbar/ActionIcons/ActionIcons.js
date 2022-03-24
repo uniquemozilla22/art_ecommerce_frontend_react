@@ -71,7 +71,9 @@ const ActionIcons = (props) => {
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item>
-                <ListAltTwoTone /> Orders
+                <Link to="/orders" className={classes.dropdown__link}>
+                  <ListAltTwoTone /> Orders
+                </Link>
               </Dropdown.Item>
               <Dropdown.Item>
                 <Link to="/mybids" className={classes.dropdown__link}>
@@ -85,7 +87,6 @@ const ActionIcons = (props) => {
                   Profile
                 </Link>
               </Dropdown.Item>
-
               <Dropdown.Item onClick={(e) => props.Logout()}>
                 <LogoutOutlined /> Logout
               </Dropdown.Item>

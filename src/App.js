@@ -24,6 +24,7 @@ import ConfirmEmail from "./pages/Confirm_email/Confirm_email";
 import Category from "./pages/Category/Category";
 import Wishlist from "./pages/wishlist/Wishlist.page";
 import MyBids from "./pages/mybids/MyBids.page";
+import Order from "./pages/order/Order";
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/category/:id" element={<Category />} />
           <Route path="/products/:id" element={<SingleProduct />} />
-        <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/privacypolicies" element={<Privacy />} />
           <Route path="/careers" element={<Career />} />
           <Route path="/termsandconditions" element={<Terms />} />
@@ -55,6 +56,7 @@ function App() {
           />
           <Route path="/auth/confirm/:token" element={<ConfirmEmail />} />
           <Route path="/mybids" element={<MyBids />} />
+          <Route path="/orders" element={<Order />} />
         </Routes>
       </Layout>
     </div>

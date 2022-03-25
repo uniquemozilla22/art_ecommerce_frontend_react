@@ -401,7 +401,7 @@ export const BiddingInformation = (props) => {
                     {parseInt(auction.start_price).toLocaleString("en-IN", {
                       maximumFractionDigits: 2,
                       style: "currency",
-                      currency: "NRS",
+                      currency: "NPR",
                     })}
                   </span>
                 </p>
@@ -413,7 +413,7 @@ export const BiddingInformation = (props) => {
                         {parseInt(currentBid.price).toLocaleString("en-IN", {
                           maximumFractionDigits: 2,
                           style: "currency",
-                          currency: "NRS",
+                          currency: "NPR",
                         })}
                         {token && isBidder.bid_status ? (
                           isBidder.winStatus === false ? (
@@ -426,7 +426,7 @@ export const BiddingInformation = (props) => {
                               ).toLocaleString("en-IN", {
                                 maximumFractionDigits: 2,
                                 style: "currency",
-                                currency: "NRS",
+                                currency: "NPR",
                               })}
                             </div>
                           ) : null

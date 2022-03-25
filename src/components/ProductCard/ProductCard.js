@@ -162,7 +162,7 @@ const BiddingCard = (props) => {
                 {parseInt(productData.unit_price).toLocaleString("en-IN", {
                   maximumFractionDigits: 2,
                   style: "currency",
-                  currency: "NRS",
+                  currency: "NPR",
                 })}
               </p>
               <h1 className={classes.time_Remaining}>
@@ -324,7 +324,7 @@ const ProductCard = (props) => {
                 {parseInt(productData.unit_price).toLocaleString("en-IN", {
                   maximumFractionDigits: 2,
                   style: "currency",
-                  currency: "NRS",
+                  currency: "NPR",
                 })}
               </p>
             </div>

@@ -9,6 +9,8 @@ const ProductTable = (props) => {
   let total = 0;
   const [data, setData] = useState(props.items);
 
+  console.log(props.items);
+
   useEffect(() => {
     setData(props.items);
   }, [props.items]);
@@ -43,7 +45,7 @@ const ProductTable = (props) => {
     <div className={"container " + classes.product__table__container}>
       <h1 className={classes.pagetitle}>
         {props.wishlist ? "Wishlist." : null}
-        {props.order ? "#" + props.order : null}
+        {props.order ? props.order : null}
       </h1>
       {data.length !== 0 ? (
         <>
@@ -68,7 +70,7 @@ const ProductTable = (props) => {
                     {parseInt(total).toLocaleString("en-IN", {
                       maximumFractionDigits: 2,
                       style: "currency",
-                      currency: "NRS",
+                      currency: "NPR",
                     })}
                   </span>{" "}
                 </h4>
@@ -78,7 +80,7 @@ const ProductTable = (props) => {
                     {parseInt(coupon).toLocaleString("en-IN", {
                       maximumFractionDigits: 2,
                       style: "currency",
-                      currency: "NRS",
+                      currency: "NPR",
                     })}{" "}
                   </span>
                 </h4>
@@ -89,7 +91,7 @@ const ProductTable = (props) => {
                     {parseInt(total - coupon).toLocaleString("en-IN", {
                       maximumFractionDigits: 2,
                       style: "currency",
-                      currency: "NRS",
+                      currency: "NPR",
                     })}
                   </span>
                 </h4>

@@ -119,9 +119,6 @@
   font-size: 1rem;
 }
 
-.bidding__component p span:before {
-  content: " Nrs.";
-}
 .highest__avatar p {
   margin: 0;
   margin-left: 0.5rem;

@@ -10,7 +10,7 @@ const ProductFeild = (props) => {
       </div>
       <div className={classes.product__content}>
         <h1>{props.title}</h1>
-        <h2>NRS.{props.price}</h2>
+        <h2>NPR.{props.price}</h2>
         <p>{props.description}</p>
       </div>
       {props.remove ? (

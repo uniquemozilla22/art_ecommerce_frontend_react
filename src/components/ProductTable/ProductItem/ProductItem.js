@@ -102,7 +102,13 @@ const ProductItem = ({
         <h5>{supplierName}</h5>
       </div>
       <div className={classes.product__Price}>
-        <h5>NRS. {price}</h5>
+        <h5>
+          {parseInt(price).toLocaleString("en-IN", {
+            maximumFractionDigits: 2,
+            style: "currency",
+            currency: "NPR",
+          })}
+        </h5>
       </div>
       <div className={classes.delete__item}>
         {wishlist && time === null ? (

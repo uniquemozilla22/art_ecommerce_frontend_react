@@ -16,7 +16,6 @@ let initialState = {
 
 let ProductReducer = (state = initialState, action) => {
   switch (action.type) {
-    
     case PRODUCT_BY_CATEGORIES: {
       return {
         ...state,

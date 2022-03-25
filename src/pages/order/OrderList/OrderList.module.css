@@ -42,10 +42,3 @@
 .order_action .action__icons__container .icons:hover {
   color: #676fa3;
 }
-
-.modal > div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}

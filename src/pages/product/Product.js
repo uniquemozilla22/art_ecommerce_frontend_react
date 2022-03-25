@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { WarningMessage } from "../../store/actions/Message/Message";
 import { useLocation } from "react-router-dom";
 import SearchProducts from "../../store/actions/Search/SearchProducts.fetch";
+import DataNotFound from "../../components/DataNotFound/DataNotFound";
 
 const Product = (props) => {
   const [isFilterActive, setIsFilterActive] = useState(false);
@@ -22,9 +23,16 @@ const Product = (props) => {
     fetchAllProducts();
   }, []);
 
+  useEffect(() => {
+    fetchAllProducts();
+  }, [location.state]);
+
   const fetchAllProducts = async () => {
+    console.log(location.state);
     if (location.state) {
-      dispatch(SearchProducts(location.state));
+      const searchproducts = await dispatch(SearchProducts(location.state));
+      setProducts(searchproducts);
+      console.log(searchproducts);
     } else {
       const allproducts = await dispatch(FetchAllProducts());
       setProducts(allproducts);
@@ -54,7 +62,7 @@ const Product = (props) => {
       <div className={classes.product__container}>
         <div className={"container-fluid"}>
           <div className={classes.product__title}>
-            <h1>Product</h1>
+            <h1>Products.</h1>
           </div>
           <div className="row">
             <div className="col-2 d-none d-md-block">
@@ -69,11 +77,18 @@ const Product = (props) => {
             </div>
             <div className="col-12 col-md-10">
               {products ? (
-                <ProductsContainer
-                  filterHandler={handleFilter}
-                  data={filteredProducts || products}
-                  fetchAllProducts={fetchAllProducts}
-                />
+                products.length !== 0 ? (
+                  <ProductsContainer
+                    filterHandler={handleFilter}
+                    data={filteredProducts || products}
+                    fetchAllProducts={fetchAllProducts}
+                  />
+                ) : (
+                  <DataNotFound
+                    content={"No products found . Try again"}
+                    action={fetchAllProducts}
+                  />
+                )
               ) : null}
             </div>
           </div>

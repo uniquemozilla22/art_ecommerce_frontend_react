@@ -253,7 +253,6 @@ const ProductCard = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => setShowModal(!showModal);
-  console.log(props);
 
   return (
     <>

@@ -5,6 +5,7 @@ import {
   SuccessMessage,
   WarningMessage,
 } from "../Message/Message";
+import { REMOVE_ORDER_PRODUCT } from "../Types/Types";
 
 const RemoveProductOnOrder = (order, product) => {
   return (dispatch, getState) => {

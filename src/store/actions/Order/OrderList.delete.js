@@ -1,21 +1,24 @@
 import axiosBase from "../../../axiosBase";
 import { hideLoading, showLoading } from "../Loading/Loading";
-import { ErrorMessage, WarningMessage } from "../Message/Message";
-import { FETCH_ORDER } from "../Types/Types";
+import {
+  ErrorMessage,
+  SuccessMessage,
+  WarningMessage,
+} from "../Message/Message";
 
-const GetOrderList = () => {
+const DeleteOrderList = (order) => {
   return async (dispatch, getState) => {
     dispatch(showLoading());
+
     try {
       const res = await new Promise((resolve) =>
-        resolve(fetchOrderData(getState().user.token))
+        resolve(deleteRequest(order, getState().user.token))
       );
       dispatch(hideLoading());
-
-      return res.data;
+      dispatch(SuccessMessage({ message: res.data.message }));
+      return res.data.success;
     } catch (error) {
       dispatch(hideLoading());
-
       if (error.response === undefined) {
         dispatch(
           ErrorMessage({
@@ -37,16 +40,17 @@ const GetOrderList = () => {
           );
         }
       }
+      return false;
     }
   };
 };
 
-const fetchOrderData = async (token) => {
-  return await axiosBase.get("orders/user", {
+const deleteRequest = (id, token) => {
+  return axiosBase.delete("/orders/delete/" + id, {
     headers: {
       Authorization: "Bearer " + token,
     },
   });
 };
 
-export default GetOrderList;
+export default DeleteOrderList;

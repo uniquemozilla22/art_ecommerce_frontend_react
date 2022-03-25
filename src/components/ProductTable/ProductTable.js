@@ -70,7 +70,7 @@ const ProductTable = (props) => {
                     {parseInt(total).toLocaleString("en-IN", {
                       maximumFractionDigits: 2,
                       style: "currency",
-                      currency: "NPR",
+                      currency: "NRS",
                     })}
                   </span>{" "}
                 </h4>
@@ -80,7 +80,7 @@ const ProductTable = (props) => {
                     {parseInt(coupon).toLocaleString("en-IN", {
                       maximumFractionDigits: 2,
                       style: "currency",
-                      currency: "NPR",
+                      currency: "NRS",
                     })}{" "}
                   </span>
                 </h4>
@@ -91,7 +91,7 @@ const ProductTable = (props) => {
                     {parseInt(total - coupon).toLocaleString("en-IN", {
                       maximumFractionDigits: 2,
                       style: "currency",
-                      currency: "NPR",
+                      currency: "NRS",
                     })}
                   </span>
                 </h4>

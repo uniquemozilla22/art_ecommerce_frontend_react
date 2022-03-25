@@ -106,7 +106,7 @@ const ProductItem = ({
           {parseInt(price).toLocaleString("en-IN", {
             maximumFractionDigits: 2,
             style: "currency",
-            currency: "NPR",
+            currency: "NRS",
           })}
         </h5>
       </div>

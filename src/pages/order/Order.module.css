@@ -1,3 +1,13 @@
-.order{
-    
+.order {
+  margin: 5rem 0;
+}
+
+.order .title__container h1 {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.order .title__container {
+  display: flex;
+  justify-content: space-between;
 }

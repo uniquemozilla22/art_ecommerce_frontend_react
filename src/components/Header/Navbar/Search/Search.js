@@ -9,20 +9,24 @@ import classes from "./Search.module.css";
 import { SearchOutlined } from "@mui/icons-material";
 
 const Search = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  const handleChange = (e) => {};
   return (
-    <OutlinedInput
-      id="SearchBar"
-      className={classes.search__bar__auto}
-      endAdornment={
-        <InputAdornment position="end">
-          <SearchOutlined />
-        </InputAdornment>
-      }
-      aria-describedby="outlined-weight-helper-text"
-      inputProps={{
-        "aria-label": "weight",
-      }}
-    />
+    <form onSubmit={handleSubmit}>
+      <OutlinedInput
+        id="SearchBar"
+        className={classes.search__bar__auto}
+        endAdornment={
+          <InputAdornment position="end">
+            <SearchOutlined />
+          </InputAdornment>
+        }
+        onChange={handleChange}
+      />
+      <input type="submit" className="d-none" />
+    </form>
   );
 };
 

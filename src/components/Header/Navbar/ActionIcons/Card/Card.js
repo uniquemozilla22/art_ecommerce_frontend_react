@@ -14,7 +14,7 @@ const CardBalance = ({ balance, email }) => {
                 {parseInt(balance).toLocaleString("en-IN", {
                   maximumFractionDigits: 2,
                   style: "currency",
-                  currency: "NPR",
+                  currency: "NRS",
                 })}
               </span>
             </p>

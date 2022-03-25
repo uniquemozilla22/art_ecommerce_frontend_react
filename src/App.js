@@ -24,7 +24,7 @@ import ConfirmEmail from "./pages/Confirm_email/Confirm_email";
 import Category from "./pages/Category/Category";
 import Wishlist from "./pages/wishlist/Wishlist.page";
 import MyBids from "./pages/mybids/MyBids.page";
-import Order from "./pages/order/Order";
+import Order from "./pages/order/Order.page";
 
 function App() {
   return (

@@ -7,23 +7,29 @@ import FetchAllProducts from "../../store/actions/products/allproducts.fetch";
 import classes from "./Product.module.css";
 import { connect } from "react-redux";
 import { WarningMessage } from "../../store/actions/Message/Message";
+import { useLocation } from "react-router-dom";
+import SearchProducts from "../../store/actions/Search/SearchProducts.fetch";
 
 const Product = (props) => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const handleFilter = () => setIsFilterActive(!isFilterActive);
-  const [products, setProducts] = useState(props.products.all);
+  const [products, setProducts] = useState(null);
   const dispatch = useDispatch();
   const [filteredProducts, setFilteredProducts] = useState(null);
-
-  useEffect(() => {
-    setProducts(props.products.all);
-  }, [props.products.all]);
+  const location = useLocation();
 
   useEffect(() => {
     fetchAllProducts();
   }, []);
 
-  const fetchAllProducts = () => dispatch(FetchAllProducts());
+  const fetchAllProducts = async () => {
+    if (location.state) {
+      dispatch(SearchProducts(location.state));
+    } else {
+      const allproducts = await dispatch(FetchAllProducts());
+      setProducts(allproducts);
+    }
+  };
 
   const filterProductbyPrice = (range) => {
     setFilteredProducts(
@@ -62,11 +68,13 @@ const Product = (props) => {
               )}
             </div>
             <div className="col-12 col-md-10">
-              <ProductsContainer
-                filterHandler={handleFilter}
-                data={filteredProducts || products}
-                fetchAllProducts={fetchAllProducts}
-              />
+              {products ? (
+                <ProductsContainer
+                  filterHandler={handleFilter}
+                  data={filteredProducts || products}
+                  fetchAllProducts={fetchAllProducts}
+                />
+              ) : null}
             </div>
           </div>
         </div>
@@ -86,11 +94,4 @@ const Product = (props) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    products: state.products,
-    ...ownProps,
-  };
-};
-
-export default connect(mapStateToProps)(Product);
+export default Product;

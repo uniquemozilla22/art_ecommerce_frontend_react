@@ -99,7 +99,7 @@ const ProductFilter = ({ data, filterProductbyPrice }) => {
                 onChange={(e, value) => handleChangeSlider(value)}
                 valueLabelDisplay="auto"
                 getAriaValueText={(value) => {
-                  return `NPR. ${value}`;
+                  return `NRS. ${value}`;
                 }}
                 className={classes.product__slider}
                 style={slider__style}

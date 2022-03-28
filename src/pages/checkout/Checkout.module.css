@@ -7,3 +7,20 @@
   font-size: 40px;
   color: #000000;
 }
+
+.checkbox {
+  display: flex !important;
+  align-items: center;
+  width: 100%;
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+
+.checkbox > label {
+  width: 100%;
+}
+
+.checkbox > input {
+  margin-left: 0 !important;
+  margin: 0 2rem;
+}

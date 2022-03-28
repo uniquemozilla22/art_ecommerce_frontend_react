@@ -1,29 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
-import ProductTable from "../../components/ProductTable/ProductTable";
+import { useDispatch } from "react-redux";
 import classes from "./Checkout.module.css";
-import removeCartItem from "../../store/actions/Cart/RemoveItem.post";
 import CheckoutInformation from "../../components/CheckoutInformation/CheckoutInformation";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
-import CartItems from "../../store/actions/Cart/CartItems.fetch";
 import GetOrderList from "../../store/actions/Order/OrderList.fetch";
+import OrderList from "../order/OrderList/OrderList.comp";
+import DeleteOrderList from "../../store/actions/Order/OrderList.delete";
+import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
+import { Form, Spinner } from "react-bootstrap";
+import { useLocation } from "react-router";
 
 const Checkout = (props) => {
-  const cartItems = useSelector((state) => state.cartContent.cartItems);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [data, setData] = useState(null);
+  const { state } = useLocation();
+
   const dispatch = useDispatch();
 
-  const [data, setData] = useState(cartItems);
+  const handleSelection = (id) => setSelectedOrder(id);
 
-  const removeCartItem = (id) => dispatch(removeCartItem({ id }));
-
-  const handleFetchCart = () => dispatch(CartItems());
-
-  const handleFetchOrders = () => {
-    let order = dispatch(GetOrderList());
+  const handleFetchOrders = async () => {
+    let order = await dispatch(GetOrderList());
+    setData(order);
   };
+
+  const deleteOrderSetter = (data, order) => {
+    const success = dispatch(DeleteOrderList(order));
+    if (success) {
+      let updated = data.filter((orders) => orders.id !== order);
+      setData(updated);
+    }
+  };
+  const deleteOrder = (order) => {
+    const confirmData = {
+      title: "The order #" + order + " will be removed from draft.",
+      onAccept: () => deleteOrderSetter(data, order),
+    };
+    dispatch(showConfirmation(confirmData.title, confirmData.onAccept));
+  };
+
   useEffect(() => {
-    setData(cartItems);
-  }, [cartItems]);
+    handleFetchOrders();
+  }, []);
+
+  useEffect(() => {
+    if (state) {
+      if (state.redirected === true) {
+        handleFetchOrders();
+      }
+    }
+  }, [state?.redirected]);
 
   return (
     <div className={classes.checkout__page}>
@@ -33,16 +59,31 @@ const Checkout = (props) => {
         </div>
         <div className="row">
           <div className={"col-lg-8 col-md-8 col-sm-12 col-xs-12"}>
-            {data ? (
-              data.length !== 0 ? (
-                <ProductTable items={data} removeFunction={removeCartItem} />
+            <Form>
+              {data ? (
+                data.length !== 0 ? (
+                  data
+                    .filter((o) => o.status === "draft")
+                    .map((order, index) => (
+                      <OrderListSelector
+                        key={index}
+                        order={order}
+                        fetchOrderData={handleFetchOrders}
+                        deleteOrder={deleteOrder}
+                        selectedOrder={selectedOrder === order.id}
+                        handleSelection={handleSelection}
+                      />
+                    ))
+                ) : (
+                  <DataNotFound
+                    content={"No Orders Found! Try adding some items to cart"}
+                    action={handleFetchOrders}
+                  />
+                )
               ) : (
-                <DataNotFound
-                  content={"No Cart Item Found! Try adding some items to cart"}
-                  action={handleFetchCart}
-                />
-              )
-            ) : null}
+                <Spinner />
+              )}
+            </Form>
           </div>
           <div className={"col-lg-4 col-md-4 col-sm-12 col-xs-12"}>
             <CheckoutInformation />
@@ -50,6 +91,31 @@ const Checkout = (props) => {
         </div>
       </div>
     </div>
+  );
+};
+
+const OrderListSelector = ({
+  handleSelection,
+  selected,
+  order,
+  fetchOrderData,
+  deleteOrder,
+}) => {
+  return (
+    <Form.Check
+      label={
+        <OrderList
+          {...order}
+          fetchOrderData={fetchOrderData}
+          deleteOrder={deleteOrder}
+        />
+      }
+      name={"orders"}
+      type={"radio"}
+      className={classes.checkbox}
+      onChange={(e) => handleSelection(order.id)}
+      checked={selected ? true : null}
+    />
   );
 };
 

@@ -7,6 +7,7 @@
   align-items: center;
   transition: all 0.4s ease-in-out;
   cursor: pointer;
+  flex-wrap: wrap;
 }
 
 .orderList .action__icons__container {
@@ -41,4 +42,34 @@
 
 .order_action .action__icons__container .icons:hover {
   color: #676fa3;
+}
+
+.action_mobile_container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.action_mobile_container .button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border-radius: 20px;
+  border: 1px solid rgb(103, 111, 163);
+  color: #676fa3;
+  margin: 5px;
+  transition: all ease-in 0.5s;
+}
+.action_mobile_container .button svg {
+  margin-right: 5px;
+}
+
+.action_mobile_container .button:hover {
+  background-color: rgb(103, 111, 163);
+  color: #fff;
+}
+@media screen and (max-width: 768px) {
+  .order_action .action__icons__container .icons {
+    margin: 1rem;
+  }
 }

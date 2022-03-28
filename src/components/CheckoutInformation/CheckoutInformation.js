@@ -1,53 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import classes from "./CheckoutInformation.module.css";
-import khalti from "../../Assets/khalti.png";
-import esewa from "../../Assets/esewa.png";
+
 import FeatherIcon from "feather-icons-react";
+import Payment from "./PaymentItem/PaymentItem";
 
 const CheckoutInformation = () => {
+  const paymentType = ["khalti", "esewa", "balance", "paypal", "stripe"];
+
+  const [selected, setSelected] = useState("khalti");
+
+  const handleSelected = (name) => setSelected(name);
+
   return (
     <div className={classes.checkout__information__container}>
       <h1 className={classes.heading__checkout__information}>Payment Info.</h1>
       <div className={classes.payment__checkbox}>
         <h2>Payment Method</h2>
-        <Form className={classes.checkbox__container}>
-          <Form.Check
-            label={<img src={esewa} alt="Esewa" />}
-            name="payment"
-            type={"radio"}
-            className={classes.checkbox}
-          />
-
-          <Form.Check
-            label={<img src={khalti} alt="Khalti" />}
-            name="payment"
-            type={"radio"}
-            className={classes.checkbox}
-          />
-          <Form.Check
-            label={
-              <div className={classes.label__COD}>
-                <FeatherIcon icon="dollar-sign" />
-                Use Balance
-              </div>
-            }
-            name="payment"
-            type={"radio"}
-            className={classes.checkbox}
-          />
-          <Form.Check
-            label={
-              <div className={classes.label__COD}>
-                <FeatherIcon icon="dollar-sign" />
-                Cash On Delivery
-              </div>
-            }
-            name="payment"
-            type={"radio"}
-            className={classes.checkbox}
-          />
-        </Form>
+        <form className={classes.checkbox__container}>
+          <div className={classes.checkbox_group}>
+            {paymentType.map((pay) => (
+              <Payment
+                name={pay}
+                handleSelected={handleSelected}
+                checked={selected === pay ? true : null}
+              />
+            ))}
+          </div>
+        </form>
       </div>
 
       <div className={classes.address__container}>

@@ -4,14 +4,16 @@ import ClearCartGlobally from "../../../../store/actions/Cart/Clear.post";
 import DataNotFound from "../../../DataNotFound/DataNotFound";
 import ProductFeild from "../../../ProductFeild/ProductFeild";
 import classes from "./CartModalBody.module.css";
-import { Link } from "react-router-dom";
 import { showConfirmation } from "../../../../store/actions/Confirmation/Confirmation.action";
 import CreateOrder from "../../../../store/actions/Order/CreateOrder.post";
+import { useNavigate } from "react-router-dom";
 
 const CartModalBody = (props) => {
   const [data, setData] = useState(props.data);
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
+  const navigation = useNavigate();
+
   useEffect(() => {
     setData(props.data);
     setTotal(totalPriceHandler(props.data));
@@ -58,6 +60,7 @@ const CartModalBody = (props) => {
 
   const onAccept = () => {
     dispatch(CreateOrder());
+    navigation("/checkout", { state: { redirected: true } });
   };
 
   const checkoutButton = () => {

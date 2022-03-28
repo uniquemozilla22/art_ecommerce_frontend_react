@@ -1,7 +1,6 @@
 import { HIDE_CONFIRMATION, SHOW_CONFIRMATION } from "../Types/Types";
 
 export const showConfirmation = (title, onAccept) => {
-  console.log(onAccept);
   return {
     type: SHOW_CONFIRMATION,
     payload: {

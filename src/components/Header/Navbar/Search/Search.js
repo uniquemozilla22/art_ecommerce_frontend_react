@@ -12,7 +12,6 @@ import { useNavigate, useLocation } from "react-router";
 const Search = () => {
   const location = useLocation();
 
-  console.log(location.state);
   const [search, setSearch] = useState();
   const navigation = useNavigate();
   const handleSubmit = (e) => {
@@ -24,7 +23,7 @@ const Search = () => {
     <form onSubmit={handleSubmit}>
       <OutlinedInput
         id="SearchBar"
-        placeholder={location.state}
+        placeholder={location.state !== String ? null : location.state}
         className={classes.search__bar__auto}
         endAdornment={
           <InputAdornment position="end">

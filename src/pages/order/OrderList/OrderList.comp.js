@@ -43,7 +43,7 @@ const OrderList = ({
     dispatch(RemoveProductOnOrder(order, product));
     const orderItems = items.filter((item) => item.data.id !== product);
     setOrderItem(orderItems);
-    if (orderItems.length == 0) {
+    if (orderItems.length === 0) {
       fetchOrderData();
       handleCloseProductsModal();
     }
@@ -74,7 +74,7 @@ const OrderList = ({
           <p>
             {" "}
             Items
-            <span>{orderItem.length}</span>
+            <span>{orderItems.length}</span>
           </p>
         </div>
         <div className={classes.order_status}>
@@ -96,7 +96,9 @@ const OrderList = ({
                 : 0}
             </span>
           </p>
-          <div className={classes.action__icons__container}>
+          <div
+            className={"d-none d-md-block " + classes.action__icons__container}
+          >
             <Tooltip title={"See Order #" + id}>
               <RemoveRedEyeOutlined
                 className={classes.icons}
@@ -115,7 +117,34 @@ const OrderList = ({
               />
             </Tooltip>
           </div>
-          <div className={classes.delete_order}></div>
+          <div
+            className={"d-flex d-md-none " + classes.action_mobile_container}
+          >
+            <button
+              className={classes.button}
+              onClick={(e) => {
+                e.preventDefault();
+                handleOpenProductsModal();
+              }}
+            >
+              <RemoveRedEyeOutlined />
+              See Order <span>#{id}</span>
+            </button>
+            <button className={classes.button}>
+              <PaymentsOutlined />
+              Place Order <span>#{id}</span>
+            </button>
+            <button
+              className={classes.button}
+              onClick={(e) => {
+                e.preventDefault();
+                deleteOrder(id);
+              }}
+            >
+              <DeleteOutlined />
+              Delete Order<span>#{id}</span>
+            </button>
+          </div>
         </div>
       </div>
       <Modal show={showProducts} onHide={handleCloseProductsModal} size="lg">

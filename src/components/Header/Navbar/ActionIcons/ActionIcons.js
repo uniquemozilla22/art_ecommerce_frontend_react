@@ -31,12 +31,12 @@ const ActionIcons = (props) => {
           onClick={() => props.toggleSearch()}
         />
       </Tooltip>
-      <Tooltip title="Help-Centre">
+      {/* <Tooltip title="Help-Centre">
         <HelpOutline
           className={classes.navigation_icons}
           onClick={() => props.toggleHelpCenter()}
         />
-      </Tooltip>
+      </Tooltip> */}
       {token ? (
         <Tooltip title="Wishlist">
           <Link to="/wishlist">
@@ -59,14 +59,21 @@ const ActionIcons = (props) => {
               variant="none"
             >
               <Tooltip title="Profile">
-                <PersonOutlineOutlined className={classes.navigation_icons} />
+                {token ? (
+                  <CardBalance
+                    balance={props.user.balance}
+                    username={props.user.username}
+                  />
+                ) : (
+                  <PersonOutlineOutlined className={classes.navigation_icons} />
+                )}
               </Tooltip>
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item disabled>
                 <CardBalance
                   balance={props.user.balance}
-                  email={props.user.email}
+                  email={props.user.username || props.user.email}
                 />
               </Dropdown.Item>
               <Dropdown.Divider />

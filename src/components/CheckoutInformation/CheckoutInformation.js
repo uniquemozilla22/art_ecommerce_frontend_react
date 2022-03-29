@@ -14,7 +14,7 @@ const CheckoutInformation = () => {
 
   return (
     <div className={classes.checkout__information__container}>
-      <h1 className={classes.heading__checkout__information}>Payment Info.</h1>
+      <h1 className={classes.heading__checkout__information}>Order Payment.</h1>
       <div className={classes.payment__checkbox}>
         <h2>Payment Method</h2>
         <form className={classes.checkbox__container}>

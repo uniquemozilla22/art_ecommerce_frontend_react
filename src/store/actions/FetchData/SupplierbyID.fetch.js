@@ -1,12 +1,12 @@
 import axiosBase from "../../../axiosBase";
-import { hideLoading, showLoading } from "../Loading/Loading";
+import { showLoading, hideLoading } from "../Loading/Loading";
 import { ErrorMessage, WarningMessage } from "../Message/Message";
 
-const FetchCategories = () => {
+const FetchSupplier = (id) => {
   return async (dispatch, getState) => {
     dispatch(showLoading());
     try {
-      const res = await new Promise((resolve) => resolve(fetch()));
+      const res = await new Promise((resolve) => resolve(fetch(id)));
       dispatch(hideLoading());
       return res.data;
     } catch (error) {
@@ -36,8 +36,8 @@ const FetchCategories = () => {
   };
 };
 
-const fetch = async () => {
-  return await axiosBase.get("categories");
+const fetch = async (id) => {
+  return await axiosBase("suppliers/" + id);
 };
 
-export default FetchCategories;
+export default FetchSupplier;

@@ -43,7 +43,7 @@ const OrderList = ({
     dispatch(RemoveProductOnOrder(order, product));
     const orderItems = items.filter((item) => item.data.id !== product);
     setOrderItem(orderItems);
-    if (orderItems.length === 0) {
+    if (orderItems.length == 0) {
       fetchOrderData();
       handleCloseProductsModal();
     }
@@ -72,7 +72,6 @@ const OrderList = ({
         </div>
         <div className={classes.order_items}>
           <p>
-            {" "}
             Items
             <span>{orderItems.length}</span>
           </p>
@@ -120,21 +119,22 @@ const OrderList = ({
           <div
             className={"d-flex d-md-none " + classes.action_mobile_container}
           >
-            <button
+            <div
               className={classes.button}
               onClick={(e) => {
+                console.log("clicked");
                 e.preventDefault();
                 handleOpenProductsModal();
               }}
             >
               <RemoveRedEyeOutlined />
               See Order <span>#{id}</span>
-            </button>
-            <button className={classes.button}>
+            </div>
+            <div className={classes.button}>
               <PaymentsOutlined />
               Place Order <span>#{id}</span>
-            </button>
-            <button
+            </div>
+            <div
               className={classes.button}
               onClick={(e) => {
                 e.preventDefault();
@@ -143,7 +143,7 @@ const OrderList = ({
             >
               <DeleteOutlined />
               Delete Order<span>#{id}</span>
-            </button>
+            </div>
           </div>
         </div>
       </div>

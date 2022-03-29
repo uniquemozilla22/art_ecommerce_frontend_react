@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ArtistBanner from "../../components/ArtistBanner/ArtistBanner";
 import background from "../../Assets/background.png";
 import art1 from "../../Assets/art1.jpg";
@@ -16,6 +16,7 @@ import {
 import { ClassNames } from "@emotion/react";
 import ProductGrid from "../../components/AritistProductGrid/ProductGrid";
 import ArtistCard from "../../components/ArtistCard/ArtistCard";
+import { useParams } from "react-router";
 
 const Artist = () => {
   const products = [
@@ -67,6 +68,12 @@ const Artist = () => {
       image: artist2,
     },
   ];
+  const { id } = useParams();
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {}, []);
+
   return (
     <div>
       <ArtistBanner

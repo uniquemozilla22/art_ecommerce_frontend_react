@@ -76,7 +76,7 @@ const Checkout = (props) => {
                     ))
                 ) : (
                   <DataNotFound
-                    content={"No Orders Found! Try adding some items to cart"}
+                    content={"No Orders Found! Try adding some items to order"}
                     action={handleFetchOrders}
                   />
                 )

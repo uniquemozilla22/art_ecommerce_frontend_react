@@ -25,14 +25,14 @@ const Product = (props) => {
 
   useEffect(() => {
     fetchAllProducts();
-  }, [location.state]);
+  }, [location.state.search]);
 
   const fetchAllProducts = async () => {
-    console.log(location.state);
     if (location.state) {
-      const searchproducts = await dispatch(SearchProducts(location.state));
+      const searchproducts = await dispatch(
+        SearchProducts(location.state.search)
+      );
       setProducts(searchproducts);
-      console.log(searchproducts);
     } else {
       const allproducts = await dispatch(FetchAllProducts());
       setProducts(allproducts);

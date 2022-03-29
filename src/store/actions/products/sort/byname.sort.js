@@ -4,8 +4,6 @@ const SortProductsByName = () => {
     data = data.sort((a, b) =>
       a.data.name > b.data.name ? 1 : b.data.name > a.data.name ? -1 : 0
     );
-
-    console.log(data);
   };
 };
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./ProductInformation.module.css";
 import FeatherIcon from "feather-icons-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { Avatar, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +23,8 @@ import IsBiddingUser from "../../store/actions/Bid/isBiddingUser.check";
 
 export const ProductInformation = (props) => {
   const dispatch = useDispatch();
+  const locations = useLocation();
+  console.log(locations);
   const { id, productData, supplier, category, likes, tags } = props;
 
   const token = useSelector((state) => state.user.token);
@@ -168,7 +170,13 @@ export const ProductInformation = (props) => {
               <h1>Share</h1>
               <div className={classes.icons__container}>
                 <div className={classes.icon}>
-                  <FeatherIcon icon="facebook" />
+                  <a
+                    target="_blank"
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}&amp;src=sdkpreparse`}
+                    class="fb-xfbml-parse-ignore"
+                  >
+                    <FeatherIcon icon="facebook" />
+                  </a>
                 </div>
                 <div className={classes.icon}>
                   <FeatherIcon icon="twitter" />

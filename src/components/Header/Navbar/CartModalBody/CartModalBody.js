@@ -61,6 +61,7 @@ const CartModalBody = (props) => {
   const onAccept = () => {
     dispatch(CreateOrder());
     navigation("/checkout", { state: { redirected: true } });
+    dispatch({ type: "CART" });
   };
 
   const checkoutButton = () => {

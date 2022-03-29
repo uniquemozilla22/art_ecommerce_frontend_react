@@ -25,8 +25,28 @@ import Category from "./pages/Category/Category";
 import Wishlist from "./pages/wishlist/Wishlist.page";
 import MyBids from "./pages/mybids/MyBids.page";
 import Order from "./pages/order/Order.page";
+import { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  // handle what happens on key press
+  const handleKeyPress = useCallback((event) => {
+    if (event.altKey && (event.key === "s" || event.key === "S")) {
+      dispatch({ type: "SEARCH" });
+    }
+  }, []);
+
+  useEffect(() => {
+    // attach the event listener
+    document.addEventListener("keydown", handleKeyPress);
+
+    // remove the event listener
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   return (
     <div className="App">
       <Layout>
@@ -47,7 +67,7 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/aboutus" element={<About />} />
-          <Route path="/artist:id" element={<Artist />} />
+          <Route path="/artist/:id" element={<Artist />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/returnsandrefunds" element={<Return />} />
           <Route path="/editprofile" element={<EditProfile />} />

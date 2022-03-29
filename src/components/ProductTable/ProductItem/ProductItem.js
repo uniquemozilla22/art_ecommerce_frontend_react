@@ -96,12 +96,19 @@ const ProductItem = ({
           <p>{description}</p>
           {time ? <p>{timed(days, mins, hours, sec)}</p> : null}
           <p className={"d-flex d-sm-none "}>{supplierName}</p>
+          <p className={"d-flex d-sm-none "}>
+            {parseInt(price).toLocaleString("en-IN", {
+              maximumFractionDigits: 2,
+              style: "currency",
+              currency: "NRS",
+            })}
+          </p>
         </div>
       </div>
       <div className={"d-none d-sm-flex " + classes.product__by}>
         <h5>{supplierName}</h5>
       </div>
-      <div className={classes.product__Price}>
+      <div className={"d-none d-sm-flex " + classes.product__Price}>
         <h5>
           {parseInt(price).toLocaleString("en-IN", {
             maximumFractionDigits: 2,

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import classes from "./SearchModal.module.css";
 import { Modal, Fade, Box, OutlinedInput, InputAdornment } from "@mui/material";
 import { SearchOutlined } from "@mui/icons-material";
+import { useNavigate } from "react-router";
 const SearchModal = (props) => {
   const [searchShow, setSearchShow] = useState(props.show);
 
@@ -13,6 +14,15 @@ const SearchModal = (props) => {
   useEffect(() => {
     setSearchShow(props.show);
   }, [props.show]);
+
+  const [search, setSearch] = useState();
+  const navigation = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigation("search", { state: { search } });
+    handleSearch();
+  };
+  const handleChange = (e) => setSearch(e.target.value);
 
   return (
     <Modal
@@ -28,10 +38,12 @@ const SearchModal = (props) => {
             id="SearchBar"
             className={classes.search__bar__modal}
             endAdornment={
-              <InputAdornment position="end">
+              <InputAdornment position="end" onClick={(e) => handleSubmit(e)}>
                 <SearchOutlined />
               </InputAdornment>
             }
+            autoFocus
+            onChange={handleChange}
           />
         </Box>
       </Fade>

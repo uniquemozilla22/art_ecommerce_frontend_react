@@ -32,3 +32,13 @@
 .balance__container p span {
   font-weight: bold;
 }
+
+.balance__container .avatar > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.balance__container .avatar > div p span {
+  margin-left: 0.5rem;
+}

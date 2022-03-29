@@ -16,17 +16,17 @@ const Search = () => {
   const navigation = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigation("search", { state: search });
+    navigation("search", { state: { search } });
   };
   const handleChange = (e) => setSearch(e.target.value);
   return (
     <form onSubmit={handleSubmit}>
       <OutlinedInput
         id="SearchBar"
-        placeholder={location.state !== String ? null : location.state}
+        placeholder={location.state?.search}
         className={classes.search__bar__auto}
         endAdornment={
-          <InputAdornment position="end">
+          <InputAdornment position="end" onClick={(e) => handleSubmit(e)}>
             <SearchOutlined />
           </InputAdornment>
         }

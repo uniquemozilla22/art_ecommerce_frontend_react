@@ -52,7 +52,7 @@ const ProductTable = (props) => {
           <div className={classes.table__title}>
             <h4>Product</h4>
             <h4 className={"d-none d-sm-block"}>By</h4>
-            <h4>Price</h4>
+            <h4 className={"d-none d-sm-block "}>Price</h4>
             <h4></h4>
           </div>
           <div className={classes.product__listing__container}>

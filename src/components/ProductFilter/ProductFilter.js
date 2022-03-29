@@ -1,31 +1,27 @@
-import { Category } from "@mui/icons-material";
-import React, { useState } from "react";
-import { useLocation } from "react-router";
-import { animated, useSpring } from "react-spring";
+import React, { useEffect, useState } from "react";
+import { animated } from "react-spring";
 import classes from "./ProductFilter.module.css";
 import FeatherIcon from "feather-icons-react";
 import { Accordion, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Slider } from "@mui/material";
 import { useDispatch } from "react-redux";
-import {
-  CATEGORY,
-  FILTER_PRODUCTS_BY_PRICE,
-} from "../../store/actions/Types/Types";
+
+import FetchCategories from "../../store/actions/FetchData/Categories.fetch";
 
 const ProductFilter = ({ data, filterProductbyPrice }) => {
   const dispatch = useDispatch();
-  const categoryData = (datas) => {
-    return datas
-      ?.map((product) => product.category)
-      .reduce((acc, current) => {
-        const x = acc.find((item) => item.id === current.id);
-        if (!x) {
-          return acc.concat([current]);
-        } else {
-          return acc;
-        }
-      }, []);
+
+  const [category, setCategory] = useState(null);
+
+  useEffect(() => {
+    fetchCategory();
+  }, []);
+
+  const fetchCategory = async () => {
+    const categories = await dispatch(FetchCategories());
+    setCategory(categories);
+    console.log(category);
   };
 
   const getPriceRange = () => {
@@ -34,7 +30,6 @@ const ProductFilter = ({ data, filterProductbyPrice }) => {
     return [price_range[0], price_range[price_range.length - 1]];
   };
 
-  const [category, setCategory] = useState(categoryData(data));
   const [highAndLow, sethighAndLow] = useState(getPriceRange());
   const [value, setValue] = useState(highAndLow);
 

@@ -42,12 +42,20 @@ const ProductsContainer = ({
     switch (type) {
       case SORT_BY_NAME_ASCENDING: {
         return data.sort((a, b) =>
-          a.data.name > b.data.name ? 1 : b.data.name > a.data.name ? -1 : 0
+          a.data.name.toLowerCase() > b.data.name.toLowerCase()
+            ? 1
+            : b.data.name.toLowerCase() > a.data.name.toLowerCase()
+            ? -1
+            : 0
         );
       }
       case SORT_BY_NAME_DESCENDING: {
         return data.sort((a, b) =>
-          a.data.name < b.data.name ? 1 : b.data.name < a.data.name ? -1 : 0
+          a.data.name.toLowerCase() < b.data.name.toLowerCase()
+            ? 1
+            : b.data.name.toLowerCase() < a.data.name.toLowerCase()
+            ? -1
+            : 0
         );
       }
       case SORT_BY_PRICE_ASCENDING: {

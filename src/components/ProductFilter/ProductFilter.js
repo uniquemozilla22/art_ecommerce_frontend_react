@@ -49,7 +49,10 @@ const ProductFilter = ({ data, filterProductbyPrice }) => {
           >
             <FeatherIcon icon="list" /> <span>Products</span>
           </NavLink>
-          <NavLink to={"/artists"}>
+          <NavLink
+            to={"/artists"}
+            className={({ isActive }) => (isActive ? classes.active__link : "")}
+          >
             <FeatherIcon icon="users" /> <span>Auctions</span>
           </NavLink>
         </ul>

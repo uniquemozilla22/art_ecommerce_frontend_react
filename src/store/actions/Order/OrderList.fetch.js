@@ -15,7 +15,6 @@ const GetOrderList = () => {
       return res.data;
     } catch (error) {
       dispatch(hideLoading());
-
       if (error.response === undefined) {
         dispatch(
           ErrorMessage({

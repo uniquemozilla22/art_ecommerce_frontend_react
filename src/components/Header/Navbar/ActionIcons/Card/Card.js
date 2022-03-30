@@ -22,17 +22,6 @@ const CardBalance = ({ balance, email, username, image }) => {
                   email?.charAt(0).toUpperCase()}
               </Avatar>
             </StyledBadge>
-            {username ? (
-              <p className="d-none d-sm-block">
-                <span>
-                  {parseInt(balance).toLocaleString("en-IN", {
-                    maximumFractionDigits: 2,
-                    style: "currency",
-                    currency: "NRS",
-                  })}
-                </span>
-              </p>
-            ) : null}
           </div>
           {email ? (
             <div className={classes.content__container}>

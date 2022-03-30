@@ -193,6 +193,7 @@ export const ProductInformation = (props) => {
 export const BiddingInformation = (props) => {
   const dispatch = useDispatch();
 
+  const username = useSelector((state) => state.user.username);
   let {
     id,
     productData,
@@ -207,6 +208,24 @@ export const BiddingInformation = (props) => {
   } = props;
   const tokens = useSelector((state) => state.user.token);
   const [token, setToken] = useState(tokens);
+  const [bidding_pirce, setBiddingPrice] = useState(currentBid.price);
+  const [likeCount, setLikeCount] = useState(likes);
+  const [winnerName, setWinnerName] = useState(
+    currentBid.first_name + " " + currentBid.last_name
+  );
+  const [bidAmount, setBidAmount] = useState(0);
+  const [showSubmit, setShowSubmit] = useState(false);
+  const [days, setDays] = useState(null);
+  const [hours, setHours] = useState(null);
+  const [mins, setMins] = useState(null);
+  const [sec, setSec] = useState(null);
+  const [isBidder, setIsBidder] = useState({
+    bid_status: false,
+  });
+  const isLikedAction = () => dispatch(isLikedByUser(id));
+  const [isBiddedbyUser, setIsBiddedbyUser] = useState(false);
+
+  const [isLiked, setIsLiked] = useState(isLikedAction);
 
   useEffect(() => {
     setToken(tokens);
@@ -215,28 +234,16 @@ export const BiddingInformation = (props) => {
     }
   }, [tokens]);
 
-  const [isBidder, setIsBidder] = useState({
-    bid_status: false,
-  });
-
   const checkBiddingUser = async () => {
     const isBidderCheck = await dispatch(IsBiddingUser(id));
     setIsBidder(isBidderCheck);
   };
-  const [likeCount, setLikeCount] = useState(likes);
-
-  const isLikedAction = () => dispatch(isLikedByUser(id));
-
-  const [isLiked, setIsLiked] = useState(isLikedAction);
 
   const toggleLike = (id) => {
     dispatch(toggleLikeOnProduct(id));
     setIsLiked(!isLiked);
     isLiked ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
   };
-
-  const [bidAmount, setBidAmount] = useState(0);
-  const [showSubmit, setShowSubmit] = useState(false);
 
   const handleChange = (e) => {
     setBidAmount(e.target.value);
@@ -262,6 +269,9 @@ export const BiddingInformation = (props) => {
         })
       );
     } else {
+      setBiddingPrice(parseInt(isBidder.recentBid) + parseInt(bidAmount));
+      setWinnerName(username);
+      setIsBiddedbyUser(true);
       dispatch(BidOnProduct(auction.id, bidAmount));
     }
   };
@@ -291,11 +301,6 @@ export const BiddingInformation = (props) => {
     dispatch(AddWishlistItem(id));
     setIsOnWishList(true);
   };
-
-  const [days, setDays] = useState(null);
-  const [hours, setHours] = useState(null);
-  const [mins, setMins] = useState(null);
-  const [sec, setSec] = useState(null);
 
   const timedInteval = setInterval(() => {
     // Get today's date and time
@@ -418,18 +423,17 @@ export const BiddingInformation = (props) => {
                     Current Bid:
                     <span>
                       <div className={classes.currentBid__container}>
-                        {parseInt(currentBid.price).toLocaleString("en-IN", {
+                        {parseInt(bidding_pirce).toLocaleString("en-IN", {
                           maximumFractionDigits: 2,
                           style: "currency",
                           currency: "NRS",
                         })}
                         {token && isBidder.bid_status ? (
-                          isBidder.winStatus === false ? (
+                          isBidder.winStatus === false && !isBiddedbyUser ? (
                             <div className={classes.losing}>
                               <FeatherIcon icon="chevron-down" />
-
                               {(
-                                parseInt(currentBid.price) -
+                                parseInt(bidding_pirce) -
                                 parseInt(isBidder.recentBid)
                               ).toLocaleString("en-IN", {
                                 maximumFractionDigits: 2,
@@ -444,7 +448,7 @@ export const BiddingInformation = (props) => {
                         className={
                           classes.currentHighBidder +
                           " " +
-                          (isBidder?.winStatus === true
+                          (isBidder?.winStatus === true || isBiddedbyUser
                             ? classes.winning
                             : classes.losing)
                         }
@@ -455,11 +459,9 @@ export const BiddingInformation = (props) => {
                             alt={currentBid.first_name}
                           />
                         ) : (
-                          <Avatar>{currentBid?.first_name?.charAt(0)}</Avatar>
+                          <Avatar>{winnerName.charAt(0)}</Avatar>
                         )}
-                        <p>
-                          {currentBid?.first_name + " " + currentBid?.last_name}
-                        </p>
+                        <p>{winnerName}</p>
                       </div>
                     </span>
                   </p>

@@ -34,17 +34,20 @@ const SearchModal = (props) => {
     >
       <Fade in={searchShow}>
         <Box className={classes.search__modal__container}>
-          <OutlinedInput
-            id="SearchBar"
-            className={classes.search__bar__modal}
-            endAdornment={
-              <InputAdornment position="end" onClick={(e) => handleSubmit(e)}>
-                <SearchOutlined />
-              </InputAdornment>
-            }
-            autoFocus
-            onChange={handleChange}
-          />
+          <form onSubmit={handleSubmit}>
+            <OutlinedInput
+              id="SearchBar"
+              className={classes.search__bar__modal}
+              endAdornment={
+                <InputAdornment position="end" onClick={(e) => handleSubmit(e)}>
+                  <SearchOutlined />
+                </InputAdornment>
+              }
+              autoFocus
+              onChange={handleChange}
+            />
+            <input type="submit" className="d-none" />
+          </form>
         </Box>
       </Fade>
     </Modal>

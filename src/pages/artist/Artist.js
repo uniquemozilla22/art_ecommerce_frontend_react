@@ -17,6 +17,9 @@ import { ClassNames } from "@emotion/react";
 import ProductGrid from "../../components/AritistProductGrid/ProductGrid";
 import ArtistCard from "../../components/ArtistCard/ArtistCard";
 import { useParams } from "react-router";
+import { useDispatch } from "react-redux";
+import FetchSupplier from "../../store/actions/FetchData/SupplierbyID.fetch";
+import DataNotFound from "../../components/DataNotFound/DataNotFound";
 
 const Artist = () => {
   const products = [
@@ -69,17 +72,34 @@ const Artist = () => {
     },
   ];
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const [artist, setArtist] = useState(null);
 
-  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetchData(id);
+  }, []);
 
-  useEffect(() => {}, []);
+  const fetchData = async (id) => {
+    const artistData = await dispatch(FetchSupplier(id));
+    setArtist(artistData);
+    console.log(artistData);
+  };
 
-  return (
+  return artist ? (
     <div>
       <ArtistBanner
         background={background}
-        name="Phurba Gurung"
-        title="Abstract Artist"
+        name={
+          artist.data.first_name.charAt(0).toUpperCase() +
+          artist.data.first_name.slice(1) +
+          " " +
+          artist.data.middle_name.charAt(0).toUpperCase() +
+          artist.data.middle_name.slice(1) +
+          " " +
+          artist.data.last_name.charAt(0).toUpperCase() +
+          artist.data.last_name.slice(1)
+        }
+        title={artist.data.genra || "Genra Not Found"}
         rank={1}
         artsSold={99}
         likes={900}
@@ -87,15 +107,50 @@ const Artist = () => {
       />
       <div className="container-fluid">
         <ArtistDetails
-          name="Phurba Gurung"
-          facebook="phurba.gurung"
-          twitter="phurba.gurung"
-          instagram="phurba.gurung"
+          name={
+            artist.data.first_name.charAt(0).toUpperCase() +
+            artist.data.first_name.slice(1) +
+            " " +
+            artist.data.middle_name.charAt(0).toUpperCase() +
+            artist.data.middle_name.slice(1) +
+            " " +
+            artist.data.last_name.charAt(0).toUpperCase() +
+            artist.data.last_name.slice(1)
+          }
+          facebook={
+            artist.data.first_name +
+            "_" +
+            artist.data.middle_name +
+            "_" +
+            artist.data.last_name
+          }
+          twitter={
+            artist.data.first_name +
+            "_" +
+            artist.data.middle_name +
+            "_" +
+            artist.data.last_name
+          }
+          instagram={
+            artist.data.first_name +
+            "_" +
+            artist.data.middle_name +
+            "_" +
+            artist.data.last_name
+          }
+          description={artist.data.description}
         />
         <div className="row">
           <div className={"col-lg-9  col-md-12 col-sm-12 col-xs-12"}>
             <div className={"row"}>
-              <ProductGrid products={products} />
+              {artist.products ? (
+                <ProductGrid products={artist.products} />
+              ) : (
+                <DataNotFound
+                  action={() => fetchData(id)}
+                  content={"Artist Not Found ! Try Again"}
+                />
+              )}
             </div>
           </div>
           <div className="col-3 d-none d-lg-block ">
@@ -114,6 +169,11 @@ const Artist = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <DataNotFound
+      action={() => fetchData(id)}
+      content={"Artist Not Found ! Try Again"}
+    />
   );
 };
 

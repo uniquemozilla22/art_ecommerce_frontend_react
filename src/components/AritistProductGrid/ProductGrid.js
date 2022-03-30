@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import fetchLikedProducts from "../../store/actions/Authentication/LikedProducts/likedProducts.fetch";
 import DataNotFound from "../DataNotFound/DataNotFound";
 import FetchAllBids from "../../store/actions/Bid/bid.fetch";
-const ProductGrid = ({ arts, bids }) => {
+const ProductGrid = ({ arts, bids, products }) => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
@@ -15,13 +15,17 @@ const ProductGrid = ({ arts, bids }) => {
   }, []);
 
   const myLikedProducts = async () => {
-    if (arts) {
-      let likedproducts = await dispatch(await fetchLikedProducts());
-      setData(likedproducts);
-    }
-    if (bids) {
-      const fetch = await dispatch(FetchAllBids());
-      setData(fetch);
+    if (data) {
+      setData(products);
+    } else {
+      if (arts) {
+        let likedproducts = await dispatch(await fetchLikedProducts());
+        setData(likedproducts);
+      }
+      if (bids) {
+        const fetch = await dispatch(FetchAllBids());
+        setData(fetch);
+      }
     }
   };
 
@@ -32,7 +36,7 @@ const ProductGrid = ({ arts, bids }) => {
         {data.length !== 0 ? (
           data.map((product, index) => {
             return product.time ? (
-              <div className="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+              <div key={index} className="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 <ProductCard
                   key={index}
                   id={product.data.id}
@@ -68,9 +72,7 @@ const ProductGrid = ({ arts, bids }) => {
         ) : (
           <DataNotFound
             action={() => myLikedProducts()}
-            content={
-              "Liked products not found. Try giving Likes to the products."
-            }
+            content={"Products not found."}
           />
         )}
       </div>

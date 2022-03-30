@@ -16,6 +16,7 @@ const Category = (props) => {
   const [products, setProducts] = useState(props.products.category);
   const params = useParams();
   const dispatch = useDispatch();
+  const { id } = params;
 
   const [filteredProducts, setFilteredProducts] = useState(null);
   useEffect(() => {
@@ -23,9 +24,8 @@ const Category = (props) => {
   }, [props.products.category]);
 
   useEffect(() => {
-    const { id } = params;
     fetchProductsByCategories({ id });
-  }, []);
+  }, [id]);
 
   const fetchProductsByCategories = (data) => {
     dispatch(ProductsByCategories(data));

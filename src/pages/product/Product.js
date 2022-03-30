@@ -17,22 +17,18 @@ const Product = (props) => {
   const [products, setProducts] = useState(null);
   const dispatch = useDispatch();
   const [filteredProducts, setFilteredProducts] = useState(null);
-  const location = useLocation();
+  const { state } = useLocation();
 
   useEffect(() => {
     fetchAllProducts();
   }, []);
 
-  useEffect(() => {
-    fetchAllProducts();
-  }, [location.state.search]);
-
   const fetchAllProducts = async () => {
-    if (location.state) {
-      const searchproducts = await dispatch(
-        SearchProducts(location.state.search)
-      );
-      setProducts(searchproducts);
+    if (state) {
+      if (state?.search) {
+        const searchproducts = await dispatch(SearchProducts(state.search));
+        setProducts(searchproducts);
+      }
     } else {
       const allproducts = await dispatch(FetchAllProducts());
       setProducts(allproducts);

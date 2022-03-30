@@ -18,6 +18,13 @@
   cursor: pointer;
   font-weight: 600;
 }
+.product__filter__container .active__link a,
+.product__filter__container .active__link span,
+.product__filter__container .active__link svg {
+  color: #000 !important;
+  cursor: pointer;
+  font-weight: 600;
+}
 .product__filter__container .filterList span {
   margin-left: 15px;
 }

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { animated } from "react-spring";
 import classes from "./ProductFilter.module.css";
 import FeatherIcon from "feather-icons-react";
-import { Accordion, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Accordion } from "react-bootstrap";
+import { Link, useParams, useLocation, NavLink } from "react-router-dom";
 import { Slider } from "@mui/material";
 import { useDispatch } from "react-redux";
 
@@ -11,6 +11,8 @@ import FetchCategories from "../../store/actions/FetchData/Categories.fetch";
 
 const ProductFilter = ({ data, filterProductbyPrice }) => {
   const dispatch = useDispatch();
+  const { id } = useParams();
+  const location = useLocation();
 
   const [category, setCategory] = useState(null);
 
@@ -21,7 +23,6 @@ const ProductFilter = ({ data, filterProductbyPrice }) => {
   const fetchCategory = async () => {
     const categories = await dispatch(FetchCategories());
     setCategory(categories);
-    console.log(category);
   };
 
   const getPriceRange = () => {
@@ -42,12 +43,15 @@ const ProductFilter = ({ data, filterProductbyPrice }) => {
     <div className={classes.product__filter__container}>
       <div className={classes.filtering__section}>
         <ul className={classes.filterList}>
-          <Link to={"/products"}>
+          <NavLink
+            to={"/products"}
+            className={({ isActive }) => (isActive ? classes.active__link : "")}
+          >
             <FeatherIcon icon="list" /> <span>Products</span>
-          </Link>
-          <Link to={"/artists"}>
+          </NavLink>
+          <NavLink to={"/artists"}>
             <FeatherIcon icon="users" /> <span>Auctions</span>
-          </Link>
+          </NavLink>
         </ul>
         <Accordion
           defaultActiveKey="0"
@@ -62,7 +66,14 @@ const ProductFilter = ({ data, filterProductbyPrice }) => {
                 <ul className={classes.categoryDropdown}>
                   {Object.keys(category).map((keys, value) => {
                     return (
-                      <animated.li key={value}>
+                      <animated.li
+                        key={value}
+                        className={
+                          id && category[value].id == id
+                            ? classes.active__link
+                            : ""
+                        }
+                      >
                         <Link
                           to={`/category/${category[value].id}`}
                           className="w-100"

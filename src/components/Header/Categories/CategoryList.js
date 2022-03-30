@@ -7,7 +7,7 @@ const CategoryList = ({ name, id, subCategory }) => {
   if (subCategory) {
     return (
       <div className={classes.category__list}>
-        <Link to={`products/${id}`}>
+        <Link to={`category/${id}`}>
           {name}
           <KeyboardArrowDownOutlined />
         </Link>
@@ -16,7 +16,7 @@ const CategoryList = ({ name, id, subCategory }) => {
   } else {
     return (
       <div className={classes.category__list}>
-        <Link to={`products/${id}`}>{name}</Link>
+        <Link to={`category/${id}`}>{name}</Link>
       </div>
     );
   }

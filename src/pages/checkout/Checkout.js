@@ -21,6 +21,10 @@ const Checkout = (props) => {
 
   const handleFetchOrders = async () => {
     let order = await dispatch(GetOrderList());
+
+    if (state.order) {
+      setSelectedOrder(order.filter((o) => o.id === state.order)[0]);
+    }
     setData(order);
   };
 
@@ -77,7 +81,7 @@ const Checkout = (props) => {
                         order={order}
                         fetchOrderData={handleFetchOrders}
                         deleteOrder={deleteOrder}
-                        selectedOrder={selectedOrder === order.id}
+                        selected={selectedOrder?.id === order.id}
                         handleSelection={handleSelection}
                       />
                     ))

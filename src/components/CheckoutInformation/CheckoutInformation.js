@@ -4,17 +4,27 @@ import classes from "./CheckoutInformation.module.css";
 import { animated, useSpring } from "react-spring";
 import FeatherIcon from "feather-icons-react";
 import Payment from "./PaymentItem/PaymentItem";
+import { useDispatch } from "react-redux";
+import FetchPaymentMethods from "../../store/actions/Payment/Payment.fetch";
 
 const CheckoutInformation = ({ data }) => {
-  const paymentType = ["khalti", "esewa", "balance", "paypal", "stripe"];
+  const [payments, setPayments] = useState(null);
+  const dispatch = useDispatch();
 
-  const [selected, setSelected] = useState("khalti");
+  useEffect(() => {
+    fetchPayment();
+  }, []);
 
-  const handleSelected = (name) => setSelected(name);
+  const fetchPayment = async () => {
+    const pay = await dispatch(FetchPaymentMethods());
+    setPayments(pay);
+  };
+
+  const [selected, setSelected] = useState();
+
+  const handleSelected = (id) => setSelected(id);
 
   const [orderInformation, setOrderInformation] = useState(data);
-  console.log(data);
-
   useEffect(() => {
     setOrderInformation(data);
   }, [data]);
@@ -32,18 +42,21 @@ const CheckoutInformation = ({ data }) => {
       style={useAnimationStyle()}
       className={classes.checkout__information__container}
     >
-      <h1 className={classes.heading__checkout__information}>Order Payment.</h1>
+      <h1 className={classes.heading__checkout__information}>
+        Order #{data.id} Payment.
+      </h1>
       <div className={classes.payment__checkbox}>
         <h2>Payment Method</h2>
         <form className={classes.checkbox__container}>
           <div className={classes.checkbox_group}>
-            {paymentType.map((pay) => (
-              <Payment
-                name={pay}
-                handleSelected={handleSelected}
-                checked={selected === pay ? true : null}
-              />
-            ))}
+            {payments &&
+              payments.map((pay) => (
+                <Payment
+                  {...pay}
+                  handleSelected={handleSelected}
+                  checked={selected === pay ? true : null}
+                />
+              ))}
           </div>
         </form>
       </div>

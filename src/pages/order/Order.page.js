@@ -3,6 +3,7 @@ import { Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Form, Spinner } from "react-bootstrap";
 import { connect, useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
 import ProductTable from "../../components/ProductTable/ProductTable";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
@@ -14,6 +15,7 @@ import OrderList from "./OrderList/OrderList.comp";
 
 const Order = (props) => {
   const [data, setData] = useState(null);
+  const navigation = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -42,6 +44,14 @@ const Order = (props) => {
     dispatch(showConfirmation(confirmData.title, confirmData.onAccept));
   };
 
+  const selectOrderToCheckout = (order) => {
+    const confirmData = {
+      title: "The order #" + order + " will be selected in checkout",
+      onAccept: () =>
+        navigation("/checkout", { state: { order, redirected: true } }),
+    };
+    dispatch(showConfirmation(confirmData.title, confirmData.onAccept));
+  };
   return (
     <div className={classes.order}>
       <div className="container">
@@ -59,6 +69,7 @@ const Order = (props) => {
                 {...order}
                 fetchOrderData={fetchOrderData}
                 deleteOrder={deleteOrder}
+                selectOrderToCheckout={selectOrderToCheckout}
               />
             ))
           ) : (

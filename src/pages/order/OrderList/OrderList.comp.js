@@ -26,6 +26,7 @@ const OrderList = ({
   fetchOrderData,
   deleteOrder,
   checkout,
+  selectOrderToCheckout,
 }) => {
   const [showProducts, setShowProducts] = useState(false);
   const dispatch = useDispatch();
@@ -110,16 +111,21 @@ const OrderList = ({
               />
             </Tooltip>
             {payment_status ? null : (
-              <Tooltip title={"Deliver this item for #" + id}>
-                <PaymentsOutlined className={classes.icons} />
-              </Tooltip>
+              <>
+                <Tooltip title={"Deliver this item for #" + id}>
+                  <PaymentsOutlined
+                    className={classes.icons}
+                    onClick={(e) => selectOrderToCheckout(id)}
+                  />
+                </Tooltip>
+                <Tooltip title={"Delete Item #" + id}>
+                  <DeleteOutlined
+                    className={classes.icons}
+                    onClick={(e) => deleteOrder(id)}
+                  />
+                </Tooltip>
+              </>
             )}
-            <Tooltip title={"Delete Item #" + id}>
-              <DeleteOutlined
-                className={classes.icons}
-                onClick={(e) => deleteOrder(id)}
-              />
-            </Tooltip>
           </div>
           <div
             className={"d-flex d-md-none " + classes.action_mobile_container}
@@ -127,7 +133,6 @@ const OrderList = ({
             <div
               className={classes.button}
               onClick={(e) => {
-                console.log("clicked");
                 e.preventDefault();
                 handleOpenProductsModal();
               }}

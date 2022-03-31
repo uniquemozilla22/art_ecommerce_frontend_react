@@ -9,8 +9,6 @@ const ProductTable = (props) => {
   let total = 0;
   const [data, setData] = useState(props.items);
 
-  console.log(props.items);
-
   useEffect(() => {
     setData(props.items);
   }, [props.items]);

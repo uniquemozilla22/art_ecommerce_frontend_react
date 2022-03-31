@@ -25,6 +25,7 @@ const OrderList = ({
   net_price,
   fetchOrderData,
   deleteOrder,
+  checkout,
 }) => {
   const [showProducts, setShowProducts] = useState(false);
   const dispatch = useDispatch();
@@ -62,7 +63,11 @@ const OrderList = ({
         className={
           classes.orderList +
           " " +
-          (payment_status ? classes.paid_order : classes.not_paid_order)
+          (!checkout
+            ? payment_status
+              ? classes.paid_order
+              : classes.not_paid_order
+            : "")
         }
       >
         <div className={classes.order_id}>

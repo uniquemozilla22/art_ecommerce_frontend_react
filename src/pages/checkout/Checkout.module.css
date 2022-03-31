@@ -6,14 +6,22 @@
   font-weight: 700;
   font-size: 40px;
   color: #000000;
+  margin: 0;
 }
-
+.checkout__page .header__title h5 {
+  font-weight:400;
+  font-size:1rem
+}
 .checkbox {
   display: flex !important;
   align-items: center;
   width: 100%;
   padding: 0 2rem;
   justify-content: space-between;
+  border:1px solid #676fa3;
+  border-radius: 20px;
+  margin: 1rem 0
+
 }
 
 .checkbox > label {

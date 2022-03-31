@@ -1,19 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import classes from "./CheckoutInformation.module.css";
-
+import { animated, useSpring } from "react-spring";
 import FeatherIcon from "feather-icons-react";
 import Payment from "./PaymentItem/PaymentItem";
 
-const CheckoutInformation = () => {
+const CheckoutInformation = ({ data }) => {
   const paymentType = ["khalti", "esewa", "balance", "paypal", "stripe"];
 
   const [selected, setSelected] = useState("khalti");
 
   const handleSelected = (name) => setSelected(name);
 
+  const [orderInformation, setOrderInformation] = useState(data);
+  console.log(data);
+
+  useEffect(() => {
+    setOrderInformation(data);
+  }, [data]);
+
+  const useAnimationStyle = () => {
+    return useSpring({
+      loop: false,
+      from: { x: 50, opacity: 0 },
+      to: { x: 0, opacity: 1 },
+      delay: 200,
+    });
+  };
   return (
-    <div className={classes.checkout__information__container}>
+    <animated.div
+      style={useAnimationStyle()}
+      className={classes.checkout__information__container}
+    >
       <h1 className={classes.heading__checkout__information}>Order Payment.</h1>
       <div className={classes.payment__checkbox}>
         <h2>Payment Method</h2>
@@ -33,28 +51,20 @@ const CheckoutInformation = () => {
       <div className={classes.address__container}>
         <h2>Address</h2>
         <Form className={classes.checkbox__container}>
-          <Form.Check
-            label={
-              <div className={classes.address__line}>
-                <h3>Pokhara-17, Birauta</h3>
-                <h4>SanchayKosh Awas, Opposite of Annapurna Petrol Pump</h4>
-              </div>
-            }
-            name="Address"
-            type={"radio"}
-            className={classes.checkbox}
-          />
-          <Form.Check
-            label={
-              <div className={classes.address__line}>
-                <h3>Kathmandu, New Baneshwor</h3>
-                <h4>Alfa Beta House, Budhanagar</h4>
-              </div>
-            }
-            name="Address"
-            type={"radio"}
-            className={classes.checkbox}
-          />
+          {orderInformation?.address.map((address) => (
+            <Form.Check
+              label={
+                <div className={classes.address__line}>
+                  <h3>{address.address}</h3>
+                  {address.landmark && <h4>{address.landmark}</h4>}
+                </div>
+              }
+              name="Address"
+              type={"radio"}
+              className={classes.checkbox}
+            />
+          ))}
+
           <div className={classes.editAddress}>
             <FeatherIcon icon="edit-3" />
             <h3>Edit Address</h3>
@@ -75,7 +85,7 @@ const CheckoutInformation = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </animated.div>
   );
 };
 

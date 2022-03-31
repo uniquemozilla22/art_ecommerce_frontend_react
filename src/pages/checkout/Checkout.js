@@ -17,7 +17,7 @@ const Checkout = (props) => {
 
   const dispatch = useDispatch();
 
-  const handleSelection = (id) => setSelectedOrder(id);
+  const handleSelection = (data) => setSelectedOrder(data);
 
   const handleFetchOrders = async () => {
     let order = await dispatch(GetOrderList());
@@ -56,9 +56,16 @@ const Checkout = (props) => {
       <div className="container-fluid">
         <div className={classes.header__title}>
           <h1>Checkout.</h1>
+          {selectedOrder ? null : <h5>Please Select an Order to Continue</h5>}
         </div>
         <div className="row">
-          <div className={"col-lg-8 col-md-8 col-sm-12 col-xs-12"}>
+          <div
+            className={
+              selectedOrder
+                ? "col-lg-8 col-md-8 col-sm-12 col-xs-12"
+                : "col-lg-12 col-md-12 col-sm-12 col-xs-12"
+            }
+          >
             <Form>
               {data ? (
                 data.length !== 0 ? (
@@ -85,8 +92,16 @@ const Checkout = (props) => {
               )}
             </Form>
           </div>
-          <div className={"col-lg-4 col-md-4 col-sm-12 col-xs-12"}>
-            <CheckoutInformation />
+          <div
+            className={
+              selectedOrder
+                ? "col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                : "col-lg-4 col-md-4 col-sm-12 col-xs-12 d-none"
+            }
+          >
+            {selectedOrder ? (
+              <CheckoutInformation data={selectedOrder} />
+            ) : null}
           </div>
         </div>
       </div>
@@ -108,12 +123,13 @@ const OrderListSelector = ({
           {...order}
           fetchOrderData={fetchOrderData}
           deleteOrder={deleteOrder}
+          checkout
         />
       }
       name={"orders"}
       type={"radio"}
       className={classes.checkbox}
-      onChange={(e) => handleSelection(order.id)}
+      onChange={(e) => handleSelection(order)}
       checked={selected ? true : null}
     />
   );

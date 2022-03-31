@@ -10,12 +10,11 @@
   flex-wrap: wrap;
 }
 
-.orderList .action__icons__container {
-}
 
 .paid_order:hover {
   box-shadow: 0 0 10px lightgreen;
 }
+
 
 .not_paid_order:hover {
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.24);

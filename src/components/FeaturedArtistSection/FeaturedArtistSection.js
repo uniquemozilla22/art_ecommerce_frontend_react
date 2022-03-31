@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ArtistCard from "../ArtistCard/ArtistCard";
 import classes from "./FeaturedArtistSection.module.css";
-import artist1 from "../../Assets/artist1.png";
-import artist2 from "../../Assets/artist2.png";
-import artist3 from "../../Assets/artist3.png";
 
 const FeaturedArtistSection = (props) => {
   const split = props.title.split(" ");

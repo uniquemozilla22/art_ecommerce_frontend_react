@@ -22,7 +22,7 @@ const Checkout = (props) => {
   const handleFetchOrders = async () => {
     let order = await dispatch(GetOrderList());
 
-    if (state.order) {
+    if (state?.order) {
       setSelectedOrder(order.filter((o) => o.id === state.order)[0]);
     }
     setData(order);

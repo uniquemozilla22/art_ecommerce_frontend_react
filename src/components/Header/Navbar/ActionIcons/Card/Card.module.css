@@ -25,20 +25,16 @@
   font-size: 0.8rem;
   font-weight: light;
   margin: 0;
-  padding: 0 5px;
   width: 100%;
 }
 
 .balance__container p span {
   font-weight: bold;
+  margin:0;
 }
 
 .balance__container .avatar > div {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.balance__container .avatar > div p span {
-  margin-left: 0.5rem;
 }

@@ -22,39 +22,6 @@ import FetchSupplier from "../../store/actions/FetchData/SupplierbyID.fetch";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
 
 const Artist = () => {
-  const products = [
-    {
-      id: 1,
-      name: "One",
-      description: "this is the description for One",
-      image: art1,
-      price: 3000,
-      time: "Jan 27, 2022 15:37:25",
-    },
-    {
-      id: 2,
-      name: "Two",
-      description: "this is the description for Two",
-      image: art2,
-      price: 6000,
-      time: "Jan 26, 2022 15:37:25",
-    },
-    {
-      id: 3,
-      name: "Three",
-      description: "this is the description for Two",
-      image: art3,
-      price: 6000,
-      time: "Jan 26, 2022 15:37:25",
-    },
-    {
-      id: 4,
-      name: "Four",
-      description: "this is the description for Two",
-      image: art1,
-      price: 6000,
-    },
-  ];
   const artists = [
     {
       id: 1,

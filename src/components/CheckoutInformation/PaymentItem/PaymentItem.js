@@ -4,7 +4,7 @@ import classes from "./PaymentItem.module.css";
 import khalti from "../../../Assets/khalti.png";
 import esewa from "../../../Assets/esewa.png";
 import { Form } from "react-bootstrap";
-const Payment = ({ name, id, checked, handleSelected }) => {
+const Payment = ({ name, id, checked, handleSelected, image_url }) => {
   const iconPrinter = (name) => {
     if (name === "khalti") {
       return <img src={khalti} alt={name} />;
@@ -22,6 +22,7 @@ const Payment = ({ name, id, checked, handleSelected }) => {
           className={classes.checkbox_input}
           onChange={(e) => handleSelected(id)}
           name={"payment"}
+          checked={checked}
         />
         <span className={classes.checkbox_tile}>
           <span className={classes.checkbox_icon}>{iconPrinter(name)}</span>

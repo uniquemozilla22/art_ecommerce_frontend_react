@@ -15,7 +15,7 @@ const ProductGrid = ({ arts, bids, products }) => {
   }, []);
 
   const myLikedProducts = async () => {
-    if (data) {
+    if (products) {
       setData(products);
     } else {
       if (arts) {

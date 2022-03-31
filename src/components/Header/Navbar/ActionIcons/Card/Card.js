@@ -34,7 +34,7 @@ const CardBalance = ({ balance, email, username, image }) => {
                   })}
                 </span>
               </p>
-              <p>{email?.split(" @")[0]}</p>
+              <p> @{email?.split("@")[0]}</p>
             </div>
           ) : null}
         </div>

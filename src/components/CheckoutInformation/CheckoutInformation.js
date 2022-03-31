@@ -50,8 +50,9 @@ const CheckoutInformation = ({ data }) => {
         <form className={classes.checkbox__container}>
           <div className={classes.checkbox_group}>
             {payments &&
-              payments.map((pay) => (
+              payments.map((pay, index) => (
                 <Payment
+                  key={index}
                   {...pay}
                   handleSelected={handleSelected}
                   checked={selected === pay ? true : null}
@@ -64,7 +65,7 @@ const CheckoutInformation = ({ data }) => {
       <div className={classes.address__container}>
         <h2>Address</h2>
         <Form className={classes.checkbox__container}>
-          {orderInformation?.address.map((address) => (
+          {orderInformation?.address.map((address, index) => (
             <Form.Check
               label={
                 <div className={classes.address__line}>
@@ -74,6 +75,7 @@ const CheckoutInformation = ({ data }) => {
               }
               name="Address"
               type={"radio"}
+              key={index}
               className={classes.checkbox}
             />
           ))}

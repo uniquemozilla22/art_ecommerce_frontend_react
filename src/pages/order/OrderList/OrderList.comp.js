@@ -112,12 +112,14 @@ const OrderList = ({
             </Tooltip>
             {payment_status ? null : (
               <>
-                <Tooltip title={"Deliver this item for #" + id}>
-                  <PaymentsOutlined
-                    className={classes.icons}
-                    onClick={(e) => selectOrderToCheckout(id)}
-                  />
-                </Tooltip>
+                {!checkout && (
+                  <Tooltip title={"Deliver this item for #" + id}>
+                    <PaymentsOutlined
+                      className={classes.icons}
+                      onClick={(e) => selectOrderToCheckout(id)}
+                    />
+                  </Tooltip>
+                )}
                 <Tooltip title={"Delete Item #" + id}>
                   <DeleteOutlined
                     className={classes.icons}

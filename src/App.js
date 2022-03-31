@@ -9,7 +9,6 @@ import Blog from "./pages/blog/blog";
 import Faqs from "./pages/faqs/faqs";
 import About from "./pages/about/about";
 import Contact from "./pages/contactus/contact";
-
 import BlogDetail from "./pages/blog/blogDetail";
 import Return from "./pages/return/return";
 import Login from "./pages/login/Login";
@@ -17,7 +16,7 @@ import Register from "./pages/register/register";
 import Product from "./pages/product/Product";
 import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import Checkout from "./pages/checkout/Checkout";
-import Artist from "./pages/artist/Artist";
+import Artist from "./pages/artist/Artist.page";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import ForgotPassword from "./pages/forgetPassword/ForgetPassword";
 import ConfirmEmail from "./pages/Confirm_email/Confirm_email";

@@ -9,12 +9,8 @@
     border: none;
     border-radius: 20px;
     width: 50vw;
-
   }
 
-  .modal__body__child{
-      z-index: 9999;
-  }
   .modal__body p span {
     text-decoration: underline;
   }
@@ -94,19 +90,20 @@
   }
   
   .modal__body .information__container{
-      position: relative;
       padding:1rem;
+      display: flex;
+      justify-content:space-between;
   }
   .modal__body .information__container P{
       margin:0;
   }
 
   .modal__body .information__container .icon {
-      position: absolute;
-      top:1rem;
-      right:1rem;
+      
   }
-
+  .modal__body svg{
+      margin:0 0.5rem;
+  }
   .modal__body svg:hover{
       color:#4267b2
   }

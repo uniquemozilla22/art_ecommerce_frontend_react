@@ -7,16 +7,19 @@ import Payment from "./PaymentItem/PaymentItem";
 import { useDispatch } from "react-redux";
 import FetchPaymentMethods from "../../store/actions/Payment/Payment.fetch";
 import EditAddressModal from "./EditAddress/EditAddressModal.comp";
-import UpdateOrderAddress from "../../store/actions/Order/UpdateOrderAddress.post";
+import UpdateOrderAddress from "../../store/actions/Address/UpdateOrderAddress.post";
+import AddOrderAddress from "../../store/actions/Address/AddOrderAddress.post";
+import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
+import DeleteOrderAddress from "../../store/actions/Address/DeleteOrderAddress.delete";
+import PostPayment from "../../store/actions/Payment/Payment.post";
 
 const CheckoutInformation = ({ data }) => {
   const [payments, setPayments] = useState(null);
   const dispatch = useDispatch();
   const [orderInformation, setOrderInformation] = useState(data);
-  const [selected, setSelected] = useState();
+  const [paymentSelected, setPaymentSelected] = useState();
   const [showAddressModal, setShowAddressModal] = useState(true);
-
-  console.log(data);
+  const [addressId, setAddressId] = useState();
   const onHideAddressModal = () => setShowAddressModal(false);
 
   const handleUpdatedData = async (index, id, d) => {
@@ -32,6 +35,44 @@ const CheckoutInformation = ({ data }) => {
     }
   };
 
+  const handleAddData = async (data) => {
+    const updated = await dispatch(AddOrderAddress(data));
+    if (updated) {
+      setOrderInformation({
+        ...orderInformation,
+        address: [...orderInformation.address, updated],
+      });
+    }
+  };
+
+  const handleConfirmationDelete = (index, id) => {
+    dispatch(
+      showConfirmation(
+        "Your Address Will Be removed. Are you Sure?",
+        async () => handleDeleteAddressData(index, id)
+      )
+    );
+  };
+
+  const handleConfirmationCheckout = () => {
+    dispatch(
+      showConfirmation("Are you sure about checking out the order?", async () =>
+        Checkout()
+      )
+    );
+  };
+
+  const Checkout = () =>
+    dispatch(PostPayment(orderInformation.id, paymentSelected, addressId));
+
+  const handleDeleteAddressData = async (index, id) => {
+    const deletedData = await dispatch(DeleteOrderAddress(id));
+    if (deletedData) {
+      const address = orderInformation.address.splice(index, 1);
+      console.log(address);
+    }
+  };
+
   useEffect(() => {
     fetchPayment();
   }, []);
@@ -40,7 +81,6 @@ const CheckoutInformation = ({ data }) => {
     const pay = await dispatch(FetchPaymentMethods());
     setPayments(pay);
   };
-  const handleSelected = (id) => setSelected(id);
 
   useEffect(() => {
     setOrderInformation(data);
@@ -72,8 +112,8 @@ const CheckoutInformation = ({ data }) => {
                   <Payment
                     key={index}
                     {...pay}
-                    handleSelected={handleSelected}
-                    checked={selected === pay ? true : null}
+                    handleSelected={(id) => setPaymentSelected(id)}
+                    checked={paymentSelected === pay ? true : null}
                   />
                 ))}
             </div>
@@ -94,6 +134,7 @@ const CheckoutInformation = ({ data }) => {
                 type={"radio"}
                 key={index}
                 className={classes.checkbox}
+                onChange={(e) => setAddressId(address.id)}
               />
             ))}
             <div
@@ -113,7 +154,11 @@ const CheckoutInformation = ({ data }) => {
             </Form>
           </div>
           <div className={classes.checkout__button}>
-            <Button className={classes.checkout} variant="none">
+            <Button
+              className={classes.checkout}
+              variant="none"
+              onClick={(e) => handleConfirmationCheckout()}
+            >
               Checkout
             </Button>
           </div>
@@ -123,7 +168,9 @@ const CheckoutInformation = ({ data }) => {
         show={showAddressModal}
         handleHide={onHideAddressModal}
         updateData={handleUpdatedData}
+        addData={handleAddData}
         data={orderInformation?.address}
+        deleteData={handleConfirmationDelete}
       />
     </>
   );

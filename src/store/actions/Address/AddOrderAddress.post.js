@@ -1,20 +1,18 @@
 import axiosBase from "../../../axiosBase";
-import { hideLoading } from "../Loading/Loading";
-import {
-  ErrorMessage,
-  SuccessMessage,
-  WarningMessage,
-} from "../Message/Message";
+import { hideLoading, showLoading } from "../Loading/Loading";
+import { ErrorMessage, WarningMessage } from "../Message/Message";
 
-const UpdateOrderAddress = (id, updaingData) => {
+const AddOrderAddress = (address) => {
   return async (dispatch, getState) => {
+    dispatch(showLoading());
     try {
       const { data } = await new Promise((resolve) =>
-        resolve(update(getState().user.token, id, updaingData))
+        resolve(
+          Post(getState().user.token, { ...address, status: "secondary" })
+        )
       );
       dispatch(hideLoading());
-      dispatch(SuccessMessage({ message: data.message }));
-      return data.updatedValues;
+      return data.address;
     } catch (error) {
       dispatch(hideLoading());
       if (error.response === undefined) {
@@ -48,12 +46,12 @@ const UpdateOrderAddress = (id, updaingData) => {
   };
 };
 
-const update = async (token, id, data) => {
-  return await axiosBase.put(`address/${id}/update`, data, {
+const Post = async (token, data) => {
+  return await axiosBase.post("address/create", data, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: "Bearer " + token,
     },
   });
 };
 
-export default UpdateOrderAddress;
+export default AddOrderAddress;

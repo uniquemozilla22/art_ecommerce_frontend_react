@@ -99,6 +99,7 @@ const DetailsEditor = ({
             name={modalData.name}
             value={modalData.value}
             updateData={updateData}
+            classes={classes}
           />
         </div>
       </Modal>
@@ -106,7 +107,7 @@ const DetailsEditor = ({
   );
 };
 
-const FormCreator = ({ name, value, updateData }) => {
+export const FormCreator = ({ name, value, updateData, classes }) => {
   const [data, setData] = useState({
     name,
     value,

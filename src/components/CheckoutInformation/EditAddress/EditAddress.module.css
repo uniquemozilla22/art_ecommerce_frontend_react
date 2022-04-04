@@ -1,0 +1,112 @@
+
+.modal__body, .modal__body__child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 2rem 1rem;
+    border: none;
+    border-radius: 20px;
+    width: 50vw;
+
+  }
+
+  .modal__body__child{
+      z-index: 9999;
+  }
+  .modal__body p span {
+    text-decoration: underline;
+  }
+  .modal__body p button {
+    background-color: transparent;
+    color: #4267b2;
+    border: none;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .modal__body {
+      width: 80vw;
+    }
+  }
+  
+  .form__modal {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.form__modal .buttons__container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+ .form__modal input,
+ .form__modal textarea,
+.form__modal select {
+    padding: 1rem;
+    border-radius: 20px;
+    margin: 0.5rem 0;
+    border: none;
+    background: #eef2ff;
+    border: 1px solid #4267b2;
+    box-sizing: border-box;
+    border-radius: 20px;
+  }
+ .form__modal input:focus, .form__modal textarea:focus {
+    outline: none;
+  }
+  
+  .modal__body h2 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+  }
+  
+  .modal__body h4 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: darkgreen;
+  }
+  
+ .form__modal input[type="submit"],
+  .modal__body .button_add {
+    background: #4267b2;
+    color: #eef2ff;
+    font-weight: medium;
+    font-size: 16px;
+    color: #ffffff;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 20px;
+  }
+  
+.form__modal .close__button {
+    background: #ffffff;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 20px;
+    color: #ff5959;
+    padding: 0.5rem;
+    width: 100%;
+  }
+  
+  .modal__body .information__container{
+      position: relative;
+      padding:1rem;
+  }
+  .modal__body .information__container P{
+      margin:0;
+  }
+
+  .modal__body .information__container .icon {
+      position: absolute;
+      top:1rem;
+      right:1rem;
+  }
+
+  .modal__body svg:hover{
+      color:#4267b2
+  }

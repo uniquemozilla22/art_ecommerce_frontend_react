@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Tooltip } from "@mui/material";
+import { Badge, Tooltip } from "@mui/material";
 import {
   HelpOutline,
   PersonOutlineOutlined,
@@ -21,6 +21,7 @@ const ActionIcons = (props) => {
   useEffect(() => {
     setToken(props.loggedIn);
   }, [props.loggedIn]);
+  console.log(props);
   return (
     <div className={classes.actionIcons}>
       <Tooltip title="Search">
@@ -31,12 +32,7 @@ const ActionIcons = (props) => {
           onClick={() => props.toggleSearch()}
         />
       </Tooltip>
-      {/* <Tooltip title="Help-Centre">
-        <HelpOutline
-          className={classes.navigation_icons}
-          onClick={() => props.toggleHelpCenter()}
-        />
-      </Tooltip> */}
+
       {token ? (
         <Tooltip title="Wishlist">
           <Link to="/wishlist">
@@ -47,10 +43,15 @@ const ActionIcons = (props) => {
       {token ? (
         <>
           <Tooltip title="Cart">
-            <ShoppingCartOutlined
-              className={classes.navigation_icons}
-              onClick={() => props.toggleCart()}
-            />
+            <Badge
+              color="primary"
+              badgeContent={props.cartContent.cartItems.length}
+            >
+              <ShoppingCartOutlined
+                className={classes.navigation_icons}
+                onClick={() => props.toggleCart()}
+              />
+            </Badge>
           </Tooltip>
           <Dropdown className={classes.dropdown___link}>
             <Dropdown.Toggle

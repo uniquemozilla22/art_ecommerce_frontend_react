@@ -3,10 +3,17 @@
   justify-content: space-between;
   align-items: center;
 }
+.actionIcons a{
+  margin:0 1rem;
+}
+
+.actionIcons a:first-child{
+  margin-left: 0;
+}
+
 
 .navigation_icons {
   font-size: 24px;
-  margin: 0 20px;
   color: #2b2b2b;
 }
 

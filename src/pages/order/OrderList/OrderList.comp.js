@@ -9,6 +9,7 @@ import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import ProductTable from "../../../components/ProductTable/ProductTable";
 import { showConfirmation } from "../../../store/actions/Confirmation/Confirmation.action";
+import { WarningMessage } from "../../../store/actions/Message/Message";
 import RemoveProductOnOrder from "../../../store/actions/Order/RemoveOrderProduct.delete";
 import classes from "./OrderList.module.css";
 
@@ -37,12 +38,20 @@ const OrderList = ({
   };
 
   const handleDeleteProduct = (items, order, product) => {
-    dispatch(RemoveProductOnOrder(order, product));
-    const orderItems = items.filter((item) => item.data.id !== product);
-    setOrderItem(orderItems);
-    if (orderItems.length == 0) {
-      fetchOrderData();
-      handleCloseProductsModal();
+    if (status !== "paid") {
+      dispatch(RemoveProductOnOrder(order, product));
+      const orderItems = items.filter((item) => item.data.id !== product);
+      setOrderItem(orderItems);
+      if (orderItems.length === 0) {
+        fetchOrderData();
+        handleCloseProductsModal();
+      }
+    } else {
+      dispatch(
+        WarningMessage({
+          message: "You cannot delete an order which has been already paid",
+        })
+      );
     }
   };
 

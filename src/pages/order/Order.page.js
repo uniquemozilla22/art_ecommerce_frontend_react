@@ -63,15 +63,43 @@ const Order = (props) => {
         </div>
         {data ? (
           data.length !== 0 ? (
-            data.map((order, index) => (
-              <OrderList
-                key={index}
-                {...order}
-                fetchOrderData={fetchOrderData}
-                deleteOrder={deleteOrder}
-                selectOrderToCheckout={selectOrderToCheckout}
-              />
-            ))
+            data
+              .filter((o) => o.status === "draft")
+              .map((order, index) => (
+                <OrderList
+                  key={index}
+                  {...order}
+                  fetchOrderData={fetchOrderData}
+                  deleteOrder={deleteOrder}
+                  selectOrderToCheckout={selectOrderToCheckout}
+                />
+              ))
+          ) : (
+            <DataNotFound
+              content={
+                "There are no orders here try checking out some of the arts. "
+              }
+              action={fetchOrderData}
+            />
+          )
+        ) : null}
+      </div>
+      <div className="container">
+        <div className={classes.title__container}>
+          <h1>Paid Orders.</h1>
+        </div>
+        {data ? (
+          data.length !== 0 ? (
+            data
+              .filter((o) => o.status === "paid")
+              .map((order, index) => (
+                <OrderList
+                  key={index}
+                  {...order}
+                  fetchOrderData={fetchOrderData}
+                  selectOrderToCheckout={selectOrderToCheckout}
+                />
+              ))
           ) : (
             <DataNotFound
               content={

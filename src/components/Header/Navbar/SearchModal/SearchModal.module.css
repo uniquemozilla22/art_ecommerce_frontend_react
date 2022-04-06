@@ -2,11 +2,16 @@
   position: absolute;
   top: 20%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0%);
+ 
+}
+
+.search__modal__container form{
   background: white;
   border-radius: 40px;
   box-shadow: 0 0 10px #2b2b2b25;
   padding: 4px 20px;
+  transition: all 0.5s ease-in-out
 }
 .search__bar__modal {
   width: 60vw;
@@ -21,4 +26,17 @@
 
 .search__bar__modal fieldset {
   border: none;
+}
+
+.model_search{
+  overflow: hidden;
+  overflow-y:scroll;
+  height: 40vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    background: white;
+    border-radius: 40px;
+    box-shadow: 0 0 10px #2b2b2b25;
+    padding: 4px 20px;
+    margin:1rem 0;
 }

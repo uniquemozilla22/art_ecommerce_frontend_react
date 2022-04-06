@@ -2,15 +2,15 @@ import axiosBase from "../../../axiosBase";
 import { hideLoading, showLoading } from "../Loading/Loading";
 import { ErrorMessage, WarningMessage } from "../Message/Message";
 
-const SearchProducts = (data) => {
+const SearchProducts = (data, search) => {
   return async (dispatch, getState) => {
-    dispatch(showLoading());
+    search && dispatch(showLoading());
     try {
       const res = await new Promise((resolve) => resolve(fetch(data)));
-      dispatch(hideLoading());
+      search && dispatch(hideLoading());
       return res.data;
     } catch (error) {
-      dispatch(hideLoading());
+      search && dispatch(hideLoading());
 
       if (error.response === undefined) {
         dispatch(

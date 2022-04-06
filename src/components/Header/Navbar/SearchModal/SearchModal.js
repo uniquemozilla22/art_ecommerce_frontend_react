@@ -3,26 +3,52 @@ import classes from "./SearchModal.module.css";
 import { Modal, Fade, Box, OutlinedInput, InputAdornment } from "@mui/material";
 import { SearchOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import SearchProducts from "../../../../store/actions/Search/SearchProducts.fetch";
+import { Spinner } from "react-bootstrap";
+import ProductTable from "../../../ProductTable/ProductTable";
 const SearchModal = (props) => {
   const [searchShow, setSearchShow] = useState(props.show);
+  const navigation = useNavigate();
+  const [search, setSearch] = useState();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
 
-  const handleSearch = () => {
-    setSearchShow(false);
-    props.toggleSearch();
-  };
-
+  const handleSearch = () => props.toggleSearch();
   useEffect(() => {
     setSearchShow(props.show);
   }, [props.show]);
 
-  const [search, setSearch] = useState();
-  const navigation = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     navigation("search", { state: { search } });
     handleSearch();
   };
-  const handleChange = (e) => setSearch(e.target.value);
+
+  const debounce = (callback, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        callback(...args);
+      }, delay);
+    };
+  };
+
+  const handleChange = (e) => {
+    if (e.target.value.trim() !== "") {
+      setSearch(e.target.value);
+      setLoading(true);
+      fetchData(e.target.value);
+    }
+  };
+
+  const fetchData = debounce(async (text) => {
+    const data = await dispatch(SearchProducts(text, false));
+    setLoading(false);
+    setData(data);
+  }, 1000);
 
   return (
     <Modal
@@ -32,24 +58,34 @@ const SearchModal = (props) => {
         timeout: 200,
       }}
     >
-      <Fade in={searchShow}>
-        <Box className={classes.search__modal__container}>
-          <form onSubmit={handleSubmit}>
-            <OutlinedInput
-              id="SearchBar"
-              className={classes.search__bar__modal}
-              endAdornment={
-                <InputAdornment position="end" onClick={(e) => handleSubmit(e)}>
-                  <SearchOutlined />
-                </InputAdornment>
-              }
-              autoFocus
-              onChange={handleChange}
-            />
-            <input type="submit" className="d-none" />
-          </form>
-        </Box>
-      </Fade>
+      <Box className={classes.search__modal__container}>
+        <form onSubmit={handleSubmit}>
+          <OutlinedInput
+            id="SearchBar"
+            className={classes.search__bar__modal}
+            endAdornment={
+              <InputAdornment position="end" onClick={(e) => handleSubmit(e)}>
+                <SearchOutlined />
+              </InputAdornment>
+            }
+            autoFocus
+            onChange={handleChange}
+          />
+          <input type="submit" className="d-none" />
+        </form>
+        {loading && <Spinner />}
+        {data && (
+          <div className={classes.model_search}>
+            {data.length !== 0 ? (
+              <ProductTable
+                removeFunction={(id) => props.deleteWishList(id)}
+                items={data}
+                refresh={fetchData}
+              />
+            ) : null}
+          </div>
+        )}
+      </Box>
     </Modal>
   );
 };

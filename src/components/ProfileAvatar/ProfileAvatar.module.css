@@ -44,9 +44,15 @@
   justify-content: center;
 }
 
+.profile__avatar__container .credit__container p {
+  font-weight:400;
+}
+
 .profile__avatar__container .credit__container span {
   display: flex;
   margin-left: 1rem;
+  font-weight:800;
+
 }
 
 @media screen and (max-width: 768px) {

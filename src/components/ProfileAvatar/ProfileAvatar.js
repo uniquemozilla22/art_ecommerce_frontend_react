@@ -23,15 +23,13 @@ const ProfileAvatar = ({ name, image, verified, balance }) => {
       <div className={classes.credit__container}>
         <p>Balance</p>
         <span>
-          {balance ? (
-            <Tooltip title="You Balance">
-              <FeatherIcon icon="dollar-sign" />
-            </Tooltip>
-          ) : (
-            <Tooltip title="You Balance">
-              <p>0</p>
-            </Tooltip>
-          )}
+          {balance
+            ? parseInt(balance).toLocaleString("en-IN", {
+                maximumFractionDigits: 2,
+                style: "currency",
+                currency: "NRS",
+              })
+            : "NRS 0.00"}
         </span>
       </div>
     </div>

@@ -7,7 +7,7 @@ import artist2 from "../../Assets/artist2.png";
 import artist1 from "../../Assets/artist1.png";
 import art3 from "../../Assets/art3.jpg";
 import classes from "./EditProfile.module.css";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import {
   ProfileNavigationLink,
   ProfileNavigationContent,
@@ -20,6 +20,8 @@ import SendOTPtoEmail from "../../store/actions/Authentication/VerifyEmail/SendO
 
 const EditProfile = (props) => {
   const [data, setData] = useState(null);
+  const balanceState = useSelector((state) => state.user.balance);
+  const [balance, setBalance] = useState(balanceState);
   const user = data
     ? {
         image: userImage,
@@ -175,7 +177,7 @@ const EditProfile = (props) => {
               name={"@" + data.username}
               image={user.image}
               verified={user.verified}
-              balance={user.balance}
+              balance={balance}
             />
             <div className={classes.links__container}>
               {links.map((link, index) => (

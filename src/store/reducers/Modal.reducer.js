@@ -5,6 +5,7 @@ import {
   HELP_CENTER,
   LOGIN_MODAL,
   FORGOT__MODEL,
+  FRAME_MODAL,
 } from "../actions/Types/Types";
 
 const initialState = {
@@ -34,10 +35,6 @@ const ModalReducer = (state = initialState, action) => {
 
     case LOGIN_MODAL:
       return { ...state, login: !state.login };
-
-    case FORGOT__MODEL: {
-      return { ...state, forgot: !state.forgot };
-    }
 
     default:
       return state;

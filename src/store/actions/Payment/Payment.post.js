@@ -1,10 +1,7 @@
 import axiosBase from "../../../axiosBase";
+import { showFrame } from "../Frame/Frame.action";
 import { showLoading, hideLoading } from "../Loading/Loading";
-import {
-  ErrorMessage,
-  SuccessMessage,
-  WarningMessage,
-} from "../Message/Message";
+import { ErrorMessage, WarningMessage } from "../Message/Message";
 
 const PostPayment = (order_id, payment_method_id, address_id) => {
   return async (dispatch, getState) => {
@@ -28,11 +25,10 @@ const PostPayment = (order_id, payment_method_id, address_id) => {
           resolve(PostPay(getState().user.token, reqData))
         );
         dispatch(hideLoading());
-        dispatch(
-          SuccessMessage({ message: "Your Payment is completed for the order" })
-        );
-        let myWindow = window.open("", "_blank");
-        myWindow.document.write(data);
+        // let myWindow = window.open("", "_blank");
+        // myWindow.document.write(data);
+        dispatch(showFrame(data));
+        // console.log(typeof data);
         // return data;
       } catch (error) {
         console.log({ ...error });

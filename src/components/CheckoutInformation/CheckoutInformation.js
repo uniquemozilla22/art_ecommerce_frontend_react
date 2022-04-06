@@ -19,7 +19,7 @@ const CheckoutInformation = ({ data }) => {
   const dispatch = useDispatch();
   const [orderInformation, setOrderInformation] = useState(data);
   const [paymentSelected, setPaymentSelected] = useState();
-  const [showAddressModal, setShowAddressModal] = useState(true);
+  const [showAddressModal, setShowAddressModal] = useState(false);
   const [addressId, setAddressId] = useState();
   const onHideAddressModal = () => setShowAddressModal(false);
 

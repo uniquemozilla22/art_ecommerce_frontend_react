@@ -3,6 +3,9 @@ export const SEARCH = "SEARCH";
 export const CATEGORY = "CATEGORY";
 export const HELP_CENTER = "HELP_CENTER";
 
+export const SHOW_FRAME_MODAL = "SHOW_FRAME_MODAL";
+export const HIDE_FRAME_MODAL = "HIDE_FRAME_MODAL";
+
 export const ADD_CART = "ADD_CART";
 export const REMOVE_CART = "REMOVE_CART";
 export const UPDATE_CART = "UPDATE_CART";

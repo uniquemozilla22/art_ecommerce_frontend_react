@@ -10,6 +10,7 @@ import Cookies from "cookies-js";
 import ProductReducer from "./Product.reducer";
 import WishListReducer from "./Wishlist.reducer";
 import ConfirmationReducer from "./Confirmation.reducer";
+import FrameReducer from "./Frame.reducer";
 
 const reducers = combineReducers({
   user: UserReducer,
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   products: ProductReducer,
   wishlist: WishListReducer,
   confirm: ConfirmationReducer,
+  frame: FrameReducer,
 });
 
 const persistConfig = {

@@ -7,12 +7,11 @@ import classes from "./FrameModal.module.css";
 import parse from "html-react-parser";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
 import Success from "./Success/Success";
-import { FormatColorReset } from "@mui/icons-material";
 
 const FrameModal = () => {
   const frameModal = useSelector((state) => state.frame);
   const [showFrame, setShowFrmae] = useState(frameModal.show);
-  const [showSuccess, setShowSuccess] = useState(FormatColorReset);
+  const [showSuccess, setShowSuccess] = useState(false);
   const iFrameRef = useRef(null);
 
   useEffect(() => {
@@ -30,11 +29,15 @@ const FrameModal = () => {
       if (iFrameRef?.current?.contentWindow?.hideModalFunction()) {
         hideFrameModal();
       }
+      if (iFrameRef?.current?.contentWindow?.successModel().show === true) {
+        successMessage();
+      }
     });
   }, []);
 
   const successMessage = () => {
     dispatch(hideFrame());
+    setShowSuccess(true);
   };
 
   return (

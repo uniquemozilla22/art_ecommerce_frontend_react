@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import SearchProducts from "../../../../store/actions/Search/SearchProducts.fetch";
 import { Spinner } from "react-bootstrap";
 import ProductTable from "../../../ProductTable/ProductTable";
+import ProductItem from "../../../ProductTable/ProductItem/ProductItem";
+import AddWishlistItem from "../../../../store/actions/Wishlist/wishlistItem.post";
 const SearchModal = (props) => {
   const [searchShow, setSearchShow] = useState(props.show);
   const navigation = useNavigate();
@@ -76,13 +78,35 @@ const SearchModal = (props) => {
         {loading && <Spinner />}
         {data && (
           <div className={classes.model_search}>
-            {data.length !== 0 ? (
-              <ProductTable
-                removeFunction={(id) => props.deleteWishList(id)}
-                items={data}
-                refresh={fetchData}
-              />
-            ) : null}
+            {data.length !== 0
+              ? data.map((item, index) => (
+                  <ProductItem
+                    key={index}
+                    id={item.data.id}
+                    image={item.data.image_url}
+                    name={item.data.name}
+                    price={item.data.unit_price}
+                    supplierName={
+                      item.supplierInfo.first_name +
+                      " " +
+                      item.supplierInfo.last_name
+                    }
+                    supplierInfo={item.supplierInfo}
+                    productData={item.data}
+                    tags={item.tags}
+                    category={item.category}
+                    description={item.data.description}
+                    wishlist
+                    wishlistFunction={() => {
+                      props.toggleSearch();
+                      dispatch(AddWishlistItem(item.data.id));
+                    }}
+                    modal={() => props.toggleSearch()}
+                    likesCount={item.likesCount}
+                    time={item?.auction?.expiration_date || null}
+                  />
+                ))
+              : null}
           </div>
         )}
       </Box>

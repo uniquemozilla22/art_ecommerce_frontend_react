@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import classes from "./ProductItem.module.css";
 import FeatherIcon from "feather-icons-react";
 import { Tooltip } from "@mui/material";
-import { Delete, ShoppingCartOutlined } from "@mui/icons-material";
+import {
+  Delete,
+  FavoriteBorderOutlined,
+  RemoveRedEyeOutlined,
+  ShoppingCartOutlined,
+} from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import AddCartItem from "../../../store/actions/Cart/AddItem.post";
+import AddWishlistItem from "../../../store/actions/Wishlist/wishlistItem.post";
+import { useNavigate } from "react-router";
 
 const ProductItem = ({
   image,
@@ -21,10 +28,19 @@ const ProductItem = ({
   tags,
   likesCount,
   category,
+  deleted,
+  wishlistFunction,
+  modal,
 }) => {
   const dispatch = useDispatch();
+  const navigation = useNavigate();
 
-  let addToCart = (data) => dispatch(AddCartItem(data));
+  let addToCart = (data) => {
+    dispatch(AddCartItem(data));
+    if (modal) {
+      modal();
+    }
+  };
 
   const [days, setDays] = useState(null);
   const [hours, setHours] = useState(null);
@@ -118,6 +134,16 @@ const ProductItem = ({
         </h5>
       </div>
       <div className={classes.delete__item}>
+        <Tooltip title={"View " + name}>
+          <RemoveRedEyeOutlined
+            onClick={(e) => {
+              if (modal) {
+                modal();
+              }
+              navigation(`/products/${id}`);
+            }}
+          />
+        </Tooltip>
         {wishlist && time === null ? (
           <Tooltip title={"Add " + name + " to cart"}>
             <ShoppingCartOutlined
@@ -133,9 +159,16 @@ const ProductItem = ({
             />
           </Tooltip>
         ) : null}
-        <Tooltip title={"Remove " + name}>
-          <Delete onClick={(e) => removeItem(id)} />
-        </Tooltip>
+        {wishlistFunction && (
+          <Tooltip title={"Add " + name + " to wishlist"}>
+            <FavoriteBorderOutlined onClick={(e) => wishlistFunction()} />
+          </Tooltip>
+        )}
+        {removeItem && (
+          <Tooltip title={"Remove " + name}>
+            <Delete onClick={(e) => removeItem(id)} />
+          </Tooltip>
+        )}
       </div>
     </div>
   );

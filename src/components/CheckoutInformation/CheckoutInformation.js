@@ -12,6 +12,7 @@ import AddOrderAddress from "../../store/actions/Address/AddOrderAddress.post";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
 import DeleteOrderAddress from "../../store/actions/Address/DeleteOrderAddress.delete";
 import PostPayment from "../../store/actions/Payment/Payment.post";
+import { WarningMessage } from "../../store/actions/Message/Message";
 
 const CheckoutInformation = ({ data }) => {
   const [payments, setPayments] = useState(null);
@@ -68,8 +69,12 @@ const CheckoutInformation = ({ data }) => {
   const handleDeleteAddressData = async (index, id) => {
     const deletedData = await dispatch(DeleteOrderAddress(id));
     if (deletedData) {
-      const address = orderInformation.address.splice(index, 1);
-      console.log(address);
+      const address = orderInformation.address;
+      address.splice(index, 1);
+      setOrderInformation({
+        ...orderInformation,
+        address,
+      });
     }
   };
 

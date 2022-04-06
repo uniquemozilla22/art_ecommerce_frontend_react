@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import classes from "./CategoryModal.module.css";
-import { Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { KeyboardArrowDownOutlined } from "@mui/icons-material/";
 import { Accordion } from "react-bootstrap";
 
 const CategoryModalList = ({ name, id, subCategory }) => {
-  console.log(subCategory);
   if (subCategory) {
     return (
       <div
@@ -31,14 +28,13 @@ const CategoryModalList = ({ name, id, subCategory }) => {
   } else {
     return (
       <div className={classes.category__list__modal}>
-        <Link to={`products/${id}`}>{name}</Link>
+        <Link to={`category/${id}`}>{name}</Link>
       </div>
     );
   }
 };
 
 const SubCategoryList = ({ name, id, subCategory }) => {
-  console.log(subCategory);
   if (subCategory) {
     return (
       <div
@@ -63,7 +59,7 @@ const SubCategoryList = ({ name, id, subCategory }) => {
   } else {
     return (
       <div className={classes.subcategory__list__modal}>
-        <Link to={`products/${id}`}>{name}</Link>
+        <Link to={`category/${id}`}>{name}</Link>
       </div>
     );
   }

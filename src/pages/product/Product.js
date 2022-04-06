@@ -21,7 +21,7 @@ const Product = (props) => {
 
   useEffect(() => {
     fetchAllProducts();
-  }, []);
+  }, [state?.search]);
 
   const fetchAllProducts = async () => {
     if (state) {

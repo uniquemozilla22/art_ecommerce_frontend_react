@@ -77,6 +77,7 @@ const EditedClick = ({ updateData, address, deleteData }) => {
       delay: 200,
     });
   };
+  console.log(address);
 
   return (
     <animated.div style={useAnimationStyle()}>
@@ -107,12 +108,14 @@ const EditedClick = ({ updateData, address, deleteData }) => {
                 onClick={(e) => setShowEdit(true)}
               />
             </Tooltip>
-            <Tooltip title={"Delete Address"}>
-              <DeleteOutlineRounded
-                className={classes.icon}
-                onClick={(e) => deleteData(address.id)}
-              />
-            </Tooltip>
+            {address.status !== "primary" && (
+              <Tooltip title={"Delete Address"}>
+                <DeleteOutlineRounded
+                  className={classes.icon}
+                  onClick={(e) => deleteData(address.id)}
+                />
+              </Tooltip>
+            )}
           </div>
         </animated.div>
       )}

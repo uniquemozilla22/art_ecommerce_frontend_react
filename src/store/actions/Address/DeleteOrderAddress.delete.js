@@ -11,7 +11,7 @@ const DeleteOrderAddress = (id) => {
     dispatch(showLoading());
     try {
       const { data } = await new Promise((resolve) =>
-        deleteData(getState().user.token, id)
+        resolve(deleteData(getState().user.token, id))
       );
       dispatch(hideLoading());
       dispatch(SuccessMessage({ message: data.message }));

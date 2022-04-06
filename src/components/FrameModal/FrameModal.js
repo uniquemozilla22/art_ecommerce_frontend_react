@@ -50,7 +50,6 @@ const FrameModal = () => {
             title="frame-latic"
             srcDoc={frameModal?.data || "<p>Loading...</p>"}
             data={"unique123"}
-            loading="lazy"
           ></iframe>
         </Box>
       </Modal>

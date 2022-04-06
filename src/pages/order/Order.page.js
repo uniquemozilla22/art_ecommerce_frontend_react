@@ -55,29 +55,31 @@ const Order = (props) => {
   return (
     <div className={classes.order}>
       <div className="container">
-        <div className={classes.title__container}>
-          <h1>Orders.</h1>
-          <Tooltip title="Refresh List">
-            <Refresh onClick={(e) => fetchOrderData()} />
-          </Tooltip>
-        </div>
         {data ? (
-          data.length !== 0 ? (
-            data
-              .filter((o) => o.status === "draft")
-              .map((order, index) => (
-                <OrderList
-                  key={index}
-                  {...order}
-                  fetchOrderData={fetchOrderData}
-                  deleteOrder={deleteOrder}
-                  selectOrderToCheckout={selectOrderToCheckout}
-                />
-              ))
+          data.filter((o) => o.status === "draft").length !== 0 ? (
+            <>
+              <div className={classes.title__container}>
+                <h1>Orders.</h1>
+                <Tooltip title="Refresh List">
+                  <Refresh onClick={(e) => fetchOrderData()} />
+                </Tooltip>
+              </div>
+              {data
+                .filter((o) => o.status === "draft")
+                .map((order, index) => (
+                  <OrderList
+                    key={index}
+                    {...order}
+                    fetchOrderData={fetchOrderData}
+                    deleteOrder={deleteOrder}
+                    selectOrderToCheckout={selectOrderToCheckout}
+                  />
+                ))}
+            </>
           ) : (
             <DataNotFound
               content={
-                "There are no orders here try checking out some of the arts. "
+                "There are no orders in draft here try checking out some of the arts. "
               }
               action={fetchOrderData}
             />
@@ -89,9 +91,9 @@ const Order = (props) => {
           <h1>Paid Orders.</h1>
         </div>
         {data ? (
-          data.length !== 0 ? (
+          data.filter((o) => o.status !== "draft").length !== 0 ? (
             data
-              .filter((o) => o.status === "paid")
+              .filter((o) => o.status !== "draft")
               .map((order, index) => (
                 <OrderList
                   key={index}

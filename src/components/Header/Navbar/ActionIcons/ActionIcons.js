@@ -21,7 +21,6 @@ const ActionIcons = (props) => {
   useEffect(() => {
     setToken(props.loggedIn);
   }, [props.loggedIn]);
-  console.log(props);
   return (
     <div className={classes.actionIcons}>
       <Tooltip title="Search">

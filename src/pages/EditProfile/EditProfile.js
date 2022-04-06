@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Tab, Nav } from "react-bootstrap";
+import { Tab, Spinner } from "react-bootstrap";
 import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";
 import userImage from "../../Assets/artist2.png";
-import art2 from "../../Assets/art2.jpg";
 import art1 from "../../Assets/art1.jpg";
 import artist2 from "../../Assets/artist2.png";
 import artist1 from "../../Assets/artist1.png";
@@ -20,32 +19,40 @@ import ChangePasswordAction from "../../store/actions/ChangePassword/ChangePassw
 import SendOTPtoEmail from "../../store/actions/Authentication/VerifyEmail/SendOTP.action";
 
 const EditProfile = (props) => {
-  const [data, setData] = useState(props.user);
-  const user = {
-    image: userImage,
-    verified: data.otherData.active_status,
-  };
+  const [data, setData] = useState(null);
+  const user = data
+    ? {
+        image: userImage,
+        verified: data.otherData.active_status,
+      }
+    : null;
 
-  const profile = {
-    first_name: data.otherData.first_name,
-    last_name: data.otherData.last_name,
-    middle_name: data.otherData.middle_name,
-    mobile_no: data.otherData.mobile_no,
-    alternative_no: data.otherData.alternative_no,
-    telephone_no: data.otherData.telephone_no,
-    gender: data.otherData.gender,
-  };
+  const profile = data
+    ? {
+        first_name: data.otherData.first_name,
+        last_name: data.otherData.last_name,
+        middle_name: data.otherData.middle_name,
+        mobile_no: data.otherData.mobile_no,
+        alternative_no: data.otherData.alternative_no,
+        telephone_no: data.otherData.telephone_no,
+        gender: data.otherData.gender,
+      }
+    : null;
 
-  const address = {
-    primary_address: data.otherData.primary_address,
-    secondary_address: data.otherData.secondary_address,
-  };
+  const address = data
+    ? {
+        primary_address: data.otherData.primary_address || " ",
+        secondary_address: data.otherData.secondary_address || " ",
+      }
+    : null;
 
-  const social = {
-    facebookId: data.otherData.facebookId,
-    googleId: data.otherData.googleId,
-    twitterId: data.otherData.twitterId,
-  };
+  const social = data
+    ? {
+        facebookId: data.otherData.facebookId,
+        googleId: data.otherData.googleId,
+        twitterId: data.otherData.twitterId,
+      }
+    : null;
   const links = [
     {
       title: "Manage Account",
@@ -144,18 +151,16 @@ const EditProfile = (props) => {
   ];
 
   useEffect(() => {
-    setData(props.user);
-  }, [props.user]);
-
-  useEffect(() => {
     fetchUserData();
   }, []);
 
-  const fetchUserData = () => {
-    props.fetchData();
+  const fetchUserData = async () => {
+    const profileData = await props.fetchData();
+    console.log(profileData);
+    setData(profileData);
   };
 
-  return (
+  return data ? (
     <div className={"container " + classes.edit__profile__container}>
       <Tab.Container
         id="left-tabs-example"
@@ -201,6 +206,8 @@ const EditProfile = (props) => {
         </div>
       </Tab.Container>
     </div>
+  ) : (
+    <Spinner />
   );
 };
 
@@ -215,7 +222,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     Loader: (data) =>
       data ? dispatch(showLoading()) : dispatch(hideLoading()),
-    fetchData: () => dispatch(FetchEditProfiileData()),
+    fetchData: async () => {
+      return await dispatch(FetchEditProfiileData());
+    },
     updateData: (data) => dispatch(UpdateProfile(data)),
     postPassword: (data) => dispatch(ChangePasswordAction(data)),
     sendOTP: (data) => dispatch(SendOTPtoEmail(data)),

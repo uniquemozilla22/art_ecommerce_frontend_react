@@ -19,7 +19,7 @@ const ProductGrid = ({ arts, bids, products }) => {
       setData(products);
     } else {
       if (arts) {
-        let likedproducts = await dispatch(await fetchLikedProducts());
+        let likedproducts = await dispatch(fetchLikedProducts());
         setData(likedproducts);
       }
       if (bids) {
@@ -32,7 +32,6 @@ const ProductGrid = ({ arts, bids, products }) => {
   return (
     <Fade cascade>
       <div className={classes.product__grid__container}>
-        {console.log(data)}
         {data.length !== 0 ? (
           data.map((product, index) => {
             return product.time ? (

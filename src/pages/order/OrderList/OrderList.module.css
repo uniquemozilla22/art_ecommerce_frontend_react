@@ -10,6 +10,10 @@
   flex-wrap: wrap;
 }
 
+.orderList > div {
+  flex:1
+}
+
 
 .paid_order:hover {
   box-shadow: 0 0 10px lightgreen;
@@ -48,6 +52,13 @@
   width: 100%;
   justify-content: center;
   flex-direction: column;
+}
+
+.orderList .order_action{
+  display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .action_mobile_container .button {

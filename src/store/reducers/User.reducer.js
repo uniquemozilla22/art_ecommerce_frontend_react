@@ -42,14 +42,7 @@ const UserReducer = (state = initialState, action) => {
         balance: 0,
       };
     }
-    case FETCH_EDIT_PROFILE: {
-      return {
-        ...state,
-        otherData: payload.otherData,
-        email: payload.email,
-        username: payload.username,
-      };
-    }
+
     case UPDATE__PROFILE: {
       return {
         ...state,

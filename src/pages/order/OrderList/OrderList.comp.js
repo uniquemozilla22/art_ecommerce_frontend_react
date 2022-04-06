@@ -102,7 +102,7 @@ const OrderList = ({
                     style: "currency",
                     currency: "NPR",
                   })
-                : 0}
+                : "NPR 0.00"}
             </span>
           </p>
           <div

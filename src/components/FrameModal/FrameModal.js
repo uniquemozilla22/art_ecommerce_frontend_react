@@ -66,7 +66,7 @@ const FrameModal = () => {
         open={showFrame}
         onClose={hideFrameModal}
         centered
-        backdrop="static"
+        backdrop="none"
         keyboard={false}
       >
         <Box className={classes.frame__container}>

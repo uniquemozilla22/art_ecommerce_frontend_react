@@ -1,15 +1,12 @@
 import { Refresh } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Form, Spinner } from "react-bootstrap";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
-import ProductTable from "../../components/ProductTable/ProductTable";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
 import DeleteOrderList from "../../store/actions/Order/OrderList.delete";
 import GetOrderList from "../../store/actions/Order/OrderList.fetch";
-import RemoveProductOnOrder from "../../store/actions/Order/RemoveOrderProduct.delete";
 import classes from "./Order.module.css";
 import OrderList from "./OrderList/OrderList.comp";
 
@@ -87,29 +84,24 @@ const Order = (props) => {
         ) : null}
       </div>
       <div className="container">
-        <div className={classes.title__container}>
-          <h1>Paid Orders.</h1>
-        </div>
         {data ? (
           data.filter((o) => o.status !== "draft").length !== 0 ? (
-            data
-              .filter((o) => o.status !== "draft")
-              .map((order, index) => (
-                <OrderList
-                  key={index}
-                  {...order}
-                  fetchOrderData={fetchOrderData}
-                  selectOrderToCheckout={selectOrderToCheckout}
-                />
-              ))
-          ) : (
-            <DataNotFound
-              content={
-                "There are no orders here try checking out some of the arts. "
-              }
-              action={fetchOrderData}
-            />
-          )
+            <>
+              <div className={classes.title__container}>
+                <h1>Paid Orders.</h1>
+              </div>
+              {data
+                .filter((o) => o.status !== "draft")
+                .map((order, index) => (
+                  <OrderList
+                    key={index}
+                    {...order}
+                    fetchOrderData={fetchOrderData}
+                    selectOrderToCheckout={selectOrderToCheckout}
+                  />
+                ))}
+            </>
+          ) : null
         ) : null}
       </div>
     </div>

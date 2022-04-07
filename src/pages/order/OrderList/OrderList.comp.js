@@ -62,6 +62,17 @@ const OrderList = ({
     };
     dispatch(showConfirmation(confirmData.title, confirmData.onAccept));
   };
+
+  const calculate_net = (items) => {
+    let totalprice = 0;
+    const prices = items.map((product) => product.data.unit_price);
+
+    prices.forEach(
+      (productprice) => (totalprice = totalprice + parseFloat(productprice))
+    );
+
+    return totalprice;
+  };
   return (
     <>
       <div
@@ -96,8 +107,8 @@ const OrderList = ({
           <p>
             Net{" "}
             <span>
-              {net_price
-                ? parseInt(net_price).toLocaleString("en-IN", {
+              {orderItem
+                ? parseInt(calculate_net(orderItem)).toLocaleString("en-IN", {
                     maximumFractionDigits: 2,
                     style: "currency",
                     currency: "NPR",

@@ -36,6 +36,11 @@ const CheckoutInformation = ({ data }) => {
     }
   };
 
+
+  const handlePaymentMethodSelection= ()=>{
+    
+  }
+
   const handleAddData = async (data) => {
     const updated = await dispatch(AddOrderAddress(data));
     if (updated) {

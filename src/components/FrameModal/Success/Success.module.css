@@ -1,7 +1,36 @@
+.success__container {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  background:#fff;
+  padding: 1rem;
+  border-radius: 20px;
+}
 
+.success__container .content__container{
+  display: flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.success__container p.message__container{
+  color:#49da83;
+}
+
+.success__container button.button{
+  border: 2px solid #49da83;
+  background:transparent;
+  color:#49da83;
+  padding:0.5rem 1rem;
+  border-radius:20px;
+
+}
 .main_container {
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -44,6 +73,12 @@
   animation: animateShadow 0.75s ease-out forwards 0.75s;
 }
 
+
+
+.message__container{
+  align-items: center;
+  color:#fff;
+}
 @keyframes animateContainer {
   0% {
     opacity: 0;

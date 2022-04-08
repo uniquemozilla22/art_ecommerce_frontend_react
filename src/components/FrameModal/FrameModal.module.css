@@ -1,9 +1,16 @@
+.backdrop{
+    background-color:#2b2b2b25;
+    height:100%;
+    width:100%;
+}
+
 .frame__container{
     position: absolute;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
     border:none;
+    background-color:#2b2b2b25
 }
 
 .frame__container iframe{

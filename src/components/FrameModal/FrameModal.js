@@ -41,43 +41,50 @@ const FrameModal = () => {
     setShowError(true);
   };
 
-  window.addEventListener("message", function (e) {
-    if (iFrameRef?.current?.contentWindow?.hideModalFunction()) {
-      hideFrameModal();
-    }
-    if (
-      iFrameRef?.current?.contentWindow?.successModel().show === true &&
-      iFrameRef?.current?.contentWindow?.successModel().success === true
-    ) {
-      successMessage();
-      setMessage("Payment Successful");
-    }
-    if (
-      iFrameRef?.current?.contentWindow?.successModel().show === true &&
-      iFrameRef?.current?.contentWindow?.successModel().success === false
-    ) {
-      errorMessage();
-      setMessage("Payment Error");
-    }
+  useEffect(() => {
+    Listener();
   });
+  const Listener = () => {
+    window.addEventListener("message", function (e) {
+      if (iFrameRef?.current?.contentWindow?.hideModalFunction()) {
+        hideFrameModal();
+      }
+      if (
+        iFrameRef?.current?.contentWindow?.successModel().show === true &&
+        iFrameRef?.current?.contentWindow?.successModel().success === true
+      ) {
+        successMessage();
+        setMessage("Payment Successful");
+      }
+      if (
+        iFrameRef?.current?.contentWindow?.successModel().show === true &&
+        iFrameRef?.current?.contentWindow?.successModel().success === false
+      ) {
+        errorMessage();
+        setMessage("Payment Error");
+      }
+    });
+  };
   return (
     <>
       <Modal
         open={showFrame}
         onClose={hideFrameModal}
         centered
-        backdrop="none"
+        hideBackdrop={true}
         keyboard={false}
       >
-        <Box className={classes.frame__container}>
-          <iframe
-            ref={iFrameRef}
-            id="frame-latic"
-            title="frame-latic"
-            srcDoc={frameModal?.data || "<p>Loading...</p>"}
-            data={"unique123"}
-          ></iframe>
-        </Box>
+        <div className={classes.backdrop}>
+          <Box className={classes.frame__container}>
+            <iframe
+              ref={iFrameRef}
+              id="frame-latic"
+              title="frame-latic"
+              srcDoc={frameModal?.data || "<p>Loading...</p>"}
+              data={"unique123"}
+            ></iframe>
+          </Box>
+        </div>
       </Modal>
       <Modal
         open={showSuccess}

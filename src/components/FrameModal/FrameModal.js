@@ -71,20 +71,17 @@ const FrameModal = () => {
         open={showFrame}
         onClose={hideFrameModal}
         centered
-        hideBackdrop={true}
         keyboard={false}
       >
-        <div className={classes.backdrop}>
-          <Box className={classes.frame__container}>
-            <iframe
-              ref={iFrameRef}
-              id="frame-latic"
-              title="frame-latic"
-              srcDoc={frameModal?.data || "<p>Loading...</p>"}
-              data={"unique123"}
-            ></iframe>
-          </Box>
-        </div>
+        <Box className={classes.frame__container}>
+          <iframe
+            ref={iFrameRef}
+            id="frame-latic"
+            title="frame-latic"
+            srcDoc={frameModal?.data || "<p>Loading...</p>"}
+            data={"unique123"}
+          ></iframe>
+        </Box>
       </Modal>
       <Modal
         open={showSuccess}

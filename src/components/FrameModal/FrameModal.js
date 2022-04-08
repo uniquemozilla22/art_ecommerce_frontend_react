@@ -42,29 +42,20 @@ const FrameModal = () => {
   };
 
   useEffect(() => {
-    Listener();
-  });
-  const Listener = () => {
     window.addEventListener("message", function (e) {
-      if (iFrameRef?.current?.contentWindow?.hideModalFunction()) {
-        hideFrameModal();
+      if (e.data.show === false) {
+        dispatch(hideFrame());
       }
-      if (
-        iFrameRef?.current?.contentWindow?.successModel().show === true &&
-        iFrameRef?.current?.contentWindow?.successModel().success === true
-      ) {
+      if (e.data.show === true && e.data.success === true) {
         successMessage();
-        setMessage("Payment Successful");
+        setMessage(e.data.message);
       }
-      if (
-        iFrameRef?.current?.contentWindow?.successModel().show === true &&
-        iFrameRef?.current?.contentWindow?.successModel().success === false
-      ) {
+      if (e.data.show === true && e.data.success === false) {
         errorMessage();
-        setMessage("Payment Error");
+        setMessage(e.data.message);
       }
     });
-  };
+  }, []);
   return (
     <>
       <Modal

@@ -40,13 +40,13 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   };
 
   const handlePaymentMethodSelection = async (id, name) => {
+    setPaymentSelectedID(id);
     const res = await dispatch(
       PaymentMethodSelection(orderInformation.id, name)
     );
     if (res) {
       handleOrderPaymentChange(order.indexOf(data), name);
       setPaymentSelected(name);
-      setPaymentSelectedID(id);
     }
   };
 
@@ -98,6 +98,10 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
 
   const fetchPayment = async () => {
     const pay = await dispatch(FetchPaymentMethods());
+    const activepayment = pay.filter(
+      (method) => method.name == paymentSelected
+    );
+    setPaymentSelectedID(activepayment[0].id);
     setPayments(pay);
   };
 

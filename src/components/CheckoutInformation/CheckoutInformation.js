@@ -14,13 +14,14 @@ import DeleteOrderAddress from "../../store/actions/Address/DeleteOrderAddress.d
 import PostPayment from "../../store/actions/Payment/Payment.post";
 import PaymentMethodSelection from "../../store/actions/Payment/PaymentMethod.post";
 
-const CheckoutInformation = ({ data }) => {
+const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [payments, setPayments] = useState(null);
   const dispatch = useDispatch();
   const [orderInformation, setOrderInformation] = useState(data);
   const [paymentSelected, setPaymentSelected] = useState(
     orderInformation.payment_type
   );
+  const [paymentSelectedID, setPaymentSelectedID] = useState();
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [addressId, setAddressId] = useState();
   const onHideAddressModal = () => setShowAddressModal(false);
@@ -38,12 +39,15 @@ const CheckoutInformation = ({ data }) => {
     }
   };
 
-  const handlePaymentMethodSelection = async (name) => {
+  const handlePaymentMethodSelection = async (id, name) => {
     const res = await dispatch(
       PaymentMethodSelection(orderInformation.id, name)
     );
-    if (!res) return;
-    setPaymentSelected(name);
+    if (res) {
+      handleOrderPaymentChange(order.indexOf(data), name);
+      setPaymentSelected(name);
+      setPaymentSelectedID(id);
+    }
   };
 
   const handleAddData = async (data) => {
@@ -74,7 +78,7 @@ const CheckoutInformation = ({ data }) => {
   };
 
   const Checkout = () =>
-    dispatch(PostPayment(orderInformation.id, paymentSelected, addressId));
+    dispatch(PostPayment(orderInformation.id, paymentSelectedID, addressId));
 
   const handleDeleteAddressData = async (index, id) => {
     const deletedData = await dispatch(DeleteOrderAddress(id));
@@ -127,7 +131,9 @@ const CheckoutInformation = ({ data }) => {
                   <Payment
                     key={index}
                     {...pay}
-                    handleSelected={(id) => handlePaymentMethodSelection(id)}
+                    handleSelected={(id, name) =>
+                      handlePaymentMethodSelection(id, name)
+                    }
                     checked={data?.payment_type === pay.name ? true : null}
                   />
                 ))}

@@ -24,11 +24,9 @@ const PostPayment = (order_id, payment_method_id, address_id) => {
         const { data } = await new Promise((resolve) =>
           resolve(PostPay(getState().user.token, reqData))
         );
+        console.log(data);
         dispatch(hideLoading());
-        // let myWindow = window.open("", "_blank");
-        // myWindow.document.write(data);
         dispatch(showFrame(data));
-        // console.log(typeof data);
         // return data;
       } catch (error) {
         console.log({ ...error });

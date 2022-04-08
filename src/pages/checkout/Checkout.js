@@ -18,11 +18,13 @@ const Checkout = (props) => {
 
   const handleSelection = (data) => {
     setSelectedOrder(data);
-    console.log(data);
   };
 
-  const handleOrderPaymentChange = (id, name) => {
-    data.filter((order) => order.id === id);
+  const handleOrderPaymentChange = (index, name) => {
+    let changingData = data;
+    changingData[index].payment_type = name;
+    setData(changingData);
+    setSelectedOrder(changingData[index]);
   };
   const handleFetchOrders = async () => {
     let order = await dispatch(GetOrderList());
@@ -87,6 +89,7 @@ const Checkout = (props) => {
                         deleteOrder={deleteOrder}
                         selected={selectedOrder?.id === order.id}
                         handleSelection={handleSelection}
+                        handleOrderPaymentChange={handleOrderPaymentChange}
                       />
                     ))
                 ) : (
@@ -108,7 +111,11 @@ const Checkout = (props) => {
             }
           >
             {selectedOrder ? (
-              <CheckoutInformation data={selectedOrder} />
+              <CheckoutInformation
+                order={data}
+                data={selectedOrder}
+                handleOrderPaymentChange={handleOrderPaymentChange}
+              />
             ) : null}
           </div>
         </div>
@@ -123,6 +130,7 @@ const OrderListSelector = ({
   order,
   fetchOrderData,
   deleteOrder,
+  handleOrderPaymentChange,
 }) => {
   return (
     <Form.Check

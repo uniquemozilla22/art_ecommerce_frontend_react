@@ -23,6 +23,7 @@ const OrderList = ({
   deleteOrder,
   checkout,
   selectOrderToCheckout,
+  handleOrderPaymentChange
 }) => {
   const [showProducts, setShowProducts] = useState(false);
   const dispatch = useDispatch();

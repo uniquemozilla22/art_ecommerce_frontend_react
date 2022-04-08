@@ -20,7 +20,7 @@ const Payment = ({ name, id, checked, handleSelected, image_url }) => {
         <input
           type="radio"
           className={classes.checkbox_input}
-          onChange={(e) => handleSelected(id)}
+          onChange={(e) => handleSelected(name)}
           name={"payment"}
           checked={checked}
         />

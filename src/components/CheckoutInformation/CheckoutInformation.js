@@ -12,13 +12,15 @@ import AddOrderAddress from "../../store/actions/Address/AddOrderAddress.post";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
 import DeleteOrderAddress from "../../store/actions/Address/DeleteOrderAddress.delete";
 import PostPayment from "../../store/actions/Payment/Payment.post";
-import { WarningMessage } from "../../store/actions/Message/Message";
+import PaymentMethodSelection from "../../store/actions/Payment/PaymentMethod.post";
 
 const CheckoutInformation = ({ data }) => {
   const [payments, setPayments] = useState(null);
   const dispatch = useDispatch();
   const [orderInformation, setOrderInformation] = useState(data);
-  const [paymentSelected, setPaymentSelected] = useState();
+  const [paymentSelected, setPaymentSelected] = useState(
+    orderInformation.payment_type
+  );
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [addressId, setAddressId] = useState();
   const onHideAddressModal = () => setShowAddressModal(false);
@@ -36,10 +38,13 @@ const CheckoutInformation = ({ data }) => {
     }
   };
 
-
-  const handlePaymentMethodSelection= ()=>{
-    
-  }
+  const handlePaymentMethodSelection = async (name) => {
+    const res = await dispatch(
+      PaymentMethodSelection(orderInformation.id, name)
+    );
+    if (!res) return;
+    setPaymentSelected(name);
+  };
 
   const handleAddData = async (data) => {
     const updated = await dispatch(AddOrderAddress(data));
@@ -122,8 +127,8 @@ const CheckoutInformation = ({ data }) => {
                   <Payment
                     key={index}
                     {...pay}
-                    handleSelected={(id) => setPaymentSelected(id)}
-                    checked={paymentSelected === pay ? true : null}
+                    handleSelected={(id) => handlePaymentMethodSelection(id)}
+                    checked={data?.payment_type === pay.name ? true : null}
                   />
                 ))}
             </div>

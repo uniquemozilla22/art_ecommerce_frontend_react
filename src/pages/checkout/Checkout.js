@@ -14,14 +14,18 @@ const Checkout = (props) => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [data, setData] = useState(null);
   const { state } = useLocation();
-
   const dispatch = useDispatch();
 
-  const handleSelection = (data) => setSelectedOrder(data);
+  const handleSelection = (data) => {
+    setSelectedOrder(data);
+    console.log(data);
+  };
 
+  const handleOrderPaymentChange = (id, name) => {
+    data.filter((order) => order.id === id);
+  };
   const handleFetchOrders = async () => {
     let order = await dispatch(GetOrderList());
-
     if (state?.order) {
       setSelectedOrder(order.filter((o) => o.id === state.order)[0]);
     }

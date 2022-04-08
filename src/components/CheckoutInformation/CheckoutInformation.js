@@ -98,10 +98,10 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
 
   const fetchPayment = async () => {
     const pay = await dispatch(FetchPaymentMethods());
-    const activepayment = pay.filter(
-      (method) => method.name == paymentSelected
-    );
-    setPaymentSelectedID(activepayment[0].id);
+    const activepayment = paymentSelected
+      ? pay.filter((method) => method.name == paymentSelected)
+      : null;
+    setPaymentSelectedID(activepayment[0]?.id);
     setPayments(pay);
   };
 

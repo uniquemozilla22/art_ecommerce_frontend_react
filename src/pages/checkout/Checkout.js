@@ -19,6 +19,7 @@ const Checkout = (props) => {
   const handleSelection = (data) => {
     setSelectedOrder(data);
   };
+  console.log(data);
 
   const handleOrderPaymentChange = (index, name) => {
     let changingData = data;

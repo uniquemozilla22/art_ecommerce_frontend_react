@@ -1,12 +1,14 @@
 import axiosBase from "../../../axiosBase";
-import { hideLoading, showLoading } from "../Loading/Loading";
+import { showLoading, hideLoading } from "../Loading/Loading";
 import { ErrorMessage, WarningMessage } from "../Message/Message";
 
-const FetchPaymentMethods = () => {
+const FetchUserAddress = () => {
   return async (dispatch, getState) => {
     try {
-      const res = await new Promise((resolve) => resolve(fetch()));
-      return res.data;
+      const { data } = await new Promise((resolve) =>
+        resolve(fetchData(getState().user.token))
+      );
+      return data;
     } catch (error) {
       if (error.response === undefined) {
         dispatch(
@@ -21,6 +23,12 @@ const FetchPaymentMethods = () => {
               message: error.response.data.message,
             })
           );
+        } else if (error.response?.status === 404) {
+          dispatch(
+            ErrorMessage({
+              message: "Request Not Found ! Try Refreshing the page.",
+            })
+          );
         } else {
           dispatch(
             ErrorMessage({
@@ -33,8 +41,12 @@ const FetchPaymentMethods = () => {
   };
 };
 
-const fetch = async () => {
-  return await axiosBase.get("payment_method");
+const fetchData = async (token) => {
+  return await axiosBase.get(`address/list`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
 };
 
-export default FetchPaymentMethods;
+export default FetchUserAddress;

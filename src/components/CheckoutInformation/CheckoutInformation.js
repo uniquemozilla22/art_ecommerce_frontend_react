@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 import classes from "./CheckoutInformation.module.css";
 import { animated, useSpring } from "react-spring";
 import FeatherIcon from "feather-icons-react";
@@ -13,6 +13,7 @@ import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.
 import DeleteOrderAddress from "../../store/actions/Address/DeleteOrderAddress.delete";
 import PostPayment from "../../store/actions/Payment/Payment.post";
 import PaymentMethodSelection from "../../store/actions/Payment/PaymentMethod.post";
+import FetchUserAddress from "../../store/actions/Address/FetchUserAddress.fetch";
 
 const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [payments, setPayments] = useState(null);
@@ -24,6 +25,8 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [paymentSelectedID, setPaymentSelectedID] = useState();
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [addressId, setAddressId] = useState();
+  const [address, setAddress] = useState(null);
+
   const onHideAddressModal = () => setShowAddressModal(false);
 
   const handleUpdatedData = async (index, id, d) => {
@@ -37,6 +40,11 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
         address,
       });
     }
+  };
+
+  const fetchAddress = async () => {
+    const address = await dispatch(FetchUserAddress());
+    setAddress(address);
   };
 
   const handlePaymentMethodSelection = async (id, name) => {
@@ -91,9 +99,9 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
       });
     }
   };
-
   useEffect(() => {
     fetchPayment();
+    fetchAddress();
   }, []);
 
   const fetchPayment = async () => {
@@ -145,31 +153,37 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
           </form>
         </div>
         <div className={classes.address__container}>
-          <h2>Address</h2>
-          <Form className={classes.checkbox__container}>
-            {orderInformation?.address.map((address, index) => (
-              <Form.Check
-                label={
-                  <div className={classes.address__line}>
-                    <h3>{address.address}</h3>
-                    {address.landmark && <h4>{address.landmark}</h4>}
-                  </div>
-                }
-                name="Address"
-                type={"radio"}
-                key={index}
-                className={classes.checkbox}
-                onChange={(e) => setAddressId(address.id)}
-              />
-            ))}
-            <div
-              className={classes.editAddress}
-              onClick={(e) => setShowAddressModal(true)}
-            >
-              <FeatherIcon icon="edit-3" />
-              <h3>Edit Address</h3>
-            </div>
-          </Form>
+          {address ? (
+            <>
+              <h2>Address</h2>
+              <Form className={classes.checkbox__container}>
+                {address?.map((address, index) => (
+                  <Form.Check
+                    label={
+                      <div className={classes.address__line}>
+                        <h3>{address.address}</h3>
+                        {address.landmark && <h4>{address.landmark}</h4>}
+                      </div>
+                    }
+                    name="Address"
+                    type={"radio"}
+                    key={index}
+                    className={classes.checkbox}
+                    onChange={(e) => setAddressId(address.id)}
+                  />
+                ))}
+                <div
+                  className={classes.editAddress}
+                  onClick={(e) => setShowAddressModal(true)}
+                >
+                  <FeatherIcon icon="edit-3" />
+                  <h3>Edit Address</h3>
+                </div>
+              </Form>
+            </>
+          ) : (
+            <Spinner />
+          )}
 
           <div className={classes.discount__container}>
             <h1>Discount.</h1>
@@ -189,14 +203,16 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
           </div>
         </div>
       </animated.div>
-      <EditAddressModal
-        show={showAddressModal}
-        handleHide={onHideAddressModal}
-        updateData={handleUpdatedData}
-        addData={handleAddData}
-        data={orderInformation?.address}
-        deleteData={handleConfirmationDelete}
-      />
+      {address ? (
+        <EditAddressModal
+          show={showAddressModal}
+          handleHide={onHideAddressModal}
+          updateData={handleUpdatedData}
+          addData={handleAddData}
+          data={address}
+          deleteData={handleConfirmationDelete}
+        />
+      ) : null}
     </>
   );
 };

@@ -35,4 +35,23 @@ const Payment = ({ name, id, checked, handleSelected, image_url }) => {
   );
 };
 
+export const SelectionContainer = ({ comp, handleSelected, checked, id }) => {
+  return (
+    <div className={classes.checkbox}>
+      <label className={classes.checkbox_wrapper}>
+        <input
+          type="radio"
+          className={classes.checkbox_input}
+          onChange={(e) => handleSelected(id)}
+          name={"payment"}
+          checked={checked}
+        />
+        <span className={classes.checkbox_tile}>
+          <span className={classes.checkbox_icon}>{comp}</span>
+        </span>
+      </label>
+    </div>
+  );
+};
+
 export default Payment;

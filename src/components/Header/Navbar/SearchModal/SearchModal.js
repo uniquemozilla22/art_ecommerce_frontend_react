@@ -37,7 +37,11 @@ const SearchModal = (props) => {
       }, delay);
     };
   };
-
+  const fetchData = debounce(async (text) => {
+    const data = await dispatch(SearchProducts(text, false));
+    setLoading(false);
+    setData(data);
+  }, 1000);
   const handleChange = (e) => {
     if (e.target.value.trim() !== "") {
       setSearch(e.target.value);
@@ -46,11 +50,7 @@ const SearchModal = (props) => {
     }
   };
 
-  const fetchData = debounce(async (text) => {
-    const data = await dispatch(SearchProducts(text, false));
-    setLoading(false);
-    setData(data);
-  }, 1000);
+ 
 
   return (
     <Modal

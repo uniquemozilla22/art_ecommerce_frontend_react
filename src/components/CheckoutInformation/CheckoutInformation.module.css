@@ -81,7 +81,7 @@
   margin: 0;
 }
 
-.checkout__information__container .editAddress {
+.checkout__information__container .editAddress ,.checkout__information__container .billing__address{
   border: 1px solid #4267b2;
   display: flex;
   padding: 0.5rem;
@@ -93,13 +93,17 @@
   cursor: pointer;
 }
 
-.checkout__information__container .editAddress h3 {
+.checkout__information__container .editAddress h3,.checkout__information__container .billing__address h3 {
   font-size: 12px;
   font-weight: 500;
   margin: 0;
   margin-left: 1rem;
 }
+.checkout__information__container .billing__address {
+  border: none;
+  margin-top:0;
 
+}
 .checkout__information__container .coupon__form {
   display: flex;
   justify-content: space-around;

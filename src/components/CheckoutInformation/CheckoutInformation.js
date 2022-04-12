@@ -14,6 +14,7 @@ import DeleteOrderAddress from "../../store/actions/Address/DeleteOrderAddress.d
 import PostPayment from "../../store/actions/Payment/Payment.post";
 import PaymentMethodSelection from "../../store/actions/Payment/PaymentMethod.post";
 import FetchUserAddress from "../../store/actions/Address/FetchUserAddress.fetch";
+import BillingAddress from "./BillindAddress/BillingAddress.comp";
 
 const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [payments, setPayments] = useState(null);
@@ -26,19 +27,21 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [addressId, setAddressId] = useState();
   const [address, setAddress] = useState(null);
+  const [showDifferentBillingAddress, setShowDifferentBillingAddress] =
+    useState(false);
+  const [billingAddress, setBillingAddress] = useState(null);
 
   const onHideAddressModal = () => setShowAddressModal(false);
 
   const handleUpdatedData = async (index, id, d) => {
     const updated = await dispatch(UpdateOrderAddress(id, d));
     if (updated) {
-      let address = orderInformation.address;
-      address[index].address = d.address;
-      address[index].landmark = d.landmark;
-      setOrderInformation({
-        ...orderInformation,
-        address,
-      });
+      let updatingAddress = address;
+      updatingAddress[index] = {
+        ...updatingAddress[index],
+        ...d,
+      };
+      setAddress(updatingAddress);
     }
   };
 
@@ -61,10 +64,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const handleAddData = async (data) => {
     const updated = await dispatch(AddOrderAddress(data));
     if (updated) {
-      setOrderInformation({
-        ...orderInformation,
-        address: [...orderInformation.address, updated],
-      });
+      setAddress([...address, updated]);
     }
   };
 
@@ -91,18 +91,19 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const handleDeleteAddressData = async (index, id) => {
     const deletedData = await dispatch(DeleteOrderAddress(id));
     if (deletedData) {
-      const address = orderInformation.address;
-      address.splice(index, 1);
-      setOrderInformation({
-        ...orderInformation,
-        address,
-      });
+      let updatingAddress = address;
+      updatingAddress.splice(index, 1);
+      setAddress([...updatingAddress]);
     }
   };
   useEffect(() => {
     fetchPayment();
     fetchAddress();
   }, []);
+
+  useEffect(() => {
+    setAddress(address);
+  }, [address]);
 
   const fetchPayment = async () => {
     const pay = await dispatch(FetchPaymentMethods());
@@ -125,6 +126,8 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
       delay: 200,
     });
   };
+
+  const handleDifferentBillingAddress = () => {};
   return (
     <>
       <animated.div
@@ -138,7 +141,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
           <h2>Payment Method</h2>
           <form className={classes.checkbox__container}>
             <div className={classes.checkbox_group}>
-              {payments &&
+              {payments ? (
                 payments.map((pay, index) => (
                   <Payment
                     key={index}
@@ -148,36 +151,54 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
                     }
                     checked={data?.payment_type === pay.name ? true : null}
                   />
-                ))}
+                ))
+              ) : (
+                <Spinner />
+              )}
             </div>
           </form>
         </div>
         <div className={classes.address__container}>
           {address ? (
             <>
-              <h2>Address</h2>
+              <div>
+                <h2>Address</h2>
+              </div>
               <Form className={classes.checkbox__container}>
                 {address?.map((address, index) => (
                   <Form.Check
                     label={
-                      <div className={classes.address__line}>
-                        <h3>{address.address}</h3>
-                        {address.landmark && <h4>{address.landmark}</h4>}
-                      </div>
+                      <label for={index}>
+                        <div className={classes.address__line}>
+                          <h3>{address.name}</h3>
+                          {address.landmark && <h4>{address.landmark}</h4>}
+                        </div>
+                      </label>
                     }
                     name="Address"
                     type={"radio"}
                     key={index}
+                    id={index}
                     className={classes.checkbox}
                     onChange={(e) => setAddressId(address.id)}
                   />
                 ))}
-                <div
-                  className={classes.editAddress}
-                  onClick={(e) => setShowAddressModal(true)}
-                >
-                  <FeatherIcon icon="edit-3" />
-                  <h3>Edit Address</h3>
+                <div className={classes.buttons__address}>
+                  <div
+                    className={classes.editAddress}
+                    onClick={(e) => setShowAddressModal(true)}
+                  >
+                    <FeatherIcon icon="edit-3" />
+                    <h3>{address.length === 0 ? "Add" : "Edit"} Address</h3>
+                  </div>
+                  {addressId && (
+                    <div
+                      className={classes.billing__address}
+                      onClick={(e) => setShowDifferentBillingAddress(true)}
+                    >
+                      <h3>Different Billing Address ?</h3>
+                    </div>
+                  )}
                 </div>
               </Form>
             </>
@@ -211,6 +232,17 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
           addData={handleAddData}
           data={address}
           deleteData={handleConfirmationDelete}
+        />
+      ) : null}
+      {address && addressId ? (
+        <BillingAddress
+          show={showDifferentBillingAddress}
+          handleHide={() => setShowDifferentBillingAddress(false)}
+          data={address.filter((add) => add.id !== addressId)}
+          handleSelection={(id) =>
+            id ? setBillingAddress(id) : setBillingAddress(id)
+          }
+          selected={billingAddress ? billingAddress : null}
         />
       ) : null}
     </>

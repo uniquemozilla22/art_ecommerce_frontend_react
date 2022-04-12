@@ -131,7 +131,6 @@ const OrderListSelector = ({
   order,
   fetchOrderData,
   deleteOrder,
-  handleOrderPaymentChange,
 }) => {
   return (
     <Form.Check

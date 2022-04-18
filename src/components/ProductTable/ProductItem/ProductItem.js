@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import classes from "./ProductItem.module.css";
-import FeatherIcon from "feather-icons-react";
 import { Tooltip } from "@mui/material";
 import {
+  Close,
   Delete,
   FavoriteBorderOutlined,
   RemoveRedEyeOutlined,
@@ -10,7 +10,6 @@ import {
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import AddCartItem from "../../../store/actions/Cart/AddItem.post";
-import AddWishlistItem from "../../../store/actions/Wishlist/wishlistItem.post";
 import { useNavigate } from "react-router";
 
 const ProductItem = ({
@@ -28,9 +27,9 @@ const ProductItem = ({
   tags,
   likesCount,
   category,
-  deleted,
   wishlistFunction,
   modal,
+  heading,
 }) => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -101,7 +100,7 @@ const ProductItem = ({
     return days + hour + mins + sec;
   };
 
-  return (
+  return heading ? (
     <div className={classes.product__item__container}>
       <div className={classes.product__info}>
         <div className={classes.image__container}>
@@ -169,6 +168,43 @@ const ProductItem = ({
             <Delete onClick={(e) => removeItem(id)} />
           </Tooltip>
         )}
+      </div>
+    </div>
+  ) : (
+    <div className={classes.product__item__container}>
+      <div className={classes.product__item__info}>
+        <div className={classes.image__container}>
+          <img src={image} alt={name} />
+        </div>
+        <div className={classes.item__content}>
+          <h5>{name}</h5>
+          <p>{description}</p>
+          {time ? <p>{timed(days, mins, hours, sec)}</p> : null}
+          <p className={classes.supplier__name}>{supplierName}</p>
+          <p className={"d-flex d-sm-none "}>
+            {parseInt(price).toLocaleString("en-IN", {
+              maximumFractionDigits: 2,
+              style: "currency",
+              currency: "NRS",
+            })}
+          </p>
+        </div>
+      </div>
+      <div className={"d-none d-sm-flex " + classes.product__item__Price}>
+        <h5>
+          {parseInt(price).toLocaleString("en-IN", {
+            maximumFractionDigits: 2,
+            style: "currency",
+            currency: "NRS",
+          })}
+        </h5>
+        <div className={classes.delete_item__icon}>
+          {removeItem && (
+            <Tooltip title={"Remove " + name}>
+              <Close onClick={(e) => removeItem(id)} />
+            </Tooltip>
+          )}
+        </div>
       </div>
     </div>
   );

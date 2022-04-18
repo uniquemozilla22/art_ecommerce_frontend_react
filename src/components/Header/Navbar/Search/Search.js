@@ -18,6 +18,17 @@ const Search = () => {
     e.preventDefault();
     navigation("search", { state: { search } });
   };
+
+  const ShortCutAnotation = () => {
+    return (
+      <div className={classes.placeholder}>
+        <p>
+          Alt <span>S</span>
+        </p>
+      </div>
+    );
+  };
+
   const handleChange = (e) => setSearch(e.target.value);
   return (
     <form onSubmit={handleSubmit}>

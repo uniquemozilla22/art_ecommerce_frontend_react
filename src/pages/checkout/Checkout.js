@@ -8,44 +8,54 @@ import OrderList from "../order/OrderList/OrderList.comp";
 import DeleteOrderList from "../../store/actions/Order/OrderList.delete";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
 import { Form, Spinner } from "react-bootstrap";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import RemoveProductOnOrder from "../../store/actions/Order/RemoveOrderProduct.delete";
+import { WarningMessage } from "../../store/actions/Message/Message";
+import ProductTable from "../../components/ProductTable/ProductTable";
+import FetchOrderById from "../../store/actions/Order/OrderById.fetch";
 
 const Checkout = (props) => {
-  const [selectedOrder, setSelectedOrder] = useState(null);
   const [data, setData] = useState(null);
   const { state } = useLocation();
   const dispatch = useDispatch();
-
-  const handleSelection = (data) => {
-    setSelectedOrder(data);
-  };
-  console.log(data);
+  const navigation = useNavigate();
 
   const handleOrderPaymentChange = (index, name) => {
     let changingData = data;
     changingData[index].payment_type = name;
     setData(changingData);
-    setSelectedOrder(changingData[index]);
   };
   const handleFetchOrders = async () => {
-    let order = await dispatch(GetOrderList());
+    console.log(state);
     if (state?.order) {
-      setSelectedOrder(order.filter((o) => o.id === state.order)[0]);
+      let order = await dispatch(FetchOrderById(state?.order));
+      setData(order);
     }
-    setData(order);
   };
 
-  const deleteOrderSetter = (data, order) => {
-    const success = dispatch(DeleteOrderList(order));
-    if (success) {
-      let updated = data.filter((orders) => orders.id !== order);
-      setData(updated);
+  const handleDeleteProduct = async (items, order, product) => {
+    if (data.status !== "paid") {
+      const success = await dispatch(RemoveProductOnOrder(order, product));
+      if (success) {
+        const orderItems = items.filter((item) => item.data.id !== product);
+        setData({ ...data, orderItems });
+        if (orderItems.length === 0) {
+          navigation("/orders", { state: { message: "Order removed" } });
+        }
+      }
+    } else {
+      dispatch(
+        WarningMessage({
+          message: "You cannot delete an order which has been already paid",
+        })
+      );
     }
   };
-  const deleteOrder = (order) => {
+
+  const handleDispatchDeleteProduct = (order, product) => {
     const confirmData = {
-      title: "The order #" + order + " will be removed from draft.",
-      onAccept: () => deleteOrderSetter(data, order),
+      title: "The item will be removed from the order",
+      onAccept: () => handleDeleteProduct(data.orderItems, order, product),
     };
     dispatch(showConfirmation(confirmData.title, confirmData.onAccept));
   };
@@ -62,59 +72,38 @@ const Checkout = (props) => {
     }
   }, [state?.redirected]);
 
-  return (
+  return state.order ? (
     <div className={classes.checkout__page}>
       <div className="container-fluid">
         <div className={classes.header__title}>
           <h1>Checkout.</h1>
-          {selectedOrder ? null : <h5>Please Select an Order to Continue</h5>}
         </div>
         <div className="row">
-          <div
-            className={
-              selectedOrder
-                ? "col-lg-8 col-md-8 col-sm-12 col-xs-12"
-                : "col-lg-12 col-md-12 col-sm-12 col-xs-12"
-            }
-          >
-            <Form>
-              {data ? (
-                data.length !== 0 ? (
-                  data
-                    .filter((o) => o.status === "draft")
-                    .map((order, index) => (
-                      <OrderListSelector
-                        key={index}
-                        order={order}
-                        fetchOrderData={handleFetchOrders}
-                        deleteOrder={deleteOrder}
-                        selected={selectedOrder?.id === order.id}
-                        handleSelection={handleSelection}
-                        handleOrderPaymentChange={handleOrderPaymentChange}
-                      />
-                    ))
-                ) : (
-                  <DataNotFound
-                    content={"No Orders Found! Try adding some items to order"}
-                    action={handleFetchOrders}
-                  />
-                )
+          <div className={"col-lg-8 col-md-8 col-sm-12 col-xs-12"}>
+            {data ? (
+              data?.orderItems.length !== 0 ? (
+                <ProductTable
+                  items={data.orderItems}
+                  removeFunction={(product) =>
+                    handleDispatchDeleteProduct(data.id, product)
+                  }
+                  hideHeading
+                />
               ) : (
-                <Spinner />
-              )}
-            </Form>
+                <DataNotFound
+                  content={"No Orders Found! Try adding some items to order"}
+                  action={handleFetchOrders}
+                />
+              )
+            ) : (
+              <Spinner />
+            )}
           </div>
-          <div
-            className={
-              selectedOrder
-                ? "col-lg-4 col-md-4 col-sm-12 col-xs-12"
-                : "col-lg-4 col-md-4 col-sm-12 col-xs-12 d-none"
-            }
-          >
-            {selectedOrder ? (
+          <div className={"col-lg-4 col-md-4 col-sm-12 col-xs-12"}>
+            {data ? (
               <CheckoutInformation
                 order={data}
-                data={selectedOrder}
+                data={data}
                 handleOrderPaymentChange={handleOrderPaymentChange}
               />
             ) : null}
@@ -122,31 +111,9 @@ const Checkout = (props) => {
         </div>
       </div>
     </div>
-  );
-};
-
-const OrderListSelector = ({
-  handleSelection,
-  selected,
-  order,
-  fetchOrderData,
-  deleteOrder,
-}) => {
-  return (
-    <Form.Check
-      label={
-        <OrderList
-          {...order}
-          fetchOrderData={fetchOrderData}
-          deleteOrder={deleteOrder}
-          checkout
-        />
-      }
-      name={"orders"}
-      type={"radio"}
-      className={classes.checkbox}
-      onChange={(e) => handleSelection(order)}
-      checked={selected ? true : null}
+  ) : (
+    <DataNotFound
+      content={"No Orders selected! Select an order from the order page"}
     />
   );
 };

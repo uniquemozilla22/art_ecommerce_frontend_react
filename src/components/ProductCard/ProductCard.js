@@ -326,6 +326,14 @@ const ProductCard = (props) => {
                   currency: "NRS",
                 })}
               </p>
+              <p className={classes.product__description}>
+                {productData.description.length >= 10
+                  ? productData.description
+                  : () => {
+                      productData.description.length = 10;
+                      return productData.description + "...";
+                    }}
+              </p>
             </div>
             <div className={"d-flex d-lg-none " + classes.button__container}>
               <button

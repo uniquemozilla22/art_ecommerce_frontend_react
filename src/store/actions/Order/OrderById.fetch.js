@@ -1,23 +1,20 @@
 import axiosBase from "../../../axiosBase";
 import { hideLoading, showLoading } from "../Loading/Loading";
-import {
-  ErrorMessage,
-  SuccessMessage,
-  WarningMessage,
-} from "../Message/Message";
+import { ErrorMessage, WarningMessage } from "../Message/Message";
 
-const RemoveProductOnOrder = (order, product) => {
+const FetchOrderById = (id) => {
   return async (dispatch, getState) => {
     dispatch(showLoading());
+
     try {
       const { data } = await new Promise((resolve) =>
-        resolve(deleteRequest(order, product, getState().user.token))
+        resolve(fetch(getState().user.token, id))
       );
       dispatch(hideLoading());
-      dispatch(SuccessMessage({ message: data.message }));
-      return data.success;
+      return data;
     } catch (error) {
       dispatch(hideLoading());
+
       if (error.response === undefined) {
         dispatch(
           ErrorMessage({
@@ -29,6 +26,12 @@ const RemoveProductOnOrder = (order, product) => {
           dispatch(
             WarningMessage({
               message: error.response.data.message,
+            })
+          );
+        } else if (error.response?.status === 404) {
+          dispatch(
+            ErrorMessage({
+              message: "Request Not Found ! Try Refreshing the page.",
             })
           );
         } else {
@@ -43,12 +46,12 @@ const RemoveProductOnOrder = (order, product) => {
   };
 };
 
-const deleteRequest = async (order, product, token) => {
-  return await axiosBase.delete("orders/item/delete/" + order + "/" + product, {
+const fetch = async (token, id) => {
+  return await axiosBase.get("orders/" + id, {
     headers: {
       Authorization: "Bearer " + token,
     },
   });
 };
 
-export default RemoveProductOnOrder;
+export default FetchOrderById;

@@ -2,9 +2,10 @@ import { Refresh } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
+import { WarningMessage } from "../../store/actions/Message/Message";
 import DeleteOrderList from "../../store/actions/Order/OrderList.delete";
 import GetOrderList from "../../store/actions/Order/OrderList.fetch";
 import classes from "./Order.module.css";
@@ -13,12 +14,16 @@ import OrderList from "./OrderList/OrderList.comp";
 const Order = (props) => {
   const [data, setData] = useState(null);
   const navigation = useNavigate();
-
+  const { state } = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchOrderData();
   }, []);
+
+  useEffect(() => {
+    if (state?.message) dispatch(WarningMessage(state?.message));
+  }, [state?.message]);
 
   const fetchOrderData = async () => {
     const fetchData = await dispatch(GetOrderList());

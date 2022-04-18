@@ -23,7 +23,7 @@ const OrderList = ({
   deleteOrder,
   checkout,
   selectOrderToCheckout,
-  handleOrderPaymentChange
+  handleOrderPaymentChange,
 }) => {
   const [showProducts, setShowProducts] = useState(false);
   const dispatch = useDispatch();
@@ -180,6 +180,7 @@ const OrderList = ({
           items={orderItem}
           order={"Order: #" + id}
           removeFunction={(product) => handleDispatchDeleteProduct(id, product)}
+          hideHeading
         />
       </Modal>
     </>

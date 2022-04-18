@@ -19,10 +19,13 @@
   border-radius: 20px;
   box-shadow: 0 0 10px #2b2b2b25;
   cursor: pointer;
+  min-height: 400px;
+  transition: transform 0.2s ease-in-out
 }
 
 .bidding__classes .bidding__card:hover {
   box-shadow: 0 0 10px #2b2b2b62;
+  transform: scale(1.1);
 }
 
 .bidding__classes .bidding__image {
@@ -69,6 +72,12 @@
   font-weight: 600;
   font-size: 12px;
 }
+
+.bidding__classes .bidding__card .product__description {
+
+}
+
+
 .bidding__classes .bidding__card .priceContainer h1 {
   font-weight: 700;
   font-size: 12px;

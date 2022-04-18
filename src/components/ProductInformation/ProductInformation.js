@@ -24,7 +24,6 @@ import IsBiddingUser from "../../store/actions/Bid/isBiddingUser.check";
 export const ProductInformation = (props) => {
   const dispatch = useDispatch();
   const locations = useLocation();
-  console.log(locations);
   const { id, productData, supplier, category, likes, tags } = props;
 
   const token = useSelector((state) => state.user.token);

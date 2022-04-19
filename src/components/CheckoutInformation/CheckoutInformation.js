@@ -48,6 +48,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const fetchAddress = async () => {
     const address = await dispatch(FetchUserAddress());
     setAddress(address);
+    console.log(address);
   };
 
   const handlePaymentMethodSelection = async (id, name) => {
@@ -108,7 +109,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const fetchPayment = async () => {
     const pay = await dispatch(FetchPaymentMethods());
     const activepayment = paymentSelected
-      ? pay.filter((method) => method.name == paymentSelected)
+      ? pay.filter((method) => method.name === paymentSelected)
       : null;
     setPaymentSelectedID(activepayment[0]?.id);
     setPayments(pay);
@@ -127,16 +128,12 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     });
   };
 
-  const handleDifferentBillingAddress = () => {};
   return (
     <>
       <animated.div
         style={useAnimationStyle()}
         className={classes.checkout__information__container}
       >
-        <h1 className={classes.heading__checkout__information}>
-          Order #{data.id} Payment.
-        </h1>
         <div className={classes.payment__checkbox}>
           <h2>Payment Method</h2>
           <form className={classes.checkbox__container}>
@@ -165,24 +162,10 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
                 <h2>Address</h2>
               </div>
               <Form className={classes.checkbox__container}>
-                {address?.map((address, index) => (
-                  <Form.Check
-                    label={
-                      <label for={index}>
-                        <div className={classes.address__line}>
-                          <h3>{address.name}</h3>
-                          {address.landmark && <h4>{address.landmark}</h4>}
-                        </div>
-                      </label>
-                    }
-                    name="Address"
-                    type={"radio"}
-                    key={index}
-                    id={index}
-                    className={classes.checkbox}
-                    onChange={(e) => setAddressId(address.id)}
-                  />
-                ))}
+                <div className={classes.address__line}>
+                  <h3>{address.name}</h3>
+                  {address.landmark && <h4>{address.landmark}</h4>}
+                </div>
                 <div className={classes.buttons__address}>
                   <div
                     className={classes.editAddress}
@@ -205,24 +188,21 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
           ) : (
             <Spinner />
           )}
-
-          <div className={classes.discount__container}>
-            <h1>Discount.</h1>
-            <Form className={classes.coupon__form}>
-              <input type={"text"} placeholder="Apply Coupon" />
-              <input type={"submit"} value={"Submit"} />
-            </Form>
-          </div>
-          <div className={classes.checkout__button}>
-            <Button
-              className={classes.checkout}
-              variant="none"
-              onClick={(e) => handleConfirmationCheckout()}
-            >
-              Checkout
-            </Button>
-          </div>
         </div>
+        <div className={classes.discount__container}>
+          <h1>Discount.</h1>
+          <Form className={classes.coupon__form}>
+            <input type={"text"} placeholder="Apply Coupon" />
+            <input type={"submit"} value={"Submit"} />
+          </Form>
+        </div>
+        <Button
+          className={classes.checkout}
+          variant="none"
+          onClick={(e) => handleConfirmationCheckout()}
+        >
+          Checkout
+        </Button>
       </animated.div>
       {address ? (
         <EditAddressModal

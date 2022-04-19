@@ -31,10 +31,12 @@
     flex-direction: column;
   }
   
-.form__modal .buttons__container {
+.form__modal .buttons__container , .form__modal .cancel__container{
     display: flex;
     justify-content: center;
     width: 100%;
+    cursor: pointer;
+    padding:0.5rem;
   }
   
  .form__modal input,

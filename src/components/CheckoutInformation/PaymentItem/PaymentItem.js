@@ -4,6 +4,7 @@ import classes from "./PaymentItem.module.css";
 import khalti from "../../../Assets/khalti.png";
 import esewa from "../../../Assets/esewa.png";
 import { Form } from "react-bootstrap";
+import { useSpring, animated } from "react-spring";
 const Payment = ({ name, id, checked, handleSelected, image_url }) => {
   const iconPrinter = (name) => {
     if (name === "khalti") {
@@ -35,9 +36,24 @@ const Payment = ({ name, id, checked, handleSelected, image_url }) => {
   );
 };
 
-export const SelectionContainer = ({ comp, handleSelected, checked, id }) => {
+export const SelectionContainer = ({
+  comp,
+  handleSelected,
+  checked,
+  id,
+  count,
+}) => {
+  const useAnimationStyle = (count) => {
+    return useSpring({
+      loop: false,
+      from: { x: 50, opacity: 0 },
+      to: { x: 0, opacity: 1 },
+      delay: count * 200,
+    });
+  };
+
   return (
-    <div className={classes.checkbox}>
+    <animated.div className={classes.checkbox} style={useAnimationStyle(count)}>
       <label className={classes.checkbox_wrapper}>
         <input
           type="radio"
@@ -50,7 +66,7 @@ export const SelectionContainer = ({ comp, handleSelected, checked, id }) => {
           <span className={classes.checkbox_icon}>{comp}</span>
         </span>
       </label>
-    </div>
+    </animated.div>
   );
 };
 

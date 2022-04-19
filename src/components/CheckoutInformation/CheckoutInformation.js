@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
 import classes from "./CheckoutInformation.module.css";
 import { animated, useSpring } from "react-spring";
-import FeatherIcon from "feather-icons-react";
 import Payment from "./PaymentItem/PaymentItem";
 import { useDispatch } from "react-redux";
 import FetchPaymentMethods from "../../store/actions/Payment/Payment.fetch";
-import EditAddressModal from "./EditAddress/EditAddressModal.comp";
 import UpdateOrderAddress from "../../store/actions/Address/UpdateOrderAddress.post";
 import AddOrderAddress from "../../store/actions/Address/AddOrderAddress.post";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
@@ -14,7 +12,8 @@ import DeleteOrderAddress from "../../store/actions/Address/DeleteOrderAddress.d
 import PostPayment from "../../store/actions/Payment/Payment.post";
 import PaymentMethodSelection from "../../store/actions/Payment/PaymentMethod.post";
 import FetchUserAddress from "../../store/actions/Address/FetchUserAddress.fetch";
-import BillingAddress from "./BillindAddress/BillingAddress.comp";
+import { EditOutlined } from "@mui/icons-material";
+import SelectAddress from "./SelectAddress/SelectAddress.comp";
 
 const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [payments, setPayments] = useState(null);
@@ -27,20 +26,20 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [addressId, setAddressId] = useState();
   const [address, setAddress] = useState(null);
-  const [showDifferentBillingAddress, setShowDifferentBillingAddress] =
-    useState(false);
-  const [billingAddress, setBillingAddress] = useState(null);
 
   const onHideAddressModal = () => setShowAddressModal(false);
+  const onOpenAddressModal = () => setShowAddressModal(true);
 
   const handleUpdatedData = async (index, id, d) => {
+    console.log(index, id, d);
     const updated = await dispatch(UpdateOrderAddress(id, d));
     if (updated) {
       let updatingAddress = address;
       updatingAddress[index] = {
         ...updatingAddress[index],
-        ...d,
+        ...updated,
       };
+
       setAddress(updatingAddress);
     }
   };
@@ -48,7 +47,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const fetchAddress = async () => {
     const address = await dispatch(FetchUserAddress());
     setAddress(address);
-    console.log(address);
+    setAddressId(address[0].id);
   };
 
   const handlePaymentMethodSelection = async (id, name) => {
@@ -101,10 +100,6 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     fetchPayment();
     fetchAddress();
   }, []);
-
-  useEffect(() => {
-    setAddress(address);
-  }, [address]);
 
   const fetchPayment = async () => {
     const pay = await dispatch(FetchPaymentMethods());
@@ -161,29 +156,34 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
               <div>
                 <h2>Address</h2>
               </div>
-              <Form className={classes.checkbox__container}>
-                <div className={classes.address__line}>
-                  <h3>{address.name}</h3>
-                  {address.landmark && <h4>{address.landmark}</h4>}
-                </div>
-                <div className={classes.buttons__address}>
-                  <div
-                    className={classes.editAddress}
-                    onClick={(e) => setShowAddressModal(true)}
-                  >
-                    <FeatherIcon icon="edit-3" />
-                    <h3>{address.length === 0 ? "Add" : "Edit"} Address</h3>
+              <div
+                className={classes.buttons__address}
+                onClick={(e) => setShowAddressModal(true)}
+              >
+                {addressId ? (
+                  address
+                    .filter((add) => add.id === addressId)
+                    .map((selectedAddress) => (
+                      <div className={classes.address__line}>
+                        <h3>{selectedAddress.name}</h3>
+                        {selectedAddress.city && (
+                          <>
+                            <h4>{selectedAddress.city}</h4>
+                            <h4>{selectedAddress.landmark}</h4>
+                          </>
+                        )}
+                      </div>
+                    ))
+                ) : (
+                  <div className={classes.address__line}>
+                    <h3>{address[0].name}</h3>
+                    {address[0].city && <h4>{address[0].landmark}</h4>}
                   </div>
-                  {addressId && (
-                    <div
-                      className={classes.billing__address}
-                      onClick={(e) => setShowDifferentBillingAddress(true)}
-                    >
-                      <h3>Different Billing Address ?</h3>
-                    </div>
-                  )}
+                )}
+                <div className={classes.editAddress}>
+                  <EditOutlined />
                 </div>
-              </Form>
+              </div>
             </>
           ) : (
             <Spinner />
@@ -204,27 +204,19 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
           Checkout
         </Button>
       </animated.div>
-      {address ? (
-        <EditAddressModal
+      {address && (
+        <SelectAddress
           show={showAddressModal}
           handleHide={onHideAddressModal}
-          updateData={handleUpdatedData}
-          addData={handleAddData}
+          handleOpen={onOpenAddressModal}
           data={address}
-          deleteData={handleConfirmationDelete}
+          handleSelection={(id) => setAddressId(id)}
+          selected={addressId}
+          handleUpdatedData={handleUpdatedData}
+          handleAddData={handleAddData}
+          handleDeleteData={handleConfirmationDelete}
         />
-      ) : null}
-      {address && addressId ? (
-        <BillingAddress
-          show={showDifferentBillingAddress}
-          handleHide={() => setShowDifferentBillingAddress(false)}
-          data={address.filter((add) => add.id !== addressId)}
-          handleSelection={(id) =>
-            id ? setBillingAddress(id) : setBillingAddress(id)
-          }
-          selected={billingAddress ? billingAddress : null}
-        />
-      ) : null}
+      )}
     </>
   );
 };

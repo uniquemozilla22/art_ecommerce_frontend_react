@@ -17,18 +17,9 @@ const SelectAddress = ({
   handleUpdatedData,
   handleDeleteData,
   handleAddData,
+  showEditAddressModal,
+  handleEditAddressModal,
 }) => {
-  const [showAddress, setShowAddress] = useState(false);
-
-  const handleShowAddress = () => {
-    handleHide();
-    setShowAddress(true);
-  };
-
-  const handleHideAddress = () => {
-    handleOpen();
-    setShowAddress(false);
-  };
   const [addresses, setAddresses] = useState(data);
 
   useEffect(() => {
@@ -68,9 +59,9 @@ const SelectAddress = ({
                     padding: "1rem",
                     margin: "1rem",
                   }}
-                  onClick={() => handleShowAddress()}
+                  onClick={() => handleEditAddressModal(true)}
                 >
-                  Edit Address
+                  {addresses.length !== 0 ? "Edit" : "Add"} Address
                 </button>
               </>
             )}
@@ -78,8 +69,8 @@ const SelectAddress = ({
         </div>
       </Modal>
       <EditAddressModal
-        show={showAddress}
-        handleHide={handleHideAddress}
+        show={showEditAddressModal}
+        handleHide={() => handleEditAddressModal(false)}
         updateData={handleUpdatedData}
         addData={handleAddData}
         data={addresses}

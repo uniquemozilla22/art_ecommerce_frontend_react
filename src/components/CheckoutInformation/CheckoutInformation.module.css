@@ -4,7 +4,9 @@
   font-size: 1rem;
 }
 
-.checkout__information__container svg{}
+.checkout__information__container svg:hover{
+  color:#e8ebfe;
+}
 
 .checkout__information__container >div{
   background: #e8ebfe;
@@ -173,4 +175,5 @@
 .checkout__information__container .checkout:hover {
   background:none !important;
   box-shadow: 0 0 3px #ff5959;
+  color: #ff5959;
 }

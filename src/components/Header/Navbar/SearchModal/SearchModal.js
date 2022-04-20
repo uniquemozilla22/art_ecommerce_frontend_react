@@ -50,8 +50,6 @@ const SearchModal = (props) => {
     }
   };
 
- 
-
   return (
     <Modal
       open={searchShow}
@@ -104,6 +102,7 @@ const SearchModal = (props) => {
                     modal={() => props.toggleSearch()}
                     likesCount={item.likesCount}
                     time={item?.auction?.expiration_date || null}
+                    heading
                   />
                 ))
               : null}

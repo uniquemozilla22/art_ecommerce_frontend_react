@@ -4,7 +4,7 @@ import classes from "./Checkout.module.css";
 import CheckoutInformation from "../../components/CheckoutInformation/CheckoutInformation";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
-import { Form, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router";
 import RemoveProductOnOrder from "../../store/actions/Order/RemoveOrderProduct.delete";
 import { WarningMessage } from "../../store/actions/Message/Message";
@@ -23,7 +23,6 @@ const Checkout = (props) => {
     setData(changingData);
   };
   const handleFetchOrders = async () => {
-    console.log(state);
     if (state?.order) {
       let order = await dispatch(FetchOrderById(state?.order));
       setData(order);

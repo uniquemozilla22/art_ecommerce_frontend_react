@@ -30,6 +30,8 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const onHideAddressModal = () => setShowAddressModal(false);
   const onOpenAddressModal = () => setShowAddressModal(true);
 
+  const [showEditAddressModal, setShowEditAddressModal] = useState(false);
+
   const handleUpdatedData = async (index, id, d) => {
     console.log(index, id, d);
     const updated = await dispatch(UpdateOrderAddress(id, d));
@@ -44,10 +46,14 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     }
   };
 
+  const handleEditAddressModal = (content) => {
+    setShowEditAddressModal(content);
+  };
+
   const fetchAddress = async () => {
     const address = await dispatch(FetchUserAddress());
     setAddress(address);
-    setAddressId(address[0].id);
+    setAddressId(address[0]?.id);
   };
 
   const handlePaymentMethodSelection = async (id, name) => {
@@ -156,33 +162,52 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
               <div>
                 <h2>Address</h2>
               </div>
-              <div
-                className={classes.buttons__address}
-                onClick={(e) => setShowAddressModal(true)}
-              >
-                {addressId ? (
-                  address
-                    .filter((add) => add.id === addressId)
-                    .map((selectedAddress) => (
-                      <div className={classes.address__line}>
-                        <h3>{selectedAddress.name}</h3>
-                        {selectedAddress.city && (
-                          <>
-                            <h4>{selectedAddress.city}</h4>
-                            <h4>{selectedAddress.landmark}</h4>
-                          </>
-                        )}
+              <div className={classes.buttons__address}>
+                {address.length !== 0 ? (
+                  addressId ? (
+                    address
+                      .filter((add) => add.id === addressId)
+                      .map((selectedAddress) => (
+                        <>
+                          <div
+                            className={classes.address__line}
+                            onClick={(e) => setShowAddressModal(true)}
+                          >
+                            <h3>{selectedAddress.name}</h3>
+                            {selectedAddress.city && (
+                              <>
+                                <h4>{selectedAddress.city}</h4>
+                                <h4>{selectedAddress.landmark}</h4>
+                              </>
+                            )}
+                          </div>
+                          <div className={classes.editAddress}>
+                            <EditOutlined />
+                          </div>
+                        </>
+                      ))
+                  ) : (
+                    <>
+                      <div
+                        className={classes.address__line}
+                        onClick={(e) => setShowAddressModal(true)}
+                      >
+                        <h3>{address[0].name}</h3>
+                        {address[0].city && <h4>{address[0].landmark}</h4>}
                       </div>
-                    ))
+                      <div className={classes.editAddress}>
+                        <EditOutlined />
+                      </div>
+                    </>
+                  )
                 ) : (
-                  <div className={classes.address__line}>
-                    <h3>{address[0].name}</h3>
-                    {address[0].city && <h4>{address[0].landmark}</h4>}
+                  <div
+                    className={classes.no__address_prompt}
+                    onClick={(e) => handleEditAddressModal(true)}
+                  >
+                    <h3>Please Add Address</h3>
                   </div>
                 )}
-                <div className={classes.editAddress}>
-                  <EditOutlined />
-                </div>
               </div>
             </>
           ) : (
@@ -215,6 +240,8 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
           handleUpdatedData={handleUpdatedData}
           handleAddData={handleAddData}
           handleDeleteData={handleConfirmationDelete}
+          showEditAddressModal={showEditAddressModal}
+          handleEditAddressModal={handleEditAddressModal}
         />
       )}
     </>

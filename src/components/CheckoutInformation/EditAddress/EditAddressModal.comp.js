@@ -27,6 +27,10 @@ const EditAddressModal = ({
   useEffect(() => {
     setAddresses(data);
   }, [data]);
+
+  useEffect(() => {
+    setAddresses(data);
+  }, [data]);
   return (
     <Modal open={show} onClose={handleHide}>
       <div className={classes.modal__body}>

@@ -95,7 +95,9 @@ export const ProductInformation = (props) => {
             <div className={classes.product__info}>
               <h1>{productData.name}</h1>
               <h2>NPR. {productData.unit_price}</h2>
-              <p>{productData.description ? productData.description : null}</p>
+              <p className={classes.product__description}>
+                {productData.description && productData.description}
+              </p>
             </div>
             <div
               className={classes.like__container}
@@ -467,7 +469,7 @@ export const BiddingInformation = (props) => {
                 ) : null}
               </div>
               {productData.description ? (
-                <p>{productData.description}</p>
+                <p  className={classes.product__description}>{productData.description}</p>
               ) : null}
             </div>
             {token ? (

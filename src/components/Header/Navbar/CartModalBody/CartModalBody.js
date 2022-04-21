@@ -58,10 +58,14 @@ const CartModalBody = (props) => {
     }
   };
 
-  const onAccept = () => {
-    dispatch(CreateOrder());
-    navigation("/checkout", { state: { redirected: true } });
-    dispatch({ type: "CART" });
+  const onAccept = async () => {
+    const order = await dispatch(CreateOrder());
+    if (order) {
+      navigation("/checkout", {
+        state: { redirected: true, order: order.order_id },
+      });
+      dispatch({ type: "CART" });
+    }
   };
 
   const checkoutButton = () => {

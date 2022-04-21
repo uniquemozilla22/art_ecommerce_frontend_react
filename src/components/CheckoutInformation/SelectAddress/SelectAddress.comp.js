@@ -39,7 +39,8 @@ const SelectAddress = ({
           >
             {addresses.map((address, index) => (
               <SelectionContainer
-                comp={<EditedClick key={index} address={address} />}
+                key={index}
+                comp={<EditedClick key={index} address={address} selection />}
                 handleSelected={handleSelection}
                 checked={address.id === selected}
                 id={address.id}
@@ -59,7 +60,10 @@ const SelectAddress = ({
                     padding: "1rem",
                     margin: "1rem",
                   }}
-                  onClick={() => handleEditAddressModal(true)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleEditAddressModal(true);
+                  }}
                 >
                   {addresses.length !== 0 ? "Edit" : "Add"} Address
                 </button>

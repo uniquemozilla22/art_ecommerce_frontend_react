@@ -7,6 +7,7 @@ import { animated } from "react-spring";
 import {
   getCountries,
   getDistrict,
+  getRegion,
   getState,
 } from "../../../store/actions/Address/AddressSelection/getHiearchy.fetch";
 import classes from "./EditAddress.module.css";
@@ -66,9 +67,11 @@ const EditAddressModal = ({
                   data={selectedAddress?.data}
                   addData={(d) => {
                     handleAddData(d);
+                    handleHideAddressForm();
                   }}
                   updateData={(id, d) => {
                     updateData(selectedAddress?.count, id, d);
+                    handleHideAddressForm();
                   }}
                   classes={classes}
                   cancel={handleHideAddressForm}
@@ -88,9 +91,10 @@ export const EditedClick = ({
   deleteData,
   handleShowAddressForm,
   count,
+  selection,
 }) => {
   return (
-    <div>
+    <div className={selection && classes.selection__container}>
       <div className={classes.information__container}>
         <div>
           <h2>
@@ -98,7 +102,8 @@ export const EditedClick = ({
           </h2>
           <p>
             <p>
-              {address.city} {address.postal_code} {address.country}
+              {address.state.name} {address.postal_code} {address.region.name},
+              {address.country.name}
             </p>
             <p>Contact: {address.mobile_number}</p>
             Landmark : <span>{address.landmark}</span>
@@ -129,29 +134,7 @@ export const EditedClick = ({
 };
 
 const FormCreator = ({ data, updateData, addData, classes, cancel }) => {
-  const [address, setAddress] = useState({
-    name: "bhaktapur",
-    user_id: 29,
-    postal_code: "44600",
-    landmark: "near durbar square",
-    mobile_number: "9861086078",
-    country: {
-      id: 1,
-      name: "Nepal",
-    },
-    state: {
-      id: 3,
-      name: "Provinces No 3",
-    },
-    district: {
-      id: 5,
-      name: "Bhaktapur",
-    },
-    region: {
-      id: 13,
-      name: "Palanse",
-    },
-  });
+  const [address, setAddress] = useState(data);
 
   const [countriesList, setCountriesList] = useState(null);
   const [stateList, setStateList] = useState(null);
@@ -175,8 +158,8 @@ const FormCreator = ({ data, updateData, addData, classes, cancel }) => {
     setDistrictList(distrctLists);
   };
 
-  const getRegionInState = async (id) => {
-    const regionLists = await dispatch(getDistrict(id));
+  const getRegionInDistrict = async (id) => {
+    const regionLists = await dispatch(getRegion(id));
     setRegionList(regionLists);
   };
   const handleSubmit = (e) => {
@@ -217,15 +200,19 @@ const FormCreator = ({ data, updateData, addData, classes, cancel }) => {
         required
       />
       <select
-        value={JSON.stringify({
-          id: address.state.id,
-          name: address.state.name,
-        })}
+        value={
+          address?.country &&
+          JSON.stringify({
+            id: address?.country?.id,
+            name: address?.country?.name,
+          })
+        }
         onChange={(e) => {
+          getStatesInCountry(JSON.parse(e.target.value).id);
           setAddress({ ...address, country: JSON.parse(e.target.value) });
         }}
       >
-        {countriesList && (
+        {countriesList && countriesList.length !== 0 && (
           <>
             <option disabled selected>
               ---Select Your Country---
@@ -242,15 +229,17 @@ const FormCreator = ({ data, updateData, addData, classes, cancel }) => {
           </>
         )}
       </select>
-
-      {address && address?.country?.id && (
+      {address && address?.country && (
         <select
-          value={JSON.stringify({
-            id: address.state.id,
-            name: address.state.name,
-          })}
+          value={
+            address?.state &&
+            JSON.stringify({
+              id: address?.state?.id,
+              name: address?.state?.name,
+            })
+          }
           onChange={(e) => {
-            console.log(e.target.name);
+            getDistrictInState(JSON.parse(e.target.value).id);
             setAddress({ ...address, state: JSON.parse(e.target.value) });
           }}
         >
@@ -274,19 +263,22 @@ const FormCreator = ({ data, updateData, addData, classes, cancel }) => {
       )}
       {address && address?.state?.id && (
         <select
-          value={JSON.stringify({
-            id: address.district.id,
-            name: address.district.name,
-          })}
+          value={
+            address?.district &&
+            JSON.stringify({
+              id: address?.district?.id,
+              name: address?.district?.name,
+            })
+          }
           onChange={(e) => {
-            console.log(e.target.name);
+            getRegionInDistrict(JSON.parse(e.target.value).id);
             setAddress({ ...address, district: JSON.parse(e.target.value) });
           }}
         >
           {districtList && (
             <>
               <option disabled selected>
-                ---Select Your State/ Province---
+                ---Select Your State/ District---
               </option>
               {districtList.map((district, index) => (
                 <option
@@ -304,22 +296,40 @@ const FormCreator = ({ data, updateData, addData, classes, cancel }) => {
           )}
         </select>
       )}
-      <input
-        type="text"
-        placeholder={address?.state || "State"}
-        name={address?.state}
-        value={address?.state}
-        onChange={(e) => setAddress({ ...address, state: e.target.value })}
-        required
-      />
-      <input
-        type="text"
-        placeholder={address?.city || "City"}
-        name={address?.city}
-        value={address?.city}
-        onChange={(e) => setAddress({ ...address, city: e.target.value })}
-        required
-      />
+      {address && address?.district?.id && (
+        <select
+          value={
+            address.region &&
+            JSON.stringify({
+              id: address?.region?.id,
+              name: address?.region?.name,
+            })
+          }
+          onChange={(e) => {
+            setAddress({ ...address, region: JSON.parse(e.target.value) });
+          }}
+        >
+          {regionList && (
+            <>
+              <option disabled selected>
+                ---Select Your Region---
+              </option>
+              {regionList.map((region, index) => (
+                <option
+                  value={JSON.stringify({
+                    id: region.id,
+                    name: region.name,
+                  })}
+                  name={region.name}
+                  key={index}
+                >
+                  {region.name}
+                </option>
+              ))}
+            </>
+          )}
+        </select>
+      )}
       <input
         type="number"
         placeholder={address?.postal_code || "Postal Code"}
@@ -346,6 +356,8 @@ const FormCreator = ({ data, updateData, addData, classes, cancel }) => {
         name={address?.landmark || ""}
         onChange={(e) => setAddress({ ...address, landmark: e.target.value })}
         rows="2"
+        required
+        value={address?.landmark}
       />
       <div className={classes.buttons__container}>
         <input type="submit" value="Submit" />

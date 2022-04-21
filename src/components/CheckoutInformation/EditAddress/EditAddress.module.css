@@ -101,7 +101,9 @@
     padding: 0.5rem;
     width: 100%;
   }
-  
+  .selection__container{
+    max-width: 200px;
+  }
   .modal__body .information__container{
       padding:1rem;
       display: flex;
@@ -109,6 +111,16 @@
   }
   .modal__body .information__container P{
       margin:0;
+  }
+
+  .information__container p span{
+    text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
   }
 
   .modal__body .information__container .icon {

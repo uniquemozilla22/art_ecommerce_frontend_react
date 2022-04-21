@@ -16,7 +16,7 @@ const UpdateOrderAddress = (id, updaingData) => {
       );
       dispatch(hideLoading());
       dispatch(SuccessMessage({ message: data.message }));
-      return data.updatedValues;
+      return data.address;
     } catch (error) {
       dispatch(hideLoading());
       if (error.response === undefined) {

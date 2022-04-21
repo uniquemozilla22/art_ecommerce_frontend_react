@@ -83,6 +83,10 @@
   height: 3rem;
 }
 
+.checkbox_icon{
+  max-width: 300px;
+}
+
 .checkbox_label {
   color: #707070;
   transition: 0.375s ease;

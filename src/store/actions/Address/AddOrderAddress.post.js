@@ -1,6 +1,10 @@
 import axiosBase from "../../../axiosBase";
 import { hideLoading, showLoading } from "../Loading/Loading";
-import { ErrorMessage, WarningMessage } from "../Message/Message";
+import {
+  ErrorMessage,
+  SuccessMessage,
+  WarningMessage,
+} from "../Message/Message";
 
 const AddOrderAddress = (address) => {
   return async (dispatch, getState) => {
@@ -12,6 +16,7 @@ const AddOrderAddress = (address) => {
         )
       );
       dispatch(hideLoading());
+      dispatch(SuccessMessage({ message: data.message }));
       return data.address;
     } catch (error) {
       dispatch(hideLoading());

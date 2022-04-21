@@ -34,7 +34,15 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
 
   const handleUpdatedData = async (index, id, d) => {
     console.log(index, id, d);
-    const updated = await dispatch(UpdateOrderAddress(id, d));
+    const updated = await dispatch(
+      UpdateOrderAddress(id, {
+        ...d,
+        country: d.country.id,
+        region: d.region.id,
+        district: d.district.id,
+        state: d.state.id,
+      })
+    );
     if (updated) {
       let updatingAddress = address;
       updatingAddress[index] = {
@@ -68,7 +76,15 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   };
 
   const handleAddData = async (data) => {
-    const updated = await dispatch(AddOrderAddress(data));
+    const updated = await dispatch(
+      AddOrderAddress({
+        ...data,
+        country: data.country.id,
+        region: data.region.id,
+        district: data.district.id,
+        state: data.state.id,
+      })
+    );
     if (updated) {
       setAddress([...address, updated]);
     }
@@ -174,9 +190,9 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
                             onClick={(e) => setShowAddressModal(true)}
                           >
                             <h3>{selectedAddress.name}</h3>
-                            {selectedAddress.city && (
+                            {selectedAddress.region.name && (
                               <>
-                                <h4>{selectedAddress.city}</h4>
+                                <h4>{selectedAddress.region.name}</h4>
                                 <h4>{selectedAddress.landmark}</h4>
                               </>
                             )}

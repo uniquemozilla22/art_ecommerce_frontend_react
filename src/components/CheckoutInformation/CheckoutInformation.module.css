@@ -4,8 +4,11 @@
   font-size: 1rem;
 }
 
+.checkout__information__container svg{
+  color:#2b2b2b80;
+}
 .checkout__information__container svg:hover{
-  color:#e8ebfe;
+  color:#2b2b2b;
 }
 
 .checkout__information__container >div{

@@ -14,6 +14,7 @@ import PaymentMethodSelection from "../../store/actions/Payment/PaymentMethod.po
 import FetchUserAddress from "../../store/actions/Address/FetchUserAddress.fetch";
 import { EditOutlined } from "@mui/icons-material";
 import SelectAddress from "./SelectAddress/SelectAddress.comp";
+import SelectAddressPost from "../../store/actions/Address/SelectAddress.post";
 
 const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [payments, setPayments] = useState(null);
@@ -26,6 +27,8 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [addressId, setAddressId] = useState();
   const [address, setAddress] = useState(null);
+  const [coupon, setCoupon] = useState(null);
+  const [shipping, setShipping] = useState(null);
 
   const onHideAddressModal = () => setShowAddressModal(false);
   const onOpenAddressModal = () => setShowAddressModal(true);
@@ -90,6 +93,14 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     }
   };
 
+  let ShippingAddressSelection = async (address, order) => {
+    console.log(address, order);
+    let { totalShippingCost } = await dispatch(
+      SelectAddressPost(address, order)
+    );
+    setShipping(totalShippingCost);
+  };
+
   const handleConfirmationDelete = (index, id) => {
     dispatch(
       showConfirmation(
@@ -123,6 +134,10 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     fetchAddress();
   }, []);
 
+  useEffect(() => {
+    ShippingAddressSelection(addressId, orderInformation.id);
+  }, [addressId, orderInformation]);
+
   const fetchPayment = async () => {
     const pay = await dispatch(FetchPaymentMethods());
     const activepayment = paymentSelected
@@ -145,17 +160,31 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     });
   };
 
-  const getSubTotal = () => {
-    return parseInt(
-      orderInformation.orderItems.reduce((previousValue, currentValue) => {
-        console.log(previousValue, currentValue);
-        return previousValue + currentValue.data.unit_price;
-      }, 0)
-    ).toLocaleString("en-IN", {
-      maximumFractionDigits: 2,
-      style: "currency",
-      currency: "NRS",
-    });
+  const getSubTotal = (shipping) => {
+    return shipping
+      ? (
+          parseInt(
+            orderInformation.orderItems.reduce(
+              (previousValue, currentValue) => {
+                return previousValue + currentValue.data.unit_price;
+              },
+              0
+            )
+          ) + parseInt(shipping)
+        ).toLocaleString("en-IN", {
+          maximumFractionDigits: 2,
+          style: "currency",
+          currency: "NRS",
+        })
+      : parseInt(
+          orderInformation.orderItems.reduce((previousValue, currentValue) => {
+            return previousValue + currentValue.data.unit_price;
+          }, 0)
+        ).toLocaleString("en-IN", {
+          maximumFractionDigits: 2,
+          style: "currency",
+          currency: "NRS",
+        });
   };
 
   return (
@@ -256,46 +285,54 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
               Sub-Total <span>{getSubTotal()}</span>
             </h3>
           </div>
-          <div className={classes.shipping__price}>
-            <h3>
-              Shipping{" "}
-              <span>
-                {parseInt(3000).toLocaleString("en-IN", {
-                  maximumFractionDigits: 2,
-                  style: "currency",
-                  currency: "NRS",
-                })}
-              </span>
-            </h3>
-          </div>
-          <div className={classes.shipping__price}>
-            <h3>
-              Coupon{" "}
-              <span>
-                {parseInt(0).toLocaleString("en-IN", {
-                  maximumFractionDigits: 2,
-                  style: "currency",
-                  currency: "NRS",
-                })}
-              </span>
-            </h3>
-          </div>
-          <div className={classes.total__price}>
-            <h3>
-              {" "}
-              Total{" "}
-              <div>
+          {shipping && (
+            <div className={classes.shipping__price}>
+              <h3>
+                Shipping{" "}
                 <span>
-                  {parseInt(6000).toLocaleString("en-IN", {
+                  {parseInt(shipping).toLocaleString("en-IN", {
                     maximumFractionDigits: 2,
                     style: "currency",
                     currency: "NRS",
                   })}
                 </span>
-                <p>* Terms and Conditions Apply</p>
-              </div>
-            </h3>
-          </div>
+              </h3>
+            </div>
+          )}
+          {coupon && (
+            <div className={classes.shipping__price}>
+              <h3>
+                Coupon{" "}
+                <span>
+                  {parseInt(0).toLocaleString("en-IN", {
+                    maximumFractionDigits: 2,
+                    style: "currency",
+                    currency: "NRS",
+                  })}
+                </span>
+              </h3>
+            </div>
+          )}
+          {
+            <div className={classes.total__price}>
+              <h3>
+                {" "}
+                Total{" "}
+                <div>
+                  <span>
+                    {shipping
+                      ? getSubTotal(shipping)
+                      : parseInt(getSubTotal()).toLocaleString("en-IN", {
+                          maximumFractionDigits: 2,
+                          style: "currency",
+                          currency: "NRS",
+                        })}
+                  </span>
+                  <p>* Terms and Conditions Apply</p>
+                </div>
+              </h3>
+            </div>
+          }
         </div>
         <Button
           className={classes.checkout}

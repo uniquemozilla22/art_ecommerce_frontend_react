@@ -145,6 +145,19 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     });
   };
 
+  const getSubTotal = () => {
+    return parseInt(
+      orderInformation.orderItems.reduce((previousValue, currentValue) => {
+        console.log(previousValue, currentValue);
+        return previousValue + currentValue.data.unit_price;
+      }, 0)
+    ).toLocaleString("en-IN", {
+      maximumFractionDigits: 2,
+      style: "currency",
+      currency: "NRS",
+    });
+  };
+
   return (
     <>
       <animated.div
@@ -236,6 +249,53 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
             <input type={"text"} placeholder="Apply Coupon" />
             <input type={"submit"} value={"Submit"} />
           </Form>
+        </div>
+        <div className={classes.shipping__container}>
+          <div className={classes.sub_total__price}>
+            <h3>
+              Sub-Total <span>{getSubTotal()}</span>
+            </h3>
+          </div>
+          <div className={classes.shipping__price}>
+            <h3>
+              Shipping{" "}
+              <span>
+                {parseInt(3000).toLocaleString("en-IN", {
+                  maximumFractionDigits: 2,
+                  style: "currency",
+                  currency: "NRS",
+                })}
+              </span>
+            </h3>
+          </div>
+          <div className={classes.shipping__price}>
+            <h3>
+              Coupon{" "}
+              <span>
+                {parseInt(0).toLocaleString("en-IN", {
+                  maximumFractionDigits: 2,
+                  style: "currency",
+                  currency: "NRS",
+                })}
+              </span>
+            </h3>
+          </div>
+          <div className={classes.total__price}>
+            <h3>
+              {" "}
+              Total{" "}
+              <div>
+                <span>
+                  {parseInt(6000).toLocaleString("en-IN", {
+                    maximumFractionDigits: 2,
+                    style: "currency",
+                    currency: "NRS",
+                  })}
+                </span>
+                <p>* Terms and Conditions Apply</p>
+              </div>
+            </h3>
+          </div>
         </div>
         <Button
           className={classes.checkout}

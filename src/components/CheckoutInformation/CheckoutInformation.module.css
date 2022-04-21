@@ -28,6 +28,37 @@
   align-items: center;
 }
 
+
+.shipping__container > div{
+  
+}
+
+.shipping__container > div > h3{
+  display: flex;
+  justify-content:space-between;
+  font-size: 1rem;
+  font-weight: 400;
+  margin:0;
+  padding:0.5rem 0;
+}
+
+.shipping__container >div > h3> div{
+  text-align: end;
+}
+.shipping__container >div > h3> div > p{
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin:0;
+
+}
+
+.shipping__container >div > h3 span{
+  text-align: end;
+  font-size: 1.2rem;
+  font-weight: 600;
+  
+}
+
 .checkout__information__container .checkbox_group {
   display: flex;
   flex-wrap: wrap;

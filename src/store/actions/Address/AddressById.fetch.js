@@ -1,25 +1,17 @@
 import axiosBase from "../../../axiosBase";
 import { hideLoading, showLoading } from "../Loading/Loading";
-import {
-  ErrorMessage,
-  SuccessMessage,
-  WarningMessage,
-} from "../Message/Message";
+import { ErrorMessage, WarningMessage } from "../Message/Message";
 
-const DeleteOrderList = (order) => {
+const AddressById = (id) => {
   return async (dispatch, getState) => {
     dispatch(showLoading());
-
     try {
-      const res = await new Promise((resolve) =>
-        resolve(deleteRequest(order, getState().user.token))
+      const { data } = await new Promise((resolve) =>
+        resolve(fetch(id, getState().user.token))
       );
       dispatch(hideLoading());
-      dispatch(SuccessMessage({ message: res.data.message }));
-      console.log(res.data.success);
-      return res.data.success;
+      return data;
     } catch (error) {
-      dispatch(hideLoading());
       if (error.response === undefined) {
         dispatch(
           ErrorMessage({
@@ -33,6 +25,12 @@ const DeleteOrderList = (order) => {
               message: error.response.data.message,
             })
           );
+        } else if (error.response?.status === 404) {
+          dispatch(
+            ErrorMessage({
+              message: "Request Not Found ! Try Refreshing the page.",
+            })
+          );
         } else {
           dispatch(
             ErrorMessage({
@@ -41,17 +39,12 @@ const DeleteOrderList = (order) => {
           );
         }
       }
-      return false;
     }
   };
 };
 
-const deleteRequest = (id, token) => {
-  return axiosBase.delete("/orders/delete/" + id, {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
+const fetch = async (id, token) => {
+  return await axiosBase.get(`address/${id}/detail`);
 };
 
-export default DeleteOrderList;
+export default AddressById;

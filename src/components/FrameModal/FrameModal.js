@@ -8,6 +8,7 @@ import parse from "html-react-parser";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
 import Success from "./Success/Success";
 import ErrorModal from "./Error/ErrorModal";
+import { useLocation, useNavigate } from "react-router";
 
 const FrameModal = () => {
   const frameModal = useSelector((state) => state.frame);
@@ -16,17 +17,15 @@ const FrameModal = () => {
   const [showError, setShowError] = useState(false);
   const [message, setMessage] = useState(null);
   const iFrameRef = useRef(null);
+  const navigation = useNavigate();
+
+  const { state } = useLocation();
 
   useEffect(() => {
     setShowFrmae(frameModal.show);
   }, [frameModal, frameModal.show]);
 
   const dispatch = useDispatch();
-
-  const handleDismiss = (e) => {
-    e.preventDefault();
-    hideFrameModal();
-  };
 
   const hideFrameModal = () => {
     dispatch(hideFrame());
@@ -86,6 +85,7 @@ const FrameModal = () => {
           handleDismiss={(e) => {
             e.preventDefault();
             setShowSuccess(false);
+            navigation("orders/" + state.order);
           }}
         />
       </Modal>
@@ -100,6 +100,7 @@ const FrameModal = () => {
           handleDismiss={(e) => {
             e.preventDefault();
             setShowError(false);
+            navigation("orders/" + state.order);
           }}
         />
       </Modal>

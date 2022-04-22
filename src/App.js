@@ -26,6 +26,7 @@ import MyBids from "./pages/mybids/MyBids.page";
 import Order from "./pages/order/Order.page";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import SingleOrder from "./pages/SingleOrder/SingleOrder.page";
 
 function App() {
   const dispatch = useDispatch();
@@ -74,6 +75,7 @@ function App() {
             path="/users/resetPassword/:id/:token"
             element={<ForgotPassword />}
           />
+          <Route path="/orders/:id" element={<SingleOrder />} />
           <Route path="/auth/confirm/:token" element={<ConfirmEmail />} />
           <Route path="/mybids" element={<MyBids />} />
           <Route path="/orders" element={<Order />} />

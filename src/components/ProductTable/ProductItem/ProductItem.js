@@ -108,7 +108,7 @@ const ProductItem = ({
         </div>
         <div className={classes.product__content}>
           <h5>{name}</h5>
-          <p>{description}</p>
+          <p className={classes.description}>{description}</p>
           {time ? <p>{timed(days, mins, hours, sec)}</p> : null}
           <p className={"d-flex d-sm-none "}>{supplierName}</p>
           <p className={"d-flex d-sm-none "}>
@@ -172,13 +172,16 @@ const ProductItem = ({
     </div>
   ) : (
     <div className={classes.product__item__container}>
-      <div className={classes.product__item__info}>
+      <div
+        className={classes.product__item__info}
+        onClick={() => navigation("../products/" + id)}
+      >
         <div className={classes.image__container}>
           <img src={image} alt={name} />
         </div>
         <div className={classes.item__content}>
           <h5>{name}</h5>
-          <p>{description}</p>
+          <p className={classes.description}>{description}</p>
           {time ? <p>{timed(days, mins, hours, sec)}</p> : null}
           <p className={classes.supplier__name}>{supplierName}</p>
           <p className={"d-flex d-sm-none "}>

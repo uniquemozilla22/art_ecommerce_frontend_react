@@ -5,7 +5,6 @@ import ProductFilter from "../../components/ProductFilter/ProductFilter";
 import ProductsContainer from "../../components/ProductsContainer/ProductsContainer";
 import FetchAllProducts from "../../store/actions/products/allproducts.fetch";
 import classes from "./Product.module.css";
-import { connect } from "react-redux";
 import { WarningMessage } from "../../store/actions/Message/Message";
 import { useLocation } from "react-router-dom";
 import SearchProducts from "../../store/actions/Search/SearchProducts.fetch";

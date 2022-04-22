@@ -1,0 +1,81 @@
+.single__order__page{
+    padding:5rem 0;
+}
+
+.single__order__page h1.single__order__title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    color: #000000;
+    margin-bottom:2rem;
+}
+
+
+.single__order__page .products__container{
+    background:#EEF2FF;
+    padding:2rem ;
+    overflow:hidden;
+    border-radius: 20px;
+    max-height: 80vh;
+    overflow-y:scroll;
+}
+
+
+.single__order__page .products__container::-webkit-scrollbar{
+    width:5px;
+}
+
+.single__order__page .products__container::-webkit-scrollbar-thumb{
+background-color: #676FA3;
+border-radius: 20px;
+}
+
+.single__order__page .order__details__container{
+    display: grid;
+    grid-template-columns :auto auto;
+    grid-gap: 2rem;
+    padding:2rem ;
+}
+
+
+.single__order__page .order__detail h6{
+ font-weight: 500;
+font-size: 16px;
+color: #888686;
+text-transform:capitalize;
+}
+
+.single__order__page .order__detail h5{
+    font-weight: 700;
+font-size: 24px;
+line-height: 36px;
+color: #000000;
+text-transform:capitalize;
+
+}
+
+.single__order__page .buttons__container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.single__order__page .buttons__container button{
+    margin:0 1rem;
+    background:none;
+    border:none;
+    width:50%
+}
+
+.single__order__page .buttons__container button.primary{
+    color:#fff;
+    background:#676FA3 ;
+    padding:1rem;
+    border-radius: 20px;
+}
+.single__order__page .buttons__container button.secondary{
+    color:#676FA3;
+    border:1px solid #676FA3;
+    padding:1rem;
+    border-radius: 20px;
+}

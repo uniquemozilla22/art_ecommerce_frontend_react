@@ -7,6 +7,8 @@ import { Tooltip } from "@mui/material";
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import ProductTable from "../../../components/ProductTable/ProductTable";
 import { showConfirmation } from "../../../store/actions/Confirmation/Confirmation.action";
 import { WarningMessage } from "../../../store/actions/Message/Message";
@@ -27,6 +29,7 @@ const OrderList = ({
 }) => {
   const [showProducts, setShowProducts] = useState(false);
   const dispatch = useDispatch();
+  const navigation = useNavigate();
 
   const [orderItem, setOrderItem] = useState(orderItems);
 
@@ -36,32 +39,6 @@ const OrderList = ({
 
   const handleOpenProductsModal = () => {
     setShowProducts(true);
-  };
-
-  const handleDeleteProduct = (items, order, product) => {
-    if (status !== "paid") {
-      dispatch(RemoveProductOnOrder(order, product));
-      const orderItems = items.filter((item) => item.data.id !== product);
-      setOrderItem(orderItems);
-      if (orderItems.length === 0) {
-        fetchOrderData();
-        handleCloseProductsModal();
-      }
-    } else {
-      dispatch(
-        WarningMessage({
-          message: "You cannot delete an order which has been already paid",
-        })
-      );
-    }
-  };
-
-  const handleDispatchDeleteProduct = (order, product) => {
-    const confirmData = {
-      title: "The Item will be removed from #" + order + ".",
-      onAccept: () => handleDeleteProduct(orderItem, order, product),
-    };
-    dispatch(showConfirmation(confirmData.title, confirmData.onAccept));
   };
 
   const calculate_net = (items) => {
@@ -120,12 +97,12 @@ const OrderList = ({
           <div
             className={"d-none d-md-block " + classes.action__icons__container}
           >
-            <Tooltip title={"See Order #" + id}>
-              <RemoveRedEyeOutlined
-                className={classes.icons}
-                onClick={(e) => handleOpenProductsModal()}
-              />
-            </Tooltip>
+            <Link to={"" + id}>
+              <Tooltip title={"See Order #" + id}>
+                <RemoveRedEyeOutlined className={classes.icons} />
+              </Tooltip>
+            </Link>
+
             {payment_status ? null : (
               <>
                 {!checkout && (
@@ -152,13 +129,16 @@ const OrderList = ({
               className={classes.button}
               onClick={(e) => {
                 e.preventDefault();
-                handleOpenProductsModal();
+                navigation("" + id);
               }}
             >
               <RemoveRedEyeOutlined />
               See Order <span>#{id}</span>
             </div>
-            <div className={classes.button}>
+            <div
+              className={classes.button}
+              onClick={(e) => selectOrderToCheckout(id)}
+            >
               <PaymentsOutlined />
               Place Order <span>#{id}</span>
             </div>
@@ -175,14 +155,6 @@ const OrderList = ({
           </div>
         </div>
       </div>
-      <Modal show={showProducts} onHide={handleCloseProductsModal} size="lg">
-        <ProductTable
-          items={orderItem}
-          order={"Order: #" + id}
-          removeFunction={(product) => handleDispatchDeleteProduct(id, product)}
-          hideHeading
-        />
-      </Modal>
     </>
   );
 };

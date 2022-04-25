@@ -11,7 +11,7 @@ const ProductFeild = (props) => {
       <div className={classes.product__content}>
         <h1>{props.title}</h1>
         <h2>NRS.{props.price}</h2>
-        <p>{props.description}</p>
+        <p className={classes.description}>{props.description}</p>
       </div>
       {props.remove ? (
         <div className={classes.closeIcon_cart}>

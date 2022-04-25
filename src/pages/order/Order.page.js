@@ -1,7 +1,6 @@
-import { Refresh } from "@mui/icons-material";
-import { Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Tab, Nav, Spinner } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
@@ -19,6 +18,7 @@ const Order = (props) => {
 
   useEffect(() => {
     fetchOrderData();
+    console.log("data");
   }, []);
 
   useEffect(() => {
@@ -54,65 +54,181 @@ const Order = (props) => {
     };
     dispatch(showConfirmation(confirmData.title, confirmData.onAccept));
   };
-  return (
-    <div className={classes.order}>
-      <div className="container">
-        {data ? (
-          data.filter((o) => o.status === "draft").length !== 0 ? (
-            <>
-              <div className={classes.title__container}>
-                <h1>Orders.</h1>
-                <Tooltip title="Refresh List">
-                  <Refresh onClick={(e) => fetchOrderData()} />
-                </Tooltip>
-              </div>
-              {data
-                .filter((o) => o.status === "draft")
-                .map((order, index) => {
-                  console.log(order)
-                  return (
-                    <OrderList
-                      key={index}
-                      {...order}
-                      fetchOrderData={fetchOrderData}
-                      deleteOrder={deleteOrder}
-                      selectOrderToCheckout={selectOrderToCheckout}
-                    />
-                  );
-                })}
-            </>
-          ) : (
-            <DataNotFound
-              content={
-                "There are no orders in draft here try checking out some of the arts. "
-              }
-              action={fetchOrderData}
-            />
-          )
-        ) : null}
-      </div>
-      <div className="container">
-        {data ? (
-          data.filter((o) => o.status !== "draft").length !== 0 ? (
-            <>
-              <div className={classes.title__container}>
-                <h1>Paid Orders.</h1>
-              </div>
-              {data
-                .filter((o) => o.status !== "draft")
-                .map((order, index) => (
-                  <OrderList
-                    key={index}
-                    {...order}
-                    fetchOrderData={fetchOrderData}
-                    selectOrderToCheckout={selectOrderToCheckout}
-                  />
-                ))}
-            </>
-          ) : null
-        ) : null}
-      </div>
+
+  return data ? (
+    <div className={classes.order + " container"}>
+      <Tab.Container id="left-tabs-example" defaultActiveKey="draft">
+        <div className={"row"}>
+          <div className={classes.title__container}>
+            <h1>Order</h1>
+          </div>
+          <div className={classes.link__container + " col-md-2 col-xs-12 "}>
+            <Nav className={"flex-column " + classes.navigation__link}>
+              <Nav.Item className={classes.navigation__item}>
+                <Nav.Link eventKey={"shipping"}>
+                  <h3>
+                    Shipping{" "}
+                    <span>
+                      {data.filter((o) => o.status === "shipping").length}
+                    </span>
+                  </h3>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item className={classes.navigation__item}>
+                <Nav.Link eventKey={"draft"}>
+                  <h3>
+                    Draft{" "}
+                    <span>
+                      {data.filter((o) => o.status === "draft").length}
+                    </span>
+                  </h3>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item className={classes.navigation__item}>
+                <Nav.Link eventKey={"paid"}>
+                  <h3>
+                    Paid{" "}
+                    <span>
+                      {data.filter((o) => o.status === "paid").length}
+                    </span>
+                  </h3>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item className={classes.navigation__item}>
+                <Nav.Link eventKey={"cancelled"}>
+                  <h3>
+                    Cancelled{" "}
+                    <span>
+                      {data.filter((o) => o.status === "cancelled").length}
+                    </span>
+                  </h3>
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </div>
+          {data && (
+            <div
+              className={classes.content__container + "  col-md-10 col-xs-12 "}
+            >
+              <Tab.Content>
+                <Tab.Pane eventKey="draft">
+                  <div className={classes.tab__container}>
+                    <div className={classes.sub__title}>
+                      <h2>Drafted Orders</h2>
+                    </div>
+                    {data.filter((o) => o.status === "draft").length !== 0 ? (
+                      data
+                        .filter((o) => o.status === "draft")
+                        .map((order, index) => {
+                          return (
+                            <OrderList
+                              key={index}
+                              {...order}
+                              fetchOrderData={fetchOrderData}
+                              deleteOrder={deleteOrder}
+                              selectOrderToCheckout={selectOrderToCheckout}
+                            />
+                          );
+                        })
+                    ) : (
+                      <DataNotFound
+                        action={() => fetchOrderData()}
+                        content="Try checking out some products from the cart."
+                      />
+                    )}
+                  </div>
+                </Tab.Pane>
+                <Tab.Pane eventKey="paid">
+                  <div className={classes.tab__container}>
+                    <div className={classes.sub__title}>
+                      <h2>Paid Orders</h2>
+                    </div>
+                    {data.filter((o) => o.status === "paid").length !== 0 ? (
+                      data
+                        .filter((o) => o.status === "paid")
+                        .map((order, index) => {
+                          return (
+                            <OrderList
+                              key={index}
+                              {...order}
+                              fetchOrderData={fetchOrderData}
+                              deleteOrder={deleteOrder}
+                              selectOrderToCheckout={selectOrderToCheckout}
+                            />
+                          );
+                        })
+                    ) : (
+                      <DataNotFound
+                        action={() => fetchOrderData()}
+                        content="You dont have paid for any orders yet."
+                      />
+                    )}
+                  </div>
+                </Tab.Pane>
+                <Tab.Pane eventKey="cancelled">
+                  <div className={classes.tab__container}>
+                    <div className={classes.sub__title}>
+                      <h2>Cancelled Orders</h2>
+                    </div>
+                    {data.filter((o) => o.status === "cancelled").length !==
+                    0 ? (
+                      data
+                        .filter((o) => o.status === "cancelled")
+                        .map((order, index) => {
+                          return (
+                            <OrderList
+                              key={index}
+                              {...order}
+                              fetchOrderData={fetchOrderData}
+                              deleteOrder={deleteOrder}
+                              selectOrderToCheckout={selectOrderToCheckout}
+                            />
+                          );
+                        })
+                    ) : (
+                      <DataNotFound
+                        action={() => fetchOrderData()}
+                        content="Wow So far so good. No Cancellation of orders."
+                      />
+                    )}
+                  </div>
+                </Tab.Pane>
+                <Tab.Pane eventKey="shipping">
+                  <div className={classes.tab__container}>
+                    <div className={classes.sub__title}>
+                      <h2>Shipping Orders</h2>
+                    </div>
+                    {data.filter((o) => o.status === "shipping").length !==
+                    0 ? (
+                      data
+                        .filter((o) => o.status === "shipping")
+                        .map((order, index) => {
+                          return (
+                            <OrderList
+                              key={index}
+                              {...order}
+                              fetchOrderData={fetchOrderData}
+                              deleteOrder={deleteOrder}
+                              selectOrderToCheckout={selectOrderToCheckout}
+                            />
+                          );
+                        })
+                    ) : (
+                      <DataNotFound
+                        action={() => fetchOrderData()}
+                        content="Place some orders and the artist will ship it to your address."
+                      />
+                    )}
+                  </div>
+                </Tab.Pane>
+              </Tab.Content>
+            </div>
+          )}
+        </div>
+      </Tab.Container>
     </div>
+  ) : (
+    <Spinner />
   );
 };
 

@@ -38,18 +38,6 @@ const OrderList = ({
   const navigation = useNavigate();
 
   const [orderItem, setOrderItem] = useState(orderItems);
-
-  const calculate_net = (items) => {
-    let totalprice = 0;
-    const prices = items.map((product) => product.data.unit_price);
-
-    prices.forEach(
-      (productprice) => (totalprice = totalprice + parseFloat(productprice))
-    );
-
-    return totalprice;
-  };
-
   const classGenerator = (s) => {
     switch (s) {
       case "paid":
@@ -121,8 +109,22 @@ const OrderList = ({
           </div>
         </div>
         <div className={classes.buttons__container}>
-          <button>Get Invoice</button>
-          <button>Delete Product</button>
+          {status === "paid" ? (
+            <>
+              <button onClick={(e) => navigation("../orders/" + id)}>
+                {" "}
+                View Order Details
+              </button>
+              <button onClick={(e) => deleteOrder(id)}>Cancel Order</button>
+            </>
+          ) : (
+            <>
+              <button onClick={(e) => navigation("../orders/" + id)}>
+                View Order Details
+              </button>
+              <button onClick={(e) => deleteOrder(id)}>Delete Order</button>
+            </>
+          )}
         </div>
       </div>
     </>

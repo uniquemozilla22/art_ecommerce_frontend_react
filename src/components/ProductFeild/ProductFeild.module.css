@@ -33,6 +33,13 @@
   color: #888686;
 }
 
+.product__feild .product__content .description {
+  width:100%;
+  height:20px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
 .product__feild .closeIcon_cart {
   position: absolute;
   top: 10px;

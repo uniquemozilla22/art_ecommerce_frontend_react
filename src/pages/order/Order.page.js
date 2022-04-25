@@ -9,6 +9,8 @@ import DeleteOrderList from "../../store/actions/Order/OrderList.delete";
 import GetOrderList from "../../store/actions/Order/OrderList.fetch";
 import classes from "./Order.module.css";
 import OrderList from "./OrderList/OrderList.comp";
+import { Tooltip } from "@mui/material";
+import { RefreshOutlined } from "@mui/icons-material";
 
 const Order = (props) => {
   const [data, setData] = useState(null);
@@ -18,7 +20,6 @@ const Order = (props) => {
 
   useEffect(() => {
     fetchOrderData();
-    console.log("data");
   }, []);
 
   useEffect(() => {
@@ -114,7 +115,16 @@ const Order = (props) => {
                 <Tab.Pane eventKey="draft">
                   <div className={classes.tab__container}>
                     <div className={classes.sub__title}>
-                      <h2>Drafted Orders</h2>
+                      <h2>
+                        Drafted Orders
+                        <p>
+                          {data.filter((o) => o.status === "draft").length}{" "}
+                          Orders
+                        </p>
+                      </h2>
+                      <Tooltip title="Refresh Order">
+                        <RefreshOutlined onClick={() => fetchOrderData()} />
+                      </Tooltip>
                     </div>
                     {data.filter((o) => o.status === "draft").length !== 0 ? (
                       data
@@ -141,7 +151,16 @@ const Order = (props) => {
                 <Tab.Pane eventKey="paid">
                   <div className={classes.tab__container}>
                     <div className={classes.sub__title}>
-                      <h2>Paid Orders</h2>
+                      <h2>
+                        Paid Orders{" "}
+                        <p>
+                          {data.filter((o) => o.status === "paid").length}{" "}
+                          Orders
+                        </p>
+                      </h2>
+                      <Tooltip title="Refresh Order">
+                        <RefreshOutlined onClick={() => fetchOrderData()} />
+                      </Tooltip>
                     </div>
                     {data.filter((o) => o.status === "paid").length !== 0 ? (
                       data
@@ -168,7 +187,16 @@ const Order = (props) => {
                 <Tab.Pane eventKey="cancelled">
                   <div className={classes.tab__container}>
                     <div className={classes.sub__title}>
-                      <h2>Cancelled Orders</h2>
+                      <h2>
+                        Cancelled Orders
+                        <p>
+                          {data.filter((o) => o.status === "cancelled").length}{" "}
+                          Orders
+                        </p>
+                      </h2>
+                      <Tooltip title="Refresh Order">
+                        <RefreshOutlined onClick={() => fetchOrderData()} />
+                      </Tooltip>
                     </div>
                     {data.filter((o) => o.status === "cancelled").length !==
                     0 ? (
@@ -196,7 +224,16 @@ const Order = (props) => {
                 <Tab.Pane eventKey="shipping">
                   <div className={classes.tab__container}>
                     <div className={classes.sub__title}>
-                      <h2>Shipping Orders</h2>
+                      <h2>
+                        Shipping Orders{" "}
+                        <p>
+                          {data.filter((o) => o.status === "shipping").length}{" "}
+                          Orders
+                        </p>
+                      </h2>
+                      <Tooltip title="Refresh Order">
+                        <RefreshOutlined onClick={() => fetchOrderData()} />
+                      </Tooltip>
                     </div>
                     {data.filter((o) => o.status === "shipping").length !==
                     0 ? (

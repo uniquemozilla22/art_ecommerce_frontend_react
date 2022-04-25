@@ -35,6 +35,11 @@
   margin-bottom:1rem;
 }
 
+.order .sub__title h2 p{
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
 .order .title__container {
   display: flex;
   justify-content: space-between;

@@ -28,7 +28,10 @@
   align-items: center;
 }
 
-
+.no__address_prompt {
+  background:none;
+  border: 1px solid #
+}
 .shipping__container > div{
   
 }

@@ -3,7 +3,14 @@ import {
   PaymentsOutlined,
   RemoveRedEyeOutlined,
 } from "@mui/icons-material";
-import { Tooltip } from "@mui/material";
+import {
+  Tooltip,
+  AvatarGroup,
+  Avatar,
+  StyledBadge,
+  Badge,
+  SmallAvatar,
+} from "@mui/material";
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
@@ -27,19 +34,10 @@ const OrderList = ({
   selectOrderToCheckout,
   handleOrderPaymentChange,
 }) => {
-  const [showProducts, setShowProducts] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
   const [orderItem, setOrderItem] = useState(orderItems);
-
-  const handleCloseProductsModal = () => {
-    setShowProducts(false);
-  };
-
-  const handleOpenProductsModal = () => {
-    setShowProducts(true);
-  };
 
   const calculate_net = (items) => {
     let totalprice = 0;
@@ -51,108 +49,80 @@ const OrderList = ({
 
     return totalprice;
   };
+
+  const classGenerator = (s) => {
+    switch (s) {
+      case "paid":
+        return classes.paid__container;
+      case "cancelled":
+        return classes.cancelled__container;
+      default:
+        return null;
+    }
+  };
   return (
     <>
       <div
-        className={
-          classes.orderList +
-          " " +
-          (!checkout
-            ? payment_status
-              ? classes.paid_order
-              : classes.not_paid_order
-            : "")
-        }
+        className={classGenerator(status) + " " + classes.orderList__container}
       >
-        <div className={classes.order_id}>
-          <p>
-            Order <span>#{id}</span>
-          </p>
-        </div>
-        <div className={classes.order_items}>
-          <p>
-            Items
-            <span>{orderItems.length}</span>
-          </p>
-        </div>
-        <div className={classes.order_status}>
-          <p>
-            Status{" "}
-            <span>{status.charAt(0).toUpperCase() + status.slice(1)}</span>
-          </p>
-        </div>
-        <div className={classes.order_action}>
-          <p>
-            Net{" "}
-            <span>
-              {orderItem
-                ? parseInt(calculate_net(orderItem)).toLocaleString("en-IN", {
-                    maximumFractionDigits: 2,
-                    style: "currency",
-                    currency: "NPR",
-                  })
-                : "NPR 0.00"}
-            </span>
-          </p>
-          <div
-            className={"d-none d-md-block " + classes.action__icons__container}
+        <div className={classes.image__container}>
+          <Badge
+            overlap="circular"
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            badgeContent={
+              orderItems.length >= 2 && (
+                <Avatar
+                  alt="Travis Howard"
+                  className={classes.small__counter}
+                  variant={"rounded"}
+                >
+                  +{orderItems.length - 1}
+                </Avatar>
+              )
+            }
           >
-            <Link to={"" + id}>
-              <Tooltip title={"See Order #" + id}>
-                <RemoveRedEyeOutlined className={classes.icons} />
-              </Tooltip>
-            </Link>
-
-            {payment_status ? null : (
-              <>
-                {!checkout && (
-                  <Tooltip title={"Deliver this item for #" + id}>
-                    <PaymentsOutlined
-                      className={classes.icons}
-                      onClick={(e) => selectOrderToCheckout(id)}
-                    />
-                  </Tooltip>
-                )}
-                <Tooltip title={"Delete Item #" + id}>
-                  <DeleteOutlined
-                    className={classes.icons}
-                    onClick={(e) => deleteOrder(id)}
-                  />
-                </Tooltip>
-              </>
-            )}
+            <Avatar
+              alt="Travis Howard"
+              src={orderItems[0].data.image_url}
+              variant={"rounded"}
+              sx={{ height: "150px", width: "150px" }}
+            >
+              +{orderItems[0]?.data.name.charAt(0)}
+            </Avatar>
+          </Badge>
+        </div>
+        <div className={classes.information__container}>
+          <div className={classes.orderID}>
+            <h3>Order #{id} </h3>
           </div>
-          <div
-            className={"d-flex d-md-none " + classes.action_mobile_container}
-          >
-            <div
-              className={classes.button}
-              onClick={(e) => {
-                e.preventDefault();
-                navigation("" + id);
-              }}
-            >
-              <RemoveRedEyeOutlined />
-              See Order <span>#{id}</span>
+          <div className={classes.data__container}>
+            <div className={classes.data__item}>
+              <h4>Status</h4>
+              <h5>{status}</h5>
             </div>
-            <div
-              className={classes.button}
-              onClick={(e) => selectOrderToCheckout(id)}
-            >
-              <PaymentsOutlined />
-              Place Order <span>#{id}</span>
+            <div className={classes.data__item}>
+              <h4>Items</h4>
+              <h5>{orderItem?.length}</h5>
             </div>
-            <div
-              className={classes.button}
-              onClick={(e) => {
-                e.preventDefault();
-                deleteOrder(id);
-              }}
-            >
-              <DeleteOutlined />
-              Delete Order<span>#{id}</span>
+            <div className={classes.data__item}>
+              <h4>Net Price</h4>
+              <h5>
+                {parseInt(net_price).toLocaleString("en-IN", {
+                  maximumFractionDigits: 2,
+                  style: "currency",
+                  currency: "NRS",
+                })}
+              </h5>
+            </div>
+            <div className={classes.data__item}>
+              <h4>Estimated Delivery</h4>
+              <h5>{new Date().getDate() + "/" + new Date().getMonth()}</h5>
             </div>
           </div>
+        </div>
+        <div className={classes.buttons__container}>
+          <button>Get Invoice</button>
+          <button>Delete Product</button>
         </div>
       </div>
     </>

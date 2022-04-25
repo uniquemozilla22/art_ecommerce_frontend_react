@@ -1,90 +1,114 @@
-.orderList {
-  display: flex;
-  justify-content: space-around;
+.orderList__container{
+  margin:1rem  0;
+  display:flex;
+  background-color:#EEF2FF;
   padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 20px;
-  align-items: center;
-  transition: all 0.4s ease-in-out;
-  cursor: pointer;
-  flex-wrap: wrap;
-}
+  justify-content: space-between;
+  align-items:center;
+  border-radius:10px;
+  transition:border .5s ease-in;
+  border-left: 5px solid transparent;
 
-.orderList a{
-  text-decoration: none;
-  color: #2b2b2b;
-}
-
-.orderList > div {
-  flex:1
 }
 
 
-.paid_order:hover {
-  box-shadow: 0 0 10px lightgreen;
+.orderList__container:hover{
+  box-shadow: 0 0 10px #2b2b2b25;
+  border-color:#4267B2;
 }
 
-
-.not_paid_order:hover {
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.24);
+.paid__container:hover{
+  border-color:lightgreen;
 }
 
-.orderList p {
-  font-weight: light;
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  margin: 0;
-  justify-content: center;
-}
+.cancelled__container:hover{
+  border-color:#ff5959;
 
-.orderList p span {
-  font-weight: bold;
-  font-size: 1rem;
-  margin-left: 0.5rem;
 }
-
-.order_action .action__icons__container .icons {
+.orderList__container .image__container{
   margin: 0 1rem;
+  flex:1;
 }
 
-.order_action .action__icons__container .icons:hover {
-  color: #676fa3;
+.orderList__container .buttons__container{
+  flex:1;
 }
 
-.action_mobile_container {
+.orderList__container .image__container .small__counter{
+  height: 30px;
+  width: 30px;
+  background-color: #4267B2 ;
+}
+
+
+.orderList__container .information__container {
+  justify-self: flex-start;
+  flex:2;
+  align-self:baseline;
+
+}
+
+.orderList__container .data__container{
+  display :flex;
+  flex-wrap: wrap;
+  flex-grow: 50%;
+}
+
+
+.orderList__container .information__container .data__container .data__item{
   display: flex;
-  width: 100%;
-  justify-content: center;
+  justify-content:flex-start;
   flex-direction: column;
+  align-items:flex-start;
+  flex:33.33%;
+  margin-bottom: 1rem;
 }
 
-.orderList .order_action{
+.orderList__container .data__item h4{
+  font-size: 0.8rem;
+  font-weight: medium;
+  color:#888686;
+  text-transform: capitalize;
+  margin: 0;
+
+}
+.orderList__container .data__item h5{
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: #000000;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.orderList__container .orderID{
+  margin-bottom: 1rem;
+
+}
+
+.orderList__container .information__container .orderID h3{
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.orderList__container .buttons__container{
   display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: flex-end;
+  flex-direction: column;
+
 }
 
-.action_mobile_container .button {
-  padding: 0.5rem 1rem;
+.orderList__container .buttons__container button{
+  border: 1px solid #4267B2;
+  margin:0.5rem 0;
+  padding:0.5rem;
   background-color: transparent;
-  border-radius: 20px;
-  border: 1px solid rgb(103, 111, 163);
-  color: #676fa3;
-  margin: 5px;
-  transition: all ease-in 0.5s;
-}
-.action_mobile_container .button svg {
-  margin-right: 5px;
+  font-weight: 500;
+  color: #4267B2;
+  font-size: 0.9rem;
+  border-radius:10px;
 }
 
-.action_mobile_container .button:hover {
-  background-color: rgb(103, 111, 163);
-  color: #fff;
-}
-@media screen and (max-width: 768px) {
-  .order_action .action__icons__container .icons {
-    margin: 1rem;
-  }
+.orderList__container .buttons__container button:hover{
+  background-color: #4267B2;
+  color: white;
+
 }

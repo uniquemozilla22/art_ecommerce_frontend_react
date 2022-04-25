@@ -68,15 +68,18 @@ const Order = (props) => {
               </div>
               {data
                 .filter((o) => o.status === "draft")
-                .map((order, index) => (
-                  <OrderList
-                    key={index}
-                    {...order}
-                    fetchOrderData={fetchOrderData}
-                    deleteOrder={deleteOrder}
-                    selectOrderToCheckout={selectOrderToCheckout}
-                  />
-                ))}
+                .map((order, index) => {
+                  console.log(order)
+                  return (
+                    <OrderList
+                      key={index}
+                      {...order}
+                      fetchOrderData={fetchOrderData}
+                      deleteOrder={deleteOrder}
+                      selectOrderToCheckout={selectOrderToCheckout}
+                    />
+                  );
+                })}
             </>
           ) : (
             <DataNotFound

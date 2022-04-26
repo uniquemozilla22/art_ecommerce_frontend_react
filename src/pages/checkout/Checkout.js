@@ -32,8 +32,9 @@ const Checkout = (props) => {
 
   const handleDeleteProduct = async (items, order, product) => {
     if (data.status !== "paid") {
-      // const success = xzawait dispatch(RemoveProductOnOrder(order, product));
-      if (true) {
+      const success = await dispatch(RemoveProductOnOrder(order, product));
+      console.log(success);
+      if (success) {
         const orderItems = items.filter((item) => item.data.id !== product);
         setData({ ...data, orderItems });
         if (orderItems.length === 0) {

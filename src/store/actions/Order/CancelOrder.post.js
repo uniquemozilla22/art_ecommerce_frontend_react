@@ -6,7 +6,9 @@ const CancelOrder = (id) => {
   return async (dispatch, getState) => {
     dispatch(showLoading());
     try {
-      const { data } = await postCancelOrder(getState().user.token, id);
+      const { data } = await new Promise((resolve) =>
+        resolve(postCancelOrder(getState().user.token, id))
+      );
       dispatch(hideLoading());
       return data;
     } catch (error) {

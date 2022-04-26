@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router";
 import ProductItem from "../../components/ProductTable/ProductItem/ProductItem";
 import FetchAddressById from "../../store/actions/Address/AddressById.fetch";
 import { showConfirmation } from "../../store/actions/Confirmation/Confirmation.action";
+import CancelOrder from "../../store/actions/Order/CancelOrder.post";
 import FetchOrderById from "../../store/actions/Order/OrderById.fetch";
 import DeleteOrderList from "../../store/actions/Order/OrderList.delete";
 import RemoveProductOnOrder from "../../store/actions/Order/RemoveOrderProduct.delete";
@@ -89,6 +90,25 @@ const SingleOrder = () => {
     const confirmData = {
       title: "The Item will be removed from #" + order + ".",
       onAccept: () => handleDeleteProduct(order.orderItems, order, product),
+    };
+    dispatch(showConfirmation(confirmData.title, confirmData.onAccept));
+  };
+
+  const cancel = async (id) => {
+    const res = await dispatch(CancelOrder(id));
+    if (res) {
+      let updateData = {
+        ...order,
+        status: "cancelled",
+      };
+      setOrder(updateData);
+    }
+  };
+
+  const cancellationOrder = () => {
+    const confirmData = {
+      title: `The order #${orderId} will be cancelled and your paid amount will return`,
+      onAccept: () => cancel(orderId),
     };
     dispatch(showConfirmation(confirmData.title, confirmData.onAccept));
   };
@@ -189,7 +209,12 @@ const SingleOrder = () => {
               {order.payment_status ? (
                 <div className={classes.buttons__container}>
                   <button className={classes.primary}>Generate Invoice</button>
-                  <button className={classes.secondary}>Cancel Order</button>
+                  <button
+                    className={classes.secondary}
+                    onClick={() => cancellationOrder()}
+                  >
+                    Cancel Order
+                  </button>
                 </div>
               ) : (
                 <div className={classes.buttons__container}>

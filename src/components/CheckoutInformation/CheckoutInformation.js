@@ -95,6 +95,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
 
   let ShippingAddressSelection = async (address, order) => {
     let data = await dispatch(SelectAddressPost(address, order));
+    console.log(data);
     setShipping(data.totalShippingCost);
   };
 

@@ -15,7 +15,7 @@ const RemoveProductOnOrder = (order, product) => {
       );
       dispatch(hideLoading());
       dispatch(SuccessMessage({ message: data.message }));
-      return data.success;
+      return data;
     } catch (error) {
       dispatch(hideLoading());
       if (error.response === undefined) {

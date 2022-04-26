@@ -94,11 +94,8 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   };
 
   let ShippingAddressSelection = async (address, order) => {
-    console.log(address, order);
-    let { totalShippingCost } = await dispatch(
-      SelectAddressPost(address, order)
-    );
-    setShipping(totalShippingCost);
+    let data = await dispatch(SelectAddressPost(address, order));
+    setShipping(data.totalShippingCost);
   };
 
   const handleConfirmationDelete = (index, id) => {

@@ -22,6 +22,7 @@ const Checkout = (props) => {
     changingData[index].payment_type = name;
     setData(changingData);
   };
+
   const handleFetchOrders = async () => {
     if (state?.order) {
       let order = await dispatch(FetchOrderById(state?.order));
@@ -31,8 +32,8 @@ const Checkout = (props) => {
 
   const handleDeleteProduct = async (items, order, product) => {
     if (data.status !== "paid") {
-      const success = await dispatch(RemoveProductOnOrder(order, product));
-      if (success) {
+      // const success = xzawait dispatch(RemoveProductOnOrder(order, product));
+      if (true) {
         const orderItems = items.filter((item) => item.data.id !== product);
         setData({ ...data, orderItems });
         if (orderItems.length === 0) {

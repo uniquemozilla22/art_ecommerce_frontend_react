@@ -28,11 +28,8 @@ const OrderList = ({
   orderItems,
   payment_status,
   net_price,
-  fetchOrderData,
   deleteOrder,
-  checkout,
-  selectOrderToCheckout,
-  handleOrderPaymentChange,
+  cancelOrder,
 }) => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -109,21 +106,15 @@ const OrderList = ({
           </div>
         </div>
         <div className={classes.buttons__container}>
-          {status === "paid" ? (
-            <>
-              <button onClick={(e) => navigation("../orders/" + id)}>
-                {" "}
-                View Order Details
-              </button>
-              <button onClick={(e) => deleteOrder(id)}>Cancel Order</button>
-            </>
-          ) : (
-            <>
-              <button onClick={(e) => navigation("../orders/" + id)}>
-                View Order Details
-              </button>
-              <button onClick={(e) => deleteOrder(id)}>Delete Order</button>
-            </>
+          <button onClick={(e) => navigation("../orders/" + id)}>
+            {" "}
+            View Order Details
+          </button>
+          {cancelOrder && (
+            <button onClick={(e) => cancelOrder(id)}>Cancel Order</button>
+          )}
+          {deleteOrder && (
+            <button onClick={(e) => deleteOrder(id)}>Delete Order</button>
           )}
         </div>
       </div>

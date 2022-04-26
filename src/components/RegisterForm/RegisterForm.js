@@ -18,8 +18,6 @@ const RegisterForm = (props) => {
     mobile_no: null,
     telephone_no: null,
     alternative_no: null,
-    primary_address: null,
-    secondary_address: null,
   });
   const [view, setView] = useState(false);
 
@@ -36,7 +34,6 @@ const RegisterForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.Loader(true);
 
     let validationData = validation;
     validationData = EmailHandler(validationData);
@@ -52,8 +49,6 @@ const RegisterForm = (props) => {
       validationData.mobile_no.validated
     ) {
       props.Register(data);
-    } else {
-      props.Loader(false);
     }
   };
 
@@ -220,34 +215,7 @@ const RegisterForm = (props) => {
           </div>
 
           <h4>Contact Information</h4>
-          <div className={"row " + classes.group}>
-            <div
-              className={
-                "col-xs-12 col-md-6 col-lg-6 " + classes.input__container
-              }
-            >
-              <input
-                type="text"
-                placeholder="Address Line 1"
-                className={classes.input}
-                name={"primary_address"}
-                onChange={(e) => handleInput(e)}
-              />
-            </div>
-            <div
-              className={
-                "col-xs-12 col-md-6 col-lg-6 " + classes.input__container
-              }
-            >
-              <input
-                type="text"
-                placeholder="Address Line 2"
-                className={classes.input}
-                name={"secondary_address"}
-                onChange={(e) => handleInput(e)}
-              />
-            </div>
-          </div>
+
           <div className={"row " + classes.group}>
             <div
               className={

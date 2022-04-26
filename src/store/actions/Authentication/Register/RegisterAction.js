@@ -1,5 +1,5 @@
 import axiosBase from "../../../../axiosBase";
-import { hideLoading } from "../../Loading/Loading";
+import { hideLoading, showLoading } from "../../Loading/Loading";
 import {
   ErrorMessage,
   SuccessMessage,
@@ -9,9 +9,10 @@ import { RegisterAuthentication } from "../../User/Authenticate";
 
 const RegisterAction = (payload) => {
   return (dispatch) => {
+    dispatch(showLoading());
     return registerUser(payload)
       .then((res) => {
-        console.log(res);
+        dispatch(hideLoading());
         dispatch(
           SuccessMessage({
             message: res.statusText + "! Profile Created.",
@@ -26,9 +27,10 @@ const RegisterAction = (payload) => {
             likes: res.data.likes || [],
           })
         );
-        dispatch(hideLoading());
       })
       .catch((err) => {
+        dispatch(hideLoading());
+
         if (err.response === undefined) {
           dispatch(
             ErrorMessage({

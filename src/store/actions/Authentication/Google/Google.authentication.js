@@ -14,6 +14,7 @@ const GoogleAuthAction = (info) => {
     dispatch(showLoading());
     try {
       const res = await authenticateUsingGoogle(info);
+      console.log(res.data);
       dispatch(hideLoading());
       dispatch(
         SuccessMessage({
@@ -22,7 +23,7 @@ const GoogleAuthAction = (info) => {
       );
       dispatch(
         RegisterAuthentication({
-          email: res.email,
+          email: res.data.email,
           token: res.data.token,
           likes: res.data.likedProducts,
           balance: res.data.balance || 0,
@@ -31,7 +32,6 @@ const GoogleAuthAction = (info) => {
       );
       dispatch({ type: GET_CART, payload: res.data.cartItems });
       if (getState().modal.login) dispatch({ type: LOGIN_MODAL });
-      return res.data;
     } catch (error) {
       if (error.response === undefined) {
         dispatch(hideLoading());

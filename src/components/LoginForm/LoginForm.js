@@ -6,7 +6,7 @@ import LoginAction from "../../store/actions/Authentication/Login/Login.action";
 import { connect } from "react-redux";
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
 import GoogleAuthAction from "../../store/actions/Authentication/Google/Google.authentication";
-import { GoogleLogin } from "react-google-login";
+import SocialButton from "../SocialLogin/LoginSocial.button";
 
 const LoginForm = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -89,6 +89,12 @@ const LoginForm = (props) => {
     console.log("error on Google", err);
   };
 
+  const facebookSuccess = (user) => {
+    console.log("Success on Facebook", user);
+  };
+  const facebookFailure = (error) => {
+    console.log("error on Facebook", error);
+  };
   const classNameContainer = () => {
     return props.loginModal ? classes.login__modal : classes.login__form;
   };
@@ -140,20 +146,31 @@ const LoginForm = (props) => {
         </Link>
         <p>Use Alternatives</p>
         <div className={classes.social__alternatives}>
-          <div className={classes.icons}>
-            <FacebookOutlined />
-          </div>
-          <GoogleLogin
-            clientId="38178867963-cig24gdoohr1le5ia7v3bcjfeelb4hco.apps.googleusercontent.com"
-            render={(renderProps) => (
-              <div className={classes.icons} onClick={renderProps.onClick}>
-                <Google />
-              </div>
-            )}
-            onSuccess={googleSuccess}
-            onFailure={googleFailure}
-            cookiePolicy="single_host_origin"
-          />
+          <SocialButton
+            provider="facebook"
+            appId="467440698300186"
+            autoLoad={false}
+            onLoginSuccess={facebookSuccess}
+            onLoginFailure={facebookFailure}
+            fields="name,email,picture"
+            scope="public_profile,email,user_friends"
+          >
+            <div className={classes.icons}>
+              <FacebookOutlined />
+            </div>
+          </SocialButton>
+
+          <SocialButton
+            provider="google"
+            appId="38178867963-cig24gdoohr1le5ia7v3bcjfeelb4hco.apps.googleusercontent.com"
+            onLoginSuccess={googleSuccess}
+            onLoginFailure={googleFailure}
+            scope="email"
+          >
+            <div className={classes.icons}>
+              <Google />
+            </div>
+          </SocialButton>
         </div>
       </div>
     </div>

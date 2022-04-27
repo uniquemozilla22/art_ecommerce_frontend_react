@@ -27,6 +27,7 @@ const OrderList = ({
   status,
   orderItems,
   payment_status,
+  estimated_delivery_time,
   net_price,
   deleteOrder,
   cancelOrder,
@@ -99,10 +100,12 @@ const OrderList = ({
                 })}
               </h5>
             </div>
-            <div className={classes.data__item}>
-              <h4>Estimated Delivery</h4>
-              <h5>{new Date().getDate() + "/" + new Date().getMonth()}</h5>
-            </div>
+            {estimated_delivery_time && (
+              <div className={classes.data__item}>
+                <h4>Estimated Delivery</h4>
+                <h5>{new Date(estimated_delivery_time).toUTCString()}</h5>
+              </div>
+            )}
           </div>
         </div>
         <div className={classes.buttons__container}>

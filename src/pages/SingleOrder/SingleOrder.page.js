@@ -191,18 +191,16 @@ const SingleOrder = () => {
                       <h6>Payment</h6>
                       <h5>{order.payment_type}</h5>
                     </div>
-                    <div className={classes.order__detail}>
-                      <h6>Estimated Delivery</h6>
-                      <h5>{order.status}</h5>
-                    </div>
-                    <div className={classes.order__detail}>
-                      <h6>Estimated Delivery</h6>
-                      <h5>{order.status}</h5>
-                    </div>
-                    <div className={classes.order__detail}>
-                      <h6>Estimated Delivery</h6>
-                      <h5>{order.status}</h5>
-                    </div>
+                    {order.estimated_delivery_time && (
+                      <div className={classes.order__detail}>
+                        <h6>Estimated Delivery</h6>
+                        <h5>
+                          {new Date(
+                            order.estimated_delivery_time
+                          ).toUTCString()}
+                        </h5>
+                      </div>
+                    )}
                   </>
                 )}
               </div>

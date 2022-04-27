@@ -209,10 +209,10 @@ export const BiddingInformation = (props) => {
   } = props;
   const tokens = useSelector((state) => state.user.token);
   const [token, setToken] = useState(tokens);
-  const [bidding_pirce, setBiddingPrice] = useState(currentBid.price);
+  const [bidding_pirce, setBiddingPrice] = useState(currentBid?.price);
   const [likeCount, setLikeCount] = useState(likes);
   const [winnerName, setWinnerName] = useState(
-    currentBid.first_name + " " + currentBid.last_name
+    currentBid?.first_name + " " + currentBid?.last_name
   );
   const [bidAmount, setBidAmount] = useState(0);
   const [showSubmit, setShowSubmit] = useState(false);
@@ -469,7 +469,9 @@ export const BiddingInformation = (props) => {
                 ) : null}
               </div>
               {productData.description ? (
-                <p  className={classes.product__description}>{productData.description}</p>
+                <p className={classes.product__description}>
+                  {productData.description}
+                </p>
               ) : null}
             </div>
             {token ? (

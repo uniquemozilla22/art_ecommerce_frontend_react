@@ -6,6 +6,7 @@ import LoginAction from "../../store/actions/Authentication/Login/Login.action";
 import { connect } from "react-redux";
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
 import GoogleAuthAction from "../../store/actions/Authentication/Google/Google.authentication";
+import { GoogleLogin } from "react-google-login";
 
 const LoginForm = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -80,6 +81,14 @@ const LoginForm = (props) => {
     }
   };
 
+  const googleSuccess = async (res) => {
+    props.GoogleLogin(res);
+  };
+
+  const googleFailure = (err) => {
+    console.log("error on Google", err);
+  };
+
   const classNameContainer = () => {
     return props.loginModal ? classes.login__modal : classes.login__form;
   };
@@ -134,9 +143,17 @@ const LoginForm = (props) => {
           <div className={classes.icons}>
             <FacebookOutlined />
           </div>
-          <div className={classes.icons}>
-            <Google onClick={(e) => props.GoogleLogin()} />
-          </div>
+          <GoogleLogin
+            clientId="38178867963-cig24gdoohr1le5ia7v3bcjfeelb4hco.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <div className={classes.icons} onClick={renderProps.onClick}>
+                <Google />
+              </div>
+            )}
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin"
+          />
         </div>
       </div>
     </div>
@@ -155,7 +172,7 @@ const mapDispatchToProps = (dispatch) => {
     Loader: (data) =>
       data ? dispatch(showLoading()) : dispatch(hideLoading()),
 
-    GoogleLogin: () => dispatch(GoogleAuthAction()),
+    GoogleLogin: (res) => dispatch(GoogleAuthAction(res)),
     toggleForgetPassword: () => dispatch({ type: "FORGOT__MODEL" }),
   };
 };

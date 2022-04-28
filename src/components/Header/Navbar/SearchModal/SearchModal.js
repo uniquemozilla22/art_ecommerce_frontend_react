@@ -27,7 +27,7 @@ const SearchModal = (props) => {
     navigation("search", { state: { search } });
     handleSearch();
   };
-
+  console.log(data);
   const debounce = (callback, delay) => {
     let timeout;
     return (...args) => {
@@ -75,38 +75,44 @@ const SearchModal = (props) => {
         </form>
         {loading && <Spinner />}
         {data && (
-          <div className={classes.model_search}>
-            {data.length !== 0
-              ? data.map((item, index) => (
-                  <ProductItem
-                    key={index}
-                    id={item.data.id}
-                    image={item.data.image_url}
-                    name={item.data.name}
-                    price={item.data.unit_price}
-                    supplierName={
-                      item.supplierInfo.first_name +
-                      " " +
-                      item.supplierInfo.last_name
-                    }
-                    supplierInfo={item.supplierInfo}
-                    productData={item.data}
-                    tags={item.tags}
-                    category={item.category}
-                    description={item.data.description}
-                    wishlist
-                    wishlistFunction={() => {
-                      props.toggleSearch();
-                      dispatch(AddWishlistItem(item.data.id));
-                    }}
-                    modal={() => props.toggleSearch()}
-                    likesCount={item.likesCount}
-                    time={item?.auction?.expiration_date || null}
-                    heading
-                  />
-                ))
-              : null}
-          </div>
+          <>
+            {data.length !== 0 && (
+              <div className={classes.model_search}>
+                {data.map((item, index) => {
+                  console.log(item);
+                    return (
+                      <ProductItem
+                        key={index}
+                        id={item?.data.id}
+                        image={item?.data.image_url}
+                        name={item.data.name}
+                        price={item.data.unit_price}
+                        supplierName={
+                          item.supplierInfo.first_name +
+                          " " +
+                          item.supplierInfo.last_name
+                        }
+                        supplierInfo={item.supplierInfo}
+                        productData={item.data}
+                        tags={item.tags}
+                        category={item.category}
+                        description={item.data.description}
+                        wishlist 
+                        wishlistFunction={() => {
+                          props.toggleSearch();
+                          dispatch(AddWishlistItem(item.data.id));
+                        }}
+                        modal={() => props.toggleSearch()}
+                        likesCount={item.likesCount}
+                        time={item?.auction?.expiration_date || null}
+                        heading
+                      />
+                    )
+                  );
+                })}
+              </div>
+            )}
+          </>
         )}
       </Box>
     </Modal>

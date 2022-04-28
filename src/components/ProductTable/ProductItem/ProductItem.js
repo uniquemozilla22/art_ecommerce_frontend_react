@@ -110,20 +110,63 @@ const ProductItem = ({
           <h5>{name}</h5>
           <p className={classes.description}>{description}</p>
           {time ? <p>{timed(days, mins, hours, sec)}</p> : null}
-          <p className={"d-flex d-sm-none "}>{supplierName}</p>
-          <p className={"d-flex d-sm-none "}>
+          <p className={"d-flex d-md-none "}>{supplierName}</p>
+          <p className={"d-flex d-md-none "}>
             {parseInt(price).toLocaleString("en-IN", {
               maximumFractionDigits: 2,
               style: "currency",
               currency: "NRS",
             })}
           </p>
+          <div className={"d-flex d-md-none " + classes.delete__item__buttons}>
+            <div>
+              <RemoveRedEyeOutlined
+                onClick={(e) => {
+                  if (modal) {
+                    modal();
+                  }
+                  navigation(`/products/${id}`);
+                }}
+              />
+              <p>{"View " + name}</p>
+            </div>
+
+            {wishlist && time === null ? (
+              <div>
+                <ShoppingCartOutlined
+                  onClick={(e) =>
+                    addToCart({
+                      data: productData,
+                      supplierInfo,
+                      tags,
+                      likesCount,
+                      category,
+                    })
+                  }
+                />
+                <p>{"Add " + name + " to cart"}</p>
+              </div>
+            ) : null}
+            {wishlistFunction && (
+              <div>
+                <FavoriteBorderOutlined onClick={(e) => wishlistFunction()} />
+                <p>{"Add " + name + " to wishlist"}</p>
+              </div>
+            )}
+            {removeItem && (
+              <div>
+                {" "}
+                <Delete onClick={(e) => removeItem(id)} />
+                <p>{"Remove " + name}</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      <div className={"d-none d-sm-flex " + classes.product__by}>
+      <div className={"d-none d-md-flex " + classes.product__by}>
         <h5>{supplierName}</h5>
       </div>
-      <div className={"d-none d-sm-flex " + classes.product__Price}>
+      <div className={"d-none d-md-flex " + classes.product__Price}>
         <h5>
           {parseInt(price).toLocaleString("en-IN", {
             maximumFractionDigits: 2,
@@ -132,7 +175,7 @@ const ProductItem = ({
           })}
         </h5>
       </div>
-      <div className={classes.delete__item}>
+      <div className={"d-none d-md-flex " + classes.delete__item}>
         <Tooltip title={"View " + name}>
           <RemoveRedEyeOutlined
             onClick={(e) => {
@@ -184,7 +227,7 @@ const ProductItem = ({
           <p className={classes.description}>{description}</p>
           {time ? <p>{timed(days, mins, hours, sec)}</p> : null}
           <p className={classes.supplier__name}>{supplierName}</p>
-          <p className={"d-flex d-sm-none "}>
+          <p className={"d-flex d-md-none "}>
             {parseInt(price).toLocaleString("en-IN", {
               maximumFractionDigits: 2,
               style: "currency",

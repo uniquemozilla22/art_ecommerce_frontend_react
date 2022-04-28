@@ -123,3 +123,32 @@ font-weight: 300;
 font-size: 20px;
 text-transform: capitalize;
 }
+
+
+.product__item__container .delete__item__buttons{
+  display:flex;
+  flex-direction: column;
+  flex:1;
+  justify-content: center;
+  border-radius: 20px;
+
+}
+
+.product__item__container .delete__item__buttons div{
+  border: 1px solid #676fa3;
+  color: #676fa3;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  width:100%;
+  padding:0.5rem;
+  border-radius: 20px;
+  margin-top: 0.5rem;
+}
+
+
+.product__item__container .delete__item__buttons div p{
+margin: 0;
+color: #676fa3;
+
+}

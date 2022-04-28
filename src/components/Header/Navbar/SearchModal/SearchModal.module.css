@@ -2,7 +2,17 @@
   position: absolute;
   top: 20%;
   left: 50%;
-  transform: translate(-50%, 0%);
+  transform: translate(-50%, -20%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search__modal__container form{
+  width: fit-content;
+  display:flex;
+  justify-content: center;
+  align-items:center;
 }
 
 .search__modal__container form{

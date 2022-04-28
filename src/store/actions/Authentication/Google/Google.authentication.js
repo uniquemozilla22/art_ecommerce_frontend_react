@@ -66,7 +66,7 @@ const GoogleAuthAction = (info) => {
 };
 
 const authenticateUsingGoogle = (userInfo) => {
-  return axiosBase.post("/auth/google", { userInfo });
+  return axiosBase.post("/auth/social", { userInfo });
 };
 
 export default GoogleAuthAction;

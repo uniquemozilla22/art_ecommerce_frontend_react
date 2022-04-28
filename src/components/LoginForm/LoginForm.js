@@ -91,6 +91,7 @@ const LoginForm = (props) => {
 
   const facebookSuccess = (user) => {
     console.log("Success on Facebook", user);
+    props.GoogleLogin(user);
   };
   const facebookFailure = (error) => {
     console.log("error on Facebook", error);

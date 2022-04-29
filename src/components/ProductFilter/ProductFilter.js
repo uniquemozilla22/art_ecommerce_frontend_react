@@ -12,7 +12,6 @@ import FetchCategories from "../../store/actions/FetchData/Categories.fetch";
 const ProductFilter = ({ data, filterProductbyPrice }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const location = useLocation();
 
   const [category, setCategory] = useState(null);
 
@@ -26,7 +25,11 @@ const ProductFilter = ({ data, filterProductbyPrice }) => {
   };
 
   const getPriceRange = () => {
-    let price_range = data?.map((product) => product.data.unit_price).sort();
+    let price_range = data
+      ?.map((product) => product.data.unit_price)
+      .sort(function (a, b) {
+        return a - b;
+      });
 
     return [price_range[0], price_range[price_range.length - 1]];
   };

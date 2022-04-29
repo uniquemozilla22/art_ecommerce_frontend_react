@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import classes from "./RegisterForm.module.css";
-import { FacebookOutlined, Google, Twitter } from "@mui/icons-material";
+import { FacebookOutlined, Google } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import RegisterAction from "../../store/actions/Authentication/Register/RegisterAction";
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
-import { useNavigate } from "react-router";
+import GoogleAuthAction from "../../store/actions/Authentication/SocialLogin/Social.authentication";
+import SocialButton from "../SocialLogin/LoginSocial.button";
+import { ErrorMessage } from "../../store/actions/Message/Message";
 
 const RegisterForm = (props) => {
   const [data, setData] = useState({
@@ -28,6 +30,21 @@ const RegisterForm = (props) => {
     mobile_no: { validated: null, message: "" },
   });
 
+  const googleSuccess = async (res) => {
+    props.SocialLogin(res);
+  };
+
+  const googleFailure = (err) => {
+    console.log(err.message);
+    props.Error(err.message);
+  };
+
+  const facebookSuccess = (user) => {
+    props.SocialLogin(user);
+  };
+  const facebookFailure = (error) => {
+    props.Error(error.message);
+  };
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -293,12 +310,31 @@ const RegisterForm = (props) => {
           </Link>
           <p>Use Alternatives</p>
           <div className={classes.social__alternatives}>
-            <div className={classes.icons}>
-              <FacebookOutlined />
-            </div>
-            <div className={classes.icons}>
-              <Google />
-            </div>
+            <SocialButton
+              provider="facebook"
+              appId="467440698300186"
+              autoLoad={false}
+              onLoginSuccess={facebookSuccess}
+              onLoginFailure={facebookFailure}
+              fields="name,email,picture"
+              scope="public_profile,email,user_friends"
+            >
+              <div className={classes.icons}>
+                <FacebookOutlined />
+              </div>
+            </SocialButton>
+
+            <SocialButton
+              provider="google"
+              appId="38178867963-cig24gdoohr1le5ia7v3bcjfeelb4hco.apps.googleusercontent.com"
+              onLoginSuccess={googleSuccess}
+              onLoginFailure={googleFailure}
+              scope="email"
+            >
+              <div className={classes.icons}>
+                <Google />
+              </div>
+            </SocialButton>
           </div>
         </div>
       </div>
@@ -318,6 +354,8 @@ const mapDispatchToProps = (dispatch) => {
     Register: (data) => dispatch(RegisterAction({ ...data })),
     Loader: (data) =>
       data ? dispatch(showLoading()) : dispatch(hideLoading()),
+    Error: (err) => dispatch(ErrorMessage({ message: err })),
+    SocialLogin: (res) => dispatch(GoogleAuthAction(res)),
   };
 };
 

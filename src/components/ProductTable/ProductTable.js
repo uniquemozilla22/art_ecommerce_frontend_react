@@ -48,7 +48,7 @@ const ProductTable = (props) => {
       {data.length !== 0 ? (
         !props.hideHeading ? (
           <>
-            <div className={classes.table__title}>
+            <div className={"d-none d-md-flex " + classes.table__title}>
               <h4>Product</h4>
               <h4 className={"d-none d-sm-block"}>By</h4>
               <h4 className={"d-none d-sm-block "}>Price</h4>

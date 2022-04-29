@@ -119,44 +119,44 @@ const ProductItem = ({
             })}
           </p>
           <div className={"d-flex d-md-none " + classes.delete__item__buttons}>
-            <div>
-              <RemoveRedEyeOutlined
-                onClick={(e) => {
-                  if (modal) {
-                    modal();
-                  }
-                  navigation(`/products/${id}`);
-                }}
-              />
+            <div
+              onClick={(e) => {
+                if (modal) {
+                  modal();
+                }
+                navigation(`/products/${id}`);
+              }}
+            >
+              <RemoveRedEyeOutlined />
               <p>{"View " + name}</p>
             </div>
 
             {wishlist && time === null ? (
-              <div>
-                <ShoppingCartOutlined
-                  onClick={(e) =>
-                    addToCart({
-                      data: productData,
-                      supplierInfo,
-                      tags,
-                      likesCount,
-                      category,
-                    })
-                  }
-                />
+              <div
+                onClick={(e) =>
+                  addToCart({
+                    data: productData,
+                    supplierInfo,
+                    tags,
+                    likesCount,
+                    category,
+                  })
+                }
+              >
+                <ShoppingCartOutlined />
                 <p>{"Add " + name + " to cart"}</p>
               </div>
             ) : null}
             {wishlistFunction && (
-              <div>
-                <FavoriteBorderOutlined onClick={(e) => wishlistFunction()} />
+              <div onClick={(e) => wishlistFunction()}>
+                <FavoriteBorderOutlined />
                 <p>{"Add " + name + " to wishlist"}</p>
               </div>
             )}
             {removeItem && (
-              <div>
+              <div onClick={(e) => removeItem(id)}>
                 {" "}
-                <Delete onClick={(e) => removeItem(id)} />
+                <Delete />
                 <p>{"Remove " + name}</p>
               </div>
             )}

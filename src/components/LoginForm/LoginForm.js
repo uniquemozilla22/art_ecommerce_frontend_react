@@ -5,8 +5,9 @@ import { FacebookOutlined, Google } from "@mui/icons-material";
 import LoginAction from "../../store/actions/Authentication/Login/Login.action";
 import { connect } from "react-redux";
 import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
-import GoogleAuthAction from "../../store/actions/Authentication/Google/Google.authentication";
+import GoogleAuthAction from "../../store/actions/Authentication/SocialLogin/Social.authentication";
 import SocialButton from "../SocialLogin/LoginSocial.button";
+import { ErrorMessage } from "../../store/actions/Message/Message";
 
 const LoginForm = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -82,19 +83,19 @@ const LoginForm = (props) => {
   };
 
   const googleSuccess = async (res) => {
-    props.GoogleLogin(res);
+    props.SocialLogin(res);
   };
 
   const googleFailure = (err) => {
-    console.log("error on Google", err);
+    console.log(err.message);
+    props.Error(err.message);
   };
 
   const facebookSuccess = (user) => {
-    console.log("Success on Facebook", user);
-    props.GoogleLogin(user);
+    props.SocialLogin(user);
   };
   const facebookFailure = (error) => {
-    console.log("error on Facebook", error);
+    props.Error(error.message);
   };
   const classNameContainer = () => {
     return props.loginModal ? classes.login__modal : classes.login__form;
@@ -190,8 +191,9 @@ const mapDispatchToProps = (dispatch) => {
     Loader: (data) =>
       data ? dispatch(showLoading()) : dispatch(hideLoading()),
 
-    GoogleLogin: (res) => dispatch(GoogleAuthAction(res)),
+    SocialLogin: (res) => dispatch(GoogleAuthAction(res)),
     toggleForgetPassword: () => dispatch({ type: "FORGOT__MODEL" }),
+    Error: (err) => dispatch(ErrorMessage({ message: err })),
   };
 };
 

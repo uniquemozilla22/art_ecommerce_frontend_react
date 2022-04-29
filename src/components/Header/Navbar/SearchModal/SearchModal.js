@@ -27,7 +27,6 @@ const SearchModal = (props) => {
     navigation("search", { state: { search } });
     handleSearch();
   };
-  console.log(data);
   const debounce = (callback, delay) => {
     let timeout;
     return (...args) => {

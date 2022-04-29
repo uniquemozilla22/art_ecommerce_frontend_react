@@ -8,7 +8,7 @@ import {
 import { GET_CART, LOGIN_MODAL } from "../../Types/Types";
 import { RegisterAuthentication } from "../../User/Authenticate";
 
-const GoogleAuthAction = (info) => {
+const SocialAuthentication = (info) => {
   return async (dispatch, getState) => {
     console.log("Info to google", info);
     dispatch(showLoading());
@@ -69,4 +69,4 @@ const authenticateUsingGoogle = (userInfo) => {
   return axiosBase.post("/auth/social", { userInfo });
 };
 
-export default GoogleAuthAction;
+export default SocialAuthentication;

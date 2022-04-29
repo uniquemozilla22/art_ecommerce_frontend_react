@@ -49,7 +49,11 @@ const Categories = (props) => {
         <Offcanvas.Body>
           <div className={classes.categories__modal__body}>
             {category.map((c, index) => (
-              <CategoryModalList {...c} key={index} />
+              <CategoryModalList
+                {...c}
+                key={index}
+                handleCloseCategory={handleCloseCategory}
+              />
             ))}
           </div>
         </Offcanvas.Body>

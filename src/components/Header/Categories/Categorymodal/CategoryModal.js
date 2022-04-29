@@ -1,9 +1,15 @@
 import React from "react";
 import classes from "./CategoryModal.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Accordion } from "react-bootstrap";
 
-const CategoryModalList = ({ name, id, subCategory }) => {
+const CategoryModalList = ({ name, id, subCategory, handleCloseCategory }) => {
+  const navigation = useNavigate();
+
+  const onLinkClick = (e, link) => {
+    handleCloseCategory();
+    navigation(link);
+  };
   if (subCategory) {
     return (
       <div
@@ -27,8 +33,11 @@ const CategoryModalList = ({ name, id, subCategory }) => {
     );
   } else {
     return (
-      <div className={classes.category__list__modal}>
-        <Link to={`category/${id}`}>{name}</Link>
+      <div
+        className={classes.category__list__modal}
+        onClick={(e) => onLinkClick(e, `category/${id}`)}
+      >
+        <Link>{name}</Link>
       </div>
     );
   }

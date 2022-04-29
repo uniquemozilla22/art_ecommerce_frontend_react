@@ -17,6 +17,7 @@ import { hideLoading, showLoading } from "../../store/actions/Loading/Loading";
 import UpdateProfile from "../../store/actions/EditProfile/EditProfile.update";
 import ChangePasswordAction from "../../store/actions/ChangePassword/ChangePassword.action";
 import SendOTPtoEmail from "../../store/actions/Authentication/VerifyEmail/SendOTP.action";
+import DataNotFound from "../../components/DataNotFound/DataNotFound";
 
 const EditProfile = (props) => {
   const [data, setData] = useState(null);
@@ -209,7 +210,10 @@ const EditProfile = (props) => {
       </Tab.Container>
     </div>
   ) : (
-    <Spinner />
+    <DataNotFound
+      action={() => fetchUserData()}
+      content={"There seems to be an error please try again."}
+    />
   );
 };
 

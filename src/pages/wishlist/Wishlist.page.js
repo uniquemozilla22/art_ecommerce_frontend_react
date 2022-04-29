@@ -1,6 +1,6 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { Spinner } from "react-bootstrap";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import WishlistData from "../../store/actions/Wishlist/wishlist.fetch";
 import DeleteWishlist from "./../../store/actions/Wishlist/wishlist.delete";
 

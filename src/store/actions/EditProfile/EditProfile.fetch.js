@@ -12,7 +12,6 @@ const FetchEditProfiileData = () => {
         resolve(fetchData(getState().user.token))
       );
       dispatch(hideLoading());
-
       const {
         username,
         twitterId,
@@ -72,6 +71,13 @@ const FetchEditProfiileData = () => {
         dispatch(
           WarningMessage({
             message: "There seems to be an error. Please try Again",
+          })
+        );
+      } else if (err.response.status === 404) {
+        console.log({ ...err });
+        dispatch(
+          WarningMessage({
+            message: "Data Not Found",
           })
         );
       }

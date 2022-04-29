@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Badge, Tooltip } from "@mui/material";
 import {
-  HelpOutline,
   PersonOutlineOutlined,
   ShoppingCartOutlined,
   SearchOutlined,

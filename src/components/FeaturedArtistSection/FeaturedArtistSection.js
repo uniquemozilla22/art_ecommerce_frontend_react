@@ -19,11 +19,11 @@ const FeaturedArtistSection = (props) => {
         </div>
         <div className="row">
           {props.artists.map((artist, index) => (
-            <div className=" col-lg-4 col-xs-12 col-md-6 ">
+            <div className=" col-lg-4 col-xs-12 col-md-6 " key={index}>
               <ArtistCard
                 id={artist.id}
                 name={artist.name}
-                image={artist.image}
+                image={artist.image}P
                 position={artist.position}
                 like={artist.likes}
                 delay={index}

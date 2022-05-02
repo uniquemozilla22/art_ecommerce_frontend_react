@@ -9,45 +9,46 @@ const ProductSection = ({ title, products }) => {
   const lastName = split.pop();
 
   return (
-    <div className={classes.trendingAuction}>
-      <div className="container-fluid">
-        <div className={classes.title__container}>
-          <h1 className={classes.headerTitle}>
-            {split}
-            <span>{" " + lastName}</span>
-          </h1>
-          <Link to="./">See More</Link>
-        </div>
-        <div
-          className={"container-fluid" + classes.trending__auction__container}
-        >
-          <div className="row">
-            <Fade cascade>
+    products.length !== 0 && (
+      <div className={classes.trendingAuction}>
+        <div className="container-fluid">
+          <div className={classes.title__container}>
+            <h1 className={classes.headerTitle}>
+              {split}
+              <span>{" " + lastName}</span>
+            </h1>
+            <Link to="./">See More</Link>
+          </div>
+          <div
+            className={"container-fluid" + classes.trending__auction__container}
+          >
+            <div className="row">
               {products.map((product, index) => {
-                console.log(product);
                 return (
-                  <div className="col" key={index}>
-                    <ProductCard
-                      key={index}
-                      id={product.data.id}
-                      productData={product.data}
-                      supplier={product.supplierInfo}
-                      time={product.auction?.expiration_date}
-                      auction={product.auction ? product.auction : null}
-                      category={product.category}
-                      delay={index}
-                      currentBid={product.currentBid}
-                      likes={product.likesCount}
-                      tags={product.tags}
-                    />
-                  </div>
+                  <Fade cascade key={index}>
+                    <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-6">
+                      <ProductCard
+                        key={index}
+                        id={product.data.id}
+                        productData={product.data}
+                        supplier={product.supplierInfo}
+                        time={product.auction?.expiration_date}
+                        auction={product.auction ? product.auction : null}
+                        category={product.category}
+                        delay={index}
+                        currentBid={product.currentBid}
+                        likes={product.likesCount}
+                        tags={product.tags}
+                      />
+                    </div>
+                  </Fade>
                 );
               })}
-            </Fade>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    )
   );
 };
 

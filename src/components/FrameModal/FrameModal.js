@@ -57,12 +57,7 @@ const FrameModal = () => {
   }, []);
   return (
     <>
-      <Modal
-        open={showFrame}
-        onClose={hideFrameModal}
-        centered
-        keyboard={false}
-      >
+      <Modal open={showFrame} onClose={hideFrameModal} centered>
         <Box className={classes.frame__container}>
           <iframe
             ref={iFrameRef}

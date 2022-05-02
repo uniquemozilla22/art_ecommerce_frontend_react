@@ -75,6 +75,7 @@
   color: #000000;
   text-align: start;
   margin: 0;
+  text-transform: capitalize;
 }
 
 .product__information__container
@@ -108,6 +109,7 @@
 .product__info h1 {
   font-weight: 600;
   font-size: 40px;
+  text-transform: capitalize;
   color: #000000;
 }
 

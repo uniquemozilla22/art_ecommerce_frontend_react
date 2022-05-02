@@ -354,7 +354,9 @@ export const BiddingInformation = (props) => {
     } else {
       sec = 0;
     }
-    return days + hour + mins + sec;
+
+    if (days + hour + mins + sec !== 0) return days + hour + mins + sec;
+    else return "Expired";
   };
 
   return (
@@ -384,8 +386,7 @@ export const BiddingInformation = (props) => {
               </div>
               <div className={classes.supplierAvatar_content}>
                 <h1>
-                  {supplier.first_name.charAt(0).toUpperCase() +
-                    supplier.first_name.slice(1) +
+                  {supplier.first_name +
                     " " +
                     supplier.middle_name +
                     " " +

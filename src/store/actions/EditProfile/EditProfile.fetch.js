@@ -10,48 +10,6 @@ const FetchEditProfiileData = () => {
         resolve(fetchData(getState().user.token))
       );
       dispatch(hideLoading());
-      console.log(res.data);
-      const {
-        username,
-        twitterId,
-        email,
-        active_status,
-        googleId,
-        facebookId,
-      } = res.data.userData;
-      const {
-        alternative_no,
-        first_name,
-        gender,
-        last_name,
-        middle_name,
-        mobile_no,
-        telephone_no,
-      } = res.data.customerData;
-
-      const { primary_address, secondary_address } = res.data.addressData;
-
-      // return {
-      //   email,
-      //   username,
-      //   otherData: {
-      //     active_status,
-      //     first_name,
-      //     middle_name,
-      //     last_name,
-      //     mobile_no,
-      //     telephone_no,
-      //     alternative_no,
-      //     gender,
-      //     twitterId,
-      //     googleId,
-      //     facebookId,
-      //     primary_address,
-      //     secondary_address,
-      //   },
-      // };
-
-      console.log(res.data);
       return res.data;
     } catch (err) {
       console.log({ ...err });

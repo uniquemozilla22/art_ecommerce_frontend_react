@@ -25,7 +25,6 @@ const ArtistSection = (props) => {
   const fetchTrendingArtist = async () => {
     const artistData = await dispatch(FetchSupplier(1));
     setArtist(artistData);
-    console.log(artistData);
   };
   return (
     <div className={classes.artist__section}>
@@ -36,7 +35,12 @@ const ArtistSection = (props) => {
               className={classes.artist__image__container}
               style={useSlideWidth(1)}
             >
-              <img src={artistImg} alt={"Artist"} />
+              <img
+                src={
+                  "https://m.media-amazon.com/images/I/713jNeMYLFL._SX425_.jpg"
+                }
+                alt="Artist"
+              />
               <div className={classes.artist__quote}>
                 <h3>"Art is the lie that enables us to realize the truth."</h3>
                 {artist && (

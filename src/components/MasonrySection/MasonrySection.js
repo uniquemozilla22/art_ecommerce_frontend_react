@@ -26,6 +26,7 @@ const MasonrySection = (props) => {
           <Masonry columns={4} spacing={5}>
             {art.map((art, index) => (
               <MasonryItem
+                key={index}
                 image={art}
                 name={"One"}
                 artist={"Furba Tamang"}

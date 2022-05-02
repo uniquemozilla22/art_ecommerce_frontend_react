@@ -67,6 +67,7 @@
   color: #2b2b2b;
   font-size: 20px;
   font-weight: 600;
+  text-transform: capitalize;
 }
 .bidding__classes .bidding__card .priceContainer p {
   font-weight: 600;

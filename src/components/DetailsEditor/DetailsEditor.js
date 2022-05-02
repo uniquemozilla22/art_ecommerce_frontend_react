@@ -45,7 +45,7 @@ const DetailsEditor = ({
           >
             <p>
               {key.charAt(0).toUpperCase() + key.slice(1).split("_").join(" ")}
-              <FeatherIcon icon="edit-2" size={"15"} className={classes.icon} />
+              <FeatherIcon icon="edit-2" className={classes.icon} />
             </p>
             <h2>{data[key]}</h2>
           </div>
@@ -122,7 +122,7 @@ export const FormCreator = ({ name, value, updateData, classes }) => {
     setData({ ...data, value: e.target.value });
   };
 
-  if (name === "gender") {
+  if (name.toLowerCase() === "gender") {
     return (
       <form className={classes.form__modal} onSubmit={(e) => handleSubmit(e)}>
         <select name={name} id={name} onChange={(e) => handleInput(e)}>
@@ -139,10 +139,10 @@ export const FormCreator = ({ name, value, updateData, classes }) => {
       </form>
     );
   } else if (
-    name === "phone_no" ||
-    name === "telephone_no" ||
-    name === "alternative_no" ||
-    name === "mobile_no"
+    name.toLowerCase() === "phone_no" ||
+    name.toLowerCase() === "telephone_no" ||
+    name.toLowerCase() === "alternative_no" ||
+    name.toLowerCase() === "mobile_no"
   ) {
     return (
       <form className={classes.form__modal} onSubmit={(e) => handleSubmit(e)}>

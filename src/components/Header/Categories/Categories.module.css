@@ -8,6 +8,7 @@
 .category__list {
   padding: 10px;
   font-size: 12px;
+  text-transform: capitalize;
 }
 .category__list:first-child {
   padding-left: 0;

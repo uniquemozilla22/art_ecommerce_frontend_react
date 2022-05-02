@@ -82,7 +82,7 @@ const ProductFilter = ({ data, filterProductbyPrice }) => {
                       >
                         <Link
                           to={`/category/${category[value].id}`}
-                          className="w-100"
+                          className="w-100 text-capitalize"
                         >
                           {category[value].name}
                         </Link>

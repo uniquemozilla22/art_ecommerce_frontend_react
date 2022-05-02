@@ -49,7 +49,7 @@ const ArtistSection = (props) => {
                       " " +
                       artist.data.middle_name +
                       " " +
-                      artist.data.middle_name}
+                      artist.data.last_name}
                   </p>
                 )}
               </div>

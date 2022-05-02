@@ -194,6 +194,7 @@ export const ProductInformation = (props) => {
 export const BiddingInformation = (props) => {
   const dispatch = useDispatch();
 
+  console.log(props);
   const username = useSelector((state) => state.user.username);
   let {
     id,
@@ -355,7 +356,7 @@ export const BiddingInformation = (props) => {
       sec = 0;
     }
 
-    if (days + hour + mins + sec !== 0) return days + hour + mins + sec;
+    if (days + hour + mins + sec !== "0") return days + hour + mins + sec;
     else return "Expired";
   };
 

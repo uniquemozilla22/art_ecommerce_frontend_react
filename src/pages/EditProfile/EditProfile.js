@@ -30,129 +30,130 @@ const EditProfile = (props) => {
       }
     : null;
 
-  const profile = data
-    ? {
-        first_name: data.otherData.first_name,
-        last_name: data.otherData.last_name,
-        middle_name: data.otherData.middle_name,
-        mobile_no: data.otherData.mobile_no,
-        alternative_no: data.otherData.alternative_no,
-        telephone_no: data.otherData.telephone_no,
-        gender: data.otherData.gender,
-      }
-    : null;
+  // const profile = data
+  //   ? {
+  //       first_name: data.otherData.first_name,
+  //       last_name: data.otherData.last_name,
+  //       middle_name: data.otherData.middle_name,
+  //       mobile_no: data.otherData.mobile_no,
+  //       alternative_no: data.otherData.alternative_no,
+  //       telephone_no: data.otherData.telephone_no,
+  //       gender: data.otherData.gender,
+  //     }
+  //   : null;
 
-  const address = data
-    ? {
-        primary_address: data.otherData.primary_address || " ",
-        secondary_address: data.otherData.secondary_address || " ",
-      }
-    : null;
+  // const address = data
+  //   ? {
+  //       primary_address: data.otherData.primary_address || " ",
+  //       secondary_address: data.otherData.secondary_address || " ",
+  //     }
+  //   : null;
 
-  const social = data
-    ? {
-        facebookId: data.otherData.facebookId,
-        googleId: data.otherData.googleId,
-        twitterId: data.otherData.twitterId,
-      }
-    : null;
-  const links = [
-    {
-      title: "Manage Account",
-      links: [
-        {
-          title: "My Profile",
-          data: profile,
-        },
-        {
-          title: "Address",
-          data: address,
-        },
-        {
-          title: "Social",
-          data: social,
-        },
-      ],
-    },
-    {
-      title: "My Orders",
-      links: [
-        {
-          title: "My Returns",
-          data: [
-            {
-              id: 1,
-              name: "One",
-              image: art1,
-              status: "Shipped",
-              payment: "Cash on Delivery",
-            },
-            {
-              id: 2,
-              name: "Two",
-              image: art3,
-              status: "Ordered",
-              payment: "Esewa",
-            },
-          ],
-        },
-        {
-          title: "Cancellations",
-          data: [
-            {
-              id: 1,
-              name: "One",
-              image: art1,
-              cancelledDate: "2019-06-01",
-            },
-            {
-              id: 2,
-              name: "Two",
-              image: art3,
-              cancelledDate: "2019-06-01",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: "Bids",
-      links: [
-        {
-          title: "My Bids",
-        },
-      ],
-    },
-    {
-      title: "My Likes",
-      links: [
-        {
-          title: "My Arts",
-          data: [],
-        },
-        {
-          title: "My Artists",
-          data: [
-            {
-              id: 1,
-              name: "Peter Chung",
-              position: "Abstract Artist",
-              likes: 99,
-              image: artist1,
-            },
-            {
-              id: 2,
-              name: "Furba Gurung",
-              position: "Abstract Artist",
-              likes: 92,
-              image: artist2,
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  // const social = data
+  //   ? {
+  //       facebookId: data.otherData.facebookId,
+  //       googleId: data.otherData.googleId,
+  //       twitterId: data.otherData.twitterId,
+  //     }
+  //   : null;
+  // const links = [
+  //   {
+  //     title: "Manage Account",
+  //     links: [
+  //       {
+  //         title: "My Profile",
+  //         data: profile,
+  //       },
+  //       {
+  //         title: "Address",
+  //         data: address,
+  //       },
+  //       {
+  //         title: "Social",
+  //         data: social,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: "My Orders",
+  //     links: [
+  //       {
+  //         title: "My Returns",
+  //         data: [
+  //           {
+  //             id: 1,
+  //             name: "One",
+  //             image: art1,
+  //             status: "Shipped",
+  //             payment: "Cash on Delivery",
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Two",
+  //             image: art3,
+  //             status: "Ordered",
+  //             payment: "Esewa",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         title: "Cancellations",
+  //         data: [
+  //           {
+  //             id: 1,
+  //             name: "One",
+  //             image: art1,
+  //             cancelledDate: "2019-06-01",
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Two",
+  //             image: art3,
+  //             cancelledDate: "2019-06-01",
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: "Bids",
+  //     links: [
+  //       {
+  //         title: "My Bids",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: "My Likes",
+  //     links: [
+  //       {
+  //         title: "My Arts",
+  //         data: [],
+  //       },
+  //       {
+  //         title: "My Artists",
+  //         data: [
+  //           {
+  //             id: 1,
+  //             name: "Peter Chung",
+  //             position: "Abstract Artist",
+  //             likes: 99,
+  //             image: artist1,
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Furba Gurung",
+  //             position: "Abstract Artist",
+  //             likes: 92,
+  //             image: artist2,
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // ];
 
+  const [links, setLinks] = useState(null);
   useEffect(() => {
     fetchUserData();
   }, []);
@@ -161,6 +162,7 @@ const EditProfile = (props) => {
     const profileData = await props.fetchData();
     console.log(profileData);
     setData(profileData);
+    setLinks(profileData.linkData);
   };
 
   return data ? (

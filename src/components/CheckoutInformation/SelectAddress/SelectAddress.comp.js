@@ -4,8 +4,10 @@ import { Form } from "react-bootstrap";
 import classes from "../EditAddress/EditAddress.module.css";
 import EditAddressModal, {
   EditedClick,
+  FormCreatorAddress,
 } from "../EditAddress/EditAddressModal.comp";
 import { SelectionContainer } from "../PaymentItem/PaymentItem";
+import { FormCreator } from "./../../DetailsEditor/DetailsEditor";
 
 const SelectAddress = ({
   show,
@@ -16,15 +18,29 @@ const SelectAddress = ({
   selected,
   handleUpdatedData,
   handleDeleteData,
-  handleAddData,
+  handleAddDatas,
   showEditAddressModal,
   handleEditAddressModal,
+  showAddForm,
+  hideAddForm,
 }) => {
   const [addresses, setAddresses] = useState(data);
 
   useEffect(() => {
     setAddresses(data);
   }, [data]);
+
+  const [selectedAddress, setSelectedAddress] = useState(null);
+
+  const handleAddData = (data) => {
+    handleAddDatas(data);
+    hideAddForm();
+  };
+  const handleShowAddressForm = (count, data) => {
+    hideAddForm(true);
+    setSelectedAddress({ count, data });
+    console.log("selected Address", count, data);
+  };
   return (
     <>
       <Modal open={show} onClose={handleHide}>
@@ -79,8 +95,27 @@ const SelectAddress = ({
         addData={handleAddData}
         data={addresses}
         deleteData={handleDeleteData}
-        showAddForm={addresses.length === 0}
+        showAddForm={showAddForm}
+        hideAddForm={hideAddForm}
+        handleShowAddressForm={handleShowAddressForm}
       />
+      <Modal open={showAddForm} onClose={() => hideAddForm(false)}>
+        <div className={classes.modal__body__child}>
+          <FormCreatorAddress
+            data={selectedAddress?.data}
+            addData={(d) => {
+              handleAddData(d);
+              hideAddForm();
+            }}
+            updateData={(id, d) => {
+              handleUpdatedData(selectedAddress?.count, id, d);
+              hideAddForm();
+            }}
+            classes={classes}
+            cancel={hideAddForm}
+          />
+        </div>
+      </Modal>
     </>
   );
 };

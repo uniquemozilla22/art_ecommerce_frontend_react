@@ -20,23 +20,13 @@ const EditAddressModal = ({
   addData,
   deleteData,
   showAddForm,
+  hideAddForm,
+  handleShowAddressForm,
 }) => {
-  const [showAddAddress, setShowAddAddress] = useState(showAddAddress);
-  const [selectedAddress, setSelectedAddress] = useState(null);
-
-  const handleAddData = (data) => addData(data);
-  const handleShowAddressForm = (count, data) => {
-    setShowAddAddress(true);
-    setSelectedAddress({ count, data });
-  };
-  const handleHideAddressForm = () => setShowAddAddress(false);
   const [addresses, setAddresses] = useState(data);
 
   useEffect(() => {
     setAddresses(data);
-    if (data.length === 0) {
-      setShowAddAddress(true);
-    }
   }, [data]);
 
   return (
@@ -58,27 +48,10 @@ const EditAddressModal = ({
           <>
             <Button
               className={classes.button_add}
-              onClick={(e) => handleShowAddressForm(null)}
+              onClick={(e) => hideAddForm(true)}
             >
               Add Address
             </Button>
-            <Modal open={showAddAddress} onClose={handleHideAddressForm}>
-              <div className={classes.modal__body__child}>
-                <FormCreator
-                  data={selectedAddress?.data}
-                  addData={(d) => {
-                    handleAddData(d);
-                    handleHideAddressForm();
-                  }}
-                  updateData={(id, d) => {
-                    updateData(selectedAddress?.count, id, d);
-                    handleHideAddressForm();
-                  }}
-                  classes={classes}
-                  cancel={handleHideAddressForm}
-                />
-              </div>
-            </Modal>
           </>
         )}
       </div>
@@ -134,7 +107,13 @@ export const EditedClick = ({
   );
 };
 
-const FormCreator = ({ data, updateData, addData, classes, cancel }) => {
+export const FormCreatorAddress = ({
+  data,
+  updateData,
+  addData,
+  classes,
+  cancel,
+}) => {
   const [address, setAddress] = useState(data);
 
   const [countriesList, setCountriesList] = useState(null);

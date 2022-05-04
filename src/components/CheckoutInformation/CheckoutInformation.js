@@ -15,6 +15,7 @@ import FetchUserAddress from "../../store/actions/Address/FetchUserAddress.fetch
 import { EditOutlined } from "@mui/icons-material";
 import SelectAddress from "./SelectAddress/SelectAddress.comp";
 import SelectAddressPost from "../../store/actions/Address/SelectAddress.post";
+import { Tooltip } from "@mui/material";
 
 const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [payments, setPayments] = useState(null);
@@ -29,6 +30,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [address, setAddress] = useState(null);
   const [coupon, setCoupon] = useState(null);
   const [shipping, setShipping] = useState(null);
+  const [showAddForm, setShowAddForm] = useState(false);
 
   const onHideAddressModal = () => setShowAddressModal(false);
   const onOpenAddressModal = () => setShowAddressModal(true);
@@ -60,11 +62,12 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     setShowEditAddressModal(content);
   };
 
+  const handleShowAddForm = (payload) => setShowAddForm(payload);
+
   const fetchAddress = useCallback(async () => {
     const address = await dispatch(FetchUserAddress());
     setAddress(address);
     setAddressId(address[0]?.id);
-    console.log(address);
   }, []);
 
   const handlePaymentMethodSelection = async (id, name) => {
@@ -236,25 +239,23 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
                   addressId ? (
                     address
                       .filter((add) => add.id === addressId)
-                      .map((selectedAddress) => (
-                        <>
-                          <div
-                            className={classes.address__line}
-                            onClick={(e) => setShowAddressModal(true)}
-                          >
+                      .map((selectedAddress, index) => (
+                        <div
+                          key={index}
+                          className="d-flex justify-content-between w-100"
+                          onClick={(e) => setShowAddressModal(true)}
+                        >
+                          <div className={classes.address__line}>
                             <h3>{selectedAddress.name}</h3>
                             <>
                               <h4>{selectedAddress.region.name}</h4>
                               <h4>{selectedAddress.landmark}</h4>
                             </>
                           </div>
-                          <div
-                            className={classes.editAddress}
-                            onClick={(e) => setShowAddressModal(true)}
-                          >
+                          <div className={classes.editAddress}>
                             <EditOutlined />
                           </div>
-                        </>
+                        </div>
                       ))
                   ) : (
                     <>
@@ -276,7 +277,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
                 ) : (
                   <div
                     className={classes.no__address_prompt}
-                    onClick={(e) => handleEditAddressModal(true)}
+                    onClick={(e) => handleShowAddForm(true)}
                   >
                     <h3>Add Address</h3>
                   </div>
@@ -349,13 +350,27 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
             </div>
           )}
         </div>
-        <Button
-          className={classes.checkout}
-          variant="none"
-          onClick={(e) => handleConfirmationCheckout()}
+        {!addressId && <div>Select Address</div>}
+        {!paymentSelectedID && <div>Select Payment </div>}
+
+        <Tooltip
+          title={
+            !addressId
+              ? "Select Address"
+              : !paymentSelectedID
+              ? "Select Payment"
+              : "Continue to Checkout"
+          }
         >
-          Checkout
-        </Button>
+          <Button
+            className={classes.checkout}
+            variant="none"
+            onClick={(e) => handleConfirmationCheckout()}
+            disabled={addressId && paymentSelectedID ? false : true}
+          >
+            Checkout
+          </Button>
+        </Tooltip>
       </animated.div>
       {address && (
         <SelectAddress
@@ -366,10 +381,18 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
           handleSelection={(id) => setAddressId(id)}
           selected={addressId}
           handleUpdatedData={handleUpdatedData}
-          handleAddData={handleAddData}
+          handleAddDatas={handleAddData}
           handleDeleteData={handleConfirmationDelete}
           showEditAddressModal={showEditAddressModal}
           handleEditAddressModal={handleEditAddressModal}
+          showAddForm={showAddForm}
+          hideAddForm={(payload) => {
+            if (payload) {
+              handleShowAddForm(payload);
+            } else {
+              handleShowAddForm(false);
+            }
+          }}
         />
       )}
     </>

@@ -58,7 +58,7 @@ const CartModalBody = (props) => {
     }
   };
 
-  const onAccept = async () => {
+  const checkoutButton = async () => {
     const order = await dispatch(CreateOrder());
     if (order) {
       navigation("/checkout", {
@@ -66,15 +66,6 @@ const CartModalBody = (props) => {
       });
       dispatch({ type: "CART" });
     }
-  };
-
-  const checkoutButton = () => {
-    dispatch(
-      showConfirmation(
-        "Your cart items will be moved to order and your cart will be cleared.",
-        onAccept
-      )
-    );
   };
 
   return (

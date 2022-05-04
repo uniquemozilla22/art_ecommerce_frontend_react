@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
 import classes from "./CheckoutInformation.module.css";
 import { animated, useSpring } from "react-spring";
@@ -36,7 +36,6 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   const [showEditAddressModal, setShowEditAddressModal] = useState(false);
 
   const handleUpdatedData = async (index, id, d) => {
-    console.log(index, id, d);
     const updated = await dispatch(
       UpdateOrderAddress(id, {
         ...d,
@@ -61,11 +60,12 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     setShowEditAddressModal(content);
   };
 
-  const fetchAddress = async () => {
+  const fetchAddress = useCallback(async () => {
     const address = await dispatch(FetchUserAddress());
     setAddress(address);
     setAddressId(address[0]?.id);
-  };
+    console.log(address);
+  }, []);
 
   const handlePaymentMethodSelection = async (id, name) => {
     setPaymentSelectedID(id);
@@ -79,6 +79,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   };
 
   const handleAddData = async (data) => {
+    console.log("addData", data);
     const updated = await dispatch(
       AddOrderAddress({
         ...data,
@@ -90,12 +91,11 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     );
     if (updated) {
       setAddress([...address, updated]);
+      if (address.length === 0) {
+        console.log(updated.id);
+        setAddressId(updated.id);
+      }
     }
-  };
-
-  let ShippingAddressSelection = async (address, order) => {
-    let data = await dispatch(SelectAddressPost(address, order));
-    setShipping(data.totalShippingCost);
   };
 
   const handleConfirmationDelete = (index, id) => {
@@ -119,17 +119,31 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     dispatch(PostPayment(orderInformation.id, paymentSelectedID, addressId));
 
   const handleDeleteAddressData = async (index, id) => {
+    console.log("delete Address ", id, addressId);
     const deletedData = await dispatch(DeleteOrderAddress(id));
     if (deletedData) {
       let updatingAddress = address;
       updatingAddress.splice(index, 1);
       setAddress([...updatingAddress]);
+      if (addressId === id) {
+        setAddressId(undefined);
+      }
     }
   };
   useEffect(() => {
     fetchPayment();
     fetchAddress();
   }, []);
+
+  let ShippingAddressSelection = useCallback(
+    async (address, order) => {
+      console.log("Shipping Address Selection ", address, order);
+      if (!address || !order) return;
+      let data = await dispatch(SelectAddressPost(address, order));
+      setShipping(data.totalShippingCost);
+    },
+    [addressId, order, address]
+  );
 
   useEffect(() => {
     ShippingAddressSelection(addressId, orderInformation.id);
@@ -229,12 +243,10 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
                             onClick={(e) => setShowAddressModal(true)}
                           >
                             <h3>{selectedAddress.name}</h3>
-                            {selectedAddress.region.name && (
-                              <>
-                                <h4>{selectedAddress.region.name}</h4>
-                                <h4>{selectedAddress.landmark}</h4>
-                              </>
-                            )}
+                            <>
+                              <h4>{selectedAddress.region.name}</h4>
+                              <h4>{selectedAddress.landmark}</h4>
+                            </>
                           </div>
                           <div className={classes.editAddress}>
                             <EditOutlined />
@@ -260,7 +272,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
                     className={classes.no__address_prompt}
                     onClick={(e) => handleEditAddressModal(true)}
                   >
-                    <h3>Please Add Address</h3>
+                    <h3>Add Address</h3>
                   </div>
                 )}
               </div>
@@ -282,7 +294,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
               Sub-Total <span>{getSubTotal()}</span>
             </h3>
           </div>
-          {shipping && (
+          {shipping && addressId && (
             <div className={classes.shipping__price}>
               <h3>
                 Shipping{" "}
@@ -310,7 +322,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
               </h3>
             </div>
           )}
-          {
+          {addressId && (
             <div className={classes.total__price}>
               <h3>
                 {" "}
@@ -329,7 +341,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
                 </div>
               </h3>
             </div>
-          }
+          )}
         </div>
         <Button
           className={classes.checkout}

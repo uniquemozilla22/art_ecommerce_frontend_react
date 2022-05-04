@@ -19,8 +19,9 @@ const EditAddressModal = ({
   data,
   addData,
   deleteData,
+  showAddForm,
 }) => {
-  const [showAddAddress, setShowAddAddress] = useState(false);
+  const [showAddAddress, setShowAddAddress] = useState(showAddAddress);
   const [selectedAddress, setSelectedAddress] = useState(null);
 
   const handleAddData = (data) => addData(data);
@@ -33,11 +34,11 @@ const EditAddressModal = ({
 
   useEffect(() => {
     setAddresses(data);
+    if (data.length === 0) {
+      setShowAddAddress(true);
+    }
   }, [data]);
 
-  useEffect(() => {
-    setAddresses(data);
-  }, [data]);
   return (
     <Modal open={show} onClose={handleHide}>
       <div className={classes.modal__body}>

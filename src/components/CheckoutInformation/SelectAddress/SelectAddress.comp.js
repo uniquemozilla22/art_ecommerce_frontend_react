@@ -79,6 +79,7 @@ const SelectAddress = ({
         addData={handleAddData}
         data={addresses}
         deleteData={handleDeleteData}
+        showAddForm={addresses.length === 0}
       />
     </>
   );

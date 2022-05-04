@@ -248,7 +248,10 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
                               <h4>{selectedAddress.landmark}</h4>
                             </>
                           </div>
-                          <div className={classes.editAddress}>
+                          <div
+                            className={classes.editAddress}
+                            onClick={(e) => setShowAddressModal(true)}
+                          >
                             <EditOutlined />
                           </div>
                         </>
@@ -262,7 +265,10 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
                         <h3>{address[0].name}</h3>
                         {address[0].city && <h4>{address[0].landmark}</h4>}
                       </div>
-                      <div className={classes.editAddress}>
+                      <div
+                        className={classes.editAddress}
+                        onClick={(e) => setShowAddressModal(true)}
+                      >
                         <EditOutlined />
                       </div>
                     </>

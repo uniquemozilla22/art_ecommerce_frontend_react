@@ -17,9 +17,9 @@ const Checkout = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
-  const handleOrderPaymentChange = (index, name) => {
+  const handleOrderPaymentChange = (name) => {
     let changingData = data;
-    changingData[index].payment_type = name;
+    changingData.payment_type = name;
     setData(changingData);
   };
 

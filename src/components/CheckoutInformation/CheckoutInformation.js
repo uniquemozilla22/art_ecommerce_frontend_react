@@ -72,11 +72,12 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
 
   const handlePaymentMethodSelection = async (id, name) => {
     setPaymentSelectedID(id);
+
     const res = await dispatch(
       PaymentMethodSelection(orderInformation.id, name)
     );
     if (res) {
-      handleOrderPaymentChange(order.indexOf(data), name);
+      handleOrderPaymentChange(name);
       setPaymentSelected(name);
     }
   };
@@ -350,26 +351,25 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
             </div>
           )}
         </div>
-        {!addressId && <div>Select Address</div>}
-        {!paymentSelectedID && <div>Select Payment </div>}
-
         <Tooltip
           title={
             !addressId
-              ? "Select Address"
+              ? "No Address Selected"
               : !paymentSelectedID
-              ? "Select Payment"
+              ? "Select Payment Method to pay for the items"
               : "Continue to Checkout"
           }
         >
-          <Button
-            className={classes.checkout}
-            variant="none"
-            onClick={(e) => handleConfirmationCheckout()}
-            disabled={addressId && paymentSelectedID ? false : true}
-          >
-            Checkout
-          </Button>
+          <span>
+            <Button
+              className={classes.checkout}
+              variant="none"
+              onClick={(e) => handleConfirmationCheckout()}
+              disabled={addressId && paymentSelectedID ? false : true}
+            >
+              Checkout
+            </Button>
+          </span>
         </Tooltip>
       </animated.div>
       {address && (

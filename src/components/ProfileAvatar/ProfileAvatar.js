@@ -1,13 +1,20 @@
 import React from "react";
 import classes from "./ProfileAvatar.module.css";
 import FeatherIcon from "feather-icons-react";
-import { Tooltip } from "@mui/material";
+import { Avatar, Tooltip } from "@mui/material";
 import { WarningAmberOutlined, WarningRounded } from "@mui/icons-material";
 
 const ProfileAvatar = ({ name, image, verified, balance }) => {
+  console.log(image);
   return (
     <div className={classes.profile__avatar__container}>
-      <img src={image} alt={`${name}'s Profile`} />
+      {image ? (
+        <img src={image} alt={`${name}'s Profile`} />
+      ) : (
+        <Avatar sx={{ width: "200px", height: "200px", fontSize: "3rem" }}>
+          {name.split(" ")[0].charAt(0) + name.split(" ")[1].charAt(0)}
+        </Avatar>
+      )}
       <div className={classes.content}>
         <h1>{name}</h1>
         {verified ? (

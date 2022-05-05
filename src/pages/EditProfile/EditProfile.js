@@ -23,12 +23,6 @@ const EditProfile = (props) => {
   const [data, setData] = useState(null);
   const balanceState = useSelector((state) => state.user.balance);
   const [balance, setBalance] = useState(balanceState);
-  const user = data
-    ? {
-        image: userImage,
-        verified: data.userData.active_status,
-      }
-    : null;
 
   const [links, setLinks] = useState(null);
   useEffect(() => {
@@ -37,9 +31,8 @@ const EditProfile = (props) => {
 
   const fetchUserData = async () => {
     const profileData = await props.fetchData();
-    console.log(profileData);
+    console.log("profile data", profileData);
     setData(profileData);
-    console.log(profileData.linkData[0].links[0].title);
     setLinks(profileData.linkData);
   };
 
@@ -55,9 +48,13 @@ const EditProfile = (props) => {
         <div className="row">
           <div className="col-md-3 col-sm-12">
             <ProfileAvatar
-              name={"@" + data.username}
-              image={user.image}
-              verified={user.verified}
+              name={
+                data.userData.googleId
+                  ? data.userData.username
+                  : "@" + data.userData.username
+              }
+              image={data.userData.image_url}
+              verified={data.userData.active_status}
               balance={balance}
             />
             <div className={classes.links__container}>

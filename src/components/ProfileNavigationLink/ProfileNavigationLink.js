@@ -12,6 +12,7 @@ import { useLocation } from "react-router";
 import BiddingTable from "../BiddingTable/BiddingTable";
 import { useDispatch } from "react-redux";
 import FetchAllBids from "../../store/actions/Bid/bid.fetch";
+import AddressComponentEditProfile from "./Address/Address.comp";
 
 export const ProfileNavigationLink = ({ title, links }) => {
   return links ? (
@@ -47,7 +48,7 @@ export const ProfileNavigationContent = ({
 }) => {
   const functionCreator = (link) => {
     switch (link.title) {
-      case "My Profile" || "Address": {
+      case "My Profile": {
         return (
           <DetailsEditor
             data={link.data}
@@ -58,6 +59,9 @@ export const ProfileNavigationContent = ({
             sendOTP={sendOTP}
           />
         );
+      }
+      case "Address": {
+        return <AddressComponentEditProfile data={link.data} />;
       }
       case "Social":
         return <SocialEditor data={link.data} />;

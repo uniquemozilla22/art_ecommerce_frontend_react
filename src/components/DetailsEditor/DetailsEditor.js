@@ -121,6 +121,7 @@ export const FormCreator = ({ name, value, updateData, classes }) => {
   const handleInput = (e) => {
     setData({ ...data, value: e.target.value });
   };
+  console.log(name.toLowerCase());
 
   if (name.toLowerCase() === "gender") {
     return (
@@ -149,6 +150,20 @@ export const FormCreator = ({ name, value, updateData, classes }) => {
         <input
           type="number"
           placeholder={value}
+          name={name}
+          onChange={(e) => handleInput(e)}
+        />
+        <div className={classes.buttons__container}>
+          <input type="submit" value="Submit" />
+        </div>
+      </form>
+    );
+  } else if (name.toLowerCase() === "date of birth") {
+    return (
+      <form className={classes.form__modal} onSubmit={(e) => handleSubmit(e)}>
+        <input
+          type="date"
+          placeholder={new Date(value)}
           name={name}
           onChange={(e) => handleInput(e)}
         />

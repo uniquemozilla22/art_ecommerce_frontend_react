@@ -63,6 +63,12 @@
   width: 50vw;
   border-radius: 20px;
 }
+
+.modal__body h2{
+  text-transform: capitalize;
+}
+
+
 .modal__body p span {
   text-decoration: underline;
 }

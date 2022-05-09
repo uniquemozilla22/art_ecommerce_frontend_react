@@ -23,7 +23,7 @@ const ArtistSection = (props) => {
   }, []);
 
   const fetchTrendingArtist = async () => {
-    const artistData = await dispatch(FetchSupplier(1));
+    const artistData = await dispatch(FetchSupplier(18));
     setArtist(artistData);
   };
   return (

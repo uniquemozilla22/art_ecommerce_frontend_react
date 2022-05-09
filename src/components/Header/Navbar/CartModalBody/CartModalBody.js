@@ -7,6 +7,7 @@ import classes from "./CartModalBody.module.css";
 import { showConfirmation } from "../../../../store/actions/Confirmation/Confirmation.action";
 import CreateOrder from "../../../../store/actions/Order/CreateOrder.post";
 import { useNavigate } from "react-router-dom";
+import CartItems from "./../../../../store/actions/Cart/CartItems.fetch";
 
 const CartModalBody = (props) => {
   const [data, setData] = useState(props.data);
@@ -28,6 +29,8 @@ const CartModalBody = (props) => {
   };
 
   const clearCart = () => dispatch(ClearCartGlobally());
+
+  const fetchCart = () => dispatch(CartItems());
 
   const printData = (data) => {
     if (!data.length == 0) {
@@ -51,7 +54,7 @@ const CartModalBody = (props) => {
     } else {
       return (
         <DataNotFound
-          action={() => console.log(data)}
+          action={() => fetchCart()}
           content="Try adding some items"
         />
       );

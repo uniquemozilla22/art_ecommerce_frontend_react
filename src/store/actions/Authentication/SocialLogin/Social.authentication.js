@@ -30,7 +30,11 @@ const SocialAuthentication = (info) => {
           username: res.data.username,
         })
       );
-      dispatch({ type: GET_CART, payload: res.data.cartItems });
+      if (res.data.cartItems === null) {
+        dispatch({ type: GET_CART, payload: [] });
+      } else {
+        dispatch({ type: GET_CART, payload: res.data.cartItems });
+      }
       if (getState().modal.login) dispatch({ type: LOGIN_MODAL });
     } catch (error) {
       if (error.response === undefined) {

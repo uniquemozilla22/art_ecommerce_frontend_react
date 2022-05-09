@@ -10,6 +10,7 @@ const CartItems = () => {
       const res = await new Promise((resolve) =>
         resolve(fetchCartItems(getState().user.token))
       );
+      console.log("Cart Fetch", res.data);
       dispatch({ type: GET_CART, payload: res.data.cartItems });
       dispatch(hideLoading());
     } catch (error) {

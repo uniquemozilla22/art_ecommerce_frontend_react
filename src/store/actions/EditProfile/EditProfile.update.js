@@ -9,49 +9,48 @@ import {
 import { UPDATE__PROFILE } from "../Types/Types";
 
 const UpdateProfile = (payload) => {
-  const state = store.getState();
-  return (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(showLoading());
-
-    updateData(state.user.token, payload)
-      .then((response) => {
-        dispatch(hideLoading());
-
+    try {
+      const res = await new Promise((resolve) =>
+        resolve(updateData(getState().user.token, payload))
+      );
+      dispatch(hideLoading());
+      dispatch(
+        SuccessMessage({
+          message: res.statusText + "!" + res.data.message,
+        })
+      );
+      dispatch({
+        type: UPDATE__PROFILE,
+        payload: {
+          [payload.name]: payload.value,
+        },
+      });
+      return res.data;
+    } catch (error) {
+      dispatch(hideLoading());
+      if (error.response === undefined) {
         dispatch(
-          SuccessMessage({
-            message: response.statusText + "!" + response.data.message,
+          ErrorMessage({
+            message: "Network Error! Check Your Internet Connection",
           })
         );
-        dispatch({
-          type: UPDATE__PROFILE,
-          payload: {
-            [payload.name]: payload.value,
-          },
-        });
-      })
-      .catch((error) => {
-        dispatch(hideLoading());
-        if (error.response === undefined) {
-          dispatch(
-            ErrorMessage({
-              message: "Network Error! Check Your Internet Connection",
-            })
-          );
-        }
-        if (error.response.status === 401) {
-          dispatch(
-            WarningMessage({
-              message: error.response.data.message,
-            })
-          );
-        } else {
-          dispatch(
-            ErrorMessage({
-              message: error.response.data.message,
-            })
-          );
-        }
-      });
+      }
+      if (error.response.status === 401) {
+        dispatch(
+          WarningMessage({
+            message: error.response.data.message,
+          })
+        );
+      } else {
+        dispatch(
+          ErrorMessage({
+            message: error.response.data.message,
+          })
+        );
+      }
+    }
   };
 };
 

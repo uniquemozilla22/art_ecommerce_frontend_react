@@ -17,6 +17,7 @@ import CardBalance from "./Card/Card";
 
 const ActionIcons = (props) => {
   const [token, setToken] = useState(props.loggedIn);
+  console.log(props);
   useEffect(() => {
     setToken(props.loggedIn);
   }, [props.loggedIn]);

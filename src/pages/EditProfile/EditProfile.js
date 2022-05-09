@@ -106,7 +106,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchData: async () => {
       return await dispatch(FetchEditProfiileData());
     },
-    updateData: (data) => dispatch(UpdateProfile(data)),
+    updateData: async (data) => await dispatch(UpdateProfile(data)),
     postPassword: (data) => dispatch(ChangePasswordAction(data)),
     sendOTP: (data) => dispatch(SendOTPtoEmail(data)),
   };

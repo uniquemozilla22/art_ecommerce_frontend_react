@@ -17,6 +17,7 @@ const DetailsEditor = ({
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showVerifyEmailModal, setShowVerifyEmailModal] = useState(false);
   const [sendMail, setSendMail] = useState(false);
+  const [userData, setUserData] = useState(data);
 
   const handleModalOpen = (data) => {
     setModalData(data);
@@ -26,7 +27,16 @@ const DetailsEditor = ({
 
   const handleSendMail = () => {
     setSendMail(true);
-    sendOTP({ email });
+    sendOTP({ email: data.email });
+  };
+
+  const handleUpdateData = async (data) => {
+    const updated = await updateData(data);
+    if (updated) {
+      console.log("updated profile", updated);
+      console.log("values", { ...userData, [data.name]: data.value });
+      setUserData({ ...userData, [data.name]: data.value });
+    }
   };
 
   const handleEmailVerifyModal = () => {
@@ -37,7 +47,7 @@ const DetailsEditor = ({
   return (
     <>
       <div className={classes.detail__modifier}>
-        {Object.keys(data).map((key, value) => (
+        {Object.keys(userData).map((key, value) => (
           <div
             key={value}
             className={classes.detail}
@@ -91,14 +101,11 @@ const DetailsEditor = ({
       </Modal>
       <Modal open={showModal} onClose={() => setShowModal(false)}>
         <div className={classes.modal__body}>
-          <h2>
-            {modalData.name.charAt(0).toUpperCase() +
-              modalData.name.slice(1).split("_").join(" ")}
-          </h2>
+          <h2>{modalData.name.split("_").join(" ")}</h2>
           <FormCreator
             name={modalData.name}
             value={modalData.value}
-            updateData={updateData}
+            updateData={handleUpdateData}
             classes={classes}
           />
         </div>
@@ -157,7 +164,7 @@ export const FormCreator = ({ name, value, updateData, classes }) => {
         </div>
       </form>
     );
-  } else if (name.toLowerCase() === "date of birth") {
+  } else if (name.toLowerCase() === "dob") {
     return (
       <form className={classes.form__modal} onSubmit={(e) => handleSubmit(e)}>
         <input

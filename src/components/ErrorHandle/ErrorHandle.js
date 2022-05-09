@@ -11,8 +11,10 @@ const MessageHandle = (props) => {
   const handleClose = () => {
     props.hideMessage();
   };
+
+  const handleCloseLocal = () => setShow(false);
   return (
-    <Snackbar open={show} autoHideDuration={3000} onClose={handleClose}>
+    <Snackbar open={show} autoHideDuration={3000} onClose={handleCloseLocal}>
       <Alert
         onClose={handleClose}
         severity={props.info.alert.toLowerCase()}

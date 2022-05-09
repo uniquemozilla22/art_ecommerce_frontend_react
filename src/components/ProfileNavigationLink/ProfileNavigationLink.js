@@ -9,9 +9,6 @@ import ArtistsGrid from "../ArtistsGrid/ArtistsGrid";
 import SocialEditor from "../SocialEditor/SocialEditor";
 import DataNotFound from "../DataNotFound/DataNotFound";
 import { useLocation } from "react-router";
-import BiddingTable from "../BiddingTable/BiddingTable";
-import { useDispatch } from "react-redux";
-import FetchAllBids from "../../store/actions/Bid/bid.fetch";
 import AddressComponentEditProfile from "./Address/Address.comp";
 
 export const ProfileNavigationLink = ({ title, links }) => {

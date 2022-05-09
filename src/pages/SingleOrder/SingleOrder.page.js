@@ -29,8 +29,6 @@ const SingleOrder = () => {
   const fetchOrder = async (id) => {
     const data = await dispatch(FetchOrderById(id));
     if (data) setOrder(data);
-    console.log(data);
-
     fetchShippinAndBillingAddressData(data);
   };
 

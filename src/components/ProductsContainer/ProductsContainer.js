@@ -136,8 +136,10 @@ const ProductsContainer = ({
               <option selected disabled>
                 Choose an Option
               </option>
-              {sorting.map((option) => (
-                <option value={option.value}>{option.name}</option>
+              {sorting.map((option, index) => (
+                <option key={index} value={option.value}>
+                  {option.name}
+                </option>
               ))}
             </Form.Select>
           </div>

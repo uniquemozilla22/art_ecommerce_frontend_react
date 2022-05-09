@@ -24,7 +24,6 @@ const EditProfile = (props) => {
   const balanceState = useSelector((state) => state.user.balance);
   const [balance, setBalance] = useState(balanceState);
 
-  const [links, setLinks] = useState(null);
   useEffect(() => {
     fetchUserData();
   }, []);
@@ -33,7 +32,6 @@ const EditProfile = (props) => {
     const profileData = await props.fetchData();
     console.log("profile data", profileData);
     setData(profileData);
-    setLinks(profileData.linkData);
   };
 
   return data ? (

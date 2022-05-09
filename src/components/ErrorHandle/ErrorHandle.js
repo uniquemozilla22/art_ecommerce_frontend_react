@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Snackbar, Alert } from "@mui/material";
 
-
 const MessageHandle = (props) => {
   const [show, setShow] = useState(props.show);
 
@@ -13,7 +12,7 @@ const MessageHandle = (props) => {
     props.hideMessage();
   };
   return (
-    <Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
+    <Snackbar open={show} autoHideDuration={3000} onClose={handleClose}>
       <Alert
         onClose={handleClose}
         severity={props.info.alert.toLowerCase()}
@@ -24,7 +23,5 @@ const MessageHandle = (props) => {
     </Snackbar>
   );
 };
-
-
 
 export default MessageHandle;

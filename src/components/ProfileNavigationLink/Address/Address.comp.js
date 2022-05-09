@@ -3,19 +3,44 @@ import React, { useState } from "react";
 import classes from "./Address.module.css";
 import { DeleteOutlineRounded, EditOutlined } from "@mui/icons-material";
 import { FormCreatorAddress } from "../../CheckoutInformation/EditAddress/EditAddressModal.comp";
+import AddOrderAddress from "../../../store/actions/Address/AddOrderAddress.post";
+import { useDispatch } from "react-redux";
+import DeleteOrderAddress from "../../../store/actions/Address/DeleteOrderAddress.delete";
+import { showConfirmation } from "../../../store/actions/Confirmation/Confirmation.action";
+import UpdateOrderAddress from "../../../store/actions/Address/UpdateOrderAddress.post";
 
 const AddressComponentEditProfile = ({ data }) => {
   const [showAddForm, setShowAddForm] = useState(false);
-  const [addressData, SelectAddressData] = useState(data);
+  const [addressData, setAddressData] = useState(data);
   const [selectedAddress, setSelectedAddress] = useState({
     data: null,
     index: null,
   });
   console.log(data);
-  const updateData = (index, id, data) => {};
-  const deleteData = () => {};
+  const dispatch = useDispatch();
 
-  const handleAddData = (data) => {};
+  const updateData = async (index, id, data) => {
+    console.log("updating data", index, id, data);
+    const updated = await dispatch(
+      UpdateOrderAddress(id, {
+        ...data,
+        country: data.country.id,
+        region: data.region.id,
+        district: data.district.id,
+        state: data.state.id,
+      })
+    );
+    console.log("Updated Address", updated);
+    if (updated) {
+      let updatingAddress = addressData;
+      updatingAddress[index] = {
+        ...updatingAddress[index],
+        ...updated,
+      };
+      console.log("updating address", updatingAddress);
+      setAddressData(updatingAddress);
+    }
+  };
 
   const handleShowAddressForm = (payload) => {
     setShowAddForm(payload);
@@ -24,9 +49,43 @@ const AddressComponentEditProfile = ({ data }) => {
   const handleSelectedAddress = (data, index) => {
     setSelectedAddress({ data, index });
   };
+
+  const handleAddData = async (data) => {
+    console.log("addData", data);
+    const updated = await dispatch(
+      AddOrderAddress({
+        ...data,
+        country: data.country.id,
+        region: data.region.id,
+        district: data.district.id,
+        state: data.state.id,
+      })
+    );
+    if (updated) {
+      setAddressData([...addressData, updated]);
+    }
+  };
+  const handleDeleteAddressData = async (index, id) => {
+    const deletedData = await dispatch(DeleteOrderAddress(id));
+    if (deletedData) {
+      let updatingAddress = addressData;
+      updatingAddress.splice(index, 1);
+      setAddressData([...updatingAddress]);
+    }
+  };
+
+  const handleConfirmationDelete = (index, id) => {
+    dispatch(
+      showConfirmation(
+        "Your Address Will Be removed. Are you Sure?",
+        async () => handleDeleteAddressData(index, id)
+      )
+    );
+  };
+
   return (
     <div className={classes.address__wrapper}>
-      {data.map((address, index) => (
+      {addressData.map((address, index) => (
         <>
           <div className={classes.address__container}>
             <div className={classes.content__container}>
@@ -51,11 +110,11 @@ const AddressComponentEditProfile = ({ data }) => {
                   />
                 </Tooltip>
               )}
-              {address.status !== "primary" && deleteData && (
+              {address.status !== "primary" && (
                 <Tooltip title={"Delete Address"}>
                   <DeleteOutlineRounded
                     className={classes.icon}
-                    onClick={(e) => deleteData(address.id)}
+                    onClick={(e) => handleConfirmationDelete(index, address.id)}
                   />
                 </Tooltip>
               )}
@@ -63,7 +122,7 @@ const AddressComponentEditProfile = ({ data }) => {
           </div>
         </>
       ))}
-      {data.length <= 5 && (
+      {addressData.length < 5 && (
         <button
           onClick={(e) => {
             handleShowAddressForm(true);

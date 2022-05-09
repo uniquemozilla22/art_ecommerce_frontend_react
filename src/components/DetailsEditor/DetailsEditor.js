@@ -121,7 +121,6 @@ export const FormCreator = ({ name, value, updateData, classes }) => {
   const handleInput = (e) => {
     setData({ ...data, value: e.target.value });
   };
-  console.log(name.toLowerCase());
 
   if (name.toLowerCase() === "gender") {
     return (

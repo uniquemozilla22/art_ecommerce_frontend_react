@@ -18,6 +18,7 @@ import UpdateProfile from "../../store/actions/EditProfile/EditProfile.update";
 import ChangePasswordAction from "../../store/actions/ChangePassword/ChangePassword.action";
 import SendOTPtoEmail from "../../store/actions/Authentication/VerifyEmail/SendOTP.action";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
+import FetchUserInfo from "./../../store/actions/EditProfile/FetchUserInfo.fetch";
 
 const EditProfile = (props) => {
   const [data, setData] = useState(null);
@@ -28,10 +29,125 @@ const EditProfile = (props) => {
     fetchUserData();
   }, []);
 
+  const layout = [
+    {
+      title: "Manage Account",
+      links: [
+        {
+          title: "My Profile",
+        },
+        {
+          title: "Address",
+        },
+      ],
+    },
+    {
+      title: "My Orders",
+      links: [
+        {
+          title: "My Returns",
+          data: [
+            {
+              id: 1,
+              name: "One",
+              image: "art1",
+              status: "Shipped",
+              payment: "Cash on Delivery",
+            },
+            {
+              id: 2,
+              name: "Two",
+              image: "art3",
+              status: "Ordered",
+              payment: "Esewa",
+            },
+          ],
+        },
+        {
+          title: "Cancellations",
+          data: [
+            {
+              id: 1,
+              name: "One",
+              image: "art1",
+              cancelledDate: "2019-06-01",
+            },
+            {
+              id: 2,
+              name: "Two",
+              image: "art3",
+              cancelledDate: "2019-06-01",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: "My Likes",
+      links: [
+        {
+          title: "My Arts",
+          data: [
+            {
+              id: 1,
+              name: "One",
+              description: "this is the description for One",
+              image: "art1",
+              price: 3000,
+              time: "Jan 27, 2022 15:37:25",
+            },
+            {
+              id: 2,
+              name: "Two",
+              description: "this is the description for Two",
+              image: "art2",
+              price: 6000,
+              time: "Jan 26, 2022 15:37:25",
+            },
+            {
+              id: 3,
+              name: "Three",
+              description: "this is the description for Two",
+              image: "art3",
+              price: 6000,
+              time: "Jan 26, 2022 15:37:25",
+            },
+            {
+              id: 4,
+              name: "Four",
+              description: "this is the description for Two",
+              image: "art1",
+              price: 6000,
+            },
+          ],
+        },
+        // {
+        //   title: "My Artists",
+        //   data: [
+        //     {
+        //       id: 1,
+        //       name: "Peter Chung",
+        //       position: "Abstract Artist",
+        //       likes: 99,
+        //       image: "artist1",
+        //     },
+        //     {
+        //       id: 2,
+        //       name: "Furba Gurung",
+        //       position: "Abstract Artist",
+        //       likes: 92,
+        //       image: "artist2",
+        //     },
+        //   ],
+        // },
+      ],
+    },
+  ];
   const fetchUserData = async () => {
-    const profileData = await props.fetchData();
-    console.log("profile data", profileData);
-    setData(profileData);
+    const profileData = await props.FetchUserInfo();
+    const EditProfileData = await props.fetchData();
+    console.log("Edit profile data", EditProfileData);
+    setData(EditProfileData);
   };
 
   return data ? (
@@ -56,7 +172,7 @@ const EditProfile = (props) => {
               balance={balance}
             />
             <div className={classes.links__container}>
-              {data.linkData.map((link, index) => (
+              {layout.map((link, index) => (
                 <ProfileNavigationLink
                   key={index}
                   title={link.title}
@@ -67,7 +183,7 @@ const EditProfile = (props) => {
           </div>
           <div className="col-md-9 col-sm-12">
             <Tab.Content>
-              {data.linkData.map((link, index) => (
+              {layout.map((link, index) => (
                 <ProfileNavigationContent
                   key={index}
                   title={link.title}
@@ -103,9 +219,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     Loader: (data) =>
       data ? dispatch(showLoading()) : dispatch(hideLoading()),
-    fetchData: async () => {
-      return await dispatch(FetchEditProfiileData());
-    },
+    fetchData: async () => await dispatch(FetchEditProfiileData()),
+    FetchUserInfo: async () => await dispatch(FetchUserInfo()),
     updateData: async (data) => await dispatch(UpdateProfile(data)),
     postPassword: (data) => dispatch(ChangePasswordAction(data)),
     sendOTP: (data) => dispatch(SendOTPtoEmail(data)),

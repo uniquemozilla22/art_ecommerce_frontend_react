@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import classes from "./ArtistSection.module.css";
-import artistImg from "../../Assets/gal1.png";
 import ProductSection from "../ProductSection/ProductSection";
 import { animated, useSpring } from "react-spring";
 import FetchSupplier from "../../store/actions/FetchData/SupplierbyID.fetch.js";

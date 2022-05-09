@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import classes from "./DetailsEditor.module.css";
 import FeatherIcon from "feather-icons-react";
 import { Modal } from "@mui/material";
+import FetchUserAddress from "../../store/actions/Address/FetchUserAddress.fetch";
+import { useDispatch } from "react-redux";
+import FetchCustomerInfo from "../../store/actions/EditProfile/FetchCustomerInfo.fetch";
+import DataNotFound from "./../DataNotFound/DataNotFound";
+import { Fade } from "react-reveal";
 
 const DetailsEditor = ({
   data,
@@ -17,13 +22,25 @@ const DetailsEditor = ({
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showVerifyEmailModal, setShowVerifyEmailModal] = useState(false);
   const [sendMail, setSendMail] = useState(false);
-  const [userData, setUserData] = useState(data);
+  const [userData, setUserData] = useState(null);
 
   const handleModalOpen = (data) => {
     setModalData(data);
     setShowModal(true);
     setOnSubmit(false);
   };
+
+  const dispatch = useDispatch();
+
+  const FetchData = useCallback(async () => {
+    const data = await dispatch(FetchCustomerInfo());
+    console.log(data);
+    setUserData(data);
+  }, []);
+
+  useEffect(() => {
+    FetchData();
+  }, []);
 
   const handleSendMail = () => {
     setSendMail(true);
@@ -44,23 +61,29 @@ const DetailsEditor = ({
     setShowVerifyEmailModal(false);
   };
 
-  return (
+  return userData ? (
     <>
-      <div className={classes.detail__modifier}>
-        {Object.keys(userData).map((key, value) => (
-          <div
-            key={value}
-            className={classes.detail}
-            onClick={() => handleModalOpen({ name: key, value: data[key] })}
-          >
-            <p>
-              {key.charAt(0).toUpperCase() + key.slice(1).split("_").join(" ")}
-              <FeatherIcon icon="edit-2" className={classes.icon} />
-            </p>
-            <h2>{data[key]}</h2>
-          </div>
-        ))}
-      </div>
+      <Fade>
+        <div className={classes.detail__modifier}>
+          {Object.keys(userData).map((key, value) => (
+            <div
+              key={value}
+              className={classes.detail}
+              onClick={() =>
+                handleModalOpen({ name: key, value: userData[key] })
+              }
+            >
+              <p>
+                {key.charAt(0).toUpperCase() +
+                  key.slice(1).split("_").join(" ")}
+                <FeatherIcon icon="edit-2" className={classes.icon} />
+              </p>
+              <h2>{userData[key]}</h2>
+            </div>
+          ))}
+        </div>
+      </Fade>
+
       <button
         className={classes.extra__button}
         onClick={(e) => setShowPasswordModal(true)}
@@ -111,6 +134,11 @@ const DetailsEditor = ({
         </div>
       </Modal>
     </>
+  ) : (
+    <DataNotFound
+      action={FetchData}
+      content="There seems to be an error. Please try again"
+    />
   );
 };
 

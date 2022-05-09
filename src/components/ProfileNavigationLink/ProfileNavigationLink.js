@@ -48,7 +48,6 @@ export const ProfileNavigationContent = ({
       case "My Profile": {
         return (
           <DetailsEditor
-            data={link.data}
             updateData={updateData}
             postPassword={postPassword}
             activeStatus={activeStatus}
@@ -58,7 +57,7 @@ export const ProfileNavigationContent = ({
         );
       }
       case "Address": {
-        return <AddressComponentEditProfile data={link.data} />;
+        return <AddressComponentEditProfile />;
       }
       case "Social":
         return <SocialEditor data={link.data} />;

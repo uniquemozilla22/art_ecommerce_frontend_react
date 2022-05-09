@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Nav, Tab } from "react-bootstrap";
 import DetailsEditor from "../DetailsEditor/DetailsEditor";
 import classes from "./ProfileNavigationLink.module.css";

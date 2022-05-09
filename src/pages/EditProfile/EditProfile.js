@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Tab, Spinner } from "react-bootstrap";
+import React, { useCallback, useEffect, useState } from "react";
+import { Tab } from "react-bootstrap";
 import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";
 import classes from "./EditProfile.module.css";
 import { connect, useSelector } from "react-redux";
@@ -15,14 +15,19 @@ import DataNotFound from "../../components/DataNotFound/DataNotFound";
 import FetchUserInfo from "./../../store/actions/EditProfile/FetchUserInfo.fetch";
 
 const EditProfile = (props) => {
-  const [data, setData] = useState(null);
   const [userData, setUserData] = useState(null);
   const balanceState = useSelector((state) => state.user.balance);
-  const [balance, setBalance] = useState(balanceState);
+  const balance = useState(balanceState);
+
+  const fetchUserData = useCallback(async () => {
+    const profileData = await props.FetchUserInfo();
+    console.log("Profile profile data", profileData);
+    setUserData(profileData);
+  }, []);
 
   useEffect(() => {
     fetchUserData();
-  }, []);
+  }, [fetchUserData]);
 
   const layout = [
     {
@@ -138,11 +143,6 @@ const EditProfile = (props) => {
       ],
     },
   ];
-  const fetchUserData = async () => {
-    const profileData = await props.FetchUserInfo();
-    console.log("Profile profile data", profileData);
-    setUserData(profileData);
-  };
 
   return userData ? (
     <div className={"container " + classes.edit__profile__container}>

@@ -5,7 +5,6 @@ import { Avatar, Tooltip } from "@mui/material";
 import { WarningAmberOutlined, WarningRounded } from "@mui/icons-material";
 
 const ProfileAvatar = ({ name, image, verified, balance }) => {
-  console.log(image);
   return (
     <div className={classes.profile__avatar__container}>
       {image ? (

@@ -10,6 +10,7 @@ import { showConfirmation } from "../../../store/actions/Confirmation/Confirmati
 import UpdateOrderAddress from "../../../store/actions/Address/UpdateOrderAddress.post";
 import FetchUserAddress from "../../../store/actions/Address/FetchUserAddress.fetch";
 import { Fade } from "react-reveal";
+import { Spinner } from "react-bootstrap";
 
 const AddressComponentEditProfile = () => {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -93,82 +94,79 @@ const AddressComponentEditProfile = () => {
     );
   };
 
-  return (
-    addressData && (
-      <Fade>
-        <div className={classes.address__wrapper}>
-          {addressData.map((address, index) => (
-            <>
-              <div className={classes.address__container}>
-                <div className={classes.content__container}>
-                  <h4>{address.name}</h4>
-                  <p>
-                    {address.region.name},{address.district.name}
-                  </p>
-                  <p>
-                    {address.state.name} -{address.postal_code} ,
-                    {address.country.name}
-                  </p>
-                </div>
-                <div className={classes.action__buttons}>
-                  {updateData && (
-                    <Tooltip title={"Edit Address"}>
-                      <EditOutlined
-                        className={classes.icon}
-                        onClick={(e) => {
-                          handleSelectedAddress(address, index);
-                          handleShowAddressForm(true);
-                        }}
-                      />
-                    </Tooltip>
-                  )}
-                  {address.status !== "primary" && (
-                    <Tooltip title={"Delete Address"}>
-                      <DeleteOutlineRounded
-                        className={classes.icon}
-                        onClick={(e) =>
-                          handleConfirmationDelete(index, address.id)
-                        }
-                      />
-                    </Tooltip>
-                  )}
-                </div>
+  return addressData ? (
+    <Fade>
+      <div className={classes.address__wrapper}>
+        {addressData.map((address, index) => (
+          <>
+            <div className={classes.address__container}>
+              <div className={classes.content__container}>
+                <h4>{address.name}</h4>
+                <p>
+                  {address.region.name},{address.district.name}
+                </p>
+                <p>
+                  {address.state.name} -{address.postal_code} ,
+                  {address.country.name}
+                </p>
               </div>
-            </>
-          ))}
-          {addressData.length < 5 && (
-            <button
-              onClick={(e) => {
-                handleShowAddressForm(true);
-                handleSelectedAddress(null, null);
-              }}
-            >
-              Add Address
-            </button>
-          )}
-          <Modal
-            open={showAddForm}
-            onClose={() => handleShowAddressForm(false)}
-          >
-            <div className={classes.modal__body__child}>
-              <FormCreatorAddress
-                data={selectedAddress.data}
-                addData={(d) => {
-                  handleAddData(d);
-                  handleShowAddressForm(false);
-                }}
-                updateData={(id, d) => {
-                  updateData(selectedAddress.index, id, d);
-                  handleShowAddressForm(false);
-                }}
-                classes={classes}
-                cancel={() => handleShowAddressForm(false)}
-              />
+              <div className={classes.action__buttons}>
+                {updateData && (
+                  <Tooltip title={"Edit Address"}>
+                    <EditOutlined
+                      className={classes.icon}
+                      onClick={(e) => {
+                        handleSelectedAddress(address, index);
+                        handleShowAddressForm(true);
+                      }}
+                    />
+                  </Tooltip>
+                )}
+                {address.status !== "primary" && (
+                  <Tooltip title={"Delete Address"}>
+                    <DeleteOutlineRounded
+                      className={classes.icon}
+                      onClick={(e) =>
+                        handleConfirmationDelete(index, address.id)
+                      }
+                    />
+                  </Tooltip>
+                )}
+              </div>
             </div>
-          </Modal>
-        </div>
-      </Fade>
-    )
+          </>
+        ))}
+        {addressData.length < 5 && (
+          <button
+            onClick={(e) => {
+              handleShowAddressForm(true);
+              handleSelectedAddress(null, null);
+            }}
+          >
+            Add Address
+          </button>
+        )}
+        <Modal open={showAddForm} onClose={() => handleShowAddressForm(false)}>
+          <div className={classes.modal__body__child}>
+            <FormCreatorAddress
+              data={selectedAddress.data}
+              addData={(d) => {
+                handleAddData(d);
+                handleShowAddressForm(false);
+              }}
+              updateData={(id, d) => {
+                updateData(selectedAddress.index, id, d);
+                handleShowAddressForm(false);
+              }}
+              classes={classes}
+              cancel={() => handleShowAddressForm(false)}
+            />
+          </div>
+        </Modal>
+      </div>
+    </Fade>
+  ) : (
+    <Spinner /> 
   );
 };
 

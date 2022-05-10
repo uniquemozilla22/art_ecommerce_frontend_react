@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import Payment from "../../../components/CheckoutInformation/PaymentItem/PaymentItem";
 import FetchPaymentMethods from "../../../store/actions/Payment/Payment.fetch";
 import classes from "./LoadFundModal.module.css";
+import LoadBalance from "./../../../store/actions/Balance/LoadBalance.post";
 
 const LoadFundModal = ({ loadModal, handleHideLoadModal }) => {
   const [payments, setPayments] = useState(null);
@@ -19,12 +20,12 @@ const LoadFundModal = ({ loadModal, handleHideLoadModal }) => {
     setPayments(pay);
   };
 
-  const handlePaymentMethodSelection = () => (id, name) => {
-    console.log("selected pay");
+  const handlePaymentMethodSelection = (id, name) => {
     setSelectedPayments({ id, name });
   };
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
+    const data = await dispatch(LoadBalance(selectedPayments.id, amount));
   };
   return (
     <Modal open={loadModal} onClose={handleHideLoadModal}>
@@ -36,9 +37,10 @@ const LoadFundModal = ({ loadModal, handleHideLoadModal }) => {
               <Payment
                 key={index}
                 {...pay}
-                handleSelected={(id, name) =>
-                  handlePaymentMethodSelection(id, name)
-                }
+                handleSelected={(id, name) => {
+                  console.log(id, name, "Selection");
+                  handlePaymentMethodSelection(id, name);
+                }}
               />
             ))
           ) : (

@@ -99,7 +99,9 @@ const EditProfile = (props) => {
           <div className="col-md-3 col-sm-12">
             <ProfileAvatar
               name={
-                userData.googleId ? userData.username : "@" + userData.username
+                userData.googleId || userData.facebookId
+                  ? userData.username
+                  : "@" + userData.username
               }
               image={userData.image_url}
               verified={userData.active_status}

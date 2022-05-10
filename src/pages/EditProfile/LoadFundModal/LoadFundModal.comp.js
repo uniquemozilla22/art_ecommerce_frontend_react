@@ -36,7 +36,7 @@ const LoadFundModal = ({ loadModal, handleHideLoadModal }) => {
         <h5>Select Load Fund Method</h5>
         <div className={classes.payment__selection}>
           {payments ? (
-            payments.filter.map((pay, index) => (
+            payments.map((pay, index) => (
               <Payment
                 key={index}
                 {...pay}

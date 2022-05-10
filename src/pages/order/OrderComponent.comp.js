@@ -17,8 +17,6 @@ const OrderComponent = ({
   title,
   deleteOrder,
 }) => {
-  const navigation = useNavigate();
-  const { state } = useLocation();
   const dispatch = useDispatch();
 
   const [data, setData] = useState(orders);
@@ -59,14 +57,16 @@ const OrderComponent = ({
   return (
     data && (
       <div className={classes.tab__container}>
-        <div className={classes.sub__title}>
-          <h2>
-            {title} <p>{data.length} Orders</p>
-          </h2>
-          <Tooltip title="Refresh Order">
-            <RefreshOutlined onClick={() => fetchOrderData()} />
-          </Tooltip>
-        </div>
+        {title && (
+          <div className={classes.sub__title}>
+            <h2>
+              {title} <p>{data.length} Orders</p>
+            </h2>
+            <Tooltip title="Refresh Order">
+              <RefreshOutlined onClick={() => fetchOrderData()} />
+            </Tooltip>
+          </div>
+        )}
         {data.length !== 0 ? (
           data.map((order, index) => {
             if (order.status === "draft") {
@@ -93,7 +93,7 @@ const OrderComponent = ({
         ) : (
           <DataNotFound
             action={() => fetchOrderData()}
-            content="You dont have paid for any orders yet."
+            content="No Data Found."
           />
         )}
       </div>

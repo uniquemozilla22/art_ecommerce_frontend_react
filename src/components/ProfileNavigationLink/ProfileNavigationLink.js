@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import DetailsEditor from "../DetailsEditor/DetailsEditor";
 import classes from "./ProfileNavigationLink.module.css";
 import { Fade } from "react-reveal";
-import OrderList from "../Profileproducts/OrderList";
 import ProductGrid from "../AritistProductGrid/ProductGrid";
 import ArtistsGrid from "../ArtistsGrid/ArtistsGrid";
 import SocialEditor from "../SocialEditor/SocialEditor";
 import DataNotFound from "../DataNotFound/DataNotFound";
 import { useLocation } from "react-router";
 import AddressComponentEditProfile from "./Address/Address.comp";
+import { useDispatch } from "react-redux";
+import GetOrderList from "../../store/actions/Order/OrderList.fetch";
+import OrderComponent from "./../../pages/order/OrderComponent.comp";
 
 export const ProfileNavigationLink = ({ title, links }) => {
   return links ? (
@@ -43,6 +45,33 @@ export const ProfileNavigationContent = ({
   email,
   sendOTP,
 }) => {
+  const [orderData, setOrderData] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const fetchOrder = useCallback(async () => {
+    const data = await dispatch(GetOrderList());
+    console.log("Order DAta", data);
+    setOrderData(data);
+  }, []);
+
+  useEffect(() => fetchOrder(), [fetchOrder]);
+  const cancelled = (order) => {
+    let updating = orderData;
+    let cancelledIndex = orderData.findIndex((or) => or.id === order);
+    console.log(cancelledIndex);
+    updating[cancelledIndex] = {
+      ...updating[cancelledIndex],
+      status: "cancelled",
+    };
+    setOrderData(updating);
+  };
+
+  const deleteOrder = (order) => {
+    let updated = orderData.filter((orders) => orders.id !== order);
+    setOrderData(updated);
+  };
+
   const functionCreator = (link) => {
     switch (link.title) {
       case "My Profile": {
@@ -61,10 +90,28 @@ export const ProfileNavigationContent = ({
       }
       case "Social":
         return <SocialEditor data={link.data} />;
-      case "My Returns":
-        return <OrderList datas={link.data} />;
+      case "Order History":
+        return (
+          orderData && (
+            <OrderComponent
+              orders={orderData?.filter((o) => o.status !== "cancelled")}
+              fetchOrderData={fetchOrder}
+              cancelled={cancelled}
+              deleteOrder={deleteOrder}
+            />
+          )
+        );
       case "Cancellations":
-        return <OrderList datas={link.data} cancelled />;
+        return (
+          orderData && (
+            <OrderComponent
+              orders={orderData?.filter((o) => o.status === "cancelled")}
+              fetchOrderData={fetchOrder}
+              cancelled={cancelled}
+              deleteOrder={deleteOrder}
+            />
+          )
+        );
       case "My Arts":
         return <ProductGrid arts />;
       case "My Bids": {

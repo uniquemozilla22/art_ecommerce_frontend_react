@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import classes from "./ProductGrid.module.css";
 import { Fade } from "react-reveal";
-import ProductCard from "../ProductCard/ProductCard";
 import { useDispatch } from "react-redux";
-import fetchLikedProducts from "../../store/actions/Authentication/LikedProducts/likedProducts.fetch";
 import DataNotFound from "../DataNotFound/DataNotFound";
 import FetchAllBids from "../../store/actions/Bid/bid.fetch";
+import AddWishlistItem from "../../store/actions/Wishlist/wishlistItem.post";
+import fetchLikedProducts from "../../store/actions/Authentication/LikedProducts/likedProducts.fetch";
+import ProductItem from "../ProductTable/ProductItem/ProductItem";
 const ProductGrid = ({ arts, bids, products }) => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
@@ -34,38 +35,31 @@ const ProductGrid = ({ arts, bids, products }) => {
       <div className={classes.product__grid__container}>
         {data.length !== 0 ? (
           data.map((product, index) => {
-            return product.time ? (
-              <div key={index} className="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                <ProductCard
-                  key={index}
-                  id={product.data.id}
-                  productData={product.data}
-                  supplier={product.supplierInfo}
-                  time={product.auction?.expiration_date}
-                  auction={product.auction ? product.auction : null}
-                  category={product.category}
-                  delay={index}
-                  currentBid={product.currentBid}
-                  likes={product.likesCount}
-                  tags={product.tags}
-                />
-              </div>
-            ) : (
-              <div className="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                <ProductCard
-                  key={index}
-                  id={product.data.id}
-                  productData={product.data}
-                  supplier={product.supplierInfo}
-                  time={product.auction?.expiration_date}
-                  auction={product.auction ? product.auction : null}
-                  category={product.category}
-                  delay={index}
-                  currentBid={product.currentBid}
-                  likes={product.likesCount}
-                  tags={product.tags}
-                />
-              </div>
+            return (
+              <ProductItem
+                key={index}
+                id={product?.data?.id}
+                image={product?.data?.image_url}
+                name={product?.data?.name}
+                price={product?.data?.unit_price}
+                supplierName={
+                  product?.supplierInfo?.first_name +
+                  " " +
+                  product?.supplierInfo?.last_name
+                }
+                supplierInfo={product?.supplierInfo}
+                productData={product?.data}
+                tags={product?.tags}
+                category={product?.category}
+                description={product?.data?.description}
+                wishlist
+                wishlistFunction={() => {
+                  dispatch(AddWishlistItem(product?.data?.id));
+                }}
+                likesCount={product?.likesCount}
+                time={product?.auction?.expiration_date || null}
+                heading
+              />
             );
           })
         ) : (

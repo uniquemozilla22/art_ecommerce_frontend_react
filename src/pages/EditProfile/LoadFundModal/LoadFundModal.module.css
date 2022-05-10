@@ -1,0 +1,72 @@
+.load__modal{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    background:#eef2ff;
+    padding: 2rem;
+    border-radius:20px;
+    width:60vw;
+}
+
+@media screen and (max-width:670px) {
+    .load__modal{
+        width:80vw;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .load__modal{
+        width:98vw;
+    }
+}
+
+.load__modal .payment__selection{
+    display: flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    transition:all 0.2s ease-in;
+
+}
+
+.load__modal  h5{
+    font-weight: 700;
+    font-size: 16px;
+    color: #a4a4a4;
+    align-items: center;
+}
+
+.load__modal form{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+}
+
+.load__modal .amount__wrapper{
+    margin-top: 2rem;
+}
+
+.load__modal input[type="number"]{
+    width:100%;
+    padding:1rem;
+    border:1px solid #4267b2;
+    outline:none;
+    border-radius: 20px;
+    margin-right:0.5rem;
+}
+
+.load__modal input[type="submit"]{
+    border:1px solid #4267b2;
+    outline:none;
+    border-radius: 20px ;
+    margin-left:0.5rem;
+    background-color: #4267b2;
+    color:#fff;
+    transition:all 0.2s ease-in;
+    padding:0.5rem 1rem;
+}
+
+.load__modal input[type="submit"]:hover{
+    background-color: transparent;
+    color:#4267b2;
+}

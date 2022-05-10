@@ -13,15 +13,20 @@ import ChangePasswordAction from "../../store/actions/ChangePassword/ChangePassw
 import SendOTPtoEmail from "../../store/actions/Authentication/VerifyEmail/SendOTP.action";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
 import FetchUserInfo from "./../../store/actions/EditProfile/FetchUserInfo.fetch";
+import { Modal } from "@mui/material";
+import LoadFundModal from "./LoadFundModal/LoadFundModal.comp";
 
 const EditProfile = (props) => {
   const [userData, setUserData] = useState(null);
   const balanceState = useSelector((state) => state.user.balance);
   const balance = useState(balanceState);
+  const [loadModal, setLoadModal] = useState(true);
+
+  const handleShowLoadModal = () => setLoadModal(true);
+  const handleHideLoadModal = () => setLoadModal(false);
 
   const fetchUserData = useCallback(async () => {
     const profileData = await props.FetchUserInfo();
-    console.log("Profile profile data", profileData);
     setUserData(profileData);
   }, []);
 
@@ -42,43 +47,13 @@ const EditProfile = (props) => {
       ],
     },
     {
-      title: "My Orders",
+      title: "Orders",
       links: [
         {
-          title: "My Returns",
-          data: [
-            {
-              id: 1,
-              name: "One",
-              image: "art1",
-              status: "Shipped",
-              payment: "Cash on Delivery",
-            },
-            {
-              id: 2,
-              name: "Two",
-              image: "art3",
-              status: "Ordered",
-              payment: "Esewa",
-            },
-          ],
+          title: "Order History",
         },
         {
           title: "Cancellations",
-          data: [
-            {
-              id: 1,
-              name: "One",
-              image: "art1",
-              cancelledDate: "2019-06-01",
-            },
-            {
-              id: 2,
-              name: "Two",
-              image: "art3",
-              cancelledDate: "2019-06-01",
-            },
-          ],
         },
       ],
     },
@@ -87,39 +62,6 @@ const EditProfile = (props) => {
       links: [
         {
           title: "My Arts",
-          data: [
-            {
-              id: 1,
-              name: "One",
-              description: "this is the description for One",
-              image: "art1",
-              price: 3000,
-              time: "Jan 27, 2022 15:37:25",
-            },
-            {
-              id: 2,
-              name: "Two",
-              description: "this is the description for Two",
-              image: "art2",
-              price: 6000,
-              time: "Jan 26, 2022 15:37:25",
-            },
-            {
-              id: 3,
-              name: "Three",
-              description: "this is the description for Two",
-              image: "art3",
-              price: 6000,
-              time: "Jan 26, 2022 15:37:25",
-            },
-            {
-              id: 4,
-              name: "Four",
-              description: "this is the description for Two",
-              image: "art1",
-              price: 6000,
-            },
-          ],
         },
         {
           title: "My Artists",
@@ -162,6 +104,7 @@ const EditProfile = (props) => {
               image={userData.image_url}
               verified={userData.active_status}
               balance={balance}
+              handleShowLoadModal={handleShowLoadModal}
             />
             <div className={classes.links__container}>
               {layout.map((link, index) => (
@@ -191,6 +134,10 @@ const EditProfile = (props) => {
           </div>
         </div>
       </Tab.Container>
+      <LoadFundModal
+        handleHideLoadModal={handleHideLoadModal}
+        loadModal={loadModal}
+      />
     </div>
   ) : (
     <DataNotFound

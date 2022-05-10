@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./ProfileAvatar.module.css";
 import FeatherIcon from "feather-icons-react";
 import { Avatar, Tooltip } from "@mui/material";
-import { WarningAmberOutlined, WarningRounded } from "@mui/icons-material";
+import { WarningAmberOutlined } from "@mui/icons-material";
 
 const ProfileAvatar = ({ name, image, verified, balance }) => {
   return (

@@ -33,11 +33,11 @@ const DetailsEditor = ({
 
   const dispatch = useDispatch();
 
-  const FetchData = useCallback(async () => {
+  const FetchData = async () => {
     const data = await dispatch(FetchCustomerInfo());
     console.log(data);
     setUserData(data);
-  }, []);
+  };
 
   useEffect(() => {
     FetchData();

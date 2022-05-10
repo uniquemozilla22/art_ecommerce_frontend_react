@@ -50,13 +50,13 @@ export const ProfileNavigationContent = ({
 
   const dispatch = useDispatch();
 
-  const fetchOrder = useCallback(async () => {
+  const fetchOrder = async () => {
     const data = await dispatch(GetOrderList());
     console.log("Order DAta", data);
     setOrderData(data);
-  }, []);
+  };
 
-  useEffect(() => fetchOrder(), [fetchOrder]);
+  useEffect(() => fetchOrder(), []);
   const cancelled = (order) => {
     let updating = orderData;
     let cancelledIndex = orderData.findIndex((or) => or.id === order);

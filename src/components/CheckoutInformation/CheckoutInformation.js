@@ -64,11 +64,11 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
 
   const handleShowAddForm = (payload) => setShowAddForm(payload);
 
-  const fetchAddress = useCallback(async () => {
+  const fetchAddress = async () => {
     const address = await dispatch(FetchUserAddress());
     setAddress(address);
     setAddressId(address[0]?.id);
-  }, []);
+  };
 
   const handlePaymentMethodSelection = async (id, name) => {
     setPaymentSelectedID(id);
@@ -139,15 +139,12 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     fetchAddress();
   }, []);
 
-  let ShippingAddressSelection = useCallback(
-    async (address, order) => {
-      console.log("Shipping Address Selection ", address, order);
-      if (!address || !order) return;
-      let data = await dispatch(SelectAddressPost(address, order));
-      setShipping(data.totalShippingCost);
-    },
-    [addressId, order, address]
-  );
+  let ShippingAddressSelection = async (address, order) => {
+    console.log("Shipping Address Selection ", address, order);
+    if (!address || !order) return;
+    let data = await dispatch(SelectAddressPost(address, order));
+    setShipping(data.totalShippingCost);
+  };
 
   useEffect(() => {
     ShippingAddressSelection(addressId, orderInformation.id);

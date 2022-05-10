@@ -1,5 +1,5 @@
 import { Modal, Tooltip } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Address.module.css";
 import { DeleteOutlineRounded, EditOutlined } from "@mui/icons-material";
 import { FormCreatorAddress } from "../../CheckoutInformation/EditAddress/EditAddressModal.comp";
@@ -20,10 +20,10 @@ const AddressComponentEditProfile = () => {
   });
   const dispatch = useDispatch();
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     const address = await dispatch(FetchUserAddress());
     setAddressData(address);
-  }, []);
+  };
 
   useEffect(() => {
     fetchData();

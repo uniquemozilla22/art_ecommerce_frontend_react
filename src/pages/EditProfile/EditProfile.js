@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tab } from "react-bootstrap";
 import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";
 import classes from "./EditProfile.module.css";
@@ -13,7 +13,6 @@ import ChangePasswordAction from "../../store/actions/ChangePassword/ChangePassw
 import SendOTPtoEmail from "../../store/actions/Authentication/VerifyEmail/SendOTP.action";
 import DataNotFound from "../../components/DataNotFound/DataNotFound";
 import FetchUserInfo from "./../../store/actions/EditProfile/FetchUserInfo.fetch";
-import { Modal } from "@mui/material";
 import LoadFundModal from "./LoadFundModal/LoadFundModal.comp";
 
 const EditProfile = (props) => {
@@ -25,14 +24,14 @@ const EditProfile = (props) => {
   const handleShowLoadModal = () => setLoadModal(true);
   const handleHideLoadModal = () => setLoadModal(false);
 
-  const fetchUserData = useCallback(async () => {
+  const fetchUserData = async () => {
     const profileData = await props.FetchUserInfo();
     setUserData(profileData);
-  }, []);
+  };
 
   useEffect(() => {
     fetchUserData();
-  }, [fetchUserData]);
+  }, []);
 
   const layout = [
     {

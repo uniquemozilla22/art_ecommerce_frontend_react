@@ -1,5 +1,5 @@
 import { Modal } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import Payment from "../../../components/CheckoutInformation/PaymentItem/PaymentItem";
@@ -14,19 +14,15 @@ const LoadFundModal = ({ loadModal, handleHideLoadModal }) => {
 
   useEffect(() => fetchPayment(), []);
 
-  const fetchPayment = useCallback(async () => {
+  const fetchPayment = async () => {
     const pay = await dispatch(FetchPaymentMethods());
     setPayments(pay);
-  }, []);
+  };
 
-  const handlePaymentMethodSelection = useCallback(
-    (id, name) => {
-      console.log("selected pay");
-      setSelectedPayments({ id, name });
-    },
-    [selectedPayments]
-  );
-
+  const handlePaymentMethodSelection = () => (id, name) => {
+    console.log("selected pay");
+    setSelectedPayments({ id, name });
+  };
   const onSubmitHandler = (e) => {
     e.preventDefault();
   };

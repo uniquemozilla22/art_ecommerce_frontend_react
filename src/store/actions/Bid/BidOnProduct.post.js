@@ -1,5 +1,5 @@
 import axiosBase from "../../../axiosBase";
-import deductBalance from "../Balance/Balance.action";
+import { deductBalance } from "../Balance/Balance.action";
 import { hideLoading, showLoading } from "../Loading/Loading";
 import {
   ErrorMessage,

@@ -15,6 +15,7 @@ const DetailsEditor = ({
   activeStatus,
   email,
   sendOTP,
+  social,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({ name: "", value: "" });
@@ -84,12 +85,14 @@ const DetailsEditor = ({
         </div>
       </Fade>
 
-      <button
-        className={classes.extra__button}
-        onClick={(e) => setShowPasswordModal(true)}
-      >
-        Change Password
-      </button>
+      {!social && (
+        <button
+          className={classes.extra__button}
+          onClick={(e) => setShowPasswordModal(true)}
+        >
+          Change Password
+        </button>
+      )}
       {!activeStatus ? (
         <button
           className={classes.extra__button}

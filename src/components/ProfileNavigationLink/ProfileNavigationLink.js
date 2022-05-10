@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import GetOrderList from "../../store/actions/Order/OrderList.fetch";
 import OrderComponent from "./../../pages/order/OrderComponent.comp";
 
-export const ProfileNavigationLink = ({ title, links }) => {
+export const ProfileNavigationLink = ({ title, links, social }) => {
   return links ? (
     <Nav className={"flex-column " + classes.navigation__link}>
       <h3>{title}</h3>
@@ -44,6 +44,7 @@ export const ProfileNavigationContent = ({
   activeStatus,
   email,
   sendOTP,
+  social,
 }) => {
   const [orderData, setOrderData] = useState(null);
 
@@ -82,6 +83,7 @@ export const ProfileNavigationContent = ({
             activeStatus={activeStatus}
             email={email}
             sendOTP={sendOTP}
+            social={social}
           />
         );
       }

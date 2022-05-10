@@ -124,14 +124,16 @@ const BiddingItem = ({
         <div className={classes.highest__avatar}>
           <p className={classes.title}>Highest</p>
           <Avatar style={{ height: "30px", width: "30px" }}>
-            {currentBid.first_name.charAt(0)}
+            {currentBid?.first_name?.charAt(0)}
           </Avatar>
-          <p>{currentBid.first_name + " " + currentBid.last_name.charAt(0)}.</p>
+          <p>
+            {currentBid?.first_name + " " + currentBid?.last_name.charAt(0)}.
+          </p>
         </div>
         <div className={classes.status__container}>
           <p>
             Current
-            <span> {currentBid.price.toLocaleString("en-IN")}</span>
+            <span> {currentBid?.price.toLocaleString("en-IN")}</span>
           </p>
 
           <p className={classes.time}>{timed(days, mins, hours, sec)}</p>

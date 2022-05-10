@@ -20,8 +20,8 @@ const EditProfile = (props) => {
   const [userData, setUserData] = useState(null);
   const balanceState = useSelector((state) => state.user.balance);
   const balance = useState(balanceState);
-  const [loadModal, setLoadModal] = useState(true);
 
+  const [loadModal, setLoadModal] = useState(false);
   const handleShowLoadModal = () => setLoadModal(true);
   const handleHideLoadModal = () => setLoadModal(false);
 
@@ -130,6 +130,7 @@ const EditProfile = (props) => {
                   activeStatus={userData.active_status}
                   email={userData.email}
                   sendOTP={props.sendOTP}
+                  social={userData.googleId || userData.facebookId}
                 />
               ))}
             </Tab.Content>

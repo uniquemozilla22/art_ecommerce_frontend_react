@@ -1,10 +1,15 @@
-import { DEDUCT_BALANCE } from "../Types/Types";
+import { ADD_BALANCE, DEDUCT_BALANCE } from "../Types/Types";
 
-const deductBalance = (amount) => {
+export const deductBalance = (amount) => {
   return {
     type: DEDUCT_BALANCE,
     payload: amount,
   };
 };
 
-export default deductBalance;
+export const addBalance = (amount) => {
+  return {
+    type: ADD_BALANCE,
+    payload: amount,
+  };
+};

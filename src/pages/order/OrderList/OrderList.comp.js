@@ -69,7 +69,7 @@ const OrderList = ({
           >
             <Avatar
               alt="Travis Howard"
-              src={orderItems[0].data.image_url}
+              src={orderItems[0]?.data.image_url}
               variant={"rounded"}
               sx={{ height: "150px", width: "150px" }}
             >

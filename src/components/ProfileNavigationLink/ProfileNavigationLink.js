@@ -94,25 +94,21 @@ export const ProfileNavigationContent = ({
         return <SocialEditor data={link.data} />;
       case "Order History":
         return (
-          orderData && (
-            <OrderComponent
-              orders={orderData?.filter((o) => o.status !== "cancelled")}
-              fetchOrderData={fetchOrder}
-              cancelled={cancelled}
-              deleteOrder={deleteOrder}
-            />
-          )
+          <OrderComponent
+            orders={orderData?.filter((o) => o.status !== "cancelled")}
+            fetchOrderData={fetchOrder}
+            cancelled={cancelled}
+            deleteOrder={deleteOrder}
+          />
         );
       case "Cancellations":
         return (
-          orderData && (
-            <OrderComponent
-              orders={orderData?.filter((o) => o.status === "cancelled")}
-              fetchOrderData={fetchOrder}
-              cancelled={cancelled}
-              deleteOrder={deleteOrder}
-            />
-          )
+          <OrderComponent
+            orders={orderData?.filter((o) => o.status === "cancelled")}
+            fetchOrderData={fetchOrder}
+            cancelled={cancelled}
+            deleteOrder={deleteOrder}
+          />
         );
       case "My Arts":
         return <ProductGrid arts />;

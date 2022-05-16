@@ -3,9 +3,7 @@ import classes from "./ProfileAvatar.module.css";
 import FeatherIcon from "feather-icons-react";
 import { Avatar, Tooltip } from "@mui/material";
 import {
-  AddCardOutlined,
   AddCardRounded,
-  Security,
   WarningAmberOutlined,
 } from "@mui/icons-material";
 
@@ -24,7 +22,7 @@ const ProfileAvatar = ({
           <img src={image} alt={`${name}'s Profile`} />
         ) : (
           <Avatar sx={{ width: "200px", height: "200px", fontSize: "3rem" }}>
-            {name.split(" ")[0].charAt(0) + name.split(" ")[1].charAt(0)}
+            {name.charAt(0)}
           </Avatar>
         )}
         <div className={classes.upload_image}>

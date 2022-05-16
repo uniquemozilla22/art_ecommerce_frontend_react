@@ -26,6 +26,7 @@ const LoadFundModal = ({ loadModal, handleHideLoadModal }) => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const data = await dispatch(LoadBalance(selectedPayments.id, amount));
+    console.log(data);
   };
   return (
     <Modal open={loadModal} onClose={handleHideLoadModal}>

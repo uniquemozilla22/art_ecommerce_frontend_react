@@ -55,49 +55,47 @@ const OrderComponent = ({
   };
 
   return (
-    data && (
-      <div className={classes.tab__container}>
-        {title && (
-          <div className={classes.sub__title}>
-            <h2>
-              {title} <p>{data.length} Orders</p>
-            </h2>
-            <Tooltip title="Refresh Order">
-              <RefreshOutlined onClick={() => fetchOrderData()} />
-            </Tooltip>
-          </div>
-        )}
-        {data.length !== 0 ? (
-          data.map((order, index) => {
-            if (order.status === "draft") {
-              return (
-                <OrderList
-                  key={index}
-                  {...order}
-                  fetchOrderData={fetchOrderData}
-                  deleteOrder={deleteOrderConfirm}
-                />
-              );
-            } else if (order.status === "paid") {
-              return (
-                <OrderList
-                  key={index}
-                  {...order}
-                  cancelOrder={cancellationOrder}
-                />
-              );
-            } else {
-              return <OrderList key={index} {...order} />;
-            }
-          })
-        ) : (
-          <DataNotFound
-            action={() => fetchOrderData()}
-            content="No Data Found."
-          />
-        )}
-      </div>
-    )
+    <div className={classes.tab__container}>
+      {title && (
+        <div className={classes.sub__title}>
+          <h2>
+            {title} <p>{data?.length} Orders</p>
+          </h2>
+          <Tooltip title="Refresh Order">
+            <RefreshOutlined onClick={() => fetchOrderData()} />
+          </Tooltip>
+        </div>
+      )}
+      {data?.length !== 0 ? (
+        data?.map((order, index) => {
+          if (order.status === "draft") {
+            return (
+              <OrderList
+                key={index}
+                {...order}
+                fetchOrderData={fetchOrderData}
+                deleteOrder={deleteOrderConfirm}
+              />
+            );
+          } else if (order.status === "paid") {
+            return (
+              <OrderList
+                key={index}
+                {...order}
+                cancelOrder={cancellationOrder}
+              />
+            );
+          } else {
+            return <OrderList key={index} {...order} />;
+          }
+        })
+      ) : (
+        <DataNotFound
+          action={() => fetchOrderData()}
+          content="No Data Found."
+        />
+      )}
+    </div>
   );
 };
 

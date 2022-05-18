@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./Banner.module.css";
 import gal1 from "../../Assets/gal1.png";
-import { Image } from "react-bootstrap";
 import { animated, useSpring } from "react-spring";
 
 const Banner = () => {

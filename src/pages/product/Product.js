@@ -41,7 +41,7 @@ const Product = (props) => {
           product.data.unit_price >= range[0] &&
           product.data.unit_price <= range[1]
       )
-    );
+    ); 
 
     if (filteredProducts && filteredProducts.length == 0) {
       dispatch(

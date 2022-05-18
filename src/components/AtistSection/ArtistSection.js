@@ -7,14 +7,7 @@ import { useDispatch } from "react-redux";
 
 const ArtistSection = (props) => {
   const dispatch = useDispatch();
-  const useSlideWidth = (delay) => {
-    return useSpring({
-      loop: false,
-      from: { width: "0%", opacity: 0 },
-      to: { width: "100%", opacity: 1 },
-      delay: delay * 100,
-    });
-  };
+ 
   const [artist, setArtist] = useState(null);
 
   useEffect(() => {
@@ -32,7 +25,12 @@ const ArtistSection = (props) => {
           <div className={"col-4  d-none d-md-block"}>
             <animated.div
               className={classes.artist__image__container}
-              style={useSlideWidth(1)}
+              style={useSpring({
+                loop: false,
+                from: { width: "0%", opacity: 0 },
+                to: { width: "100%", opacity: 1 },
+                delay: 100,
+              })}
             >
               <img
                 src={

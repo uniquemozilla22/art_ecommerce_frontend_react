@@ -20,14 +20,6 @@ import AddWishlistItem from "./../../store/actions/Wishlist/wishlistItem.post";
 import isWishlist from "../../store/actions/Wishlist/isWishlist.check";
 
 const BiddingCard = (props) => {
-  const useAnimationStyle = (delay) => {
-    return useSpring({
-      loop: false,
-      from: { y: 50, opacity: 0 },
-      to: { y: 0, opacity: 1 },
-      delay: delay * 200,
-    });
-  };
   const dispatch = useDispatch();
   const { id, productData, time, delay } = props;
 
@@ -115,7 +107,12 @@ const BiddingCard = (props) => {
     <>
       <animated.div
         className={classes.bidding__classes}
-        style={useAnimationStyle(delay)}
+        style={useSpring({
+          loop: false,
+          from: { y: 50, opacity: 0 },
+          to: { y: 0, opacity: 1 },
+          delay: delay * 200,
+        })}
       >
         <Card className={classes.bidding__card}>
           <Card.Img
@@ -219,14 +216,6 @@ const BiddingCard = (props) => {
 };
 
 const ProductCard = (props) => {
-  const useAnimationStyle = (delay) => {
-    return useSpring({
-      loop: false,
-      from: { y: 50, opacity: 0 },
-      to: { y: 0, opacity: 1 },
-      delay: delay * 200,
-    });
-  };
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -258,7 +247,12 @@ const ProductCard = (props) => {
     <>
       <animated.div
         className={classes.bidding__classes}
-        style={useAnimationStyle(delay)}
+        style={useSpring({
+          loop: false,
+          from: { y: 50, opacity: 0 },
+          to: { y: 0, opacity: 1 },
+          delay: delay * 200,
+        })}
       >
         <Card className={classes.bidding__card}>
           <Card.Img

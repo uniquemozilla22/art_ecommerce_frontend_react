@@ -163,15 +163,6 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
     setOrderInformation(data);
   }, [data]);
 
-  const useAnimationStyle = () => {
-    return useSpring({
-      loop: false,
-      from: { x: 50, opacity: 0 },
-      to: { x: 0, opacity: 1 },
-      delay: 200,
-    });
-  };
-
   const getSubTotal = (shipping) => {
     return shipping
       ? (
@@ -202,7 +193,12 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
   return (
     <>
       <animated.div
-        style={useAnimationStyle()}
+        style={useSpring({
+          loop: false,
+          from: { x: 50, opacity: 0 },
+          to: { x: 0, opacity: 1 },
+          delay: 200,
+        })}
         className={classes.checkout__information__container}
       >
         <div className={classes.payment__checkbox}>

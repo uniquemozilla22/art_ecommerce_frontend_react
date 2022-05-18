@@ -43,17 +43,16 @@ export const SelectionContainer = ({
   id,
   count,
 }) => {
-  const useAnimationStyle = (count) => {
-    return useSpring({
-      loop: false,
-      from: { x: 50, opacity: 0 },
-      to: { x: 0, opacity: 1 },
-      delay: count * 200,
-    });
-  };
-
   return (
-    <animated.div className={classes.checkbox} style={useAnimationStyle(count)}>
+    <animated.div
+      className={classes.checkbox}
+      style={useSpring({
+        loop: false,
+        from: { x: 50, opacity: 0 },
+        to: { x: 0, opacity: 1 },
+        delay: count * 200,
+      })}
+    >
       <label className={classes.checkbox_wrapper}>
         <input
           type="radio"

@@ -7,19 +7,16 @@ import { animated, useSpring } from "react-spring";
 import { Link } from "react-router-dom";
 
 const ArtistCard = ({ id, name, image, position, like, delay, sm }) => {
-  const useAnimationStyle = (delay) => {
-    return useSpring({
-      loop: false,
-      from: { y: 50, opacity: 0 },
-      to: { y: 0, opacity: 1 },
-      delay: delay * 200,
-    });
-  };
   return (
     <div style={sm ? { margin: "1rem 2rem" } : null}>
       <animated.div
         className={classes.artist__card__container}
-        style={useAnimationStyle(delay)}
+        style={useSpring({
+          loop: false,
+          from: { y: 50, opacity: 0 },
+          to: { y: 0, opacity: 1 },
+          delay: delay * 200,
+        })}
       >
         <Card className={classes.bidding__card}>
           <Card.Img

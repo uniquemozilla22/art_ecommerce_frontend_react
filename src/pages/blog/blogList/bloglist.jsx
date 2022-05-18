@@ -5,24 +5,22 @@ import { animated, useSpring } from "react-spring";
 import { Link } from "react-router-dom";
 
 const BlogList = () => {
-  const useAnimationStyle = (delay) => {
-    return useSpring({
-      loop: false,
-      from: { x: 20, opacity: 0 },
-      to: { x: 0, opacity: 1 },
-      delay: delay * 200,
-    });
-  };
   return (
     <Link to={"/blog/1"} className={classes.card__container}>
       <animated.div
         className={`row ${classes.cardBoxList}`}
-        style={useAnimationStyle(1)}
+        style={useSpring({
+          loop: false,
+          from: { y: 50, opacity: 0 },
+          to: { y: 0, opacity: 1 },
+          delay:  200,
+        })}
       >
         <div className="col-lg-3 col-sm-4 col-4">
           <img
             src="https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_CrashDummy_image1600w.jpg"
             className={classes.cardBoxImage}
+            alt={""}
           />
         </div>
         <div className="col-lg-9 col-sm-8 col-8">

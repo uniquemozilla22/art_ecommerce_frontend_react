@@ -6,7 +6,6 @@ import artist2 from "../Assets/artist2.png";
 import artist3 from "../Assets/artist3.png";
 import FeaturedArtistSection from "../components/FeaturedArtistSection/FeaturedArtistSection";
 import MasonrySection from "../components/MasonrySection/MasonrySection";
-import Fade from "react-reveal/Fade";
 import TrendingAuction from "../components/TrendingAuction/TrendingAuction";
 const Home = () => {
   const [trendingAuctions, setTrendingAuctions] = useState([]);
@@ -37,27 +36,17 @@ const Home = () => {
 
   return (
     <>
-      <Fade>
         <Banner />
-      </Fade>
-      <Fade>
         <TrendingAuction />
-      </Fade>
-      <Fade cascade>
         <ArtistSection
           artistName={"Picasso Pablo"}
           products={trendingAuctions}
         />
-      </Fade>
-      <Fade cascade>
         <FeaturedArtistSection
           title={"Featured Artists"}
           artists={featuredArtist}
         />
-      </Fade>
-      <Fade cascade>
         <MasonrySection title={"Loved Arts"} />
-      </Fade>
     </>
   );
 };

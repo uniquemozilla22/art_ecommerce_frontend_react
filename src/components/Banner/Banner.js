@@ -12,35 +12,12 @@ const Banner = () => {
         <div className={"row " + classes.banner__wrapper}>
           <div className={"col-xs-12 col-md-4 col-4 "}>
             <div className={classes.banner__content}>
-              <animated.h4
-                style={useSpring({
-                  loop: false,
-                  from: { opacity: 0 },
-                  to: { opacity: 1 },
-                  delay: 400,
-                })}
-              >
-                -Edgar Degas
-              </animated.h4>
-              <animated.h1
-                style={useSpring({
-                  loop: false,
-                  from: { opacity: 0 },
-                  to: { opacity: 1 },
-                  delay: 600,
-                })}
-              >
+              <animated.h4>-Edgar Degas</animated.h4>
+              <animated.h1>
                 <span>Art</span>, The More you share
                 <br /> the better it <span>gets.</span>
               </animated.h1>
-              <animated.div
-                style={useSpring({
-                  loop: false,
-                  from: { opacity: 0 },
-                  to: { opacity: 1 },
-                  delay: 800,
-                })}
-              >
+              <animated.div>
                 <Link to="/blog" className={classes.link}>
                   Learn More <DoubleArrowTwoTone />
                 </Link>

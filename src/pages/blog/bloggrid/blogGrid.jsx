@@ -8,12 +8,7 @@ const BlogGrid = () => {
     <Link to={`/blog/1`} className={classes.card__container}>
       <animated.div
         className={classes.cardBox}
-        style={useSpring({
-          loop: false,
-          from: { y: 50, opacity: 0 },
-          to: { y: 0, opacity: 1 },
-          delay: 200,
-        })}
+        
       >
         <img
           src="https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_CrashDummy_image1600w.jpg"

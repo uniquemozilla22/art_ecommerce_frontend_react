@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import classes from "./ProductGrid.module.css";
-import { Fade } from "react-reveal";
 import { useDispatch } from "react-redux";
 import DataNotFound from "../DataNotFound/DataNotFound";
 import FetchAllBids from "../../store/actions/Bid/bid.fetch";
@@ -31,7 +30,6 @@ const ProductGrid = ({ arts, bids, products }) => {
   };
 
   return (
-    <Fade cascade>
       <div className={classes.product__grid__container}>
         {data.length !== 0 ? (
           data.map((product, index) => {
@@ -69,7 +67,6 @@ const ProductGrid = ({ arts, bids, products }) => {
           />
         )}
       </div>
-    </Fade>
   );
 };
 

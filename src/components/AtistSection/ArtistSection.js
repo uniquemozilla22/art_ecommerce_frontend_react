@@ -25,12 +25,7 @@ const ArtistSection = (props) => {
           <div className={"col-4  d-none d-md-block"}>
             <animated.div
               className={classes.artist__image__container}
-              style={useSpring({
-                loop: false,
-                from: { width: "0%", opacity: 0 },
-                to: { width: "100%", opacity: 1 },
-                delay: 100,
-              })}
+              
             >
               <img
                 src={

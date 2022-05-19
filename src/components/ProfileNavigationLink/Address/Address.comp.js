@@ -9,7 +9,6 @@ import DeleteOrderAddress from "../../../store/actions/Address/DeleteOrderAddres
 import { showConfirmation } from "../../../store/actions/Confirmation/Confirmation.action";
 import UpdateOrderAddress from "../../../store/actions/Address/UpdateOrderAddress.post";
 import FetchUserAddress from "../../../store/actions/Address/FetchUserAddress.fetch";
-import { Fade } from "react-reveal";
 import { Spinner } from "react-bootstrap";
 
 const AddressComponentEditProfile = () => {
@@ -95,7 +94,6 @@ const AddressComponentEditProfile = () => {
   };
 
   return addressData ? (
-    <Fade>
       <div className={classes.address__wrapper}>
         {addressData.map((address, index) => (
           <>
@@ -164,7 +162,6 @@ const AddressComponentEditProfile = () => {
           </div>
         </Modal>
       </div>
-    </Fade>
   ) : (
     <Spinner /> 
   );

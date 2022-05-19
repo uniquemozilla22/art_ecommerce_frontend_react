@@ -32,14 +32,7 @@ const Sidebar = () => {
               />
             </div>
             <div className="col-lg-6">
-              <animated.div
-                className={classes.refundBox}
-                style={useSpring({
-                  loop: false,
-                  from: { y: 50, opacity: 0 },
-                  to: { y: 0, opacity: 1 },
-                })}
-              >
+              <animated.div className={classes.refundBox}>
                 <p>
                   <b>How to get Refund from a Product?</b>
                 </p>

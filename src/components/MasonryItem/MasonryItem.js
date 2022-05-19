@@ -7,16 +7,7 @@ import classes from "./MasonryItem.module.css";
 const MasonryItem = ({ image, name, artist, height, like, delay }) => {
   return (
     <div className={classes.container__masontry__item} style={{ height }}>
-      <animated.div
-        className={classes.masonryItem}
-        style={useSpring({
-          loop: { reverse: true },
-          from: { y: 5 },
-          to: { y: 0 },
-          config: { duration: 1000 },
-          delay: delay * 100,
-        })}
-      >
+      <animated.div className={classes.masonryItem}>
         <div className={classes.imageContainer}>
           <img
             src={image}

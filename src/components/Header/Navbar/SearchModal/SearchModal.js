@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import classes from "./SearchModal.module.css";
-import { Modal, Fade, Box, OutlinedInput, InputAdornment } from "@mui/material";
+import { Modal, Box, OutlinedInput, InputAdornment } from "@mui/material";
 import { SearchOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";

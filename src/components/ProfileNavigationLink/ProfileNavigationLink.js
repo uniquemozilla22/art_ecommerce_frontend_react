@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import DetailsEditor from "../DetailsEditor/DetailsEditor";
 import classes from "./ProfileNavigationLink.module.css";
-import { Fade } from "react-reveal";
 import ProductGrid from "../AritistProductGrid/ProductGrid";
 import ArtistsGrid from "../ArtistsGrid/ArtistsGrid";
 import SocialEditor from "../SocialEditor/SocialEditor";
@@ -135,9 +134,7 @@ export const ProfileNavigationContent = ({
         className={classes.tab__pane__container}
       >
         <h3>{link.title}</h3>
-        <Fade cascade>
           <div className={classes.tab__container}>{functionCreator(link)}</div>
-        </Fade>
       </Tab.Pane>
     ))
   ) : (

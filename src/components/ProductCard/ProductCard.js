@@ -105,15 +105,7 @@ const BiddingCard = (props) => {
 
   return (
     <>
-      <animated.div
-        className={classes.bidding__classes}
-        style={useSpring({
-          loop: false,
-          from: { y: 50, opacity: 0 },
-          to: { y: 0, opacity: 1 },
-          delay: delay * 200,
-        })}
-      >
+      <animated.div className={classes.bidding__classes}>
         <Card className={classes.bidding__card}>
           <Card.Img
             variant="bottom"
@@ -245,15 +237,7 @@ const ProductCard = (props) => {
 
   return (
     <>
-      <animated.div
-        className={classes.bidding__classes}
-        style={useSpring({
-          loop: false,
-          from: { y: 50, opacity: 0 },
-          to: { y: 0, opacity: 1 },
-          delay: delay * 200,
-        })}
-      >
+      <animated.div className={classes.bidding__classes}>
         <Card className={classes.bidding__card}>
           <Card.Img
             variant="bottom"

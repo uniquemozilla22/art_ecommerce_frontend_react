@@ -7,15 +7,7 @@ import { Link } from "react-router-dom";
 const BlogList = () => {
   return (
     <Link to={"/blog/1"} className={classes.card__container}>
-      <animated.div
-        className={`row ${classes.cardBoxList}`}
-        style={useSpring({
-          loop: false,
-          from: { y: 50, opacity: 0 },
-          to: { y: 0, opacity: 1 },
-          delay:  200,
-        })}
-      >
+      <animated.div className={`row ${classes.cardBoxList}`}>
         <div className="col-lg-3 col-sm-4 col-4">
           <img
             src="https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_CrashDummy_image1600w.jpg"

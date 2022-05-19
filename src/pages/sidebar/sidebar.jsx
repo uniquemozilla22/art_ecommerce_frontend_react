@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./sidebar.module.css";
 import { animated, useSpring } from "react-spring";
 import { Link } from "react-router-dom";
@@ -11,34 +11,13 @@ const Sidebar = () => {
       <div className="filterBar">
         <h3 className={classes.filterHeading}>Filter </h3>
         <ul className={classes.filterList}>
-          <animated.li
-            style={useSpring({
-              loop: false,
-              from: { x: 50, opacity: 0 },
-              to: { x: 0, opacity: 1 },
-              delay: 100,
-            })}
-          >
+          <animated.li>
             <FeatherIcon icon="eye" /> <span>View All</span>
           </animated.li>
-          <animated.li
-            style={useSpring({
-              loop: false,
-              from: { x: 50, opacity: 0 },
-              to: { x: 0, opacity: 1 },
-              delay: 200,
-            })}
-          >
+          <animated.li>
             <FeatherIcon icon="list" /> <span>Products</span>
           </animated.li>
-          <animated.li
-            style={useSpring({
-              loop: false,
-              from: { x: 50, opacity: 0 },
-              to: { x: 0, opacity: 1 },
-              delay: 300,
-            })}
-          >
+          <animated.li>
             <FeatherIcon icon="users" /> <span>Artist</span>
           </animated.li>
         </ul>
@@ -48,62 +27,27 @@ const Sidebar = () => {
             <Accordion.Header>Category</Accordion.Header>
             <Accordion.Body>
               <ul className={classes.categoryDropdown}>
-                <animated.li
-                  style={useSpring({
-                    loop: false,
-                    from: { x: 50, opacity: 0 },
-                    to: { x: 0, opacity: 1 },
-                    delay: 100,
-                  })}
-                >
+                <animated.li>
                   <Link to="/dashboard" className="w-100">
                     Category 1
                   </Link>
                 </animated.li>
-                <animated.li
-                  style={useSpring({
-                    loop: false,
-                    from: { x: 50, opacity: 0 },
-                    to: { x: 0, opacity: 1 },
-                    delay: 200,
-                  })}
-                >
+                <animated.li>
                   <Link to="/dashboard" className="w-100">
                     Category 2
                   </Link>
                 </animated.li>
-                <animated.li
-                  style={useSpring({
-                    loop: false,
-                    from: { x: 50, opacity: 0 },
-                    to: { x: 0, opacity: 1 },
-                    delay: 300,
-                  })}
-                >
+                <animated.li>
                   <Link to="/dashboard" className="w-100">
                     Category 3
                   </Link>
                 </animated.li>
-                <animated.li
-                  style={useSpring({
-                    loop: false,
-                    from: { x: 50, opacity: 0 },
-                    to: { x: 0, opacity: 1 },
-                    delay: 400,
-                  })}
-                >
+                <animated.li>
                   <Link to="/dashboard" className="w-100">
                     Category 4
                   </Link>
                 </animated.li>
-                <animated.li
-                  style={useSpring({
-                    loop: false,
-                    from: { x: 50, opacity: 0 },
-                    to: { x: 0, opacity: 1 },
-                    delay: 500,
-                  })}
-                >
+                <animated.li>
                   <Link to="/dashboard" className="w-100">
                     Category 5
                   </Link>

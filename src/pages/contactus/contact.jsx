@@ -12,25 +12,11 @@ const Contact = () => {
               <h2 className="pageHeading">Contact Us</h2>
             </div>
           </div>
-          <animated.div
-            className={"row " + classes.contactBox}
-            style={useSpring({
-              loop: false,
-              from: { x: 50, opacity: 0 },
-              to: { x: 0, opacity: 1 },
-              delay: 100,
-            })}
-          >
+          <animated.div className={"row " + classes.contactBox}>
             <div className="col-lg-5">
               <animated.img
                 alt="contactImage"
                 className="w-100"
-                style={useSpring({
-                  loop: false,
-                  from: { x: 50, opacity: 0 },
-                  to: { x: 0, opacity: 1 },
-                  delay: 300,
-                })}
                 src="https://s3-alpha-sig.figma.com/img/3497/cf1d/6c4e75162258e7ac76c894e908bd7bdd?Expires=1643587200&Signature=QPLUoR03EgsW8nP8Qw2EQOJqVe-Ay4bEFrnjZo-HkbkKe~c12M8yPBszD72FapUWs8KeQ~nX~sI675WcSFA0XSSfGt-vECWaoHr7~BSw3uQ8IksaYaqf7GQ5DB0-JszgTnn8aO8WWzsGultC2tg3rrErf1u9NTbJ1OfOUrdGstGijh4OmCM~MAXHr03MCbivLKR1UZBg453dUvvvsHyMCa5tFLBeLchgzqVVy9g8oSpwpOgN1S0~PAhT6CH4safVqsiRZ1HjnpPofPM2YLDe9SbgkBzC7jOzezr7FTbqEYcZ1rh1gpwu-o2h5t6YcOZ5LjoI4rj1aRx2IwJrW62XSw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
               />
             </div>

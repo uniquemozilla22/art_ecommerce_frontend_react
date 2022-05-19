@@ -1,7 +1,6 @@
 import React from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import classes from "./ProductSection.module.css";
-import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 
 const ProductSection = ({ title, products }) => {
@@ -25,23 +24,21 @@ const ProductSection = ({ title, products }) => {
             <div className="row">
               {products.map((product, index) => {
                 return (
-                  <Fade cascade key={index}>
-                    <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-6">
-                      <ProductCard
-                        key={index}
-                        id={product.data.id}
-                        productData={product.data}
-                        supplier={product.supplierInfo}
-                        time={product.auction?.expiration_date}
-                        auction={product.auction ? product.auction : null}
-                        category={product.category}
-                        delay={index}
-                        currentBid={product.currentBid}
-                        likes={product.likesCount}
-                        tags={product.tags}
-                      />
-                    </div>
-                  </Fade>
+                  <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-6">
+                    <ProductCard
+                      key={index}
+                      id={product.data.id}
+                      productData={product.data}
+                      supplier={product.supplierInfo}
+                      time={product.auction?.expiration_date}
+                      auction={product.auction ? product.auction : null}
+                      category={product.category}
+                      delay={index}
+                      currentBid={product.currentBid}
+                      likes={product.likesCount}
+                      tags={product.tags}
+                    />
+                  </div>
                 );
               })}
             </div>

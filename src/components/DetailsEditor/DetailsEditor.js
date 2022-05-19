@@ -6,7 +6,6 @@ import FetchUserAddress from "../../store/actions/Address/FetchUserAddress.fetch
 import { useDispatch } from "react-redux";
 import FetchCustomerInfo from "../../store/actions/EditProfile/FetchCustomerInfo.fetch";
 import DataNotFound from "./../DataNotFound/DataNotFound";
-import { Fade } from "react-reveal";
 
 const DetailsEditor = ({
   data,
@@ -64,26 +63,21 @@ const DetailsEditor = ({
 
   return userData ? (
     <>
-      <Fade>
-        <div className={classes.detail__modifier}>
-          {Object.keys(userData).map((key, value) => (
-            <div
-              key={value}
-              className={classes.detail}
-              onClick={() =>
-                handleModalOpen({ name: key, value: userData[key] })
-              }
-            >
-              <p>
-                {key.charAt(0).toUpperCase() +
-                  key.slice(1).split("_").join(" ")}
-                <FeatherIcon icon="edit-2" className={classes.icon} />
-              </p>
-              <h2>{userData[key]}</h2>
-            </div>
-          ))}
-        </div>
-      </Fade>
+      <div className={classes.detail__modifier}>
+        {Object.keys(userData).map((key, value) => (
+          <div
+            key={value}
+            className={classes.detail}
+            onClick={() => handleModalOpen({ name: key, value: userData[key] })}
+          >
+            <p>
+              {key.charAt(0).toUpperCase() + key.slice(1).split("_").join(" ")}
+              <FeatherIcon icon="edit-2" className={classes.icon} />
+            </p>
+            <h2>{userData[key]}</h2>
+          </div>
+        ))}
+      </div>
 
       {!social && (
         <button

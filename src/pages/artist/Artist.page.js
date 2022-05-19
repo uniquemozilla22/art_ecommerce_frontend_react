@@ -8,7 +8,6 @@ import artist1 from "../../Assets/artist1.png";
 import artist2 from "../../Assets/artist2.png";
 import artist3 from "../../Assets/artist3.png";
 import ArtistDetails from "../../components/ArtistDetails/ArtistDetails";
-import { Fade } from "react-reveal";
 import {
   BiddingCard,
   ProductCard,

@@ -192,15 +192,7 @@ const CheckoutInformation = ({ order, data, handleOrderPaymentChange }) => {
 
   return (
     <>
-      <animated.div
-        style={useSpring({
-          loop: false,
-          from: { x: 50, opacity: 0 },
-          to: { x: 0, opacity: 1 },
-          delay: 200,
-        })}
-        className={classes.checkout__information__container}
-      >
+      <animated.div className={classes.checkout__information__container}>
         <div className={classes.payment__checkbox}>
           <h2>Payment Method</h2>
           <form className={classes.checkbox__container}>

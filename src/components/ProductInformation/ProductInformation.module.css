@@ -50,6 +50,7 @@
 .product__information__container .supplierAvatar {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .product__information__container .supplierAvatar .supplierAvatar__img {

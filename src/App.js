@@ -79,6 +79,7 @@ function App() {
           <Route path="/auth/confirm/:token" element={<ConfirmEmail />} />
           <Route path="/mybids" element={<MyBids />} />
           <Route path="/orders" element={<Order />} />
+          <Route element={<h1>hello</h1>} />
         </Routes>
       </Layout>
     </div>

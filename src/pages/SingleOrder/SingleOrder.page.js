@@ -12,8 +12,6 @@ import RemoveProductOnOrder from "../../store/actions/Order/RemoveOrderProduct.d
 import classes from "./SingleOrder.module.css";
 
 const SingleOrder = () => {
-
-  
   const params = useParams();
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -31,6 +29,7 @@ const SingleOrder = () => {
   const fetchOrder = async (id) => {
     const data = await dispatch(FetchOrderById(id));
     if (data) setOrder(data);
+    console.log(data);
     fetchShippinAndBillingAddressData(data);
   };
 

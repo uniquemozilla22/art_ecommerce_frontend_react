@@ -6,6 +6,16 @@ import { Accordion } from "react-bootstrap";
 const CategoryModalList = ({ name, id, subCategory, handleCloseCategory }) => {
   const navigation = useNavigate();
 
+  subCategory = [
+    {
+      name: "Index1",
+      id: 1,
+    },
+    {
+      name: "Index12",
+      id: 12,
+    },
+  ];
   const onLinkClick = (e, link) => {
     handleCloseCategory();
     navigation(link);
@@ -23,8 +33,8 @@ const CategoryModalList = ({ name, id, subCategory, handleCloseCategory }) => {
               {name}
             </Accordion.Header>
             <Accordion.Body className={classes.moreList__body}>
-              {subCategory.map((category) => (
-                <SubCategoryList {...category} />
+              {subCategory.map((category, index) => (
+                <SubCategoryList key={index} {...category} />
               ))}
             </Accordion.Body>
           </Accordion.Item>
@@ -33,11 +43,8 @@ const CategoryModalList = ({ name, id, subCategory, handleCloseCategory }) => {
     );
   } else {
     return (
-      <div
-        className={classes.category__list__modal}
-        onClick={(e) => onLinkClick(e, `category/${id}`)}
-      >
-        <Link>{name}</Link>
+      <div className={classes.category__list__modal}>
+        <Link to={`category/${id}`}>{name}</Link>
       </div>
     );
   }

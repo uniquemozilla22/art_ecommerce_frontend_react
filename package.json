@@ -22,7 +22,6 @@
     "react-bootstrap": "^2.1.1",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "react-reveal": "^1.2.2",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
@@ -38,7 +37,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "(cd ../art-gallery-backend-nodejs && npm run dev)"
   },
   "eslintConfig": {
     "extends": [

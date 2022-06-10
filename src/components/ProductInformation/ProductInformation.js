@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./ProductInformation.module.css";
 import FeatherIcon from "feather-icons-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { Avatar, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,6 +53,9 @@ export const ProductInformation = (props) => {
     dispatch(AddWishlistItem(id));
     setIsOnWishList(true);
   };
+  const navigation = useNavigate();
+  const goToArtistSinglePage = (id) => navigation("/artist/" + id);
+
   return (
     <div className={"row " + classes.product__information__container}>
       <div
@@ -71,7 +74,10 @@ export const ProductInformation = (props) => {
         <div className={classes.information__content__container}>
           <div className={classes.supplier__information}>
             <h3 className={classes.supplier_heading}>Artist Information</h3>
-            <div className={classes.supplierAvatar}>
+            <div
+              className={classes.supplierAvatar}
+              onClick={() => goToArtistSinglePage(supplier.id)}
+            >
               <div className={classes.supplierAvatar__img}>
                 {supplier.image_url ? (
                   <img src={supplier.image_url} alt={supplier.name} />
@@ -226,7 +232,7 @@ export const BiddingInformation = (props) => {
   });
   const isLikedAction = () => dispatch(isLikedByUser(id));
   const [isBiddedbyUser, setIsBiddedbyUser] = useState(false);
-
+  const navigation = useNavigate();
   const [isLiked, setIsLiked] = useState(isLikedAction);
 
   useEffect(() => {
@@ -360,6 +366,8 @@ export const BiddingInformation = (props) => {
     else return "Expired";
   };
 
+  const goToArtistSinglePage = (id) => navigation("/artist/" + id);
+
   return (
     <div className={"row " + classes.product__information__container}>
       <div
@@ -377,7 +385,10 @@ export const BiddingInformation = (props) => {
         <div className={classes.information__content__container}>
           <div className={classes.supplier__information}>
             <h3 className={classes.supplier_heading}>Artist Information</h3>
-            <div className={classes.supplierAvatar}>
+            <div
+              className={classes.supplierAvatar}
+              onClick={() => goToArtistSinglePage(supplier.id)}
+            >
               <div className={classes.supplierAvatar__img}>
                 {supplier.image_url ? (
                   <img src={supplier.image_url} alt={supplier.name} />

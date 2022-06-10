@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Tab } from "react-bootstrap";
 import ProfileAvatar from "../../components/ProfileAvatar/ProfileAvatar";
 import classes from "./EditProfile.module.css";
@@ -24,14 +24,14 @@ const EditProfile = (props) => {
   const handleShowLoadModal = () => setLoadModal(true);
   const handleHideLoadModal = () => setLoadModal(false);
 
-  const fetchUserData = async () => {
+  const fetchUserData = useCallback(async () => {
     const profileData = await props.FetchUserInfo();
     setUserData(profileData);
-  };
+  }, []);
 
   useEffect(() => {
     fetchUserData();
-  }, []);
+  }, [fetchUserData]);
 
   const layout = [
     {
